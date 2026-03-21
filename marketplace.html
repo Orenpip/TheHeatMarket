@@ -6,6 +6,7 @@
   <title>HeatGrid — Heat Marketplace</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -35,6 +36,11 @@
 <script type="text/babel">
 const { useState, useEffect, useRef, useMemo, useCallback } = React;
 
+// ── Supabase client ──────────────────────────────────────────────
+const SUPABASE_URL = 'https://przxbwneuccutjwfczoq.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByenhid25ldWNjdXRqd2Zjem9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMDk0ODIsImV4cCI6MjA4OTY4NTQ4Mn0.9WlKFZILPku6Qmp-WerGUSJ-9KbEBV5MjcHmm6B-kA8';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
 // ── Haversine ────────────────────────────────────────────────────
 function haversineKm(lat1,lng1,lat2,lng2) {
   const R=6371, dLat=(lat2-lat1)*Math.PI/180, dLng=(lng2-lng1)*Math.PI/180;
@@ -42,15 +48,24 @@ function haversineKm(lat1,lng1,lat2,lng2) {
   return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
 }
 
-// ── Load data centers ────────────────────────────────────────────
+// ── Load data centers (static + Supabase listings) ───────────────
 function useDataCenters() {
   const [dcs, setDcs] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch('data/existing_dcs.json')
-      .then(r => r.json())
-      .then(d => { setDcs(d.data_centers ?? []); setLoading(false); })
-      .catch(() => setLoading(false));
+    Promise.all([
+      fetch('data/existing_dcs.json').then(r => r.json()).then(d => d.data_centers ?? []),
+      sb.from('heat_listings').select('*').eq('status', 'active')
+        .then(({ data }) => (data || []).map(l => ({
+          id: l.id, name: l.facility_name, city: l.city, state: l.state,
+          lat: l.lat, lng: l.lng, est_capacity_mw: l.capacity_mw,
+          output_temp_c: l.output_temp_c, price_per_mwh: l.price_per_mwh,
+          company: l.company_name, _listing: true,
+        }))),
+    ]).then(([staticDcs, liveDcs]) => {
+      setDcs([...liveDcs, ...staticDcs]);
+      setLoading(false);
+    }).catch(() => setLoading(false));
   }, []);
   return { dcs, loading };
 }
@@ -127,13 +142,238 @@ function LocationSearch({ onResult }) {
   );
 }
 
+// ── Modal wrapper ────────────────────────────────────────────────
+function Modal({ open, onClose, children }) {
+  if (!open) return null;
+  return (
+    <div style={{position:'fixed',inset:0,zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}}
+      onClick={onClose}>
+      <div style={{position:'absolute',inset:0,background:'rgba(0,0,0,.45)'}} />
+      <div className="fade-in rounded-2xl" style={{position:'relative',background:'white',
+        maxWidth:440,width:'90%',maxHeight:'90vh',overflow:'auto',padding:28}}
+        onClick={e=>e.stopPropagation()}>
+        <button onClick={onClose} style={{position:'absolute',top:12,right:16,background:'none',
+          border:'none',fontSize:20,color:'#9a9a9a',cursor:'pointer'}}>×</button>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ── Express Interest Form ────────────────────────────────────────
+function ExpressInterestForm({ dc, onClose, onSuccess }) {
+  const [form, setForm] = useState({
+    facility_type:'school', facility_name:'', contact_name:'', contact_email:'', heat_need_mwh:'', message:''
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [done, setDone] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.contact_email || !form.facility_name || !form.contact_name) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+    setSubmitting(true);
+    setError(null);
+    const { error: err } = await sb.from('heat_inquiries').insert({
+      listing_id: dc._listing ? dc.id : null,
+      facility_type: form.facility_type,
+      facility_name: form.facility_name,
+      city: dc.city || '',
+      state: dc.state || '',
+      contact_email: form.contact_email,
+      contact_name: form.contact_name,
+      heat_need_mwh: form.heat_need_mwh ? parseFloat(form.heat_need_mwh) : null,
+      message: form.message || null,
+    });
+    setSubmitting(false);
+    if (err) { setError('Something went wrong. Please try again.'); return; }
+    setDone(true);
+    if (onSuccess) onSuccess();
+  };
+
+  if (done) return (
+    <div className="text-center py-4">
+      <p className="text-3xl mb-3">&#10003;</p>
+      <p className="serif font-bold text-lg mb-2">Interest Registered!</p>
+      <p className="text-xs" style={{color:'#6b6b6b'}}>
+        We'll connect you with {dc.name || 'this data center'}. Check your email for next steps.
+      </p>
+      <button onClick={onClose} className="mt-4 px-5 py-2 rounded-lg text-xs font-bold"
+        style={{background:'#1a1a1a',color:'white'}}>Close</button>
+    </div>
+  );
+
+  const fieldStyle = {background:'#f5f0e8',border:'1px solid #e2d9cc',borderRadius:8,padding:'8px 12px',
+    fontSize:12,fontFamily:'Space Mono,monospace',width:'100%',outline:'none'};
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <p className="serif font-bold text-lg mb-1">Express Interest</p>
+      <p className="text-xs mb-4" style={{color:'#6b6b6b'}}>
+        in {dc.name || 'Data Center'} — {dc.city}, {dc.state}
+      </p>
+      {error && <p className="text-xs mb-3 font-bold" style={{color:'#d4380d'}}>{error}</p>}
+      <div className="space-y-3">
+        <div>
+          <label className="text-xs font-bold block mb-1">Facility Type *</label>
+          <select value={form.facility_type} onChange={e=>setForm({...form,facility_type:e.target.value})}
+            style={fieldStyle}>
+            {['school','greenhouse','pool','hospital','industrial','residential','other'].map(t=>
+              <option key={t} value={t}>{t.charAt(0).toUpperCase()+t.slice(1)}</option>)}
+          </select>
+        </div>
+        <div>
+          <label className="text-xs font-bold block mb-1">Facility Name *</label>
+          <input type="text" value={form.facility_name} placeholder="e.g. Lincoln Elementary"
+            onChange={e=>setForm({...form,facility_name:e.target.value})} style={fieldStyle} />
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs font-bold block mb-1">Your Name *</label>
+            <input type="text" value={form.contact_name}
+              onChange={e=>setForm({...form,contact_name:e.target.value})} style={fieldStyle} />
+          </div>
+          <div>
+            <label className="text-xs font-bold block mb-1">Email *</label>
+            <input type="email" value={form.contact_email}
+              onChange={e=>setForm({...form,contact_email:e.target.value})} style={fieldStyle} />
+          </div>
+        </div>
+        <div>
+          <label className="text-xs font-bold block mb-1">Annual Heat Need (MWh)</label>
+          <input type="number" value={form.heat_need_mwh} placeholder="Optional"
+            onChange={e=>setForm({...form,heat_need_mwh:e.target.value})} style={fieldStyle} />
+        </div>
+        <div>
+          <label className="text-xs font-bold block mb-1">Message</label>
+          <textarea value={form.message} placeholder="Anything else we should know?"
+            onChange={e=>setForm({...form,message:e.target.value})} rows={2}
+            style={{...fieldStyle,resize:'vertical'}} />
+        </div>
+      </div>
+      <button type="submit" disabled={submitting}
+        className="w-full mt-4 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+        style={{background:'#d4380d',color:'white',opacity:submitting?0.6:1}}>
+        {submitting ? 'Submitting...' : 'Submit Interest'}
+      </button>
+    </form>
+  );
+}
+
+// ── Buyer Registration Form ──────────────────────────────────────
+function BuyerRegistrationForm({ location, onClose }) {
+  const [form, setForm] = useState({
+    facility_type:'school', facility_name:'', contact_name:'', contact_email:'', heat_need_mwh:'', message:''
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [done, setDone] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.contact_email || !form.facility_name || !form.contact_name) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+    setSubmitting(true);
+    setError(null);
+    const { error: err } = await sb.from('heat_inquiries').insert({
+      listing_id: null,
+      facility_type: form.facility_type,
+      facility_name: form.facility_name,
+      city: location?.label?.split(',')[0]?.trim() || '',
+      state: location?.label?.split(',')[1]?.trim() || '',
+      lat: location?.lat || null,
+      lng: location?.lng || null,
+      contact_email: form.contact_email,
+      contact_name: form.contact_name,
+      heat_need_mwh: form.heat_need_mwh ? parseFloat(form.heat_need_mwh) : null,
+      message: form.message || null,
+    });
+    setSubmitting(false);
+    if (err) { setError('Something went wrong. Please try again.'); return; }
+    setDone(true);
+  };
+
+  if (done) return (
+    <div className="text-center py-4">
+      <p className="text-3xl mb-3">&#10003;</p>
+      <p className="serif font-bold text-lg mb-2">You're Registered!</p>
+      <p className="text-xs" style={{color:'#6b6b6b'}}>
+        We'll match you with the best heat sources near you and reach out via email.
+      </p>
+      <button onClick={onClose} className="mt-4 px-5 py-2 rounded-lg text-xs font-bold"
+        style={{background:'#1a1a1a',color:'white'}}>Close</button>
+    </div>
+  );
+
+  const fieldStyle = {background:'#f5f0e8',border:'1px solid #e2d9cc',borderRadius:8,padding:'8px 12px',
+    fontSize:12,fontFamily:'Space Mono,monospace',width:'100%',outline:'none'};
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <p className="serif font-bold text-lg mb-1">Register as Heat Buyer</p>
+      <p className="text-xs mb-4" style={{color:'#6b6b6b'}}>
+        Tell us about your facility and we'll match you with nearby data centers.
+      </p>
+      {error && <p className="text-xs mb-3 font-bold" style={{color:'#d4380d'}}>{error}</p>}
+      <div className="space-y-3">
+        <div>
+          <label className="text-xs font-bold block mb-1">Facility Type *</label>
+          <select value={form.facility_type} onChange={e=>setForm({...form,facility_type:e.target.value})}
+            style={fieldStyle}>
+            {['school','greenhouse','pool','hospital','industrial','residential','other'].map(t=>
+              <option key={t} value={t}>{t.charAt(0).toUpperCase()+t.slice(1)}</option>)}
+          </select>
+        </div>
+        <div>
+          <label className="text-xs font-bold block mb-1">Facility Name *</label>
+          <input type="text" value={form.facility_name} placeholder="e.g. Springfield Community Pool"
+            onChange={e=>setForm({...form,facility_name:e.target.value})} style={fieldStyle} />
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs font-bold block mb-1">Your Name *</label>
+            <input type="text" value={form.contact_name}
+              onChange={e=>setForm({...form,contact_name:e.target.value})} style={fieldStyle} />
+          </div>
+          <div>
+            <label className="text-xs font-bold block mb-1">Email *</label>
+            <input type="email" value={form.contact_email}
+              onChange={e=>setForm({...form,contact_email:e.target.value})} style={fieldStyle} />
+          </div>
+        </div>
+        <div>
+          <label className="text-xs font-bold block mb-1">Annual Heat Need (MWh)</label>
+          <input type="number" value={form.heat_need_mwh} placeholder="Optional — we can help estimate"
+            onChange={e=>setForm({...form,heat_need_mwh:e.target.value})} style={fieldStyle} />
+        </div>
+        <div>
+          <label className="text-xs font-bold block mb-1">Message</label>
+          <textarea value={form.message} placeholder="Tell us about your heating needs"
+            onChange={e=>setForm({...form,message:e.target.value})} rows={2}
+            style={{...fieldStyle,resize:'vertical'}} />
+        </div>
+      </div>
+      <button type="submit" disabled={submitting}
+        className="w-full mt-4 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+        style={{background:'#d4380d',color:'white',opacity:submitting?0.6:1}}>
+        {submitting ? 'Submitting...' : 'Register'}
+      </button>
+    </form>
+  );
+}
+
 // ── DC Card ──────────────────────────────────────────────────────
-function DCCard({ dc, distKm }) {
+function DCCard({ dc, distKm, onExpressInterest }) {
   const [expanded, setExpanded] = useState(false);
-  const outputTemp = 45; // default air-cooled
+  const outputTemp = dc.output_temp_c || 45;
   const annualHeatMwh = Math.round((dc.est_capacity_mw || 10) * 8760 * 0.80);
   const gasCostMwh = 48.15;
-  const heatPrice = 20;
+  const heatPrice = dc.price_per_mwh || 20;
   const savingsPerMwh = gasCostMwh - heatPrice;
 
   return (
@@ -141,9 +381,14 @@ function DCCard({ dc, distKm }) {
       <button className="w-full text-left p-5" onClick={()=>setExpanded(e=>!e)}>
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex-1 min-w-0">
-            <p className="font-bold text-sm truncate leading-tight">{dc.name || 'Data Center'}</p>
+            <div className="flex items-center gap-2">
+              <p className="font-bold text-sm truncate leading-tight">{dc.name || 'Data Center'}</p>
+              {dc._listing && (
+                <span className="text-xs px-2 py-0.5 rounded-full font-bold" style={{background:'#dcfce7',color:'#15803d',fontSize:9}}>LISTED</span>
+              )}
+            </div>
             <p className="text-xs mt-0.5" style={{color:'#6b6b6b'}}>
-              {dc.city}, {dc.state}
+              {dc.company ? `${dc.company} · ` : ''}{dc.city}, {dc.state}
             </p>
           </div>
           {distKm !== null && (
@@ -194,7 +439,8 @@ function DCCard({ dc, distKm }) {
               </p>
             </div>
           )}
-          <button className="w-full mt-3 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+          <button onClick={()=>onExpressInterest(dc)}
+            className="w-full mt-3 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
             style={{background:'#d4380d',color:'white'}}>
             Express Interest
           </button>
@@ -210,6 +456,8 @@ function App() {
   const [location, setLocation] = useState(null); // {lat,lng,label}
   const [radius, setRadius] = useState(50);       // km
   const [sortBy, setSortBy] = useState('distance');
+  const [interestDc, setInterestDc] = useState(null); // DC for express interest modal
+  const [showRegister, setShowRegister] = useState(false); // buyer registration modal
 
   const nearby = useMemo(() => {
     if (!dcs || !location) return null;
@@ -315,7 +563,7 @@ function App() {
             </div>
           ) : (
             <div className="space-y-3">
-              {sorted.map((dc,i) => <DCCard key={dc.id || i} dc={dc} distKm={dc.distKm} />)}
+              {sorted.map((dc,i) => <DCCard key={dc.id || i} dc={dc} distKm={dc.distKm} onExpressInterest={setInterestDc} />)}
             </div>
           )}
 
@@ -327,7 +575,8 @@ function App() {
                 Register your organization to get connected with data centers near you.
                 We'll match you with the best heat source for your needs.
               </p>
-              <button className="px-6 py-3 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+              <button onClick={()=>setShowRegister(true)}
+                className="px-6 py-3 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
                 style={{background:'#d4380d',color:'white'}}>
                 Register as Heat Buyer
               </button>
@@ -372,6 +621,14 @@ function App() {
           </div>
         </div>
       )}
+
+      {/* Modals */}
+      <Modal open={!!interestDc} onClose={()=>setInterestDc(null)}>
+        {interestDc && <ExpressInterestForm dc={interestDc} onClose={()=>setInterestDc(null)} />}
+      </Modal>
+      <Modal open={showRegister} onClose={()=>setShowRegister(false)}>
+        <BuyerRegistrationForm location={location} onClose={()=>setShowRegister(false)} />
+      </Modal>
     </div>
   );
 }

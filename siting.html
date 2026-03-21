@@ -12,6 +12,9 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -119,6 +122,11 @@
 // ══════════════════════════════════════════════════════════════════
 
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+// ── Supabase client ──────────────────────────────────────────────
+const SUPABASE_URL = 'https://przxbwneuccutjwfczoq.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByenhid25ldWNjdXRqd2Zjem9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMDk0ODIsImV4cCI6MjA4OTY4NTQ4Mn0.9WlKFZILPku6Qmp-WerGUSJ-9KbEBV5MjcHmm6B-kA8';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
 // ── Free map tile style (no token required) ───────────────────────
 const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
@@ -316,7 +324,7 @@ function ScoreBar({ label, value, sublabel, color }) {
 }
 
 // ── ScoreCard (Side A panel) ──────────────────────────────────────
-function ScoreCard({ county, scores, onViewMarket }) {
+function ScoreCard({ county, scores, onViewMarket, onListHeat }) {
   if (!scores) return null;
   const { label, color, bg, text } = getThreshold(scores.total);
   const total = Math.round(scores.total);
@@ -374,12 +382,167 @@ function ScoreCard({ county, scores, onViewMarket }) {
         </div>
       )}
 
-      <button onClick={onViewMarket}
-        className="w-full py-3.5 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
-        style={{background:'#d4380d',color:'white',letterSpacing:'.04em'}}>
-        View Heat Buyers →
-      </button>
+      <div className="flex gap-2">
+        <button onClick={onViewMarket}
+          className="flex-1 py-3.5 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+          style={{background:'#d4380d',color:'white',letterSpacing:'.04em'}}>
+          View Heat Buyers →
+        </button>
+        <button onClick={onListHeat}
+          className="py-3.5 px-4 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+          style={{background:'#1a5cff',color:'white',letterSpacing:'.04em'}}
+          title="List your waste heat on the marketplace">
+          List Heat
+        </button>
+      </div>
     </div>
+  );
+}
+
+// ── Modal wrapper ────────────────────────────────────────────────
+function Modal({ open, onClose, children }) {
+  if (!open) return null;
+  return (
+    <div style={{position:'fixed',inset:0,zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}}
+      onClick={onClose}>
+      <div style={{position:'absolute',inset:0,background:'rgba(0,0,0,.45)'}} />
+      <div className="fade-in rounded-2xl" style={{position:'relative',background:'white',
+        maxWidth:440,width:'90%',maxHeight:'90vh',overflow:'auto',padding:28}}
+        onClick={e=>e.stopPropagation()}>
+        <button onClick={onClose} style={{position:'absolute',top:12,right:16,background:'none',
+          border:'none',fontSize:20,color:'#9a9a9a',cursor:'pointer'}}>×</button>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ── List Your Heat Form ──────────────────────────────────────────
+function ListHeatForm({ county, onClose }) {
+  const [form, setForm] = useState({
+    company_name:'', facility_name:'', city: county?.county || '', state: county?.state || '',
+    capacity_mw:'', output_temp_c:'45', price_per_mwh:'', contact_email:'', contact_name:'', description:''
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [done, setDone] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.company_name || !form.facility_name || !form.contact_email || !form.capacity_mw || !form.price_per_mwh) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+    setSubmitting(true);
+    setError(null);
+    const { error: err } = await sb.from('heat_listings').insert({
+      company_name: form.company_name,
+      facility_name: form.facility_name,
+      city: form.city,
+      state: form.state,
+      lat: county?.lat || 0,
+      lng: county?.lng || 0,
+      capacity_mw: parseFloat(form.capacity_mw),
+      output_temp_c: parseInt(form.output_temp_c) || 45,
+      price_per_mwh: parseFloat(form.price_per_mwh),
+      contact_email: form.contact_email,
+      contact_name: form.contact_name || null,
+      description: form.description || null,
+    });
+    setSubmitting(false);
+    if (err) { setError('Something went wrong. Please try again.'); return; }
+    setDone(true);
+  };
+
+  if (done) return (
+    <div className="text-center py-4">
+      <p className="text-3xl mb-3">&#10003;</p>
+      <p className="serif font-bold text-lg mb-2">Listing Created!</p>
+      <p className="text-xs" style={{color:'#6b6b6b'}}>
+        Your waste heat is now listed on the HeatGrid marketplace. Buyers near you will see it.
+      </p>
+      <button onClick={onClose} className="mt-4 px-5 py-2 rounded-lg text-xs font-bold"
+        style={{background:'#1a1a1a',color:'white'}}>Close</button>
+    </div>
+  );
+
+  const fieldStyle = {background:'#f5f0e8',border:'1px solid #e2d9cc',borderRadius:8,padding:'8px 12px',
+    fontSize:12,fontFamily:'Space Mono,monospace',width:'100%',outline:'none'};
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <p className="serif font-bold text-lg mb-1">List Your Waste Heat</p>
+      <p className="text-xs mb-4" style={{color:'#6b6b6b'}}>
+        Make your DC's waste heat available to nearby buyers on the marketplace.
+      </p>
+      {error && <p className="text-xs mb-3 font-bold" style={{color:'#d4380d'}}>{error}</p>}
+      <div className="space-y-3">
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs font-bold block mb-1">Company *</label>
+            <input type="text" value={form.company_name} placeholder="e.g. Acme Cloud"
+              onChange={e=>setForm({...form,company_name:e.target.value})} style={fieldStyle} />
+          </div>
+          <div>
+            <label className="text-xs font-bold block mb-1">Facility Name *</label>
+            <input type="text" value={form.facility_name} placeholder="e.g. US-East DC1"
+              onChange={e=>setForm({...form,facility_name:e.target.value})} style={fieldStyle} />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs font-bold block mb-1">City</label>
+            <input type="text" value={form.city}
+              onChange={e=>setForm({...form,city:e.target.value})} style={fieldStyle} />
+          </div>
+          <div>
+            <label className="text-xs font-bold block mb-1">State</label>
+            <input type="text" value={form.state}
+              onChange={e=>setForm({...form,state:e.target.value})} style={fieldStyle} />
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          <div>
+            <label className="text-xs font-bold block mb-1">Capacity (MW) *</label>
+            <input type="number" value={form.capacity_mw} placeholder="20"
+              onChange={e=>setForm({...form,capacity_mw:e.target.value})} style={fieldStyle} />
+          </div>
+          <div>
+            <label className="text-xs font-bold block mb-1">Output Temp (°C)</label>
+            <input type="number" value={form.output_temp_c}
+              onChange={e=>setForm({...form,output_temp_c:e.target.value})} style={fieldStyle} />
+          </div>
+          <div>
+            <label className="text-xs font-bold block mb-1">Price ($/MWh) *</label>
+            <input type="number" value={form.price_per_mwh} placeholder="20"
+              onChange={e=>setForm({...form,price_per_mwh:e.target.value})} style={fieldStyle} />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs font-bold block mb-1">Contact Name</label>
+            <input type="text" value={form.contact_name}
+              onChange={e=>setForm({...form,contact_name:e.target.value})} style={fieldStyle} />
+          </div>
+          <div>
+            <label className="text-xs font-bold block mb-1">Email *</label>
+            <input type="email" value={form.contact_email}
+              onChange={e=>setForm({...form,contact_email:e.target.value})} style={fieldStyle} />
+          </div>
+        </div>
+        <div>
+          <label className="text-xs font-bold block mb-1">Description</label>
+          <textarea value={form.description} placeholder="Cooling type, availability, etc."
+            onChange={e=>setForm({...form,description:e.target.value})} rows={2}
+            style={{...fieldStyle,resize:'vertical'}} />
+        </div>
+      </div>
+      <button type="submit" disabled={submitting}
+        className="w-full mt-4 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+        style={{background:'#1a5cff',color:'white',opacity:submitting?0.6:1}}>
+        {submitting ? 'Submitting...' : 'Create Listing'}
+      </button>
+    </form>
   );
 }
 
@@ -1124,6 +1287,7 @@ function App() {
   const [dcConfig,    setDcConfig]    = useState({capacityMw:20, coolingType:'air', radiusKm:5});
   // Compare mode
   const [pickingB,    setPickingB]    = useState(false);   // user is clicking map to set site B
+  const [showListHeat, setShowListHeat] = useState(false); // list heat modal
   const [selectedB,   setSelectedB]   = useState(null);
   const [countyB,     setCountyB]     = useState(null);
   const [scoresB,     setScoresB]     = useState(null);
@@ -1334,7 +1498,7 @@ function App() {
               onClearB={()=>{ setSelectedB(null); setCountyB(null); setScoresB(null); }}
             />
           ) : activeView==='siteA' ? (
-            <ScoreCard county={county} scores={scores} onViewMarket={()=>setActiveView('siteB')} />
+            <ScoreCard county={county} scores={scores} onViewMarket={()=>setActiveView('siteB')} onListHeat={()=>setShowListHeat(true)} />
           ) : (
             <MarketplacePanel
               location={selected} buyers={buyers}
@@ -1420,6 +1584,11 @@ function App() {
           )}
         </div>
       </div>
+
+      {/* List Heat Modal */}
+      <Modal open={showListHeat} onClose={()=>setShowListHeat(false)}>
+        <ListHeatForm county={county} onClose={()=>setShowListHeat(false)} />
+      </Modal>
     </div>
   );
 }
