@@ -253,32 +253,72 @@ function useDatasets() {
   useEffect(() => {
     async function load() {
       try {
-        const [egridRes, countiesRes, schoolsRes, ghRes, poolsRes, dcsRes] = await Promise.all([
+        const [egridRes, countiesRes, geoRes, schoolsRes, ghRes, poolsRes, dcsRes] = await Promise.all([
           fetch('data/egrid_subregions.json'),
           fetch('data/county_scores.json'),
+          fetch('data/counties_geo.json'),
           fetch('data/schools.json'),
           fetch('data/greenhouses.json'),
           fetch('data/pools.json'),
           fetch('data/existing_dcs.json'),
         ]);
 
-        const [egrid, countiesData, schoolsData, ghData, poolsData, dcsData] = await Promise.all([
-          egridRes.json(), countiesRes.json(), schoolsRes.json(),
+        const [egrid, countiesData, countiesGeo, schoolsData, ghData, poolsData, dcsData] = await Promise.all([
+          egridRes.json(), countiesRes.json(), geoRes.json(), schoolsRes.json(),
           ghRes.json().catch(()=>({greenhouses:[]})),
           poolsRes.json().catch(()=>({pools:[]})),
           dcsRes.json().catch(()=>({data_centers:[]})),
         ]);
 
         const counties = countiesData.counties ?? [];
-        const buyers   = [
-          ...(schoolsData.schools    ?? []),
+
+        // Parse compact schools format: {h:[headers], d:[[vals...]]}
+        let schools = [];
+        if (schoolsData.d && schoolsData.h) {
+          const [iName,iCity,iState,iLat,iLng,iEnroll] = schoolsData.h.map((_,i)=>i);
+          schools = schoolsData.d.map(r => {
+            const enrollment = r[iEnroll] || 0;
+            const estSqft = Math.max(enrollment * 150, 10000);
+            return {
+              name: r[iName], city: r[iCity], state: r[iState],
+              lat: r[iLat], lng: r[iLng], type: 'school',
+              required_temp_c: 70, enrollment,
+              est_sqft: estSqft,
+              est_annual_demand_mwh: Math.round(estSqft * 30 / 3412 * 10) / 10,
+              est_annual_heating_cost_usd: Math.round(estSqft * 30 / 3412 * 48.15),
+            };
+          });
+        } else {
+          schools = schoolsData.schools ?? [];
+        }
+
+        const buyers = [
+          ...schools,
           ...(ghData.greenhouses     ?? []),
           ...(poolsData.pools        ?? []),
         ];
 
+        // Join scores to county GeoJSON features by FIPS
+        const scoreLookup = {};
+        counties.forEach(c => { scoreLookup[c.fips] = c; });
+        countiesGeo.features.forEach(f => {
+          const fips = (f.id || '').padStart(5, '0');
+          const s = scoreLookup[fips];
+          if (s) {
+            f.properties.score = s.total;
+            f.properties.clean_energy = s.clean_energy;
+            f.properties.water = s.water;
+            f.properties.climate = s.climate;
+            f.properties.heat = s.heat;
+            f.properties.county_name = s.county;
+            f.properties.state_abbr = s.state;
+          }
+        });
+
         setData({
           egrid:      egrid.subregions ?? [],
           counties,
+          countiesGeo,
           buyers,
           existingDCs: dcsData.data_centers ?? [],
         });
@@ -1093,35 +1133,43 @@ function HeatMap({ data, selected, selectedB, pickingB, activeView, buyers, radi
     map.on('load', () => {
       loadedRef.current = true;
 
-      // ── County heatmap circles ──────────────────────────────
-      const countyGJ = {
-        type:'FeatureCollection',
-        features:(data?.counties??[]).map(c=>({
-          type:'Feature',
-          geometry:{type:'Point',coordinates:[c.lng,c.lat]},
-          properties:{score:c.total,county:c.county,state:c.state,energy:c.clean_energy,water:c.water,heat:c.heat},
-        })),
-      };
-      map.addSource('counties',{type:'geojson',data:countyGJ});
+      // ── County choropleth (filled polygons) ─────────────────
+      map.addSource('counties',{type:'geojson',data:data?.countiesGeo ?? {type:'FeatureCollection',features:[]}});
+
+      // Fill layer — colored by score
       map.addLayer({
-        id:'county-circles', type:'circle', source:'counties',
+        id:'county-fill', type:'fill', source:'counties',
         paint:{
-          'circle-radius':['interpolate',['linear'],['zoom'], 2,16, 4,22, 6,30, 9,40, 12,55],
-          'circle-color':['interpolate',['linear'],['get','score'],
-            17,'#dc2626', 25,'#ef4444', 35,'#f97316', 45,'#eab308',
-            55,'#22c55e', 65,'#16a34a', 73,'#15803d'],
-          'circle-opacity':0.40, 'circle-blur':0.9,
+          'fill-color':['case',
+            ['has','score'],
+            ['interpolate',['linear'],['get','score'],
+              17,'#dc2626', 25,'#ef4444', 35,'#f97316', 45,'#eab308',
+              55,'#22c55e', 65,'#16a34a', 73,'#15803d'],
+            'rgba(200,200,200,0.1)'],
+          'fill-opacity':0.55,
         },
       });
 
-      map.on('mousemove','county-circles',e=>{
+      // Border lines for county boundaries
+      map.addLayer({
+        id:'county-borders', type:'line', source:'counties',
+        paint:{
+          'line-color':'rgba(255,255,255,0.3)',
+          'line-width':['interpolate',['linear'],['zoom'], 3,0, 6,0.5, 10,1],
+        },
+      });
+
+      map.on('mousemove','county-fill',e=>{
+        if (!e.features?.length) return;
         map.getCanvas().style.cursor='pointer';
         const p = e.features[0].properties;
-        popupRef.current.setLngLat(e.lngLat)
-          .setHTML(`<strong>${p.county}, ${p.state}</strong><br/>Score: <strong>${Math.round(p.score)}/100</strong><br/>Energy: ${Math.round(p.energy)} · Water: ${Math.round(p.water)} · Heat: ${Math.round(p.heat)}`)
-          .addTo(map);
+        if (p.score) {
+          popupRef.current.setLngLat(e.lngLat)
+            .setHTML(`<strong>${p.county_name||p.NAME}, ${p.state_abbr||p.STATE}</strong><br/>Score: <strong>${Math.round(p.score)}/100</strong><br/>Energy: ${Math.round(p.clean_energy)} · Water: ${Math.round(p.water)} · Heat: ${Math.round(p.heat)}`)
+            .addTo(map);
+        }
       });
-      map.on('mouseleave','county-circles',()=>{
+      map.on('mouseleave','county-fill',()=>{
         map.getCanvas().style.cursor='crosshair';
         popupRef.current.remove();
       });

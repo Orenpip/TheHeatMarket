@@ -429,13 +429,23 @@ function DCCard({ dc, distKm, onExpressInterest }) {
               <p>You save: <strong style={{color:'#15803d'}}>${savingsPerMwh.toFixed(0)}/MWh</strong></p>
             </div>
           </div>
-          {distKm !== null && distKm < 25 && (
+          {distKm !== null && distKm < 2 && (
             <div className="mt-3 rounded-lg p-3" style={{background:'#d1fae5',border:'1px solid #6ee7b7'}}>
               <p className="font-bold" style={{color:'#15803d'}}>
-                Within feasible piping distance ({distKm.toFixed(1)} km)
+                Direct connection feasible ({distKm < 1 ? `${Math.round(distKm*1000)}m` : `${distKm.toFixed(1)} km`} away)
               </p>
               <p className="mt-1" style={{color:'#166534'}}>
-                Estimated pipe cost: ${(distKm * 1000 * 1000 / 1e6).toFixed(1)}M · Payback depends on your demand
+                Close enough for a direct heat connection — minimal infrastructure needed.
+              </p>
+            </div>
+          )}
+          {distKm !== null && distKm >= 2 && distKm < 10 && (
+            <div className="mt-3 rounded-lg p-3" style={{background:'#fef9c3',border:'1px solid #fde68a'}}>
+              <p className="font-bold" style={{color:'#a16207'}}>
+                Co-development opportunity ({distKm.toFixed(1)} km away)
+              </p>
+              <p className="mt-1" style={{color:'#92400e'}}>
+                Consider co-locating new facilities adjacent to this data center for direct heat access.
               </p>
             </div>
           )}
@@ -505,11 +515,11 @@ function App() {
       {/* Hero / search */}
       <div style={{padding:'48px 24px 32px',maxWidth:800,margin:'0 auto',textAlign:'center'}}>
         <h1 className="serif font-bold mb-2" style={{fontSize:32}}>
-          Find cheap heat near you
+          Is there a data center near you?
         </h1>
         <p className="text-sm mb-6" style={{color:'#6b6b6b',maxWidth:480,margin:'0 auto'}}>
-          Data centers near you may be selling waste heat at a fraction of gas prices.
-          Enter your location to discover potential heat sources.
+          Data centers produce enormous amounts of waste heat. If one is close enough,
+          your school, pool, or greenhouse could heat for free.
         </p>
         <LocationSearch onResult={setLocation} />
       </div>
@@ -570,10 +580,10 @@ function App() {
           {/* CTA for registration */}
           {sorted.length > 0 && (
             <div className="mt-8 rounded-xl p-6 text-center" style={{background:'white',border:'1px solid #e2d9cc'}}>
-              <h3 className="serif font-bold text-lg mb-2">Want to start buying heat?</h3>
+              <h3 className="serif font-bold text-lg mb-2">Interested in connecting?</h3>
               <p className="text-xs mb-4" style={{color:'#6b6b6b'}}>
-                Register your organization to get connected with data centers near you.
-                We'll match you with the best heat source for your needs.
+                Register your facility and we'll help you explore whether a nearby
+                data center could provide your heating — for a fraction of what you pay today.
               </p>
               <button onClick={()=>setShowRegister(true)}
                 className="px-6 py-3 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
@@ -590,9 +600,9 @@ function App() {
         <div style={{maxWidth:800,margin:'0 auto',padding:'0 24px 48px'}}>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
             {[
-              ['🏫','Schools','K-12 schools spend $8B/yr on gas heating. DC waste heat can cut costs 40-60%.'],
-              ['🌱','Greenhouses','Year-round heat demand at 30-50°C — perfect match for DC output, no heat pump needed.'],
-              ['🏊','Pools & Aquatics','Pools need 26-30°C water. DC waste heat delivers this directly, saving $15-25K/yr.'],
+              ['🏫','Schools','130K US schools heat with gas. Those near data centers could eliminate heating costs entirely.'],
+              ['🌱','Greenhouses','Year-round heat demand at 30-50°C — a perfect match for DC waste heat, no gas needed.'],
+              ['🏊','Pools & Aquatics','Pools need 26-30°C water. DC waste heat delivers this directly, cutting $15-25K/yr.'],
             ].map(([emoji,title,desc])=>(
               <div key={title} className="rounded-xl p-5" style={{background:'white',border:'1px solid #e2d9cc'}}>
                 <p className="text-2xl mb-2">{emoji}</p>
@@ -607,9 +617,9 @@ function App() {
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs" style={{color:'#6b6b6b'}}>
               {[
                 ['1.','Enter your location','Search by city, address, or ZIP code'],
-                ['2.','Browse nearby DCs','See data centers ranked by distance and capacity'],
-                ['3.','Compare economics','Each listing shows heat price vs. your gas baseline'],
-                ['4.','Express interest','We connect you with the data center operator'],
+                ['2.','See what\'s nearby','Data centers ranked by distance — closest first'],
+                ['3.','Check feasibility','Under 2km? Direct connection is practical and affordable'],
+                ['4.','Get connected','We match you with the DC operator to explore the opportunity'],
               ].map(([n,t,d])=>(
                 <div key={n}>
                   <p className="font-bold text-lg mb-1" style={{color:'#d4380d'}}>{n}</p>
