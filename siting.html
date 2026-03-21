@@ -253,18 +253,18 @@ function useDatasets() {
   useEffect(() => {
     async function load() {
       try {
-        const [egridRes, countiesRes, geoRes, schoolsRes, ghRes, poolsRes, dcsRes] = await Promise.all([
+        // Load core data first (fast), then schools (large) in parallel
+        const [egridRes, countiesRes, geoRes, ghRes, poolsRes, dcsRes] = await Promise.all([
           fetch('data/egrid_subregions.json'),
           fetch('data/county_scores.json'),
           fetch('data/counties_geo.json'),
-          fetch('data/schools.json'),
           fetch('data/greenhouses.json'),
           fetch('data/pools.json'),
           fetch('data/existing_dcs.json'),
         ]);
 
-        const [egrid, countiesData, countiesGeo, schoolsData, ghData, poolsData, dcsData] = await Promise.all([
-          egridRes.json(), countiesRes.json(), geoRes.json(), schoolsRes.json(),
+        const [egrid, countiesData, countiesGeo, ghData, poolsData, dcsData] = await Promise.all([
+          egridRes.json(), countiesRes.json(), geoRes.json(),
           ghRes.json().catch(()=>({greenhouses:[]})),
           poolsRes.json().catch(()=>({pools:[]})),
           dcsRes.json().catch(()=>({data_centers:[]})),
@@ -272,25 +272,27 @@ function useDatasets() {
 
         const counties = countiesData.counties ?? [];
 
-        // Parse compact schools format: {h:[headers], d:[[vals...]]}
+        // Parse schools — loaded separately to not block initial render
         let schools = [];
-        if (schoolsData.d && schoolsData.h) {
-          const [iName,iCity,iState,iLat,iLng,iEnroll] = schoolsData.h.map((_,i)=>i);
-          schools = schoolsData.d.map(r => {
-            const enrollment = r[iEnroll] || 0;
-            const estSqft = Math.max(enrollment * 150, 10000);
-            return {
-              name: r[iName], city: r[iCity], state: r[iState],
-              lat: r[iLat], lng: r[iLng], type: 'school',
-              required_temp_c: 70, enrollment,
-              est_sqft: estSqft,
-              est_annual_demand_mwh: Math.round(estSqft * 30 / 3412 * 10) / 10,
-              est_annual_heating_cost_usd: Math.round(estSqft * 30 / 3412 * 48.15),
-            };
-          });
-        } else {
-          schools = schoolsData.schools ?? [];
-        }
+        try {
+          const schoolsData = await fetch('data/schools.json').then(r => r.json());
+          if (schoolsData.d && schoolsData.h) {
+            schools = schoolsData.d.map(r => {
+              const enrollment = r[5] || 0;
+              const estSqft = Math.max(enrollment * 150, 10000);
+              return {
+                name: r[0], city: r[1], state: r[2],
+                lat: r[3], lng: r[4], type: 'school',
+                required_temp_c: 70, enrollment,
+                est_sqft: estSqft,
+                est_annual_demand_mwh: Math.round(estSqft * 30 / 3412 * 10) / 10,
+                est_annual_heating_cost_usd: Math.round(estSqft * 30 / 3412 * 48.15),
+              };
+            });
+          } else {
+            schools = schoolsData.schools ?? [];
+          }
+        } catch(e) { console.warn('Schools data failed to load:', e); }
 
         const buyers = [
           ...schools,
@@ -1302,34 +1304,39 @@ function App() {
   const [scoresB,     setScoresB]     = useState(null);
   const mapRef = useRef(null);
 
+  // Fast bounding-box pre-filter before expensive haversine (1° lat ≈ 111km)
+  const findNearbyBuyers = useCallback((lat, lng, radiusKm, buyers) => {
+    const degBuffer = radiusKm / 111 * 1.2; // 20% buffer for longitude distortion
+    const minLat = lat - degBuffer, maxLat = lat + degBuffer;
+    const minLng = lng - degBuffer, maxLng = lng + degBuffer;
+    const results = [];
+    for (let i = 0; i < buyers.length; i++) {
+      const b = buyers[i];
+      if (b.lat < minLat || b.lat > maxLat || b.lng < minLng || b.lng > maxLng) continue;
+      const d = haversineKm(lat, lng, b.lat, b.lng);
+      if (d <= radiusKm) results.push(calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d));
+    }
+    return results;
+  }, [dcConfig]);
+
   // Recompute site A when location or DC config changes
   useEffect(() => {
     if (!selected || !data) return;
     const c = nearestCounty(selected.lat, selected.lng, data.counties);
     setCounty(c);
-    const nearby = data.buyers
-      .map(b => {
-        const d = haversineKm(selected.lat, selected.lng, b.lat, b.lng);
-        return d <= dcConfig.radiusKm ? calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d) : null;
-      })
-      .filter(Boolean);
+    const nearby = findNearbyBuyers(selected.lat, selected.lng, dcConfig.radiusKm, data.buyers);
     setBuyers(nearby);
     setScores(computeScores(c, nearby));
-  }, [selected, dcConfig, data]);
+  }, [selected, dcConfig, data, findNearbyBuyers]);
 
   // Recompute site B
   useEffect(() => {
     if (!selectedB || !data) return;
     const c = nearestCounty(selectedB.lat, selectedB.lng, data.counties);
     setCountyB(c);
-    const nearby = data.buyers
-      .map(b => {
-        const d = haversineKm(selectedB.lat, selectedB.lng, b.lat, b.lng);
-        return d <= dcConfig.radiusKm ? calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d) : null;
-      })
-      .filter(Boolean);
+    const nearby = findNearbyBuyers(selectedB.lat, selectedB.lng, dcConfig.radiusKm, data.buyers);
     setScoresB(computeScores(c, nearby));
-  }, [selectedB, dcConfig, data]);
+  }, [selectedB, dcConfig, data, findNearbyBuyers]);
 
   // Restore from URL hash on initial data load
   useEffect(() => {
