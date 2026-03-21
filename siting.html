@@ -253,18 +253,18 @@ function useDatasets() {
   useEffect(() => {
     async function load() {
       try {
-        // Load core data first (fast), then schools (large) in parallel
-        const [egridRes, countiesRes, geoRes, ghRes, poolsRes, dcsRes] = await Promise.all([
+        const [egridRes, countiesRes, geoRes, schoolsRes, ghRes, poolsRes, dcsRes] = await Promise.all([
           fetch('data/egrid_subregions.json'),
           fetch('data/county_scores.json'),
           fetch('data/counties_geo.json'),
+          fetch('data/schools.json'),
           fetch('data/greenhouses.json'),
           fetch('data/pools.json'),
           fetch('data/existing_dcs.json'),
         ]);
 
-        const [egrid, countiesData, countiesGeo, ghData, poolsData, dcsData] = await Promise.all([
-          egridRes.json(), countiesRes.json(), geoRes.json(),
+        const [egrid, countiesData, countiesGeo, schoolsData, ghData, poolsData, dcsData] = await Promise.all([
+          egridRes.json(), countiesRes.json(), geoRes.json(), schoolsRes.json(),
           ghRes.json().catch(()=>({greenhouses:[]})),
           poolsRes.json().catch(()=>({pools:[]})),
           dcsRes.json().catch(()=>({data_centers:[]})),
@@ -272,27 +272,25 @@ function useDatasets() {
 
         const counties = countiesData.counties ?? [];
 
-        // Parse schools — loaded separately to not block initial render
+        // Parse compact schools format: {h:[headers], d:[[vals...]]}
         let schools = [];
-        try {
-          const schoolsData = await fetch('data/schools.json').then(r => r.json());
-          if (schoolsData.d && schoolsData.h) {
-            schools = schoolsData.d.map(r => {
-              const enrollment = r[5] || 0;
-              const estSqft = Math.max(enrollment * 150, 10000);
-              return {
-                name: r[0], city: r[1], state: r[2],
-                lat: r[3], lng: r[4], type: 'school',
-                required_temp_c: 70, enrollment,
-                est_sqft: estSqft,
-                est_annual_demand_mwh: Math.round(estSqft * 30 / 3412 * 10) / 10,
-                est_annual_heating_cost_usd: Math.round(estSqft * 30 / 3412 * 48.15),
-              };
-            });
-          } else {
-            schools = schoolsData.schools ?? [];
-          }
-        } catch(e) { console.warn('Schools data failed to load:', e); }
+        if (schoolsData.d && schoolsData.h) {
+          const [iName,iCity,iState,iLat,iLng,iEnroll] = schoolsData.h.map((_,i)=>i);
+          schools = schoolsData.d.map(r => {
+            const enrollment = r[iEnroll] || 0;
+            const estSqft = Math.max(enrollment * 150, 10000);
+            return {
+              name: r[iName], city: r[iCity], state: r[iState],
+              lat: r[iLat], lng: r[iLng], type: 'school',
+              required_temp_c: 70, enrollment,
+              est_sqft: estSqft,
+              est_annual_demand_mwh: Math.round(estSqft * 30 / 3412 * 10) / 10,
+              est_annual_heating_cost_usd: Math.round(estSqft * 30 / 3412 * 48.15),
+            };
+          });
+        } else {
+          schools = schoolsData.schools ?? [];
+        }
 
         const buyers = [
           ...schools,
@@ -590,59 +588,97 @@ function ListHeatForm({ county, onClose }) {
 
 // ── BuyerCard ─────────────────────────────────────────────────────
 function BuyerCard({ buyer }) {
+  const [open, setOpen] = useState(false);
   const meta  = BUYER_META[buyer.type] ?? BUYER_META.school;
-  const distLabel = buyer.distKm < 1
-    ? `${Math.round(buyer.distKm*1000)}m away`
-    : `${buyer.distKm.toFixed(1)} km away`;
-  const isClose = buyer.distKm < 2;
+  const feas  = buyer.feasibility;
+  const fc    = feas >= 65 ? '#15803d' : feas >= 35 ? '#ca8a04' : '#b91c1c';
+  const fl    = feas >= 65 ? 'HIGH' : feas >= 35 ? 'MEDIUM' : 'LOW';
 
   return (
     <div className="buyer-card rounded-xl mb-3 overflow-hidden" style={{border:'1px solid #e2d9cc',background:'white'}}>
-      <div className="p-4">
+      <button className="w-full text-left p-4" onClick={() => setOpen(o=>!o)}>
         {/* Header row */}
-        <div className="flex items-start gap-2.5 mb-2">
+        <div className="flex items-start gap-2.5 mb-3">
           <span className="text-xl mt-0.5 flex-shrink-0">{meta.emoji}</span>
           <div className="flex-1 min-w-0">
             <p className="font-bold text-sm truncate leading-tight">{buyer.name}</p>
             <p className="text-xs mt-0.5" style={{color:'#6b6b6b'}}>
               {meta.label} · {buyer.city}, {buyer.state}
             </p>
+            <p className="text-xs" style={{color:'#9a9a9a'}}>{buyer.distKm.toFixed(1)} km away</p>
           </div>
           <div className="flex-shrink-0 text-right">
-            <p className="text-xs font-bold" style={{color: isClose ? '#15803d' : '#9a9a9a'}}>{distLabel}</p>
+            <p className="text-xs font-bold" style={{color:fc}}>{fl}</p>
+            <p className="text-xs" style={{color:'#9a9a9a'}}>feasibility</p>
           </div>
         </div>
 
-        {/* Connection feasibility */}
-        <div className="flex items-center gap-2">
-          {isClose ? (
-            <span className="text-xs px-2 py-0.5 rounded-full font-bold"
-              style={{background:'#d1fae5',color:'#15803d'}}>
-              Direct connection feasible
-            </span>
-          ) : buyer.distKm < 10 ? (
-            <span className="text-xs px-2 py-0.5 rounded-full font-bold"
-              style={{background:'#fef9c3',color:'#a16207'}}>
-              Co-development opportunity
-            </span>
-          ) : (
-            <span className="text-xs px-2 py-0.5 rounded-full font-bold"
-              style={{background:'#f5f0e8',color:'#9a9a9a'}}>
-              Future potential
-            </span>
+        {/* Metrics row */}
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            [fmtUSD(buyer.annualSavings), 'savings/yr'],
+            [`${buyer.co2Saved}t`,        'CO₂/yr'],
+            [`${buyer.payback}yr`,        'payback'],
+          ].map(([v,l]) => (
+            <div key={l} className="text-center rounded-lg py-1.5" style={{background:'#f5f0e8'}}>
+              <p className="text-xs font-bold">{v}</p>
+              <p className="text-xs" style={{color:'#9a9a9a'}}>{l}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Feasibility bar */}
+        <div className="mt-2.5 h-1.5 rounded-full overflow-hidden" style={{background:'#e2d9cc'}}>
+          <div className="h-full rounded-full bar-fill" style={{width:`${feas}%`,background:fc}} />
+        </div>
+
+        {/* Heat pump badge */}
+        <div className="mt-2 flex items-center gap-2">
+          <span className="text-xs px-2 py-0.5 rounded-full font-bold"
+            style={{
+              background: buyer.needsPump ? '#fff1ed' : '#d1fae5',
+              color:      buyer.needsPump ? '#c2410c' : '#15803d',
+            }}>
+            {buyer.needsPump ? '⚡ Heat pump required' : '✅ Direct use'}
+          </span>
+          <span className="text-xs" style={{color:'#9a9a9a'}}>{buyer.required_temp_c}°C needed</span>
+        </div>
+      </button>
+
+      {/* Expanded details */}
+      {open && (
+        <div className="px-4 pb-4 text-xs" style={{borderTop:'1px solid #f0e8dc'}}>
+          <div className="grid grid-cols-2 gap-3 mt-3">
+            <div>
+              <p className="font-bold uppercase tracking-wider mb-1.5" style={{color:'#b0a898',fontSize:10}}>Heat Transfer</p>
+              <p className="mb-1">Deliverable: <strong>{fmtMWh(buyer.deliverableMwh)}/yr</strong></p>
+              <p className="mb-1">Pipe distance: <strong>{(buyer.distKm*1000).toFixed(0)} m</strong></p>
+              <p>Pump COP: <strong>{buyer.needsPump ? '3.5' : 'N/A'}</strong></p>
+            </div>
+            <div>
+              <p className="font-bold uppercase tracking-wider mb-1.5" style={{color:'#b0a898',fontSize:10}}>Economics</p>
+              <p className="mb-1">Gas cost: <strong>${buyer.gasCostMwh}/MWh</strong></p>
+              <p className="mb-1">DC heat cost: <strong>${buyer.dcHeatCostMwh}/MWh</strong></p>
+              <p>Infrastructure: <strong>{fmtUSD(buyer.infraCost)}</strong></p>
+            </div>
+          </div>
+          {buyer.type === 'school' && buyer.est_sqft && (
+            <p className="mt-2" style={{color:'#9a9a9a'}}>
+              ~{(buyer.est_sqft/1000).toFixed(0)}K sqft · {buyer.students} students · {buyer.level}
+            </p>
           )}
-          {buyer.enrollment > 0 && (
-            <span className="text-xs" style={{color:'#9a9a9a'}}>{buyer.enrollment.toLocaleString()} students</span>
+          {buyer.type === 'greenhouse' && buyer.sqft && (
+            <p className="mt-2" style={{color:'#9a9a9a'}}>~{(buyer.sqft/1000).toFixed(0)}K sqft · year-round demand</p>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 }
 
 // ── Marketplace Panel (Side B) ────────────────────────────────────
 function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
-  const [sortBy, setSortBy] = useState('distance');
+  const [sortBy, setSortBy] = useState('feasibility');
 
   const sorted = useMemo(() => {
     if (!buyers?.length) return [];
@@ -654,13 +690,11 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
     return b.sort((a,z) => z.feasibility - a.feasibility);
   }, [buyers, sortBy]);
 
-  // Simple, meaningful community stats — only count feasible connections (<2km)
   const impact = useMemo(() => {
     if (!buyers?.length) return null;
     const nearby = buyers.filter(b => b.distKm < 2);
     const reachable = buyers.filter(b => b.distKm < 10);
-    const totalHeat = dcConfig.capacityMw * 8760 * 0.80; // MWh/yr
-    // Each school uses ~90 MWh/yr heating (avg 600 students × 150sqft × 30kBtu/sqft / 3412)
+    const totalHeat = dcConfig.capacityMw * 8760 * 0.80;
     const schoolsHeatable = Math.min(nearby.length, Math.floor(totalHeat / 90));
     return { nearby: nearby.length, reachable: reachable.length, schoolsHeatable, totalHeat };
   }, [buyers, dcConfig]);
@@ -732,20 +766,19 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
         </p>
       </div>
 
-      {/* Community impact — simple, meaningful numbers */}
+      {/* Community impact */}
       {impact && impact.reachable > 0 && (
         <div className="rounded-xl p-4 mb-3" style={{background:'#fff1ed',border:'1px solid #fed7aa'}}>
           <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{color:'#d4380d'}}>
             Community Impact
           </p>
           <div className="space-y-2">
-            {impact.nearby > 0 && (
+            {impact.nearby > 0 ? (
               <div className="rounded-lg p-3" style={{background:'white'}}>
                 <p className="font-bold text-lg" style={{color:'#15803d'}}>{impact.nearby} facilities</p>
                 <p className="text-xs" style={{color:'#6b6b6b'}}>within 2 km — direct heat connection feasible</p>
               </div>
-            )}
-            {impact.nearby === 0 && (
+            ) : (
               <div className="rounded-lg p-3" style={{background:'white'}}>
                 <p className="font-bold text-lg" style={{color:'#a16207'}}>{impact.reachable} facilities</p>
                 <p className="text-xs" style={{color:'#6b6b6b'}}>within 10 km — co-development opportunities</p>
@@ -778,7 +811,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
 
       {/* Sort pills */}
       <div className="flex gap-1.5 mb-3 overflow-x-auto pb-1 flex-shrink-0" style={{scrollbarWidth:'none'}}>
-        {[['distance','Nearest'],['feasibility','Best Match']].map(([v,l])=>(
+        {[['feasibility','Best Match'],['distance','Nearest'],['savings','Most Savings'],['co2','Most CO₂'],['payback','Fastest ROI']].map(([v,l])=>(
           <button key={v} onClick={()=>setSortBy(v)}
             className="flex-shrink-0 pill-btn text-xs px-2.5 py-1 rounded-full border"
             style={{
@@ -1304,39 +1337,34 @@ function App() {
   const [scoresB,     setScoresB]     = useState(null);
   const mapRef = useRef(null);
 
-  // Fast bounding-box pre-filter before expensive haversine (1° lat ≈ 111km)
-  const findNearbyBuyers = useCallback((lat, lng, radiusKm, buyers) => {
-    const degBuffer = radiusKm / 111 * 1.2; // 20% buffer for longitude distortion
-    const minLat = lat - degBuffer, maxLat = lat + degBuffer;
-    const minLng = lng - degBuffer, maxLng = lng + degBuffer;
-    const results = [];
-    for (let i = 0; i < buyers.length; i++) {
-      const b = buyers[i];
-      if (b.lat < minLat || b.lat > maxLat || b.lng < minLng || b.lng > maxLng) continue;
-      const d = haversineKm(lat, lng, b.lat, b.lng);
-      if (d <= radiusKm) results.push(calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d));
-    }
-    return results;
-  }, [dcConfig]);
-
   // Recompute site A when location or DC config changes
   useEffect(() => {
     if (!selected || !data) return;
     const c = nearestCounty(selected.lat, selected.lng, data.counties);
     setCounty(c);
-    const nearby = findNearbyBuyers(selected.lat, selected.lng, dcConfig.radiusKm, data.buyers);
+    const nearby = data.buyers
+      .map(b => {
+        const d = haversineKm(selected.lat, selected.lng, b.lat, b.lng);
+        return d <= dcConfig.radiusKm ? calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d) : null;
+      })
+      .filter(Boolean);
     setBuyers(nearby);
     setScores(computeScores(c, nearby));
-  }, [selected, dcConfig, data, findNearbyBuyers]);
+  }, [selected, dcConfig, data]);
 
   // Recompute site B
   useEffect(() => {
     if (!selectedB || !data) return;
     const c = nearestCounty(selectedB.lat, selectedB.lng, data.counties);
     setCountyB(c);
-    const nearby = findNearbyBuyers(selectedB.lat, selectedB.lng, dcConfig.radiusKm, data.buyers);
+    const nearby = data.buyers
+      .map(b => {
+        const d = haversineKm(selectedB.lat, selectedB.lng, b.lat, b.lng);
+        return d <= dcConfig.radiusKm ? calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d) : null;
+      })
+      .filter(Boolean);
     setScoresB(computeScores(c, nearby));
-  }, [selectedB, dcConfig, data, findNearbyBuyers]);
+  }, [selectedB, dcConfig, data]);
 
   // Restore from URL hash on initial data load
   useEffect(() => {
