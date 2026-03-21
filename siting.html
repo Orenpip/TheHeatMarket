@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeatGrid — Data Center Sustainability Platform</title>
+
+  <!-- MapLibre GL JS (free, no token required) -->
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React 18 + ReactDOM (UMD) -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel (JSX in-browser) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    :root {
+      --bg:         #f5f0e8;
+      --surface:    #ffffff;
+      --text:       #1a1a1a;
+      --muted:      #6b6b6b;
+      --faint:      #9a9a9a;
+      --border:     #e2d9cc;
+      --blue:       #1a5cff;
+      --blue-dim:   #e8eeff;
+      --orange:     #d4380d;
+      --orange-dim: #fff1ed;
+      --green:      #15803d;
+      --amber:      #a16207;
+      --red:        #b91c1c;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { height: 100%; overflow: hidden; }
+    body { font-family: 'Space Mono', monospace; background: var(--bg); color: var(--text); }
+
+    .serif { font-family: 'Fraunces', serif; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    /* Animations */
+    .fade-in  { animation: fadeIn .28s ease-out both; }
+    .slide-up { animation: slideUp .3s ease-out both; }
+    @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .bar-fill { transition: width .55s cubic-bezier(.4,0,.2,1); }
+
+    /* Map cursor */
+    .maplibregl-canvas-container { cursor: crosshair !important; }
+
+    /* Custom slider */
+    input[type=range] {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 4px; background: var(--border);
+      border-radius: 2px; outline: none; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--orange); border: 2px solid white;
+      box-shadow: 0 1px 4px rgba(0,0,0,.18); cursor: grab;
+    }
+    input[type=range]:active::-webkit-slider-thumb { cursor: grabbing; }
+
+    /* Buyer cards */
+    .buyer-card { transition: box-shadow .15s ease, transform .15s ease; cursor: pointer; }
+    .buyer-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.09); transform: translateY(-1px); }
+
+    /* Spinner */
+    .spinner {
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 2px solid var(--border); border-top-color: var(--blue);
+      animation: spin .75s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* MapLibre popup override */
+    .maplibregl-popup-content {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      padding: 7px 11px; border-radius: 7px;
+      background: #1a1a1a; color: #f5f0e8; box-shadow: 0 3px 12px rgba(0,0,0,.3);
+    }
+    .maplibregl-popup-tip { border-top-color: #1a1a1a !important; }
+    .maplibregl-ctrl-group { border-radius: 10px !important; overflow: hidden; }
+
+    /* Comparison toggle */
+    .pill-btn { transition: background .15s, color .15s; }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { sans: ['Space Mono','monospace'], serif: ['Fraunces','serif'] },
+        colors: { 'hg-bg':'#f5f0e8','hg-border':'#e2d9cc','hg-blue':'#1a5cff','hg-orange':'#d4380d' }
+      }}
+    }
+  </script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+// ══════════════════════════════════════════════════════════════════
+//  HeatGrid — Two-Sided Data Center Sustainability Platform
+//  Stack: MapLibre GL JS (free) · React 18 · Tailwind · Space Mono + Fraunces
+//  Data:  EPA eGRID 2023 · WRI Aqueduct · NOAA Normals (synthetic county data)
+// ══════════════════════════════════════════════════════════════════
+
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+// ── Free map tile style (no token required) ───────────────────────
+const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
+
+// ── Scoring weights (v2: clean_energy 15%, water 25%, climate 25%, heat 35%) ──
+const W = { clean_energy: 0.15, water: 0.25, climate: 0.25, heat: 0.35 };
+
+// ── Score thresholds (calibrated for 17-73 actual range) ─────────
+const THRESHOLDS = [
+  { min: 70, label: 'Excellent', color: '#15803d', bg: '#dcfce7', text: '#14532d' },
+  { min: 55, label: 'Good',      color: '#16a34a', bg: '#d1fae5', text: '#14532d' },
+  { min: 40, label: 'Moderate',  color: '#ca8a04', bg: '#fef9c3', text: '#713f12' },
+  { min: 25, label: 'Poor',      color: '#ea580c', bg: '#ffedd5', text: '#7c2d12' },
+  { min: 0,  label: 'Critical',  color: '#dc2626', bg: '#fee2e2', text: '#7f1d1d' },
+];
+
+const BUYER_META = {
+  school:     { emoji: '🏫', color: '#1a5cff',  label: 'School'         },
+  greenhouse: { emoji: '🌱', color: '#15803d',  label: 'Greenhouse'     },
+  pool:       { emoji: '🏊', color: '#0891b2',  label: 'Aquatic Center' },
+};
+
+// ── Helpers ───────────────────────────────────────────────────────
+const clamp = (v,mn,mx) => Math.max(mn, Math.min(mx, v));
+const norm  = (v,mn,mx) => clamp((v-mn)/(mx-mn), 0, 1);
+
+function haversineKm(lat1,lng1,lat2,lng2) {
+  const R=6371, dLat=(lat2-lat1)*Math.PI/180, dLng=(lng2-lng1)*Math.PI/180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+
+function getThreshold(score) {
+  return THRESHOLDS.find(t => score >= t.min) ?? THRESHOLDS[THRESHOLDS.length-1];
+}
+
+function fmtUSD(n) {
+  if (n >= 1e6) return `$${(n/1e6).toFixed(1)}M`;
+  if (n >= 1e3) return `$${Math.round(n/1e3)}K`;
+  return `$${Math.round(n)}`;
+}
+function fmtMWh(n) {
+  return n >= 1000 ? `${(n/1000).toFixed(1)} GWh` : `${Math.round(n)} MWh`;
+}
+
+function circleGeoJSON(lat,lng,radiusKm,steps=72) {
+  const pts = Array.from({length:steps+1},(_,i) => {
+    const a = (i/steps)*2*Math.PI;
+    return [lng + radiusKm/(111.32*Math.cos(lat*Math.PI/180))*Math.sin(a),
+            lat + radiusKm/111.32*Math.cos(a)];
+  });
+  return {type:'Feature',geometry:{type:'Polygon',coordinates:[pts]}};
+}
+
+// ── Scoring engine (v2: 4 components) ─────────────────────────────
+function computeScores(county, nearbyBuyers) {
+  if (!county) return null;
+  const { co2_lbs_per_mwh: co2=900, bws_raw=2, avg_temp_f=55, avg_humidity=65,
+          solar_cf=0.18, wind_cf=0.18, hdd=4000, density_per_sqmi=300 } = county;
+
+  // Clean Energy: 70% grid CO₂ + 30% renewable capacity factor
+  const gridSub  = (1 - norm(co2, 200, 1600)) * 100;
+  const renewSub = norm(solar_cf + wind_cf, 0.20, 0.70) * 100;
+  const clean_energy = 0.70 * gridSub + 0.30 * renewSub;
+
+  // Water stress: lower stress = higher score
+  const water = (1 - norm(bws_raw, 0, 4)) * 100;
+
+  // Climate: cooler + drier = less cooling load
+  const climate = norm(clamp(95-avg_temp_f,0,65),0,65)*50
+                + norm(clamp(90-avg_humidity,0,70),0,70)*50;
+
+  // Heat demand: HDD (70%) + density (30%) + buyer boost
+  const heatHdd     = norm(hdd, 0, 7500) * 100;
+  const heatDensity = norm(density_per_sqmi, 0, 2000) * 100;
+  const buyerBoost  = nearbyBuyers ? Math.min(nearbyBuyers.length * 2, 15) : 0;
+  const heat = Math.min(100, 0.70 * heatHdd + 0.30 * heatDensity + buyerBoost);
+
+  const total = W.clean_energy*clean_energy + W.water*water + W.climate*climate + W.heat*heat;
+  return { clean_energy, water, climate, heat, total };
+}
+
+// ── Economics engine ──────────────────────────────────────────────
+function calcEconomics(buyer, dcCapMw, coolingType, distKm) {
+  const outputTempC  = coolingType === 'liquid' ? 55 : 45;
+  const annualHeatMwh = dcCapMw * 8760 * 0.80;
+  const pipeLoss     = 0.015 * distKm;
+  const demandMwh    = buyer.est_annual_demand_mwh ?? (buyer.est_annual_heating_cost_usd / 48.15) ?? 300;
+  const deliverable  = Math.min(annualHeatMwh * (1 - pipeLoss), demandMwh);
+
+  const needsPump    = buyer.required_temp_c > outputTempC;
+  const pumpCostMwh  = needsPump ? (0.12*1000)/3.5 : 0;   // $34.3/MWh if pump needed
+  const gasCostMwh   = (12/0.85)*3.412;                    // ~$48.15/MWh
+  const heatSaleMwh  = 20;                                  // DC revenue from heat
+  const totalDcCost  = heatSaleMwh + pumpCostMwh;
+
+  const annualSavings = deliverable * (gasCostMwh - totalDcCost);
+  const co2Saved      = deliverable * 185 / 1000;
+
+  const pipeM     = distKm * 1000;
+  const infraCost = pipeM*1000 + 50_000 + (needsPump ? 200_000 : 0);
+  const payback   = infraCost / Math.max(annualSavings, 1);
+
+  const feasibility = Math.max(0,
+    65*(1/(1+distKm/5)) + 25*norm(annualSavings, 0, 200_000) + 10*norm(10-payback, 0, 10)
+  );
+
+  return { ...buyer, distKm, needsPump, deliverableMwh:Math.round(deliverable),
+    annualSavings:Math.round(annualSavings), co2Saved:Math.round(co2Saved),
+    infraCost:Math.round(infraCost), payback:Math.round(payback*10)/10,
+    gasCostMwh:Math.round(gasCostMwh*100)/100,
+    dcHeatCostMwh:Math.round(totalDcCost*100)/100,
+    feasibility:Math.round(feasibility) };
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  Data loader
+// ══════════════════════════════════════════════════════════════════
+function useDatasets() {
+  const [data,    setData]    = useState(null);
+  const [error,   setError]   = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const [egridRes, countiesRes, schoolsRes, ghRes, poolsRes, dcsRes] = await Promise.all([
+          fetch('data/egrid_subregions.json'),
+          fetch('data/county_scores.json'),
+          fetch('data/schools.json'),
+          fetch('data/greenhouses.json'),
+          fetch('data/pools.json'),
+          fetch('data/existing_dcs.json'),
+        ]);
+
+        const [egrid, countiesData, schoolsData, ghData, poolsData, dcsData] = await Promise.all([
+          egridRes.json(), countiesRes.json(), schoolsRes.json(),
+          ghRes.json().catch(()=>({greenhouses:[]})),
+          poolsRes.json().catch(()=>({pools:[]})),
+          dcsRes.json().catch(()=>({data_centers:[]})),
+        ]);
+
+        const counties = countiesData.counties ?? [];
+        const buyers   = [
+          ...(schoolsData.schools    ?? []),
+          ...(ghData.greenhouses     ?? []),
+          ...(poolsData.pools        ?? []),
+        ];
+
+        setData({
+          egrid:      egrid.subregions ?? [],
+          counties,
+          buyers,
+          existingDCs: dcsData.data_centers ?? [],
+        });
+      } catch(e) {
+        setError(e.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, []);
+
+  return { data, error, loading };
+}
+
+function nearestCounty(lat, lng, counties) {
+  let best=null, bestD=Infinity;
+  for (const c of counties) {
+    const d = haversineKm(lat,lng,c.lat,c.lng);
+    if (d < bestD) { bestD=d; best=c; }
+  }
+  return best;
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  Sub-components
+// ══════════════════════════════════════════════════════════════════
+
+// ── ScoreBar ──────────────────────────────────────────────────────
+function ScoreBar({ label, value, sublabel, color }) {
+  return (
+    <div className="mb-3">
+      <div className="flex justify-between items-baseline mb-1">
+        <span className="text-xs font-bold tracking-wider uppercase" style={{color:'#9a9a9a'}}>{label}</span>
+        <span className="text-sm font-bold" style={{color}}>{Math.round(value)}</span>
+      </div>
+      <div className="h-2 rounded-full overflow-hidden" style={{background:'#e2d9cc'}}>
+        <div className="h-full rounded-full bar-fill" style={{width:`${Math.round(value)}%`,background:color}} />
+      </div>
+      {sublabel && <p className="text-xs mt-0.5" style={{color:'#b0a898'}}>{sublabel}</p>}
+    </div>
+  );
+}
+
+// ── ScoreCard (Side A panel) ──────────────────────────────────────
+function ScoreCard({ county, scores, onViewMarket }) {
+  if (!scores) return null;
+  const { label, color, bg, text } = getThreshold(scores.total);
+  const total = Math.round(scores.total);
+
+  return (
+    <div className="slide-up h-full flex flex-col">
+      {/* Location */}
+      <div className="mb-4 pb-4" style={{borderBottom:'1px solid #e2d9cc'}}>
+        <p className="text-xs uppercase tracking-widest mb-1" style={{color:'#9a9a9a'}}>Selected Site</p>
+        <h2 className="serif text-xl font-bold">{county?.county ?? 'Unknown'}</h2>
+        <p className="text-xs mt-0.5" style={{color:'#6b6b6b'}}>
+          {county?.state ?? ''}{county?.egrid ? ` · ${county.egrid} grid` : ''}
+        </p>
+      </div>
+
+      {/* Big score */}
+      <div className="rounded-2xl p-5 mb-5 text-center" style={{background:bg}}>
+        <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{color:text, opacity:.7}}>
+          Sustainability Score
+        </p>
+        <div className="flex items-end justify-center gap-1.5">
+          <span className="serif font-bold" style={{fontSize:64,lineHeight:1,color}}>{total}</span>
+          <span className="text-lg mb-2 font-bold" style={{color, opacity:.6}}>/100</span>
+        </div>
+        <span className="inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest"
+          style={{background:color,color:'white'}}>{label}</span>
+      </div>
+
+      {/* Component bars (4 components, v2) */}
+      <div className="mb-4 flex-1">
+        <ScoreBar label="Clean Energy" value={scores.clean_energy} color="#1a5cff"
+          sublabel={county?.co2_lbs_per_mwh ? `${Math.round(county.co2_lbs_per_mwh)} lb CO₂/MWh · ${county.egrid??''} grid region` : null} />
+        <ScoreBar label="Water Stress" value={scores.water}     color="#0891b2"
+          sublabel={county?.bws_label ? `${county.bws_label} (${county.bws_raw?.toFixed(1)}/4)` : null} />
+        <ScoreBar label="Climate"      value={scores.climate}   color="#7c3aed"
+          sublabel={county?.avg_temp_f ? `${Math.round(county.avg_temp_f)}°F avg · ${Math.round(county.hdd??0)} heating degree days` : null} />
+        <ScoreBar label="Heat Demand"  value={scores.heat}      color="#d4380d"
+          sublabel={county?.hdd ? `${Math.round(county.hdd)} HDD · ${Math.round(county.density_per_sqmi??0)} people/sqmi` : null} />
+      </div>
+
+      {/* Contextual insights */}
+      {scores.heat > 55 && (
+        <div className="rounded-xl p-3 mb-3 text-xs" style={{background:'#fff1ed',border:'1px solid #fed7aa'}}>
+          💡 <strong>High heat demand</strong> — strong nearby buyer potential for waste heat reuse.
+        </div>
+      )}
+      {scores.water < 30 && (
+        <div className="rounded-xl p-3 mb-3 text-xs" style={{background:'#fee2e2',border:'1px solid #fca5a5'}}>
+          ⚠️ <strong>High water stress</strong> — liquid cooling with reclaimed water or dry cooling recommended.
+        </div>
+      )}
+      {scores.clean_energy > 65 && (
+        <div className="rounded-xl p-3 mb-3 text-xs" style={{background:'#d1fae5',border:'1px solid #6ee7b7'}}>
+          ✅ <strong>Clean local grid</strong> — low carbon footprint for operations.
+        </div>
+      )}
+
+      <button onClick={onViewMarket}
+        className="w-full py-3.5 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+        style={{background:'#d4380d',color:'white',letterSpacing:'.04em'}}>
+        View Heat Buyers →
+      </button>
+    </div>
+  );
+}
+
+// ── BuyerCard ─────────────────────────────────────────────────────
+function BuyerCard({ buyer }) {
+  const [open, setOpen] = useState(false);
+  const meta  = BUYER_META[buyer.type] ?? BUYER_META.school;
+  const feas  = buyer.feasibility;
+  const fc    = feas >= 65 ? '#15803d' : feas >= 35 ? '#ca8a04' : '#b91c1c';
+  const fl    = feas >= 65 ? 'HIGH' : feas >= 35 ? 'MEDIUM' : 'LOW';
+
+  return (
+    <div className="buyer-card rounded-xl mb-3 overflow-hidden" style={{border:'1px solid #e2d9cc',background:'white'}}>
+      <button className="w-full text-left p-4" onClick={() => setOpen(o=>!o)}>
+        {/* Header row */}
+        <div className="flex items-start gap-2.5 mb-3">
+          <span className="text-xl mt-0.5 flex-shrink-0">{meta.emoji}</span>
+          <div className="flex-1 min-w-0">
+            <p className="font-bold text-sm truncate leading-tight">{buyer.name}</p>
+            <p className="text-xs mt-0.5" style={{color:'#6b6b6b'}}>
+              {meta.label} · {buyer.city}, {buyer.state}
+            </p>
+            <p className="text-xs" style={{color:'#9a9a9a'}}>{buyer.distKm.toFixed(1)} km away</p>
+          </div>
+          <div className="flex-shrink-0 text-right">
+            <p className="text-xs font-bold" style={{color:fc}}>{fl}</p>
+            <p className="text-xs" style={{color:'#9a9a9a'}}>feasibility</p>
+          </div>
+        </div>
+
+        {/* Metrics row */}
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            [fmtUSD(buyer.annualSavings), 'savings/yr'],
+            [`${buyer.co2Saved}t`,        'CO₂/yr'],
+            [`${buyer.payback}yr`,        'payback'],
+          ].map(([v,l]) => (
+            <div key={l} className="text-center rounded-lg py-1.5" style={{background:'#f5f0e8'}}>
+              <p className="text-xs font-bold">{v}</p>
+              <p className="text-xs" style={{color:'#9a9a9a'}}>{l}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Feasibility bar */}
+        <div className="mt-2.5 h-1.5 rounded-full overflow-hidden" style={{background:'#e2d9cc'}}>
+          <div className="h-full rounded-full bar-fill" style={{width:`${feas}%`,background:fc}} />
+        </div>
+
+        {/* Heat pump badge */}
+        <div className="mt-2 flex items-center gap-2">
+          <span className="text-xs px-2 py-0.5 rounded-full font-bold"
+            style={{
+              background: buyer.needsPump ? '#fff1ed' : '#d1fae5',
+              color:      buyer.needsPump ? '#c2410c' : '#15803d',
+            }}>
+            {buyer.needsPump ? '⚡ Heat pump required' : '✅ Direct use'}
+          </span>
+          <span className="text-xs" style={{color:'#9a9a9a'}}>{buyer.required_temp_c}°C needed</span>
+        </div>
+      </button>
+
+      {/* Expanded details */}
+      {open && (
+        <div className="px-4 pb-4 text-xs" style={{borderTop:'1px solid #f0e8dc'}}>
+          <div className="grid grid-cols-2 gap-3 mt-3">
+            <div>
+              <p className="font-bold uppercase tracking-wider mb-1.5" style={{color:'#b0a898',fontSize:10}}>Heat Transfer</p>
+              <p className="mb-1">Deliverable: <strong>{fmtMWh(buyer.deliverableMwh)}/yr</strong></p>
+              <p className="mb-1">Pipe distance: <strong>{(buyer.distKm*1000).toFixed(0)} m</strong></p>
+              <p>Pump COP: <strong>{buyer.needsPump ? '3.5' : 'N/A'}</strong></p>
+            </div>
+            <div>
+              <p className="font-bold uppercase tracking-wider mb-1.5" style={{color:'#b0a898',fontSize:10}}>Economics</p>
+              <p className="mb-1">Gas cost: <strong>${buyer.gasCostMwh}/MWh</strong></p>
+              <p className="mb-1">DC heat cost: <strong>${buyer.dcHeatCostMwh}/MWh</strong></p>
+              <p>Infrastructure: <strong>{fmtUSD(buyer.infraCost)}</strong></p>
+            </div>
+          </div>
+          {buyer.type === 'school' && buyer.est_sqft && (
+            <p className="mt-2" style={{color:'#9a9a9a'}}>
+              ~{(buyer.est_sqft/1000).toFixed(0)}K sqft · {buyer.students} students · {buyer.level}
+            </p>
+          )}
+          {buyer.type === 'greenhouse' && buyer.sqft && (
+            <p className="mt-2" style={{color:'#9a9a9a'}}>~{(buyer.sqft/1000).toFixed(0)}K sqft · year-round demand</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Marketplace Panel (Side B) ────────────────────────────────────
+function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
+  const [sortBy, setSortBy] = useState('feasibility');
+
+  const sorted = useMemo(() => {
+    if (!buyers?.length) return [];
+    const b = [...buyers];
+    if (sortBy === 'distance')  return b.sort((a,z) => a.distKm - z.distKm);
+    if (sortBy === 'savings')   return b.sort((a,z) => z.annualSavings - a.annualSavings);
+    if (sortBy === 'co2')       return b.sort((a,z) => z.co2Saved - a.co2Saved);
+    if (sortBy === 'payback')   return b.sort((a,z) => a.payback - z.payback);
+    return b.sort((a,z) => z.feasibility - a.feasibility);
+  }, [buyers, sortBy]);
+
+  const summary = useMemo(() => {
+    if (!buyers?.length) return null;
+    const totalSavings  = buyers.reduce((s,b)=>s+b.annualSavings, 0);
+    const totalCo2      = buyers.reduce((s,b)=>s+b.co2Saved, 0);
+    const totalMwh      = buyers.reduce((s,b)=>s+b.deliverableMwh, 0);
+    const avgPayback    = buyers.reduce((s,b)=>s+b.payback, 0)/buyers.length;
+    return { totalSavings, totalCo2, totalMwh, avgPayback, homesEquiv: Math.round(totalMwh/10.5) };
+  }, [buyers]);
+
+  const totalHeatMwh = Math.round(dcConfig.capacityMw * 8760 * 0.80);
+  const capturedPct  = summary ? Math.min(100, Math.round(summary.totalMwh/totalHeatMwh*100)) : 0;
+
+  // By-type counts
+  const byType = useMemo(() => {
+    const counts = { school:0, greenhouse:0, pool:0 };
+    (buyers||[]).forEach(b => { if (counts[b.type] !== undefined) counts[b.type]++; });
+    return counts;
+  }, [buyers]);
+
+  return (
+    <div className="slide-up h-full flex flex-col">
+      {/* Back */}
+      <button onClick={onBack} className="flex items-center gap-1.5 text-xs mb-4 hover:opacity-60 transition-opacity" style={{color:'#6b6b6b'}}>
+        ← Siting Score
+      </button>
+
+      {/* DC Config */}
+      <div className="rounded-xl p-4 mb-3" style={{background:'white',border:'1px solid #e2d9cc'}}>
+        <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{color:'#d4380d'}}>
+          ⚡ Data Center Configuration
+        </p>
+
+        {/* Capacity */}
+        <div className="mb-3">
+          <div className="flex justify-between text-xs mb-1">
+            <span style={{color:'#6b6b6b'}}>Capacity</span>
+            <span className="font-bold">{dcConfig.capacityMw} MW</span>
+          </div>
+          <input type="range" min="1" max="200" value={dcConfig.capacityMw}
+            onChange={e => onDcChange({...dcConfig,capacityMw:+e.target.value})} />
+          <div className="flex justify-between text-xs mt-0.5" style={{color:'#c0b8b0'}}>
+            <span>1 MW</span><span>200 MW</span>
+          </div>
+        </div>
+
+        {/* Cooling */}
+        <div className="mb-3">
+          <p className="text-xs mb-1.5" style={{color:'#6b6b6b'}}>Cooling Architecture</p>
+          <div className="flex gap-2">
+            {[['air','Air-cooled (45°C)'],['liquid','Liquid-cooled (55°C)']].map(([v,l])=>(
+              <button key={v} onClick={()=>onDcChange({...dcConfig,coolingType:v})}
+                className="flex-1 pill-btn text-xs py-2 px-2 rounded-lg font-bold border"
+                style={{
+                  background: dcConfig.coolingType===v ? '#d4380d' : 'white',
+                  color:      dcConfig.coolingType===v ? 'white'   : '#6b6b6b',
+                  border:     `1px solid ${dcConfig.coolingType===v ? '#d4380d' : '#e2d9cc'}`,
+                }}>{l}</button>
+            ))}
+          </div>
+        </div>
+
+        {/* Radius */}
+        <div>
+          <div className="flex justify-between text-xs mb-1">
+            <span style={{color:'#6b6b6b'}}>Discovery Radius</span>
+            <span className="font-bold">{dcConfig.radiusKm} km</span>
+          </div>
+          <input type="range" min="1" max="25" value={dcConfig.radiusKm}
+            onChange={e => onDcChange({...dcConfig,radiusKm:+e.target.value})} />
+          <div className="flex justify-between text-xs mt-0.5" style={{color:'#c0b8b0'}}>
+            <span>1 km</span><span>25 km</span>
+          </div>
+        </div>
+
+        <p className="text-xs mt-2 text-right" style={{color:'#9a9a9a'}}>
+          Heat available: <strong style={{color:'#d4380d'}}>{fmtMWh(totalHeatMwh)}/yr</strong>
+        </p>
+      </div>
+
+      {/* Impact summary */}
+      {summary && (
+        <div className="rounded-xl p-4 mb-3" style={{background:'#fff1ed',border:'1px solid #fed7aa'}}>
+          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{color:'#d4380d'}}>
+            Community Impact
+          </p>
+          <div className="grid grid-cols-2 gap-2 mb-3">
+            {[
+              [fmtUSD(summary.totalSavings), 'annual savings'],
+              [`${summary.totalCo2}t`,        'CO₂ eliminated'],
+              [`${summary.homesEquiv.toLocaleString()}`, 'homes equiv.'],
+              [`${summary.avgPayback.toFixed(1)}yr`,     'avg payback'],
+            ].map(([v,l])=>(
+              <div key={l} className="text-center rounded-lg py-2" style={{background:'white'}}>
+                <p className="font-bold text-sm" style={{color:'#d4380d'}}>{v}</p>
+                <p className="text-xs" style={{color:'#6b6b6b'}}>{l}</p>
+              </div>
+            ))}
+          </div>
+          {/* Heat capture bar */}
+          <div className="text-xs mb-1.5" style={{color:'#92400e'}}>
+            Heat captured vs. dumped: <strong>{capturedPct}%</strong>
+          </div>
+          <div className="h-2.5 rounded-full overflow-hidden" style={{background:'#fde68a'}}>
+            <div className="h-full rounded-full bar-fill" style={{width:`${capturedPct}%`,background:'#d4380d'}} />
+          </div>
+        </div>
+      )}
+
+      {/* Buyer list header */}
+      <div className="flex items-center justify-between mb-2 flex-shrink-0">
+        <div className="flex items-center gap-2">
+          <span className="serif font-bold text-sm">Buyers within {dcConfig.radiusKm} km</span>
+          <span className="text-xs px-2 py-0.5 rounded-full font-bold" style={{background:'#d4380d',color:'white'}}>
+            {sorted.length}
+          </span>
+        </div>
+        <div className="flex gap-1.5 text-xs" style={{color:'#6b6b6b'}}>
+          {byType.school > 0 && <span>🏫{byType.school}</span>}
+          {byType.greenhouse > 0 && <span>🌱{byType.greenhouse}</span>}
+          {byType.pool > 0 && <span>🏊{byType.pool}</span>}
+        </div>
+      </div>
+
+      {/* Sort pills */}
+      <div className="flex gap-1.5 mb-3 overflow-x-auto pb-1 flex-shrink-0" style={{scrollbarWidth:'none'}}>
+        {[['feasibility','Best Match'],['distance','Nearest'],['savings','Most Savings'],['co2','Most CO₂'],['payback','Fastest ROI']].map(([v,l])=>(
+          <button key={v} onClick={()=>setSortBy(v)}
+            className="flex-shrink-0 pill-btn text-xs px-2.5 py-1 rounded-full border"
+            style={{
+              background: sortBy===v ? '#1a1a1a' : 'white',
+              color:      sortBy===v ? 'white'   : '#6b6b6b',
+              border:     `1px solid ${sortBy===v ? '#1a1a1a' : '#e2d9cc'}`,
+            }}>{l}</button>
+        ))}
+      </div>
+
+      {/* Cards */}
+      <div className="flex-1 overflow-y-auto">
+        {sorted.length === 0 ? (
+          <div className="text-center py-10" style={{color:'#9a9a9a'}}>
+            <p className="text-3xl mb-2">🔍</p>
+            <p className="text-sm font-bold mb-1">No buyers found within {dcConfig.radiusKm} km</p>
+            <p className="text-xs">Try increasing the discovery radius</p>
+          </div>
+        ) : sorted.map(b=><BuyerCard key={b.id} buyer={b} />)}
+      </div>
+    </div>
+  );
+}
+
+// ── ComparePanel (A/B siting comparison) ─────────────────────────
+function ComparePanel({ countyA, scoresA, countyB, scoresB, onClearB }) {
+  const METRICS = [
+    { key:'clean_energy', label:'Clean Energy', icon:'⚡' },
+    { key:'water',        label:'Water Stress', icon:'💧' },
+    { key:'climate',      label:'Climate',      icon:'🌡' },
+    { key:'heat',         label:'Heat Demand',  icon:'🔥' },
+  ];
+  const winnerTotal = scoresA.total >= scoresB.total ? 'A' : 'B';
+  const diff = Math.abs(scoresA.total - scoresB.total);
+  const winnerCounty = winnerTotal === 'A' ? countyA : countyB;
+  const loserCounty  = winnerTotal === 'A' ? countyB : countyA;
+
+  return (
+    <div className="slide-up h-full flex flex-col">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4 pb-4" style={{borderBottom:'1px solid #e2d9cc'}}>
+        <div>
+          <p className="text-xs uppercase tracking-widest mb-0.5" style={{color:'#9a9a9a'}}>A/B Comparison</p>
+          <h2 className="serif text-lg font-bold">Site Face-Off</h2>
+        </div>
+        <button onClick={onClearB}
+          className="text-xs px-3 py-1.5 rounded-lg hover:opacity-70 transition-opacity font-bold"
+          style={{background:'#e2d9cc',color:'#6b6b6b'}}>Clear B</button>
+      </div>
+
+      {/* Big scores side by side */}
+      <div className="grid grid-cols-2 gap-2 mb-5">
+        {[
+          {id:'A',county:countyA,scores:scoresA,color:'#1a5cff',bg:'#e8eeff'},
+          {id:'B',county:countyB,scores:scoresB,color:'#d4380d',bg:'#fff1ed'},
+        ].map(({id,county,scores,color,bg})=>{
+          const t = getThreshold(scores.total);
+          return (
+            <div key={id} className="rounded-xl p-3 text-center relative" style={{background:bg}}>
+              {winnerTotal===id && (
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-xs px-2 py-0.5 rounded-full font-bold whitespace-nowrap"
+                  style={{background:color,color:'white'}}>Winner</div>
+              )}
+              <p className="text-xs font-bold uppercase tracking-widest mb-1 mt-1" style={{color}}>{id==='A'?'🔵':'🟠'} Site {id}</p>
+              <p className="serif font-bold" style={{fontSize:40,lineHeight:1,color}}>{Math.round(scores.total)}</p>
+              <p className="text-xs font-bold mt-1" style={{color:t.color}}>{t.label}</p>
+              <p className="text-xs mt-0.5 truncate" style={{color:'#6b6b6b'}}>{county?.county}, {county?.state}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Per-metric comparison bars */}
+      <div className="flex-1 overflow-y-auto space-y-3">
+        {METRICS.map(m=>{
+          const vA = Math.round(scoresA[m.key]);
+          const vB = Math.round(scoresB[m.key]);
+          const winner = vA > vB ? 'A' : vA < vB ? 'B' : null;
+          return (
+            <div key={m.key} className="rounded-xl p-3" style={{background:'white',border:'1px solid #e2d9cc'}}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider" style={{color:'#9a9a9a'}}>{m.icon} {m.label}</span>
+                {winner && (
+                  <span className="text-xs font-bold" style={{color:winner==='A'?'#1a5cff':'#d4380d'}}>
+                    {winner==='A'?'🔵':'🟠'} +{Math.abs(vA-vB)} pts
+                  </span>
+                )}
+              </div>
+              {[['A',vA,'#1a5cff'],[' B',vB,'#d4380d']].map(([lbl,v,clr])=>(
+                <div key={lbl} className="flex items-center gap-2 mb-1.5">
+                  <span className="text-xs font-bold w-5 text-right" style={{color:clr}}>{v}</span>
+                  <div className="flex-1 h-2 rounded-full overflow-hidden" style={{background:'#e2d9cc'}}>
+                    <div className="h-full rounded-full bar-fill" style={{width:`${v}%`,background:clr}} />
+                  </div>
+                  <span className="text-xs font-bold w-4" style={{color:clr}}>{lbl}</span>
+                </div>
+              ))}
+            </div>
+          );
+        })}
+
+        {/* Verdict */}
+        <div className="rounded-xl p-3 mt-1" style={{background:'white',border:'1px solid #e2d9cc'}}>
+          <p className="text-xs font-bold uppercase tracking-wider mb-1.5" style={{color:'#9a9a9a'}}>Verdict</p>
+          <p className="text-xs leading-relaxed" style={{color:'#1a1a1a'}}>
+            {diff < 3
+              ? `📊 Near tie — ${winnerCounty?.county} and ${loserCounty?.county} score within ${diff.toFixed(1)} points.`
+              : diff < 10
+              ? `${winnerTotal==='A'?'🔵':'🟠'} ${winnerCounty?.county} edges out ${loserCounty?.county} by ${diff.toFixed(1)} points.`
+              : `⚡ ${winnerCounty?.county} is the significantly stronger siting choice (+${diff.toFixed(1)} pts).`}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── SearchBar (Nominatim geocoding) ───────────────────────────────
+function SearchBar({ onResult, mapRef }) {
+  const [query,   setQuery]   = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [open,    setOpen]    = useState(false);
+  const debounceRef = useRef(null);
+  const inputRef    = useRef(null);
+
+  const search = useCallback(async (q) => {
+    if (!q || q.length < 3) { setResults([]); setOpen(false); return; }
+    setLoading(true);
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&countrycodes=us&limit=6&addressdetails=1`;
+      const res = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+      const data = await res.json();
+      const filtered = data.filter(r => r.lat && r.lon && parseFloat(r.lat) > 18 && parseFloat(r.lat) < 72);
+      setResults(filtered);
+      setOpen(filtered.length > 0);
+    } catch(e) {
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    const q = e.target.value;
+    setQuery(q);
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => search(q), 350);
+  };
+
+  const handleSelect = (r) => {
+    const lat = parseFloat(r.lat);
+    const lng = parseFloat(r.lon);
+    setQuery(r.display_name.split(',').slice(0,2).join(','));
+    setResults([]);
+    setOpen(false);
+    onResult(lat, lng);
+    mapRef.current?.flyTo({ center: [lng, lat], zoom: 10, duration: 1000, essential: true });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') { setOpen(false); inputRef.current?.blur(); }
+    if (e.key === 'Enter' && results.length > 0) handleSelect(results[0]);
+  };
+
+  return (
+    <div style={{ position: 'relative', width: 280 }}>
+      <div className="flex items-center gap-2 rounded-xl px-3 py-2"
+        style={{ background: 'rgba(255,255,255,.10)', border: '1px solid rgba(255,255,255,.12)' }}>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" strokeWidth="2.5" strokeLinecap="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input ref={inputRef} type="text" value={query} onChange={handleChange} onKeyDown={handleKeyDown}
+          onFocus={() => results.length > 0 && setOpen(true)}
+          placeholder="Search city, address, county…"
+          style={{
+            background: 'transparent', border: 'none', outline: 'none',
+            color: '#f5f0e8', fontSize: 12, width: '100%',
+            fontFamily: 'Space Mono, monospace',
+          }}
+        />
+        {loading && <div className="spinner" style={{ width: 12, height: 12, flexShrink: 0 }} />}
+        {query && !loading && (
+          <button onClick={() => { setQuery(''); setResults([]); setOpen(false); }}
+            style={{ color: '#9a9a9a', background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, lineHeight: 1 }}>×</button>
+        )}
+      </div>
+      {open && results.length > 0 && (
+        <div style={{
+          position: 'absolute', top: '110%', left: 0, right: 0, zIndex: 100,
+          background: 'white', borderRadius: 10, boxShadow: '0 8px 32px rgba(0,0,0,.18)',
+          border: '1px solid #e2d9cc', overflow: 'hidden',
+        }}>
+          {results.map((r, i) => {
+            const parts = r.display_name.split(',');
+            const main  = parts.slice(0, 2).join(',').trim();
+            const sub   = parts.slice(2, 4).join(',').trim();
+            return (
+              <button key={i} onClick={() => handleSelect(r)}
+                className="w-full text-left px-3 py-2.5 hover:bg-gray-50 transition-colors"
+                style={{ borderBottom: i < results.length-1 ? '1px solid #f0e8dc' : 'none', display: 'block' }}>
+                <p className="text-xs font-bold truncate">{main}</p>
+                {sub && <p className="text-xs truncate" style={{ color: '#9a9a9a' }}>{sub}</p>}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Empty state ───────────────────────────────────────────────────
+function EmptyState({ onDemo }) {
+  return (
+    <div className="slide-up flex flex-col items-center justify-center h-full py-8 px-2 text-center">
+      <div className="mb-6">
+        <p className="text-5xl mb-4">🌍</p>
+        <h2 className="serif text-2xl font-bold mb-2">Analyze Any US Site</h2>
+        <p className="text-sm leading-relaxed" style={{color:'#6b6b6b'}}>
+          Click the map to score any location for sustainable data center siting and discover nearby waste heat buyers.
+        </p>
+      </div>
+
+      <div className="w-full rounded-xl p-4 mb-5 text-left" style={{background:'white',border:'1px solid #e2d9cc'}}>
+        <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{color:'#9a9a9a'}}>How It Works</p>
+        <div className="space-y-2.5 text-xs" style={{color:'#6b6b6b',lineHeight:1.6}}>
+          <p><strong style={{color:'#1a5cff'}}>Side A — Siting Score:</strong> 5-factor sustainability score based on grid carbon, water stress, climate, renewables, and local heat demand.</p>
+          <p><strong style={{color:'#d4380d'}}>Side B — Heat Market:</strong> Discover schools, greenhouses, and pools that can buy the DC's waste heat, with full ROI analysis.</p>
+          <p><strong>The Interlock:</strong> More heat buyers nearby → higher heat demand score → better overall siting score.</p>
+        </div>
+      </div>
+
+      <div className="w-full space-y-2">
+        <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{color:'#9a9a9a'}}>Try a demo location</p>
+        <button onClick={() => onDemo(39.04, -77.49, 9)}
+          className="w-full py-3 rounded-xl text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
+          style={{background:'#1a5cff',color:'white'}}>
+          📍 Ashburn, VA — Data center capital of the world
+        </button>
+        <button onClick={() => onDemo(47.61, -122.33, 9)}
+          className="w-full py-3 rounded-xl text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
+          style={{background:'white',border:'1px solid #e2d9cc',color:'#1a1a1a'}}>
+          📍 Seattle, WA — Clean grid, cold climate
+        </button>
+        <button onClick={() => onDemo(41.85, -87.65, 9)}
+          className="w-full py-3 rounded-xl text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
+          style={{background:'white',border:'1px solid #e2d9cc',color:'#1a1a1a'}}>
+          📍 Chicago, IL — Dense buyer market, dirty grid
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── Loading / Error ───────────────────────────────────────────────
+function LoadingScreen() {
+  return (
+    <div className="h-screen flex flex-col items-center justify-center gap-5" style={{background:'#f5f0e8'}}>
+      <h1 className="serif text-4xl font-bold">HeatGrid</h1>
+      <div className="spinner" />
+      <p className="text-sm" style={{color:'#6b6b6b'}}>Loading datasets…</p>
+    </div>
+  );
+}
+
+function ErrorScreen({ message }) {
+  return (
+    <div className="h-screen flex flex-col items-center justify-center gap-4 p-8 text-center" style={{background:'#f5f0e8'}}>
+      <h1 className="serif text-4xl font-bold">HeatGrid</h1>
+      <div className="rounded-xl p-5 max-w-md" style={{background:'#fee2e2',border:'1px solid #fca5a5'}}>
+        <p className="font-bold mb-2" style={{color:'#991b1b'}}>Could not load data files</p>
+        <p className="text-xs mb-3" style={{color:'#dc2626'}}>{message}</p>
+        <p className="text-xs" style={{color:'#7f1d1d'}}>
+          Run a local server to avoid CORS issues:<br/>
+          <code className="font-bold bg-red-100 px-1 rounded">python3 -m http.server 8000</code><br/>
+          then open <code className="font-bold">http://localhost:8000</code>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  Map component
+// ══════════════════════════════════════════════════════════════════
+function HeatMap({ data, selected, selectedB, pickingB, activeView, buyers, radiusKm, onSelect, mapRef: externalRef }) {
+  const containerRef  = useRef(null);
+  const mapRef        = useRef(null);
+  const popupRef      = useRef(null);
+  const loadedRef     = useRef(false);
+
+  // Init map once
+  useEffect(() => {
+    if (!containerRef.current || mapRef.current) return;
+
+    const map = new maplibregl.Map({
+      container: containerRef.current,
+      style: MAP_STYLE,
+      center: [-98.5, 39.5],
+      zoom: 3.6,
+      minZoom: 2, maxZoom: 14,
+      attributionControl: false,
+    });
+    map.addControl(new maplibregl.NavigationControl({showCompass:false}), 'top-right');
+    map.addControl(new maplibregl.AttributionControl({compact:true}), 'bottom-right');
+
+    mapRef.current = map;
+    if (externalRef) externalRef.current = map;
+
+    popupRef.current = new maplibregl.Popup({
+      closeButton: false, closeOnClick: false, offset: 12, maxWidth:'240px',
+    });
+
+    map.on('load', () => {
+      loadedRef.current = true;
+
+      // ── County heatmap circles ──────────────────────────────
+      const countyGJ = {
+        type:'FeatureCollection',
+        features:(data?.counties??[]).map(c=>({
+          type:'Feature',
+          geometry:{type:'Point',coordinates:[c.lng,c.lat]},
+          properties:{score:c.total,county:c.county,state:c.state,energy:c.clean_energy,water:c.water,heat:c.heat},
+        })),
+      };
+      map.addSource('counties',{type:'geojson',data:countyGJ});
+      map.addLayer({
+        id:'county-circles', type:'circle', source:'counties',
+        paint:{
+          'circle-radius':['interpolate',['linear'],['zoom'], 2,16, 4,22, 6,30, 9,40, 12,55],
+          'circle-color':['interpolate',['linear'],['get','score'],
+            17,'#dc2626', 25,'#ef4444', 35,'#f97316', 45,'#eab308',
+            55,'#22c55e', 65,'#16a34a', 73,'#15803d'],
+          'circle-opacity':0.40, 'circle-blur':0.9,
+        },
+      });
+
+      map.on('mousemove','county-circles',e=>{
+        map.getCanvas().style.cursor='pointer';
+        const p = e.features[0].properties;
+        popupRef.current.setLngLat(e.lngLat)
+          .setHTML(`<strong>${p.county}, ${p.state}</strong><br/>Score: <strong>${Math.round(p.score)}/100</strong><br/>Energy: ${Math.round(p.energy)} · Water: ${Math.round(p.water)} · Heat: ${Math.round(p.heat)}`)
+          .addTo(map);
+      });
+      map.on('mouseleave','county-circles',()=>{
+        map.getCanvas().style.cursor='crosshair';
+        popupRef.current.remove();
+      });
+
+      // ── Existing DC markers ─────────────────────────────────
+      const dcGJ = {
+        type:'FeatureCollection',
+        features:(data?.existingDCs??[]).map(dc=>({
+          type:'Feature',
+          geometry:{type:'Point',coordinates:[dc.lng,dc.lat]},
+          properties:{name:dc.name,city:dc.city,state:dc.state,cap:dc.est_capacity_mw},
+        })),
+      };
+      map.addSource('dcs',{type:'geojson',data:dcGJ});
+      map.addLayer({
+        id:'dc-layer', type:'circle', source:'dcs',
+        paint:{
+          'circle-radius':['interpolate',['linear'],['zoom'], 3,4, 8,9],
+          'circle-color':'#1a1a1a',
+          'circle-stroke-width':2,'circle-stroke-color':'#f5f0e8',
+          'circle-opacity':0.85,
+        },
+      });
+      map.on('mousemove','dc-layer',e=>{
+        map.getCanvas().style.cursor='pointer';
+        const p=e.features[0].properties;
+        popupRef.current.setLngLat(e.lngLat)
+          .setHTML(`⬛ <strong>${p.name}</strong><br/>${p.city}, ${p.state} · ${p.cap} MW`)
+          .addTo(map);
+      });
+      map.on('mouseleave','dc-layer',()=>{
+        map.getCanvas().style.cursor='crosshair';
+        popupRef.current.remove();
+      });
+
+      // ── Dynamic sources (populated via useEffect) ───────────
+      map.addSource('selected',  {type:'geojson',data:{type:'FeatureCollection',features:[]}});
+      map.addSource('ring',      {type:'geojson',data:{type:'FeatureCollection',features:[]}});
+      map.addSource('buyer-geo', {type:'geojson',data:{type:'FeatureCollection',features:[]}});
+
+      map.addLayer({id:'ring-fill',   type:'fill',   source:'ring',
+        paint:{'fill-color':'#d4380d','fill-opacity':0.05}});
+      map.addLayer({id:'ring-outline', type:'line',  source:'ring',
+        paint:{'line-color':'#d4380d','line-width':1.5,'line-dasharray':[5,3],'line-opacity':0.7}});
+      map.addLayer({id:'buyer-lines',  type:'line',   source:'buyer-geo',
+        filter:['==','$type','LineString'],
+        paint:{'line-color':'#d4380d','line-width':['get','w'],'line-opacity':0.25}});
+      map.addLayer({id:'buyer-points', type:'circle', source:'buyer-geo',
+        filter:['==','$type','Point'],
+        paint:{
+          'circle-radius':7,
+          'circle-color':['get','color'],
+          'circle-stroke-width':2,'circle-stroke-color':'white',
+          'circle-opacity':0.9,
+        }});
+      map.addLayer({id:'selected-pin', type:'circle', source:'selected',
+        paint:{
+          'circle-radius':11,'circle-color':'#1a5cff',
+          'circle-stroke-width':3,'circle-stroke-color':'white',
+          'circle-opacity':0.95,
+        }});
+
+      // ── Site B pin ──────────────────────────────────────────
+      map.addSource('selected-b', {type:'geojson',data:{type:'FeatureCollection',features:[]}});
+      map.addLayer({id:'selected-b-pin', type:'circle', source:'selected-b',
+        paint:{
+          'circle-radius':11,'circle-color':'#d4380d',
+          'circle-stroke-width':3,'circle-stroke-color':'white',
+          'circle-opacity':0.95,
+        }});
+
+      map.on('mousemove','buyer-points',e=>{
+        map.getCanvas().style.cursor='pointer';
+        const p=e.features[0].properties;
+        popupRef.current.setLngLat(e.lngLat)
+          .setHTML(`${p.emoji} <strong>${p.name}</strong><br/>${p.typeLbl} · ${p.dist}km away<br/>Savings: ${p.sav}`)
+          .addTo(map);
+      });
+      map.on('mouseleave','buyer-points',()=>{
+        map.getCanvas().style.cursor='crosshair';
+        popupRef.current.remove();
+      });
+
+      // Click to select
+      map.on('click', e=>{
+        onSelect(e.lngLat.lat, e.lngLat.lng);
+      });
+    });
+
+    return () => { map.remove(); mapRef.current=null; loadedRef.current=false; };
+  }, [data]);
+
+  // Update selected pin (A)
+  useEffect(() => {
+    const map=mapRef.current;
+    if (!map||!loadedRef.current) return;
+    const gj = selected
+      ? {type:'FeatureCollection',features:[{type:'Feature',geometry:{type:'Point',coordinates:[selected.lng,selected.lat]}}]}
+      : {type:'FeatureCollection',features:[]};
+    map.getSource('selected')?.setData(gj);
+  }, [selected]);
+
+  // Update site B pin
+  useEffect(() => {
+    const map=mapRef.current;
+    if (!map||!loadedRef.current) return;
+    const gj = selectedB
+      ? {type:'FeatureCollection',features:[{type:'Feature',geometry:{type:'Point',coordinates:[selectedB.lng,selectedB.lat]}}]}
+      : {type:'FeatureCollection',features:[]};
+    map.getSource('selected-b')?.setData(gj);
+  }, [selectedB]);
+
+  // Change cursor when picking site B
+  useEffect(() => {
+    const map=mapRef.current;
+    if (!map) return;
+    map.getCanvas().style.cursor = pickingB ? 'crosshair' : '';
+  }, [pickingB]);
+
+  // Update radius ring + buyer overlays
+  useEffect(() => {
+    const map=mapRef.current;
+    if (!map||!loadedRef.current) return;
+    const ringSrc  = map.getSource('ring');
+    const buyerSrc = map.getSource('buyer-geo');
+    if (!ringSrc||!buyerSrc) return;
+
+    if (activeView==='siteB' && selected && buyers?.length) {
+      ringSrc.setData({type:'FeatureCollection',
+        features:[circleGeoJSON(selected.lat,selected.lng,radiusKm)]});
+
+      const feats=[];
+      buyers.forEach(b=>{
+        const meta=BUYER_META[b.type]??BUYER_META.school;
+        feats.push({type:'Feature',
+          geometry:{type:'Point',coordinates:[b.lng,b.lat]},
+          properties:{emoji:meta.emoji,name:b.name,typeLbl:meta.label,color:meta.color,
+            dist:b.distKm.toFixed(1),sav:fmtUSD(b.annualSavings)}});
+        feats.push({type:'Feature',
+          geometry:{type:'LineString',coordinates:[[selected.lng,selected.lat],[b.lng,b.lat]]},
+          properties:{w:Math.max(1,b.deliverableMwh/300)}});
+      });
+      buyerSrc.setData({type:'FeatureCollection',features:feats});
+    } else {
+      ringSrc.setData({type:'FeatureCollection',features:[]});
+      buyerSrc.setData({type:'FeatureCollection',features:[]});
+    }
+  }, [activeView, selected, buyers, radiusKm]);
+
+  return <div ref={containerRef} style={{width:'100%',height:'100%'}} />;
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  Main App
+// ══════════════════════════════════════════════════════════════════
+function App() {
+  const { data, error, loading } = useDatasets();
+  const [selected,    setSelected]    = useState(null);   // {lat,lng}
+  const [activeView,  setActiveView]  = useState('siteA');// 'siteA' | 'siteB'
+  const [county,      setCounty]      = useState(null);
+  const [scores,      setScores]      = useState(null);
+  const [buyers,      setBuyers]      = useState(null);
+  const [dcConfig,    setDcConfig]    = useState({capacityMw:20, coolingType:'air', radiusKm:5});
+  // Compare mode
+  const [pickingB,    setPickingB]    = useState(false);   // user is clicking map to set site B
+  const [selectedB,   setSelectedB]   = useState(null);
+  const [countyB,     setCountyB]     = useState(null);
+  const [scoresB,     setScoresB]     = useState(null);
+  const mapRef = useRef(null);
+
+  // Recompute site A when location or DC config changes
+  useEffect(() => {
+    if (!selected || !data) return;
+    const c = nearestCounty(selected.lat, selected.lng, data.counties);
+    setCounty(c);
+    const nearby = data.buyers
+      .map(b => {
+        const d = haversineKm(selected.lat, selected.lng, b.lat, b.lng);
+        return d <= dcConfig.radiusKm ? calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d) : null;
+      })
+      .filter(Boolean);
+    setBuyers(nearby);
+    setScores(computeScores(c, nearby));
+  }, [selected, dcConfig, data]);
+
+  // Recompute site B
+  useEffect(() => {
+    if (!selectedB || !data) return;
+    const c = nearestCounty(selectedB.lat, selectedB.lng, data.counties);
+    setCountyB(c);
+    const nearby = data.buyers
+      .map(b => {
+        const d = haversineKm(selectedB.lat, selectedB.lng, b.lat, b.lng);
+        return d <= dcConfig.radiusKm ? calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d) : null;
+      })
+      .filter(Boolean);
+    setScoresB(computeScores(c, nearby));
+  }, [selectedB, dcConfig, data]);
+
+  // Restore from URL hash on initial data load
+  useEffect(() => {
+    if (!data) return;
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const parts = hash.split(',');
+    if (parts.length < 2) return;
+    const lat = parseFloat(parts[0]);
+    const lng = parseFloat(parts[1]);
+    if (isNaN(lat) || isNaN(lng)) return;
+    setSelected({ lat, lng });
+    // fly after map is ready (slight delay)
+    setTimeout(() => {
+      mapRef.current?.flyTo({ center: [lng, lat], zoom: 10, duration: 800, essential: true });
+    }, 600);
+  }, [data]);
+
+  const handleSelect = useCallback((lat,lng) => {
+    if (pickingB) {
+      setSelectedB({lat,lng});
+      setPickingB(false);
+      return;
+    }
+    setSelected({lat,lng});
+    setSelectedB(null);
+    setCountyB(null);
+    setScoresB(null);
+    setActiveView('siteA');
+    history.replaceState(null, '', '#' + lat.toFixed(5) + ',' + lng.toFixed(5));
+  },[pickingB]);
+
+  const handleDemo = useCallback((lat,lng,zoom) => {
+    handleSelect(lat,lng);
+    mapRef.current?.flyTo({center:[lng,lat],zoom,duration:1200,essential:true});
+  },[handleSelect]);
+
+  const handleClearLocation = useCallback(() => {
+    setSelected(null);
+    setSelectedB(null);
+    setCounty(null);
+    setCountyB(null);
+    setScores(null);
+    setScoresB(null);
+    setBuyers(null);
+    setPickingB(false);
+    setActiveView('siteA');
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }, []);
+
+  // Keyboard shortcuts (after handleClearLocation is defined)
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.key === 'Escape') { if (selected) handleClearLocation(); }
+      if (e.key === 'Tab' && selected) {
+        e.preventDefault();
+        setActiveView(v => v === 'siteA' ? 'siteB' : 'siteA');
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [selected, handleClearLocation]);
+
+  if (loading) return <LoadingScreen />;
+  if (error)   return <ErrorScreen message={error} />;
+
+  return (
+    <div style={{height:'100vh',display:'flex',flexDirection:'column',background:'#f5f0e8'}}>
+
+      {/* ── Header ─────────────────────────────────────────── */}
+      <header style={{
+        height:52, flexShrink:0, background:'#1a1a1a', color:'#f5f0e8',
+        display:'flex', alignItems:'center', justifyContent:'space-between',
+        padding:'0 20px', zIndex:10, gap:12,
+      }}>
+        {/* Brand */}
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <a href="index.html" className="serif font-bold text-xl tracking-tight hover:opacity-80 transition-opacity"
+            style={{color:'#f5f0e8',textDecoration:'none'}}>HeatGrid</a>
+          <span className="text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wider"
+            style={{background:'#1a5cff',color:'white'}}>SITING</span>
+        </div>
+
+        {/* Search bar — center */}
+        <SearchBar onResult={handleSelect} mapRef={mapRef} />
+
+        {/* View tabs + Compare — only when location A is selected */}
+        {selected && !selectedB && !pickingB && (
+          <div className="flex items-center gap-1 rounded-full px-1 py-1" style={{background:'rgba(255,255,255,.08)'}}>
+            {[['siteA','🔵 Score'],['siteB','🟠 Market']].map(([v,l])=>(
+              <button key={v} onClick={()=>setActiveView(v)}
+                className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
+                style={{
+                  background: activeView===v ? '#f5f0e8' : 'transparent',
+                  color:      activeView===v ? '#1a1a1a' : '#9a9a9a',
+                }}>{l}</button>
+            ))}
+            <button onClick={()=>setPickingB(true)}
+              className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
+              style={{background:'transparent',color:'#9a9a9a'}}>⚖ A/B</button>
+          </div>
+        )}
+
+        {/* Picking site B notification */}
+        {pickingB && (
+          <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold animate-pulse"
+            style={{background:'#d4380d',color:'white'}}>
+            🟠 Click map to pin Site B
+            <button onClick={()=>setPickingB(false)} style={{opacity:.7}}>✕</button>
+          </div>
+        )}
+
+        {/* Compare tab — when both sites are set */}
+        {selected && selectedB && (
+          <div className="flex items-center gap-1 rounded-full px-1 py-1" style={{background:'rgba(255,255,255,.08)'}}>
+            <button onClick={()=>{ setSelectedB(null); setCountyB(null); setScoresB(null); }}
+              className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
+              style={{background:'transparent',color:'#9a9a9a'}}>🔵 A only</button>
+            <button className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
+              style={{background:'#f5f0e8',color:'#1a1a1a'}}>⚖ Compare</button>
+          </div>
+        )}
+
+        {/* Right side actions */}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          {scores && selected && (
+            <span className="hidden lg:block text-xs" style={{color:'#6b6b6b'}}>
+              <strong style={{color:'#f5f0e8'}}>{Math.round(scores.total)}</strong>/100
+              &nbsp;·&nbsp;{county?.county}, {county?.state}
+            </span>
+          )}
+          {selected && (
+            <button
+              onClick={() => {
+                const url = window.location.href;
+                navigator.clipboard?.writeText(url).then(() => {
+                  /* quick flash feedback */
+                  const el = document.getElementById('share-btn');
+                  if (el) { el.textContent='✓ Copied'; setTimeout(()=>{ el.textContent='Share'; }, 1500); }
+                });
+              }}
+              id="share-btn"
+              className="text-xs px-3 py-1.5 rounded-lg font-bold transition-opacity hover:opacity-80"
+              style={{background:'rgba(255,255,255,.12)',color:'#f5f0e8',border:'1px solid rgba(255,255,255,.1)'}}>
+              Share
+            </button>
+          )}
+          {selected && (
+            <button onClick={handleClearLocation}
+              className="text-xs px-2 py-1.5 rounded-lg hover:opacity-70 transition-opacity"
+              style={{color:'#9a9a9a'}}
+              title="Clear selection">✕</button>
+          )}
+          <span className="hidden md:block text-xs" style={{color:'#4a4a4a'}}>{data.buyers.length.toLocaleString()} buyers</span>
+        </div>
+      </header>
+
+      {/* ── Body ───────────────────────────────────────────── */}
+      <div style={{flex:1,display:'flex',overflow:'hidden'}}>
+
+        {/* Left panel */}
+        <div style={{
+          width:380, flexShrink:0, overflowY:'auto',
+          background:'#f5f0e8', padding:20,
+          borderRight:'1px solid #e2d9cc',
+          display:'flex', flexDirection:'column',
+        }}>
+          {!selected ? (
+            <EmptyState onDemo={handleDemo} />
+          ) : selectedB && scoresB ? (
+            <ComparePanel
+              countyA={county} scoresA={scores}
+              countyB={countyB} scoresB={scoresB}
+              onClearB={()=>{ setSelectedB(null); setCountyB(null); setScoresB(null); }}
+            />
+          ) : activeView==='siteA' ? (
+            <ScoreCard county={county} scores={scores} onViewMarket={()=>setActiveView('siteB')} />
+          ) : (
+            <MarketplacePanel
+              location={selected} buyers={buyers}
+              dcConfig={dcConfig} onDcChange={setDcConfig}
+              onBack={()=>setActiveView('siteA')}
+            />
+          )}
+        </div>
+
+        {/* Map */}
+        <div style={{flex:1,position:'relative'}}>
+          <HeatMap
+            data={data} selected={selected} selectedB={selectedB}
+            pickingB={pickingB}
+            activeView={activeView} buyers={buyers}
+            radiusKm={dcConfig.radiusKm}
+            onSelect={handleSelect} mapRef={mapRef}
+          />
+
+          {/* Legend */}
+          <div style={{
+            position:'absolute', bottom:32, left:12,
+            background:'rgba(255,255,255,.93)', borderRadius:12,
+            padding:'10px 14px', fontSize:11, backdropFilter:'blur(8px)',
+            border:'1px solid #e2d9cc', boxShadow:'0 2px 12px rgba(0,0,0,.06)',
+          }}>
+            <p className="font-bold uppercase tracking-wider mb-2" style={{color:'#9a9a9a',fontSize:9}}>
+              Siting Score
+            </p>
+            {[...THRESHOLDS].reverse().map(t=>(
+              <div key={t.label} className="flex items-center gap-2 mb-1">
+                <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{background:t.color}} />
+                <span style={{color:'#6b6b6b'}}>{t.label} ({t.min}+)</span>
+              </div>
+            ))}
+            <div className="flex items-center gap-2 mt-2 pt-2" style={{borderTop:'1px solid #e2d9cc'}}>
+              <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{background:'#1a1a1a'}} />
+              <span style={{color:'#6b6b6b'}}>Existing data center</span>
+            </div>
+            {activeView==='siteB' && buyers?.length > 0 && (
+              <>
+                <div className="mt-2 pt-2" style={{borderTop:'1px solid #e2d9cc'}}>
+                  {Object.entries(BUYER_META).map(([k,m])=>(
+                    <div key={k} className="flex items-center gap-2 mb-1">
+                      <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{background:m.color}} />
+                      <span style={{color:'#6b6b6b'}}>{m.emoji} {m.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Coordinate readout */}
+          {selected && (
+            <div style={{
+              position:'absolute', bottom:32, right:12,
+              background:'rgba(26,26,26,.8)', borderRadius:8,
+              padding:'6px 10px', fontSize:10, color:'#f5f0e8',
+              fontFamily:'Space Mono,monospace', letterSpacing:'.03em',
+              textAlign:'right', lineHeight:1.6,
+            }}>
+              <span style={{color:'#93c5fd'}}>A</span> {selected.lat.toFixed(4)}°N · {Math.abs(selected.lng).toFixed(4)}°W
+              {selectedB && <>
+                <br/>
+                <span style={{color:'#fdba74'}}>B</span> {selectedB.lat.toFixed(4)}°N · {Math.abs(selectedB.lng).toFixed(4)}°W
+              </>}
+              <br/>
+              <span style={{opacity:.4,fontSize:9}}>ESC clear · TAB toggle</span>
+            </div>
+          )}
+
+          {/* Side B radius badge */}
+          {activeView==='siteB' && selected && (
+            <div style={{
+              position:'absolute', top:12, left:'50%', transform:'translateX(-50%)',
+              background:'#d4380d', color:'white', borderRadius:99,
+              padding:'5px 14px', fontSize:11, fontWeight:'bold',
+              boxShadow:'0 2px 8px rgba(212,56,13,.4)',
+            }}>
+              {buyers?.length??0} buyers within {dcConfig.radiusKm} km · {fmtMWh(dcConfig.capacityMw*8760*0.80)} heat/yr
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Mount
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

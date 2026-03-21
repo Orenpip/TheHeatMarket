@@ -22,7 +22,7 @@ random.seed(42)
 # State bounding boxes: (lat_min, lat_max, lng_min, lng_max)
 # ---------------------------------------------------------------------------
 STATE_BBOX = {
-    'AL': (30.2, 35.0, -88.5, -84.9),
+    'AL': (30.5, 35.0, -88.4, -84.9),   # tightened: avoid Gulf offshore
     'AK': (51.0, 71.5, -169.0, -130.0),
     'AZ': (31.3, 37.0, -114.8, -109.0),
     'AR': (33.0, 36.5, -94.6, -89.6),
@@ -30,8 +30,8 @@ STATE_BBOX = {
     'CO': (37.0, 41.0, -109.1, -102.0),
     'CT': (41.0, 42.1, -73.7, -71.8),
     'DE': (38.5, 39.8, -75.8, -75.0),
-    'FL': (24.5, 31.0, -87.6, -80.0),
-    'GA': (30.4, 35.0, -85.6, -80.9),
+    'FL': (25.5, 31.0, -87.4, -80.5),   # tightened: avoid Gulf/Atlantic offshore
+    'GA': (30.7, 35.0, -85.6, -81.2),   # tightened: avoid Atlantic offshore
     'HI': (18.9, 22.3, -160.2, -154.8),
     'ID': (42.0, 49.0, -117.2, -111.0),
     'IL': (37.0, 42.5, -91.5, -87.5),
@@ -39,13 +39,13 @@ STATE_BBOX = {
     'IA': (40.4, 43.5, -96.6, -90.1),
     'KS': (37.0, 40.0, -102.1, -94.6),
     'KY': (36.5, 39.1, -89.6, -81.9),
-    'LA': (28.9, 33.0, -94.0, -89.0),
-    'ME': (43.1, 47.5, -71.1, -66.9),
+    'LA': (29.5, 33.0, -94.0, -89.5),   # tightened: avoid Gulf offshore
+    'ME': (43.1, 47.3, -71.1, -67.2),   # tightened: avoid Atlantic offshore
     'MD': (37.9, 39.7, -79.5, -75.0),
     'MA': (41.2, 42.9, -73.5, -69.9),
     'MI': (41.7, 47.5, -90.4, -82.4),
     'MN': (43.5, 49.4, -97.2, -89.5),
-    'MS': (30.2, 35.0, -91.7, -88.1),
+    'MS': (30.5, 35.0, -91.5, -88.2),   # tightened: avoid Gulf offshore
     'MO': (36.0, 40.6, -95.8, -89.1),
     'MT': (44.4, 49.0, -116.0, -104.0),
     'NE': (40.0, 43.0, -104.1, -95.3),
@@ -54,20 +54,20 @@ STATE_BBOX = {
     'NJ': (38.9, 41.4, -75.6, -73.9),
     'NM': (31.3, 37.0, -109.1, -103.0),
     'NY': (40.5, 45.0, -79.8, -71.9),
-    'NC': (33.8, 36.6, -84.3, -75.5),
+    'NC': (34.0, 36.6, -84.3, -76.0),   # tightened: avoid Atlantic offshore
     'ND': (45.9, 49.0, -104.0, -96.6),
     'OH': (38.4, 42.3, -84.8, -80.5),
     'OK': (33.6, 37.0, -103.0, -94.4),
     'OR': (42.0, 46.3, -124.6, -116.5),
     'PA': (39.7, 42.3, -80.5, -74.7),
     'RI': (41.1, 42.0, -71.9, -71.1),
-    'SC': (32.0, 35.2, -83.4, -78.5),
+    'SC': (32.2, 35.2, -83.4, -79.0),   # tightened: avoid Atlantic offshore
     'SD': (42.5, 45.9, -104.1, -96.4),
     'TN': (34.9, 36.7, -90.3, -81.7),
-    'TX': (25.8, 36.5, -106.6, -93.5),
+    'TX': (26.2, 36.5, -106.4, -94.0),  # tightened: avoid Gulf offshore
     'UT': (37.0, 42.0, -114.1, -109.0),
     'VT': (42.7, 45.0, -73.4, -71.5),
-    'VA': (36.5, 39.5, -83.7, -75.2),
+    'VA': (36.6, 39.5, -83.7, -75.7),   # tightened: avoid Chesapeake/Atlantic
     'WA': (45.5, 49.0, -124.7, -116.9),
     'WV': (37.2, 40.6, -82.6, -77.7),
     'WI': (42.5, 47.1, -92.9, -86.8),
@@ -78,25 +78,29 @@ STATE_BBOX = {
 # ---------------------------------------------------------------------------
 # State-level eGRID CO2 (lb/MWh)
 # ---------------------------------------------------------------------------
-STATE_CO2 = {
-    'WA': 499.5, 'OR': 499.5, 'ID': 499.5, 'MT': 499.5,
-    'CA': 436.7, 'TX': 738.0, 'FL': 840.9,
-    'AL': 840.9, 'GA': 840.9, 'TN': 821.4,
-    'VA': 641.6, 'NC': 641.6, 'SC': 641.6,
-    'IL': 1238.3,
-    'MO': 894.5, 'KS': 894.5,
-    'OK': 891.1, 'AR': 891.1,
-    'LA': 739.4, 'MS': 739.4,
-    'MN': 906.5, 'ND': 906.5, 'SD': 906.5, 'NE': 906.5, 'IA': 906.5,
-    'WI': 1402.0, 'MI': 1016.4,
-    'OH': 1027.0, 'IN': 1027.0, 'KY': 1027.0, 'WV': 1027.0,
-    'CO': 1187.3, 'WY': 1187.3,
-    'AZ': 703.7, 'NM': 703.7, 'NV': 703.7, 'UT': 703.7,
-    'ME': 489.8, 'NH': 489.8, 'VT': 489.8, 'MA': 489.8,
-    'RI': 489.8, 'CT': 489.8,
-    'NJ': 644.5, 'PA': 644.5, 'MD': 644.5, 'DE': 644.5, 'DC': 644.5,
-    'NY': 627.0,
-    'AK': 899.0, 'HI': 1274.8,
+STATE_CO2 = {  # Real EPA eGRID 2023 values (lb CO₂/MWh)
+    'WA': 631.7, 'OR': 631.7, 'ID': 631.7, 'MT': 631.7,  # NWPP
+    'CA': 428.5,  # CAMX
+    'TX': 733.9,  # ERCT
+    'FL': 782.3,  # FRCC
+    'AL': 842.3, 'GA': 842.3,  # SRSO
+    'TN': 898.1,  # SRTV
+    'VA': 593.4, 'NC': 593.4, 'SC': 593.4,  # SRVC
+    'IL': 1239.8,  # SRMW
+    'MO': 862.0, 'KS': 862.0,  # SPNO
+    'OK': 872.0, 'AR': 872.0,  # SPSO
+    'LA': 739.7, 'MS': 739.7,  # SRMV
+    'MN': 920.1, 'ND': 920.1, 'SD': 920.1, 'NE': 920.1, 'IA': 920.1,  # MROW
+    'WI': 1397.3,  # MROE
+    'MI': 970.6,   # RFCM
+    'OH': 911.4, 'IN': 911.4, 'KY': 911.4, 'WV': 911.4,  # RFCW
+    'CO': 1036.6, 'WY': 1036.6,  # RMPA
+    'AZ': 703.7, 'NM': 703.7, 'NV': 703.7, 'UT': 703.7,  # AZNM
+    'ME': 539.3, 'NH': 539.3, 'VT': 539.3, 'MA': 539.3,  # NEWE
+    'RI': 539.3, 'CT': 539.3,
+    'NJ': 596.9, 'PA': 596.9, 'MD': 596.9, 'DE': 596.9, 'DC': 596.9,  # RFCE
+    'NY': 864.5,  # NYCW (downstate default)
+    'AK': 899.6, 'HI': 1489.5,  # AKGD, HIOA
 }
 
 # ---------------------------------------------------------------------------
@@ -1302,22 +1306,31 @@ def main():
             density = density_from_pop(pop, state, idx)
             cdd = cdd_from_temp_and_state(avg_temp_f, state)
 
-            # --- Score components (matching compute_scores.py formulas) ---
-            grid_s = (1 - norm(co2, 400, 1450)) * 100
-            water_s = (1 - norm(bws_raw, 0, 5)) * 100
+            # --- Score components (v2 formula) ---
+            # Clean Energy (merged grid carbon + renewable potential)
+            grid_sub = (1 - norm(co2, 200, 1600)) * 100       # grid CO2: lower = better
+            renew_sub = norm(solar + wind, 0.20, 0.70) * 100  # solar+wind CF: higher = better
+            clean_energy_s = 0.70 * grid_sub + 0.30 * renew_sub
+
+            # Water stress: lower = better (0-4 normalized scale)
+            water_s = (1 - norm(bws_raw, 0, 4)) * 100
+
+            # Climate: cooler + drier = less cooling needed
             climate_s = (
                 norm(clamp(95 - avg_temp_f, 0, 65), 0, 65) * 50
                 + norm(clamp(90 - avg_humidity, 0, 70), 0, 70) * 50
             )
-            renewable_s = norm(solar + wind, 0.15, 0.60) * 100
-            heat_d = norm(hdd * housing_units / 1_000_000, 0.5, 18) * 100
+
+            # Heat demand: HDD (70%) + population density (30%)
+            heat_hdd = norm(hdd, 0, 7500) * 100
+            heat_density = norm(density, 0, 2000) * 100
+            heat_d = 0.70 * heat_hdd + 0.30 * heat_density
 
             total = (
-                0.25 * grid_s
+                0.15 * clean_energy_s
                 + 0.25 * water_s
-                + 0.20 * climate_s
-                + 0.10 * renewable_s
-                + 0.20 * heat_d
+                + 0.25 * climate_s
+                + 0.35 * heat_d
             )
 
             county_scores.append({
@@ -1327,10 +1340,9 @@ def main():
                 'lat': lat,
                 'lng': lng,
                 'total': round(total, 1),
-                'grid': round(grid_s, 1),
+                'clean_energy': round(clean_energy_s, 1),
                 'water': round(water_s, 1),
                 'climate': round(climate_s, 1),
-                'renewable': round(renewable_s, 1),
                 'heat': round(heat_d, 1),
                 'co2_lbs_per_mwh': co2,
                 'egrid': egrid_code,
@@ -1360,14 +1372,14 @@ def main():
     print("Top 10 counties by total score:")
     for c in county_scores[:10]:
         print(f"  {c['county']}, {c['state']}  total={c['total']}  "
-              f"grid={c['grid']} water={c['water']} climate={c['climate']} "
-              f"renewable={c['renewable']} heat={c['heat']}")
+              f"energy={c['clean_energy']} water={c['water']} climate={c['climate']} "
+              f"heat={c['heat']}")
     print()
     print("Bottom 10 counties by total score:")
     for c in county_scores[-10:]:
         print(f"  {c['county']}, {c['state']}  total={c['total']}  "
-              f"grid={c['grid']} water={c['water']} climate={c['climate']} "
-              f"renewable={c['renewable']} heat={c['heat']}")
+              f"energy={c['clean_energy']} water={c['water']} climate={c['climate']} "
+              f"heat={c['heat']}")
 
 
 if __name__ == '__main__':

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeatGrid — Heat Marketplace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { sans: ['Space Mono','monospace'], serif: ['Fraunces','serif'] },
+      }}
+    }
+  </script>
+  <style>
+    :root { --bg: #f5f0e8; --surface: #fff; --text: #1a1a1a; --muted: #6b6b6b;
+            --border: #e2d9cc; --orange: #d4380d; --blue: #1a5cff; --green: #15803d; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Space Mono', monospace; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .serif { font-family: 'Fraunces', serif; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+    .fade-in { animation: fadeIn .3s ease-out both; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .dc-card { transition: box-shadow .15s, transform .15s; }
+    .dc-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+// ── Haversine ────────────────────────────────────────────────────
+function haversineKm(lat1,lng1,lat2,lng2) {
+  const R=6371, dLat=(lat2-lat1)*Math.PI/180, dLng=(lng2-lng1)*Math.PI/180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+
+// ── Load data centers ────────────────────────────────────────────
+function useDataCenters() {
+  const [dcs, setDcs] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch('data/existing_dcs.json')
+      .then(r => r.json())
+      .then(d => { setDcs(d.data_centers ?? []); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+  return { dcs, loading };
+}
+
+// ── Search bar (Nominatim) ───────────────────────────────────────
+function LocationSearch({ onResult }) {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const debounceRef = useRef(null);
+
+  const search = useCallback(async (q) => {
+    if (!q || q.length < 3) { setResults([]); setOpen(false); return; }
+    setLoading(true);
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&countrycodes=us&limit=6&addressdetails=1`;
+      const res = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+      const data = await res.json();
+      setResults(data.filter(r => r.lat && r.lon));
+      setOpen(data.length > 0);
+    } catch(e) { setResults([]); }
+    finally { setLoading(false); }
+  }, []);
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => search(e.target.value), 350);
+  };
+
+  const handleSelect = (r) => {
+    const lat = parseFloat(r.lat), lng = parseFloat(r.lon);
+    const label = r.display_name.split(',').slice(0,2).join(',').trim();
+    setQuery(label);
+    setOpen(false);
+    onResult({ lat, lng, label });
+  };
+
+  return (
+    <div style={{ position:'relative', width:'100%', maxWidth:500 }}>
+      <div className="flex items-center gap-3 rounded-xl px-4 py-3"
+        style={{ background:'white', border:'1px solid #e2d9cc' }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" strokeWidth="2.5" strokeLinecap="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" value={query} onChange={handleChange}
+          onFocus={() => results.length > 0 && setOpen(true)}
+          placeholder="Enter your location (city, address, zip)…"
+          style={{ background:'transparent', border:'none', outline:'none', fontSize:13, width:'100%',
+                   fontFamily:'Space Mono, monospace', color:'#1a1a1a' }}
+        />
+        {query && <button onClick={()=>{setQuery('');setResults([]);setOpen(false);}}
+          style={{color:'#9a9a9a',background:'none',border:'none',cursor:'pointer',fontSize:16}}>×</button>}
+      </div>
+      {open && results.length > 0 && (
+        <div style={{ position:'absolute',top:'110%',left:0,right:0,zIndex:100,
+          background:'white',borderRadius:10,boxShadow:'0 8px 32px rgba(0,0,0,.15)',
+          border:'1px solid #e2d9cc',overflow:'hidden' }}>
+          {results.map((r,i) => {
+            const parts = r.display_name.split(',');
+            return (
+              <button key={i} onClick={()=>handleSelect(r)}
+                className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors block"
+                style={{borderBottom: i<results.length-1?'1px solid #f0e8dc':'none'}}>
+                <p className="text-xs font-bold truncate">{parts.slice(0,2).join(',').trim()}</p>
+                <p className="text-xs truncate" style={{color:'#9a9a9a'}}>{parts.slice(2,4).join(',').trim()}</p>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── DC Card ──────────────────────────────────────────────────────
+function DCCard({ dc, distKm }) {
+  const [expanded, setExpanded] = useState(false);
+  const outputTemp = 45; // default air-cooled
+  const annualHeatMwh = Math.round((dc.est_capacity_mw || 10) * 8760 * 0.80);
+  const gasCostMwh = 48.15;
+  const heatPrice = 20;
+  const savingsPerMwh = gasCostMwh - heatPrice;
+
+  return (
+    <div className="dc-card rounded-xl overflow-hidden" style={{background:'white',border:'1px solid #e2d9cc'}}>
+      <button className="w-full text-left p-5" onClick={()=>setExpanded(e=>!e)}>
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div className="flex-1 min-w-0">
+            <p className="font-bold text-sm truncate leading-tight">{dc.name || 'Data Center'}</p>
+            <p className="text-xs mt-0.5" style={{color:'#6b6b6b'}}>
+              {dc.city}, {dc.state}
+            </p>
+          </div>
+          {distKm !== null && (
+            <div className="text-right flex-shrink-0">
+              <p className="text-sm font-bold" style={{color:'#d4380d'}}>{distKm < 1 ? `${Math.round(distKm*1000)}m` : `${distKm.toFixed(1)}km`}</p>
+              <p className="text-xs" style={{color:'#9a9a9a'}}>away</p>
+            </div>
+          )}
+        </div>
+
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            [`${dc.est_capacity_mw || '~10'} MW`, 'capacity'],
+            [`${outputTemp}°C`, 'output temp'],
+            [`$${heatPrice}/MWh`, 'heat price'],
+          ].map(([v,l]) => (
+            <div key={l} className="text-center rounded-lg py-2" style={{background:'#f5f0e8'}}>
+              <p className="text-xs font-bold">{v}</p>
+              <p style={{fontSize:10,color:'#9a9a9a'}}>{l}</p>
+            </div>
+          ))}
+        </div>
+      </button>
+
+      {expanded && (
+        <div className="px-5 pb-5 text-xs" style={{borderTop:'1px solid #f0e8dc'}}>
+          <div className="grid grid-cols-2 gap-3 mt-3">
+            <div>
+              <p className="font-bold uppercase tracking-wider mb-1.5" style={{color:'#b0a898',fontSize:10}}>Heat Available</p>
+              <p className="mb-1">Annual: <strong>{(annualHeatMwh/1000).toFixed(1)} GWh</strong></p>
+              <p className="mb-1">Output temp: <strong>{outputTemp}°C</strong></p>
+              <p>Recovery rate: <strong>80%</strong></p>
+            </div>
+            <div>
+              <p className="font-bold uppercase tracking-wider mb-1.5" style={{color:'#b0a898',fontSize:10}}>Your Savings</p>
+              <p className="mb-1">Gas baseline: <strong>$48.15/MWh</strong></p>
+              <p className="mb-1">DC heat price: <strong>${heatPrice}/MWh</strong></p>
+              <p>You save: <strong style={{color:'#15803d'}}>${savingsPerMwh.toFixed(0)}/MWh</strong></p>
+            </div>
+          </div>
+          {distKm !== null && distKm < 25 && (
+            <div className="mt-3 rounded-lg p-3" style={{background:'#d1fae5',border:'1px solid #6ee7b7'}}>
+              <p className="font-bold" style={{color:'#15803d'}}>
+                Within feasible piping distance ({distKm.toFixed(1)} km)
+              </p>
+              <p className="mt-1" style={{color:'#166534'}}>
+                Estimated pipe cost: ${(distKm * 1000 * 1000 / 1e6).toFixed(1)}M · Payback depends on your demand
+              </p>
+            </div>
+          )}
+          <button className="w-full mt-3 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+            style={{background:'#d4380d',color:'white'}}>
+            Express Interest
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Main App ─────────────────────────────────────────────────────
+function App() {
+  const { dcs, loading } = useDataCenters();
+  const [location, setLocation] = useState(null); // {lat,lng,label}
+  const [radius, setRadius] = useState(50);       // km
+  const [sortBy, setSortBy] = useState('distance');
+
+  const nearby = useMemo(() => {
+    if (!dcs || !location) return null;
+    return dcs
+      .map(dc => {
+        const d = haversineKm(location.lat, location.lng, dc.lat, dc.lng);
+        return d <= radius ? { ...dc, distKm: d } : null;
+      })
+      .filter(Boolean);
+  }, [dcs, location, radius]);
+
+  const sorted = useMemo(() => {
+    if (!nearby) return [];
+    const arr = [...nearby];
+    if (sortBy === 'distance')  return arr.sort((a,b) => a.distKm - b.distKm);
+    if (sortBy === 'capacity')  return arr.sort((a,b) => (b.est_capacity_mw||10) - (a.est_capacity_mw||10));
+    return arr;
+  }, [nearby, sortBy]);
+
+  if (loading) return (
+    <div className="h-screen flex flex-col items-center justify-center gap-4" style={{background:'#f5f0e8'}}>
+      <h1 className="serif text-3xl font-bold">HeatGrid Marketplace</h1>
+      <p className="text-sm" style={{color:'#6b6b6b'}}>Loading data centers...</p>
+    </div>
+  );
+
+  return (
+    <div style={{minHeight:'100vh',background:'#f5f0e8'}}>
+      {/* Header */}
+      <header style={{
+        background:'#1a1a1a',color:'#f5f0e8',padding:'14px 24px',
+        display:'flex',alignItems:'center',justifyContent:'space-between',gap:16,
+      }}>
+        <div className="flex items-center gap-3">
+          <a href="index.html" className="serif font-bold text-xl tracking-tight hover:opacity-80 transition-opacity"
+            style={{color:'#f5f0e8',textDecoration:'none'}}>HeatGrid</a>
+          <span className="text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wider"
+            style={{background:'#d4380d',color:'white'}}>MARKETPLACE</span>
+        </div>
+        <div className="text-xs" style={{color:'#6b6b6b'}}>
+          {dcs?.length?.toLocaleString()} data centers indexed
+        </div>
+      </header>
+
+      {/* Hero / search */}
+      <div style={{padding:'48px 24px 32px',maxWidth:800,margin:'0 auto',textAlign:'center'}}>
+        <h1 className="serif font-bold mb-2" style={{fontSize:32}}>
+          Find cheap heat near you
+        </h1>
+        <p className="text-sm mb-6" style={{color:'#6b6b6b',maxWidth:480,margin:'0 auto'}}>
+          Data centers near you may be selling waste heat at a fraction of gas prices.
+          Enter your location to discover potential heat sources.
+        </p>
+        <LocationSearch onResult={setLocation} />
+      </div>
+
+      {/* Results */}
+      {location && (
+        <div className="fade-in" style={{maxWidth:800,margin:'0 auto',padding:'0 24px 48px'}}>
+          {/* Controls bar */}
+          <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold" style={{color:'#9a9a9a'}}>Within</span>
+              <select value={radius} onChange={e=>setRadius(+e.target.value)}
+                className="text-xs font-bold rounded-lg px-3 py-1.5"
+                style={{background:'white',border:'1px solid #e2d9cc',outline:'none'}}>
+                {[10,25,50,100,200].map(r=><option key={r} value={r}>{r} km</option>)}
+              </select>
+              <span className="text-xs font-bold" style={{color:'#9a9a9a'}}>of {location.label}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs" style={{color:'#9a9a9a'}}>Sort:</span>
+              {[['distance','Nearest'],['capacity','Largest']].map(([v,l])=>(
+                <button key={v} onClick={()=>setSortBy(v)}
+                  className="text-xs px-3 py-1.5 rounded-full font-bold border transition-colors"
+                  style={{
+                    background: sortBy===v ? '#1a1a1a' : 'white',
+                    color:      sortBy===v ? 'white'   : '#6b6b6b',
+                    border:     `1px solid ${sortBy===v ? '#1a1a1a' : '#e2d9cc'}`,
+                  }}>{l}</button>
+              ))}
+            </div>
+          </div>
+
+          {/* Count badge */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xs px-3 py-1 rounded-full font-bold" style={{background:'#d4380d',color:'white'}}>
+              {sorted.length} found
+            </span>
+            {sorted.length > 0 && (
+              <span className="text-xs" style={{color:'#9a9a9a'}}>
+                Nearest: {sorted[0]?.distKm.toFixed(1)} km
+              </span>
+            )}
+          </div>
+
+          {/* Cards */}
+          {sorted.length === 0 ? (
+            <div className="text-center py-16" style={{color:'#9a9a9a'}}>
+              <p className="text-3xl mb-3">🔍</p>
+              <p className="text-sm font-bold mb-1">No data centers within {radius} km</p>
+              <p className="text-xs">Try increasing the search radius</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {sorted.map((dc,i) => <DCCard key={dc.id || i} dc={dc} distKm={dc.distKm} />)}
+            </div>
+          )}
+
+          {/* CTA for registration */}
+          {sorted.length > 0 && (
+            <div className="mt-8 rounded-xl p-6 text-center" style={{background:'white',border:'1px solid #e2d9cc'}}>
+              <h3 className="serif font-bold text-lg mb-2">Want to start buying heat?</h3>
+              <p className="text-xs mb-4" style={{color:'#6b6b6b'}}>
+                Register your organization to get connected with data centers near you.
+                We'll match you with the best heat source for your needs.
+              </p>
+              <button className="px-6 py-3 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+                style={{background:'#d4380d',color:'white'}}>
+                Register as Heat Buyer
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Empty state: before search */}
+      {!location && (
+        <div style={{maxWidth:800,margin:'0 auto',padding:'0 24px 48px'}}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+            {[
+              ['🏫','Schools','K-12 schools spend $8B/yr on gas heating. DC waste heat can cut costs 40-60%.'],
+              ['🌱','Greenhouses','Year-round heat demand at 30-50°C — perfect match for DC output, no heat pump needed.'],
+              ['🏊','Pools & Aquatics','Pools need 26-30°C water. DC waste heat delivers this directly, saving $15-25K/yr.'],
+            ].map(([emoji,title,desc])=>(
+              <div key={title} className="rounded-xl p-5" style={{background:'white',border:'1px solid #e2d9cc'}}>
+                <p className="text-2xl mb-2">{emoji}</p>
+                <p className="font-bold text-sm mb-1">{title}</p>
+                <p className="text-xs" style={{color:'#6b6b6b',lineHeight:1.6}}>{desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-xl p-5 mt-4" style={{background:'white',border:'1px solid #e2d9cc'}}>
+            <p className="font-bold text-xs uppercase tracking-wider mb-3" style={{color:'#9a9a9a'}}>How it works</p>
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs" style={{color:'#6b6b6b'}}>
+              {[
+                ['1.','Enter your location','Search by city, address, or ZIP code'],
+                ['2.','Browse nearby DCs','See data centers ranked by distance and capacity'],
+                ['3.','Compare economics','Each listing shows heat price vs. your gas baseline'],
+                ['4.','Express interest','We connect you with the data center operator'],
+              ].map(([n,t,d])=>(
+                <div key={n}>
+                  <p className="font-bold text-lg mb-1" style={{color:'#d4380d'}}>{n}</p>
+                  <p className="font-bold text-sm mb-0.5" style={{color:'#1a1a1a'}}>{t}</p>
+                  <p style={{lineHeight:1.5}}>{d}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
