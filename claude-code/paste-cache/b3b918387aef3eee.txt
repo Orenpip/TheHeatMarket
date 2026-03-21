@@ -1,0 +1,42 @@
+2026-03-03 17:07:40.772 [error] Error: Student not found
+    at i (/var/task/apps/web/.next/server/app/(student)/page.js:1:18398)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async u (/var/task/apps/web/.next/server/app/(student)/page.js:1:14332) {
+  digest: '2431134759'
+}
+2026-03-03 17:07:40.790 [error] PrismaClientKnownRequestError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at i9.handleRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:8008)
+    at i9.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:7090)
+    at i9.request (/var/task/apps/web/.next/server/chunks/7535.js:21:6803)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async i (/var/task/apps/web/.next/server/chunks/7535.js:33:7529)
+    at async o (/var/task/apps/web/.next/server/app/(student)/page.js:1:13153) {
+  code: 'P1000',
+  clientVersion: '6.19.2',
+  meta: { modelName: 'Student', database_user: 'postgres' },
+  digest: '3002134287'
+}
+2026-03-03 17:07:40.793 [error] PrismaClientKnownRequestError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at i9.handleRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:8008)
+    at i9.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:7090)
+    at i9.request (/var/task/apps/web/.next/server/chunks/7535.js:21:6803)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async i (/var/task/apps/web/.next/server/chunks/7535.js:33:7529)
+    at async o (/var/task/apps/web/.next/server/app/(student)/page.js:1:13153) {
+  code: 'P1000',
+  clientVersion: '6.19.2',
+  meta: { modelName: 'Student', database_user: 'postgres' },
+  digest: '3002134287'
+}

@@ -1,0 +1,1586 @@
+2026-02-25T18:24:32.135Z [DEBUG] [init] configureGlobalMTLS starting
+2026-02-25T18:24:32.135Z [DEBUG] [init] configureGlobalMTLS complete
+2026-02-25T18:24:32.135Z [DEBUG] [init] configureGlobalAgents starting
+2026-02-25T18:24:32.135Z [DEBUG] [init] configureGlobalAgents complete
+2026-02-25T18:24:32.137Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-02-25T18:24:32.138Z [DEBUG] [ToolSearch:optimistic] mode=tst-auto, ENABLE_TOOL_SEARCH=undefined, result=true
+2026-02-25T18:24:32.138Z [DEBUG] [STARTUP] Running setup()...
+2026-02-25T18:24:32.140Z [DEBUG] Loading skills from: managed=/Library/Application Support/ClaudeCode/.claude/skills, user=/Users/yahelraviv/.claude/skills, project=[]
+2026-02-25T18:24:32.140Z [DEBUG] Error log sink initialized
+2026-02-25T18:24:32.142Z [DEBUG] [STARTUP] setup() completed in 4ms
+2026-02-25T18:24:32.142Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-02-25T18:24:32.144Z [DEBUG] Loaded 0 unique skills (0 unconditional, 0 conditional, managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-02-25T18:24:32.145Z [DEBUG] [Claude in Chrome] Found chrome profiles: Profile 7, Profile 8, Profile 6, Profile 1, Default, Profile 4, Profile 3
+2026-02-25T18:24:32.146Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2026-02-25T18:24:32.146Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2026-02-25T18:24:32.146Z [DEBUG] Total plugin skills loaded: 0
+2026-02-25T18:24:32.146Z [DEBUG] Total plugin commands loaded: 0
+2026-02-25T18:24:32.146Z [DEBUG] Registered 0 hooks from 0 plugins
+2026-02-25T18:24:32.146Z [DEBUG] Total plugin agents loaded: 0
+2026-02-25T18:24:32.148Z [DEBUG] getSkills returning: 0 skill dir commands, 0 plugin skills, 2 bundled skills
+2026-02-25T18:24:32.148Z [DEBUG] [STARTUP] Commands and agents loaded in 6ms
+2026-02-25T18:24:32.149Z [DEBUG] Acquired PID lock for 2.1.42 (PID 36451)
+2026-02-25T18:24:32.149Z [DEBUG] Acquired PID lock on running version: /Users/yahelraviv/.local/share/claude/versions/2.1.42
+2026-02-25T18:24:32.153Z [DEBUG] [STARTUP] Running showSetupScreens()...
+2026-02-25T18:24:32.154Z [DEBUG] [keybindings] KeybindingSetup initialized with 102 bindings, 0 warnings
+2026-02-25T18:24:32.164Z [DEBUG] [keybindings] Watching for changes to /Users/yahelraviv/.claude/keybindings.json
+2026-02-25T18:24:32.184Z [DEBUG] [Claude in Chrome] Found brave profiles: Profile 1, Default, Profile 2
+2026-02-25T18:24:32.186Z [DEBUG] [Claude in Chrome] Extension not found in any browser
+2026-02-25T18:24:33.059Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043873059
+2026-02-25T18:24:33.059Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:24:33.059Z [DEBUG] Temp file written successfully, size: 8507 bytes
+2026-02-25T18:24:33.059Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:24:33.059Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043873059 to /Users/yahelraviv/.claude.json
+2026-02-25T18:24:33.060Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:24:33.244Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043873244
+2026-02-25T18:24:33.244Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:24:33.244Z [DEBUG] Temp file written successfully, size: 8507 bytes
+2026-02-25T18:24:33.244Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:24:33.244Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043873244 to /Users/yahelraviv/.claude.json
+2026-02-25T18:24:33.244Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:24:36.428Z [DEBUG] Grove: Using fresh cached config
+2026-02-25T18:24:36.443Z [DEBUG] [Perfetto] initializePerfettoTracing called, env value: undefined
+2026-02-25T18:24:36.445Z [DEBUG] Git remote URL: null
+2026-02-25T18:24:36.445Z [DEBUG] No git remote URL found
+2026-02-25T18:24:36.445Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2026-02-25T18:24:36.665Z [DEBUG] [STARTUP] showSetupScreens() completed in 4512ms
+2026-02-25T18:24:36.666Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-02-25T18:24:36.666Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-02-25T18:24:36.666Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-02-25T18:24:36.667Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:24:36.667Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:24:36.670Z [DEBUG] Total LSP servers loaded: 0
+2026-02-25T18:24:36.670Z [DEBUG] [STARTUP] MCP configs loaded in 4533ms
+2026-02-25T18:24:36.676Z [DEBUG] [Reconnection] computeInitialTeamContext: No teammate context set (not a teammate)
+2026-02-25T18:24:36.679Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043876679
+2026-02-25T18:24:36.679Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:24:36.679Z [DEBUG] Temp file written successfully, size: 8507 bytes
+2026-02-25T18:24:36.679Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:24:36.679Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043876679 to /Users/yahelraviv/.claude.json
+2026-02-25T18:24:36.679Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:24:36.680Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-02-25T18:24:36.680Z [DEBUG] LSP manager initialized with 0 servers
+2026-02-25T18:24:36.680Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:24:36.681Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2026-02-25T18:24:36.681Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:24:36.681Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2026-02-25T18:24:36.681Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-02-25T18:24:36.681Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-02-25T18:24:36.690Z [DEBUG] LSP server manager initialized successfully
+2026-02-25T18:24:36.690Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-02-25T18:24:36.694Z [DEBUG] [keybindings] KeybindingSetup initialized with 102 bindings, 0 warnings
+2026-02-25T18:24:36.831Z [DEBUG] [REPL:mount] REPL mounted, disabled=false
+2026-02-25T18:24:36.831Z [DEBUG] Official marketplace auto-install skipped: already_attempted
+2026-02-25T18:24:36.831Z [DEBUG] performStartupChecks called
+2026-02-25T18:24:36.832Z [DEBUG] Starting background plugin installations
+2026-02-25T18:24:36.832Z [DEBUG] performBackgroundPluginInstallations called
+2026-02-25T18:24:36.832Z [DEBUG] No CLAUDE.md/rules files found
+2026-02-25T18:24:36.834Z [DEBUG] Watching for changes in setting files /Users/yahelraviv/.claude/settings.json, /Users/yahelraviv/.claude/settings.local.json...
+2026-02-25T18:24:37.193Z [DEBUG] [claudeai-mcp] Checking gate (cached)...
+2026-02-25T18:24:37.193Z [DEBUG] [claudeai-mcp] Gate returned: true
+2026-02-25T18:24:37.193Z [DEBUG] [claudeai-mcp] Fetching from https://api.anthropic.com/v1/mcp_servers?limit=1000
+2026-02-25T18:24:37.195Z [DEBUG] Loaded plugins - Enabled: 0, Disabled: 0, Commands: 0, Agents: 0, Errors: 0
+2026-02-25T18:24:37.195Z [DEBUG] AutoUpdaterWrapper: Installation type: native
+2026-02-25T18:24:37.195Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:24:37.195Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:24:37.196Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:24:37.197Z [DEBUG] Setting installation status: 0 marketplaces, 0 installable plugins, 0 uninstallable plugins
+2026-02-25T18:24:37.202Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043877202
+2026-02-25T18:24:37.202Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:24:37.202Z [DEBUG] Temp file written successfully, size: 8507 bytes
+2026-02-25T18:24:37.202Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:24:37.202Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043877202 to /Users/yahelraviv/.claude.json
+2026-02-25T18:24:37.202Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:24:37.203Z [DEBUG] Org fast mode: disabled (extra_usage_disabled)
+2026-02-25T18:24:37.207Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:37.216Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:37.278Z [DEBUG] [claudeai-mcp] Fetched 2 servers
+2026-02-25T18:24:37.279Z [DEBUG] MCP server "claude.ai Gmail": Initializing claude.ai proxy transport for server mcpsrv_01BwEVHvsY36LqDGbaybRXEs
+2026-02-25T18:24:37.279Z [DEBUG] MCP server "claude.ai Gmail": Using claude.ai proxy at https://mcp-proxy.anthropic.com/v1/mcp/mcpsrv_01BwEVHvsY36LqDGbaybRXEs
+2026-02-25T18:24:37.279Z [DEBUG] MCP server "claude.ai Gmail": claude.ai proxy transport created successfully
+2026-02-25T18:24:37.281Z [DEBUG] MCP server "claude.ai Gmail": Starting connection with timeout of 30000ms
+2026-02-25T18:24:37.281Z [DEBUG] MCP server "claude.ai Google Calendar": Initializing claude.ai proxy transport for server mcpsrv_012isYxbokCyw21TSPQF2Qhb
+2026-02-25T18:24:37.281Z [DEBUG] MCP server "claude.ai Google Calendar": Using claude.ai proxy at https://mcp-proxy.anthropic.com/v1/mcp/mcpsrv_012isYxbokCyw21TSPQF2Qhb
+2026-02-25T18:24:37.281Z [DEBUG] MCP server "claude.ai Google Calendar": claude.ai proxy transport created successfully
+2026-02-25T18:24:37.282Z [DEBUG] MCP server "claude.ai Google Calendar": Starting connection with timeout of 30000ms
+2026-02-25T18:24:37.283Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:37.291Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:37.292Z [DEBUG] Checking for native installer update to version 2.1.56
+2026-02-25T18:24:37.293Z [DEBUG] Downloading native installer version 2.1.56
+2026-02-25T18:24:37.616Z [DEBUG] MCP server "claude.ai Gmail": claude.ai proxy connection failed after 337ms: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYVFn6fPWoMRgrTP97ZPV"}
+2026-02-25T18:24:37.616Z [ERROR] MCP server "claude.ai Gmail" Error: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYVFn6fPWoMRgrTP97ZPV"}
+2026-02-25T18:24:37.617Z [DEBUG] MCP server "claude.ai Gmail": Authentication required for claude.ai proxy server
+2026-02-25T18:24:37.619Z [DEBUG] MCP server "claude.ai Google Calendar": claude.ai proxy connection failed after 338ms: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYVFn6cuhbcZuPQQcWNG7"}
+2026-02-25T18:24:37.619Z [ERROR] MCP server "claude.ai Google Calendar" Error: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYVFn6cuhbcZuPQQcWNG7"}
+2026-02-25T18:24:37.619Z [DEBUG] MCP server "claude.ai Google Calendar": Authentication required for claude.ai proxy server
+2026-02-25T18:24:37.626Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:37.635Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:40.042Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:40.277Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:40.456Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:40.548Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:40.711Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:40.752Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:40.837Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:41.094Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:41.275Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:41.441Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:41.575Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:41.702Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:42.202Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:42.357Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:42.528Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:42.739Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:42.839Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:42.968Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:43.159Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:43.330Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:43.437Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:44.200Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:44.300Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:44.528Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:44.731Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:44.859Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:45.008Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:46.010Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:46.120Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:46.523Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:49.673Z [DEBUG] Atomically installed binary to /Users/yahelraviv/.local/share/claude/versions/2.1.56
+2026-02-25T18:24:49.676Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-02-25T18:24:49.676Z [DEBUG] Atomically updated symlink /Users/yahelraviv/.local/bin/claude -> /Users/yahelraviv/.local/share/claude/versions/2.1.56
+2026-02-25T18:24:49.677Z [DEBUG] Successfully updated to version 2.1.56
+2026-02-25T18:24:49.680Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:49.684Z [DEBUG] Cleaned up old staging directory: 2.1.52.34025.1771981920055
+2026-02-25T18:24:49.684Z [DEBUG] Cleaned up 1 orphaned staging directories
+2026-02-25T18:24:49.695Z [DEBUG] Acquired PID lock for 2.1.39 (PID 36451)
+2026-02-25T18:24:49.707Z [DEBUG] Released PID lock for 2.1.39
+2026-02-25T18:24:56.994Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:24:58.260Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:46.162Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.183Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-25T18:25:47.183Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-25T18:25:47.183Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-25T18:25:47.183Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-25T18:25:47.184Z [DEBUG] Sending 1 skills via attachment (initial, 1 total sent)
+2026-02-25T18:25:47.188Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-02-25T18:25:47.188Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:25:47.188Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-02-25T18:25:47.188Z [DEBUG] FileHistory: Added snapshot for 7ffd0cd8-6f37-4858-bf0b-6cbe15bd6b76, tracking 0 files
+2026-02-25T18:25:47.191Z [DEBUG] [useDeferredValue] Messages deferred by 2 (0→2)
+2026-02-25T18:25:47.199Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.199Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.208Z [DEBUG] Started caffeinate to prevent sleep
+2026-02-25T18:25:47.210Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-25T18:25:47.214Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947214
+2026-02-25T18:25:47.214Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.214Z [DEBUG] Temp file written successfully, size: 8507 bytes
+2026-02-25T18:25:47.214Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.214Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947214 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.214Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.215Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.fee; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:25:47.215Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.215Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:25:47.215Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:25:47.215Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947215
+2026-02-25T18:25:47.215Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.216Z [DEBUG] Temp file written successfully, size: 8542 bytes
+2026-02-25T18:25:47.216Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.216Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947215 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.216Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.217Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947217
+2026-02-25T18:25:47.217Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.217Z [DEBUG] Temp file written successfully, size: 8541 bytes
+2026-02-25T18:25:47.217Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.217Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947217 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.217Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.217Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.217Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:25:47.217Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.218Z [DEBUG] Total plugin output styles loaded: 0
+2026-02-25T18:25:47.220Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947220
+2026-02-25T18:25:47.220Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.220Z [DEBUG] Temp file written successfully, size: 8574 bytes
+2026-02-25T18:25:47.220Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.220Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947220 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.220Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.220Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947220
+2026-02-25T18:25:47.220Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.220Z [DEBUG] Temp file written successfully, size: 8605 bytes
+2026-02-25T18:25:47.220Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.220Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947220 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.221Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.221Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947221
+2026-02-25T18:25:47.221Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.221Z [DEBUG] Temp file written successfully, size: 8605 bytes
+2026-02-25T18:25:47.221Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.221Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947221 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.221Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.222Z [DEBUG] autocompact: tokens=86 threshold=167000 effectiveWindow=180000
+2026-02-25T18:25:47.222Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947222
+2026-02-25T18:25:47.222Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.222Z [DEBUG] Temp file written successfully, size: 8642 bytes
+2026-02-25T18:25:47.222Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.222Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947222 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.222Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.223Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947223
+2026-02-25T18:25:47.223Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.223Z [DEBUG] Temp file written successfully, size: 8641 bytes
+2026-02-25T18:25:47.223Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.223Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947223 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.223Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.223Z [DEBUG] Auto tool search disabled: 0 tokens (threshold: 20000, 10% of context) [source: query]
+2026-02-25T18:25:47.226Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947226
+2026-02-25T18:25:47.226Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.226Z [DEBUG] Temp file written successfully, size: 8641 bytes
+2026-02-25T18:25:47.226Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.226Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947226 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.226Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.226Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.c31; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:25:47.226Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.226Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:25:47.226Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:25:47.227Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043947227
+2026-02-25T18:25:47.227Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:47.227Z [DEBUG] Temp file written successfully, size: 8758 bytes
+2026-02-25T18:25:47.227Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:47.227Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043947227 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:47.227Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:47.227Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.227Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:25:47.227Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.237Z [DEBUG] [useDeferredValue] Messages deferred by 2 (0→2)
+2026-02-25T18:25:47.238Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.240Z [DEBUG] Stats cache version mismatch (got 1, expected 2), returning empty cache
+2026-02-25T18:25:47.240Z [DEBUG] Stats cache empty, processing all historical data in background
+2026-02-25T18:25:47.243Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:47.245Z [DEBUG] Cleaned up old image cache: /Users/yahelraviv/.claude/image-cache/98f37636-58a5-40ce-ab2f-ad11ab41e651
+2026-02-25T18:25:47.245Z [DEBUG] Cleaned up old paste: /Users/yahelraviv/.claude/paste-cache/f81c233569dd13a7.txt
+2026-02-25T18:25:47.306Z [DEBUG] Cleaned up old paste: /Users/yahelraviv/.claude/paste-cache/627566cd1b77e65f.txt
+2026-02-25T18:25:47.414Z [DEBUG] Stats cache saved successfully (lastComputedDate: 2026-02-24)
+2026-02-25T18:25:47.414Z [DEBUG] Stats cache updated with 4 sessions
+2026-02-25T18:25:47.416Z [DEBUG] Cleaned up old paste: /Users/yahelraviv/.claude/paste-cache/a959e77236e9838f.txt
+2026-02-25T18:25:47.423Z [DEBUG] Cleaned up old paste: /Users/yahelraviv/.claude/paste-cache/ac3bf5cf067a8bc6.txt
+2026-02-25T18:25:47.424Z [DEBUG] Cleaned up old paste: /Users/yahelraviv/.claude/paste-cache/9412eb14c7d36cde.txt
+2026-02-25T18:25:47.427Z [DEBUG] Cleaned up old paste: /Users/yahelraviv/.claude/paste-cache/1b723378f35f9f1f.txt
+2026-02-25T18:25:47.427Z [DEBUG] Cleaned up old paste: /Users/yahelraviv/.claude/paste-cache/6157a58d68f936b5.txt
+2026-02-25T18:25:47.697Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:25:47.906Z [DEBUG] Successfully refreshed marketplace: claude-plugins-official
+2026-02-25T18:25:47.906Z [DEBUG] Plugin autoupdate: checking installed plugins
+2026-02-25T18:25:49.280Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:25:49.287Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:50.138Z [DEBUG] [useDeferredValue] Messages deferred by 1 (2→3)
+2026-02-25T18:25:50.141Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:50.149Z [DEBUG] [useDeferredValue] Messages deferred by 1 (2→3)
+2026-02-25T18:25:50.150Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:50.155Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:50.817Z [DEBUG] [useDeferredValue] Messages deferred by 1 (3→4)
+2026-02-25T18:25:50.827Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:50.842Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:50.843Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.229Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.240Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.415Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.420Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.422Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.423Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.429Z [DEBUG] [useDeferredValue] Messages deferred by 1 (4→5)
+2026-02-25T18:25:51.430Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.441Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.454Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.457Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-02-25T18:25:51.458Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2026-02-25T18:25:51.458Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:25:51.458Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-25T18:25:51.467Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.481Z [DEBUG] tree-sitter: loaded from embedded
+2026-02-25T18:25:51.487Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-25T18:25:51.487Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-25T18:25:51.488Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043951488
+2026-02-25T18:25:51.488Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:51.488Z [DEBUG] Temp file written successfully, size: 8786 bytes
+2026-02-25T18:25:51.488Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:51.488Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043951488 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:51.488Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:51.488Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.589; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:25:51.488Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.488Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:25:51.488Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:25:51.488Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.589; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:25:51.488Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.488Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:25:51.488Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:25:51.488Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.489Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.489Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:25:51.489Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:25:51.489Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.489Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.490Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:51.882Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:25:52.445Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:25:52.495Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "gh auth status:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2026-02-25T18:25:52.495Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2026-02-25T18:25:52.496Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2026-02-25T18:25:52.496Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:25:52.496Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-25T18:25:52.504Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-02-25T18:25:52.507Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043952507
+2026-02-25T18:25:52.507Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:52.507Z [DEBUG] Temp file written successfully, size: 8785 bytes
+2026-02-25T18:25:52.507Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:52.507Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043952507 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:52.507Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:57.481Z [DEBUG] Creating shell snapshot for zsh (/bin/zsh)
+2026-02-25T18:25:57.481Z [DEBUG] Looking for shell config file: /Users/yahelraviv/.zshrc
+2026-02-25T18:25:57.481Z [DEBUG] Snapshots directory: /Users/yahelraviv/.claude/shell-snapshots
+2026-02-25T18:25:57.482Z [DEBUG] Creating snapshot at: /Users/yahelraviv/.claude/shell-snapshots/snapshot-zsh-1772043957481-mmur7j.sh
+2026-02-25T18:25:57.482Z [DEBUG] Shell binary exists: true
+2026-02-25T18:25:57.482Z [DEBUG] Execution timeout: 10000ms
+2026-02-25T18:25:57.506Z [DEBUG] Started caffeinate to prevent sleep
+2026-02-25T18:25:57.506Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:57.507Z [DEBUG] AutoUpdaterWrapper: Installation type: native
+2026-02-25T18:25:57.509Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:57.514Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:57.752Z [DEBUG] Checking for native installer update to version 2.1.56
+2026-02-25T18:25:57.753Z [DEBUG] Version 2.1.56 already installed, updating symlink
+2026-02-25T18:25:57.753Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-02-25T18:25:57.753Z [DEBUG] Successfully updated to version 2.1.56
+2026-02-25T18:25:57.754Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:57.876Z [DEBUG] Shell snapshot created successfully (140064 bytes)
+2026-02-25T18:25:57.877Z [DEBUG] No session environment scripts found
+2026-02-25T18:25:57.889Z [DEBUG] Bash tool error (414ms): Shell command failed
+2026-02-25T18:25:57.889Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2026-02-25T18:25:57.889Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:25:57.890Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-25T18:25:57.890Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-25T18:25:57.890Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-25T18:25:57.890Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-25T18:25:57.890Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-25T18:25:57.891Z [DEBUG] [useDeferredValue] Messages deferred by 1 (5→6)
+2026-02-25T18:25:57.893Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:57.899Z [DEBUG] autocompact: tokens=18778 threshold=167000 effectiveWindow=180000
+2026-02-25T18:25:57.899Z [DEBUG] Auto tool search disabled: 0 tokens (threshold: 20000, 10% of context) [source: query]
+2026-02-25T18:25:57.901Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043957901
+2026-02-25T18:25:57.901Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:25:57.901Z [DEBUG] Temp file written successfully, size: 8785 bytes
+2026-02-25T18:25:57.901Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:25:57.901Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043957901 to /Users/yahelraviv/.claude.json
+2026-02-25T18:25:57.901Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:25:57.901Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.c31; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:25:57.901Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:57.901Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:25:57.901Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:25:57.901Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:57.901Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:25:57.901Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:57.902Z [DEBUG] [useDeferredValue] Messages deferred by 1 (5→6)
+2026-02-25T18:25:57.903Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:25:57.906Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:00.680Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:00.746Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:26:00.750Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:02.646Z [DEBUG] [useDeferredValue] Messages deferred by 1 (6→7)
+2026-02-25T18:26:02.650Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:02.675Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:02.679Z [DEBUG] High write ratio: blit=0, write=1165 (100.0% writes), screen=43x80
+2026-02-25T18:26:02.684Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:02.902Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2026-02-25T18:26:02.902Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:26:02.902Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-02-25T18:26:02.906Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043962906
+2026-02-25T18:26:02.906Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:26:02.906Z [DEBUG] Temp file written successfully, size: 8831 bytes
+2026-02-25T18:26:02.906Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:26:02.906Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043962906 to /Users/yahelraviv/.claude.json
+2026-02-25T18:26:02.907Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:26:02.907Z [DEBUG] autocompact: tokens=19171 threshold=167000 effectiveWindow=180000
+2026-02-25T18:26:02.910Z [DEBUG] Auto tool search disabled: 0 tokens (threshold: 20000, 10% of context) [source: query]
+2026-02-25T18:26:02.917Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043962917
+2026-02-25T18:26:02.917Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:26:02.918Z [DEBUG] Temp file written successfully, size: 8831 bytes
+2026-02-25T18:26:02.918Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:26:02.918Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043962917 to /Users/yahelraviv/.claude.json
+2026-02-25T18:26:02.918Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:26:02.920Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043962920
+2026-02-25T18:26:02.920Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:26:02.921Z [DEBUG] Temp file written successfully, size: 8855 bytes
+2026-02-25T18:26:02.921Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:26:02.921Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043962920 to /Users/yahelraviv/.claude.json
+2026-02-25T18:26:02.921Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:26:02.922Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.c31; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:26:02.922Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:02.922Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:26:02.922Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:26:02.923Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772043962923
+2026-02-25T18:26:02.923Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:26:02.923Z [DEBUG] Temp file written successfully, size: 8876 bytes
+2026-02-25T18:26:02.923Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:26:02.923Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772043962923 to /Users/yahelraviv/.claude.json
+2026-02-25T18:26:02.923Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:26:02.923Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:26:02.924Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:02.924Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:02.929Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:02.933Z [DEBUG] High write ratio: blit=0, write=1151 (100.0% writes), screen=41x80
+2026-02-25T18:26:02.933Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-02-25T18:26:04.742Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:26:04.856Z [DEBUG] Forked agent [prompt_suggestion] received message: type=assistant
+2026-02-25T18:26:04.912Z [DEBUG] Getting matching hook commands for SubagentStop with query:
+2026-02-25T18:26:04.912Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:26:04.912Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-02-25T18:26:04.912Z [DEBUG] Forked agent [prompt_suggestion] finished: 1 messages, types=[assistant], totalUsage: input=3 output=4 cacheRead=18800 cacheCreate=385
+2026-02-25T18:26:04.913Z [DEBUG] [Speculation] enabled=false
+2026-02-25T18:26:04.918Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:04.925Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:20.153Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:38.665Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:52.704Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:52.890Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:52.916Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:53.027Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:53.235Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:53.522Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:53.636Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:53.784Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:53.849Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:54.012Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:54.129Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:54.277Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:54.424Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:54.540Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:54.687Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.364Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-25T18:26:55.364Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-25T18:26:55.364Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-25T18:26:55.364Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-25T18:26:55.368Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-02-25T18:26:55.368Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:26:55.368Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-02-25T18:26:55.369Z [DEBUG] FileHistory: Making snapshot for message e50182d5-3a06-4d7c-b247-d69bc287950b
+2026-02-25T18:26:55.369Z [DEBUG] FileHistory: Added snapshot for e50182d5-3a06-4d7c-b247-d69bc287950b, tracking 0 files
+2026-02-25T18:26:55.370Z [DEBUG] [useDeferredValue] Messages deferred by 1 (7→8)
+2026-02-25T18:26:55.379Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.380Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.384Z [DEBUG] High write ratio: blit=0, write=1246 (100.0% writes), screen=45x80
+2026-02-25T18:26:55.387Z [DEBUG] Started caffeinate to prevent sleep
+2026-02-25T18:26:55.388Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.389Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-25T18:26:55.389Z [DEBUG] [SystemPrompt] path=simple proactive=false
+2026-02-25T18:26:55.390Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.288; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:26:55.390Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.390Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:26:55.390Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:26:55.390Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.390Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:26:55.391Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.393Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772044015392
+2026-02-25T18:26:55.393Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:26:55.393Z [DEBUG] Temp file written successfully, size: 8876 bytes
+2026-02-25T18:26:55.393Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:26:55.393Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772044015392 to /Users/yahelraviv/.claude.json
+2026-02-25T18:26:55.393Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:26:55.394Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772044015394
+2026-02-25T18:26:55.394Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:26:55.394Z [DEBUG] Temp file written successfully, size: 8913 bytes
+2026-02-25T18:26:55.394Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:26:55.394Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772044015394 to /Users/yahelraviv/.claude.json
+2026-02-25T18:26:55.395Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:26:55.395Z [DEBUG] autocompact: tokens=18900 threshold=167000 effectiveWindow=180000
+2026-02-25T18:26:55.396Z [DEBUG] Auto tool search disabled: 0 tokens (threshold: 20000, 10% of context) [source: query]
+2026-02-25T18:26:55.400Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772044015400
+2026-02-25T18:26:55.400Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:26:55.400Z [DEBUG] Temp file written successfully, size: 8913 bytes
+2026-02-25T18:26:55.400Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:26:55.400Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772044015400 to /Users/yahelraviv/.claude.json
+2026-02-25T18:26:55.400Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:26:55.401Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.c31; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:26:55.401Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.401Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:26:55.401Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:26:55.401Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.401Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:26:55.401Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.409Z [DEBUG] [useDeferredValue] Messages deferred by 1 (7→8)
+2026-02-25T18:26:55.410Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.415Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:55.433Z [DEBUG] High write ratio: blit=0, write=1264 (100.0% writes), screen=47x80
+2026-02-25T18:26:55.795Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:26:57.171Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:26:57.184Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:57.215Z [DEBUG] High write ratio: blit=0, write=1264 (100.0% writes), screen=47x80
+2026-02-25T18:26:57.288Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:57.291Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:57.295Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:57.585Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:57.592Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.097Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.114Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.117Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.124Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-02-25T18:26:58.125Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2026-02-25T18:26:58.125Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:26:58.125Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-25T18:26:58.128Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-25T18:26:58.128Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.0c8; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:26:58.128Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.128Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:26:58.128Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:26:58.128Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.128Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:26:58.129Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.130Z [DEBUG] [useDeferredValue] Messages deferred by 1 (8→9)
+2026-02-25T18:26:58.133Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.136Z [DEBUG] High write ratio: blit=0, write=1264 (100.0% writes), screen=47x80
+2026-02-25T18:26:58.140Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.164Z [DEBUG] High write ratio: blit=0, write=1299 (100.0% writes), screen=50x80
+2026-02-25T18:26:58.165Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.175Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.177Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:26:58.203Z [DEBUG] High write ratio: blit=0, write=1299 (100.0% writes), screen=50x80
+2026-02-25T18:26:58.504Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:26:58.554Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "brew install:*"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2026-02-25T18:26:58.555Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2026-02-25T18:26:58.556Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2026-02-25T18:26:58.556Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:26:58.556Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-25T18:26:58.569Z [DEBUG] High write ratio: blit=0, write=1323 (100.0% writes), screen=54x80
+2026-02-25T18:26:58.570Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-02-25T18:27:02.448Z [DEBUG] High write ratio: blit=0, write=1303 (100.0% writes), screen=50x80
+2026-02-25T18:27:02.452Z [DEBUG] Started caffeinate to prevent sleep
+2026-02-25T18:27:02.453Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:02.454Z [DEBUG] AutoUpdaterWrapper: Installation type: native
+2026-02-25T18:27:02.454Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:02.454Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:02.580Z [DEBUG] Checking for native installer update to version 2.1.56
+2026-02-25T18:27:02.580Z [DEBUG] Version 2.1.56 already installed, updating symlink
+2026-02-25T18:27:02.580Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-02-25T18:27:02.580Z [DEBUG] Successfully updated to version 2.1.56
+2026-02-25T18:27:02.581Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:04.440Z [DEBUG] [useDeferredValue] Messages deferred by 1 (9→10)
+2026-02-25T18:27:04.443Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:04.447Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:04.469Z [DEBUG] High write ratio: blit=0, write=1348 (100.0% writes), screen=51x80
+2026-02-25T18:27:05.440Z [DEBUG] [useDeferredValue] Messages deferred by 1 (10→11)
+2026-02-25T18:27:05.443Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:05.445Z [DEBUG] High write ratio: blit=0, write=1348 (100.0% writes), screen=51x80
+2026-02-25T18:27:05.452Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:05.476Z [DEBUG] High write ratio: blit=0, write=1446 (100.0% writes), screen=54x80
+2026-02-25T18:27:06.440Z [DEBUG] [useDeferredValue] Messages deferred by 1 (11→12)
+2026-02-25T18:27:06.443Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:06.446Z [DEBUG] High write ratio: blit=0, write=1446 (100.0% writes), screen=54x80
+2026-02-25T18:27:06.452Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:06.472Z [DEBUG] High write ratio: blit=0, write=1446 (100.0% writes), screen=54x80
+2026-02-25T18:27:07.442Z [DEBUG] [useDeferredValue] Messages deferred by 1 (12→13)
+2026-02-25T18:27:07.444Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:07.448Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:07.469Z [DEBUG] High write ratio: blit=0, write=1446 (100.0% writes), screen=54x80
+2026-02-25T18:27:08.442Z [DEBUG] [useDeferredValue] Messages deferred by 1 (13→14)
+2026-02-25T18:27:08.445Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:08.447Z [DEBUG] High write ratio: blit=0, write=1446 (100.0% writes), screen=54x80
+2026-02-25T18:27:08.450Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:08.478Z [DEBUG] High write ratio: blit=0, write=1661 (100.0% writes), screen=56x80
+2026-02-25T18:27:09.445Z [DEBUG] [useDeferredValue] Messages deferred by 1 (14→15)
+2026-02-25T18:27:09.447Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:09.450Z [DEBUG] High write ratio: blit=0, write=1661 (100.0% writes), screen=56x80
+2026-02-25T18:27:09.452Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:09.476Z [DEBUG] High write ratio: blit=0, write=1638 (100.0% writes), screen=56x80
+2026-02-25T18:27:10.445Z [DEBUG] [useDeferredValue] Messages deferred by 1 (15→16)
+2026-02-25T18:27:10.449Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:10.452Z [DEBUG] High write ratio: blit=0, write=1638 (100.0% writes), screen=56x80
+2026-02-25T18:27:10.460Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:10.482Z [DEBUG] High write ratio: blit=0, write=1565 (100.0% writes), screen=56x80
+2026-02-25T18:27:11.447Z [DEBUG] [useDeferredValue] Messages deferred by 1 (16→17)
+2026-02-25T18:27:11.451Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:11.454Z [DEBUG] High write ratio: blit=0, write=1565 (100.0% writes), screen=56x80
+2026-02-25T18:27:11.457Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:11.480Z [DEBUG] High write ratio: blit=0, write=1587 (100.0% writes), screen=56x80
+2026-02-25T18:27:12.453Z [DEBUG] [useDeferredValue] Messages deferred by 1 (17→18)
+2026-02-25T18:27:12.462Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:12.467Z [DEBUG] High write ratio: blit=0, write=1587 (100.0% writes), screen=56x80
+2026-02-25T18:27:12.478Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:12.499Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:27:13.453Z [DEBUG] [useDeferredValue] Messages deferred by 1 (18→19)
+2026-02-25T18:27:13.457Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:13.462Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:27:13.465Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:13.489Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:14.458Z [DEBUG] [useDeferredValue] Messages deferred by 1 (19→20)
+2026-02-25T18:27:14.467Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:14.472Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:14.480Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:14.505Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:15.462Z [DEBUG] [useDeferredValue] Messages deferred by 1 (20→21)
+2026-02-25T18:27:15.469Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:15.474Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:15.479Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:15.504Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:16.461Z [DEBUG] [useDeferredValue] Messages deferred by 1 (21→22)
+2026-02-25T18:27:16.470Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:16.478Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:16.489Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:16.512Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:17.465Z [DEBUG] [useDeferredValue] Messages deferred by 1 (22→23)
+2026-02-25T18:27:17.473Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:17.480Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:17.491Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:17.515Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:18.466Z [DEBUG] [useDeferredValue] Messages deferred by 1 (23→24)
+2026-02-25T18:27:18.474Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:18.479Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:18.487Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:18.510Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:19.470Z [DEBUG] [useDeferredValue] Messages deferred by 1 (24→25)
+2026-02-25T18:27:19.477Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:19.481Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:19.486Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:19.509Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:20.475Z [DEBUG] [useDeferredValue] Messages deferred by 1 (25→26)
+2026-02-25T18:27:20.486Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:20.492Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:20.503Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:20.526Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:21.476Z [DEBUG] [useDeferredValue] Messages deferred by 1 (26→27)
+2026-02-25T18:27:21.483Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:21.488Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:21.497Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:21.525Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:22.480Z [DEBUG] [useDeferredValue] Messages deferred by 1 (27→28)
+2026-02-25T18:27:22.489Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:22.494Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:22.502Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:22.532Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:23.483Z [DEBUG] [useDeferredValue] Messages deferred by 1 (28→29)
+2026-02-25T18:27:23.492Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:23.499Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:23.509Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:23.534Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:24.485Z [DEBUG] [useDeferredValue] Messages deferred by 1 (29→30)
+2026-02-25T18:27:24.491Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:24.496Z [DEBUG] High write ratio: blit=0, write=1644 (100.0% writes), screen=56x80
+2026-02-25T18:27:24.501Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:24.525Z [DEBUG] High write ratio: blit=0, write=1601 (100.0% writes), screen=56x80
+2026-02-25T18:27:25.489Z [DEBUG] [useDeferredValue] Messages deferred by 1 (30→31)
+2026-02-25T18:27:25.493Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:25.498Z [DEBUG] High write ratio: blit=0, write=1601 (100.0% writes), screen=56x80
+2026-02-25T18:27:25.506Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:25.529Z [DEBUG] High write ratio: blit=0, write=1601 (100.0% writes), screen=56x80
+2026-02-25T18:27:26.493Z [DEBUG] [useDeferredValue] Messages deferred by 1 (31→32)
+2026-02-25T18:27:26.501Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:26.506Z [DEBUG] High write ratio: blit=0, write=1601 (100.0% writes), screen=56x80
+2026-02-25T18:27:26.514Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:26.537Z [DEBUG] High write ratio: blit=0, write=1601 (100.0% writes), screen=56x80
+2026-02-25T18:27:27.497Z [DEBUG] [useDeferredValue] Messages deferred by 1 (32→33)
+2026-02-25T18:27:27.507Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:27.512Z [DEBUG] High write ratio: blit=0, write=1601 (100.0% writes), screen=56x80
+2026-02-25T18:27:27.521Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:27.545Z [DEBUG] High write ratio: blit=0, write=1601 (100.0% writes), screen=56x80
+2026-02-25T18:27:28.499Z [DEBUG] [useDeferredValue] Messages deferred by 1 (33→34)
+2026-02-25T18:27:28.509Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:28.515Z [DEBUG] High write ratio: blit=0, write=1601 (100.0% writes), screen=56x80
+2026-02-25T18:27:28.527Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:28.551Z [DEBUG] High write ratio: blit=0, write=1601 (100.0% writes), screen=56x80
+2026-02-25T18:27:29.499Z [DEBUG] [useDeferredValue] Messages deferred by 1 (34→35)
+2026-02-25T18:27:29.507Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:29.513Z [DEBUG] High write ratio: blit=0, write=1619 (100.0% writes), screen=56x80
+2026-02-25T18:27:29.524Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:29.547Z [DEBUG] High write ratio: blit=0, write=1619 (100.0% writes), screen=56x80
+2026-02-25T18:27:30.503Z [DEBUG] [useDeferredValue] Messages deferred by 1 (35→36)
+2026-02-25T18:27:30.513Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:30.519Z [DEBUG] High write ratio: blit=0, write=1619 (100.0% writes), screen=56x80
+2026-02-25T18:27:30.527Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:30.550Z [DEBUG] High write ratio: blit=0, write=1619 (100.0% writes), screen=56x80
+2026-02-25T18:27:31.506Z [DEBUG] [useDeferredValue] Messages deferred by 1 (36→37)
+2026-02-25T18:27:31.515Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:31.521Z [DEBUG] High write ratio: blit=0, write=1619 (100.0% writes), screen=56x80
+2026-02-25T18:27:31.531Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:31.556Z [DEBUG] High write ratio: blit=0, write=1619 (100.0% writes), screen=56x80
+2026-02-25T18:27:32.513Z [DEBUG] [useDeferredValue] Messages deferred by 1 (37→38)
+2026-02-25T18:27:32.521Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:32.525Z [DEBUG] High write ratio: blit=0, write=1619 (100.0% writes), screen=56x80
+2026-02-25T18:27:32.536Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:32.559Z [DEBUG] High write ratio: blit=0, write=1619 (100.0% writes), screen=56x80
+2026-02-25T18:27:33.513Z [DEBUG] [useDeferredValue] Messages deferred by 1 (38→39)
+2026-02-25T18:27:33.515Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:33.520Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:33.540Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:34.521Z [DEBUG] [useDeferredValue] Messages deferred by 1 (39→40)
+2026-02-25T18:27:34.526Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:34.530Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:34.535Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:34.556Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:35.521Z [DEBUG] [useDeferredValue] Messages deferred by 1 (40→41)
+2026-02-25T18:27:35.523Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:35.526Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:35.545Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:36.522Z [DEBUG] [useDeferredValue] Messages deferred by 1 (41→42)
+2026-02-25T18:27:36.524Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:36.527Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:36.548Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:37.523Z [DEBUG] [useDeferredValue] Messages deferred by 1 (42→43)
+2026-02-25T18:27:37.526Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:37.528Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:37.530Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:37.549Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:38.526Z [DEBUG] [useDeferredValue] Messages deferred by 1 (43→44)
+2026-02-25T18:27:38.528Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:38.530Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:38.533Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:38.551Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:39.528Z [DEBUG] [useDeferredValue] Messages deferred by 1 (44→45)
+2026-02-25T18:27:39.530Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:39.532Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:39.534Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:39.556Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:40.528Z [DEBUG] [useDeferredValue] Messages deferred by 1 (45→46)
+2026-02-25T18:27:40.531Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:40.534Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:40.556Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:41.529Z [DEBUG] [useDeferredValue] Messages deferred by 1 (46→47)
+2026-02-25T18:27:41.532Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:41.535Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:41.541Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:41.565Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:42.532Z [DEBUG] [useDeferredValue] Messages deferred by 1 (47→48)
+2026-02-25T18:27:42.534Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:42.537Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:42.539Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:42.569Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:43.535Z [DEBUG] [useDeferredValue] Messages deferred by 1 (48→49)
+2026-02-25T18:27:43.538Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:43.542Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:43.548Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:43.577Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:44.536Z [DEBUG] [useDeferredValue] Messages deferred by 1 (49→50)
+2026-02-25T18:27:44.539Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:44.542Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:44.545Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:44.569Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:45.540Z [DEBUG] [useDeferredValue] Messages deferred by 1 (50→51)
+2026-02-25T18:27:45.546Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:45.559Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:45.610Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:46.541Z [DEBUG] [useDeferredValue] Messages deferred by 1 (51→52)
+2026-02-25T18:27:46.547Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:46.553Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:46.564Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:46.607Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:47.542Z [DEBUG] [useDeferredValue] Messages deferred by 1 (52→53)
+2026-02-25T18:27:47.544Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:47.548Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:47.575Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:48.544Z [DEBUG] [useDeferredValue] Messages deferred by 1 (53→54)
+2026-02-25T18:27:48.547Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:48.550Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:48.553Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:48.571Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:49.547Z [DEBUG] [useDeferredValue] Messages deferred by 1 (54→55)
+2026-02-25T18:27:49.553Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:49.559Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:49.570Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:49.590Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:50.564Z [DEBUG] [useDeferredValue] Messages deferred by 1 (55→56)
+2026-02-25T18:27:50.573Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:50.582Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:50.596Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:50.622Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:51.551Z [DEBUG] [useDeferredValue] Messages deferred by 1 (56→57)
+2026-02-25T18:27:51.554Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:51.556Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:51.564Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:51.592Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:52.552Z [DEBUG] [useDeferredValue] Messages deferred by 1 (57→58)
+2026-02-25T18:27:52.554Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:52.556Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:52.561Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:52.582Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:53.553Z [DEBUG] [useDeferredValue] Messages deferred by 1 (58→59)
+2026-02-25T18:27:53.558Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:53.563Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:53.577Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:53.600Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:54.559Z [DEBUG] [useDeferredValue] Messages deferred by 1 (59→60)
+2026-02-25T18:27:54.563Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:54.566Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:54.569Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:54.591Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:55.565Z [DEBUG] [useDeferredValue] Messages deferred by 1 (60→61)
+2026-02-25T18:27:55.572Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:55.574Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:55.579Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:55.612Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:56.566Z [DEBUG] [useDeferredValue] Messages deferred by 1 (61→62)
+2026-02-25T18:27:56.568Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:56.570Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:56.573Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:56.598Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:57.570Z [DEBUG] [useDeferredValue] Messages deferred by 1 (62→63)
+2026-02-25T18:27:57.575Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:57.577Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:57.580Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:57.600Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:58.571Z [DEBUG] [useDeferredValue] Messages deferred by 1 (63→64)
+2026-02-25T18:27:58.573Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:58.576Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:58.598Z [DEBUG] High write ratio: blit=0, write=1628 (100.0% writes), screen=56x80
+2026-02-25T18:27:59.573Z [DEBUG] [useDeferredValue] Messages deferred by 1 (64→65)
+2026-02-25T18:27:59.576Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:59.578Z [DEBUG] High write ratio: blit=0, write=1630 (100.0% writes), screen=56x80
+2026-02-25T18:27:59.580Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:27:59.600Z [DEBUG] High write ratio: blit=0, write=1630 (100.0% writes), screen=56x80
+2026-02-25T18:28:00.576Z [DEBUG] [useDeferredValue] Messages deferred by 1 (65→66)
+2026-02-25T18:28:00.579Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:00.581Z [DEBUG] High write ratio: blit=0, write=1630 (100.0% writes), screen=56x80
+2026-02-25T18:28:00.599Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:00.610Z [DEBUG] High write ratio: blit=0, write=1630 (100.0% writes), screen=56x80
+2026-02-25T18:28:01.580Z [DEBUG] [useDeferredValue] Messages deferred by 1 (66→67)
+2026-02-25T18:28:01.583Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:01.587Z [DEBUG] High write ratio: blit=0, write=1630 (100.0% writes), screen=56x80
+2026-02-25T18:28:01.591Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:01.615Z [DEBUG] High write ratio: blit=0, write=1630 (100.0% writes), screen=56x80
+2026-02-25T18:28:02.582Z [DEBUG] [useDeferredValue] Messages deferred by 1 (67→68)
+2026-02-25T18:28:02.585Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:02.589Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:02.614Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:03.585Z [DEBUG] [useDeferredValue] Messages deferred by 1 (68→69)
+2026-02-25T18:28:03.592Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:03.600Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:03.635Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:03.637Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:04.589Z [DEBUG] [useDeferredValue] Messages deferred by 1 (69→70)
+2026-02-25T18:28:04.592Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:04.598Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:04.602Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:04.620Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:05.587Z [DEBUG] [useDeferredValue] Messages deferred by 1 (70→71)
+2026-02-25T18:28:05.589Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:05.592Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:05.614Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:06.588Z [DEBUG] [useDeferredValue] Messages deferred by 1 (71→72)
+2026-02-25T18:28:06.591Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:06.595Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:06.598Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:06.623Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:07.604Z [DEBUG] [useDeferredValue] Messages deferred by 1 (72→73)
+2026-02-25T18:28:07.629Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:07.650Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:07.655Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:08.603Z [DEBUG] [useDeferredValue] Messages deferred by 1 (73→74)
+2026-02-25T18:28:08.606Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:08.608Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:08.613Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:08.627Z [DEBUG] High write ratio: blit=0, write=1632 (100.0% writes), screen=56x80
+2026-02-25T18:28:09.604Z [DEBUG] [useDeferredValue] Messages deferred by 1 (74→75)
+2026-02-25T18:28:09.610Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:09.615Z [DEBUG] High write ratio: blit=0, write=1633 (100.0% writes), screen=56x80
+2026-02-25T18:28:09.635Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:09.642Z [DEBUG] High write ratio: blit=0, write=1633 (100.0% writes), screen=56x80
+2026-02-25T18:28:10.605Z [DEBUG] [useDeferredValue] Messages deferred by 1 (75→76)
+2026-02-25T18:28:10.607Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:10.610Z [DEBUG] High write ratio: blit=0, write=1633 (100.0% writes), screen=56x80
+2026-02-25T18:28:10.614Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:10.636Z [DEBUG] High write ratio: blit=0, write=1633 (100.0% writes), screen=56x80
+2026-02-25T18:28:11.607Z [DEBUG] [useDeferredValue] Messages deferred by 1 (76→77)
+2026-02-25T18:28:11.611Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:11.615Z [DEBUG] High write ratio: blit=0, write=1633 (100.0% writes), screen=56x80
+2026-02-25T18:28:11.623Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:11.646Z [DEBUG] High write ratio: blit=0, write=1633 (100.0% writes), screen=56x80
+2026-02-25T18:28:12.611Z [DEBUG] [useDeferredValue] Messages deferred by 1 (77→78)
+2026-02-25T18:28:12.615Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:12.618Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:12.636Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:13.614Z [DEBUG] [useDeferredValue] Messages deferred by 1 (78→79)
+2026-02-25T18:28:13.622Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:13.626Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:13.649Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:13.653Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:14.620Z [DEBUG] [useDeferredValue] Messages deferred by 1 (79→80)
+2026-02-25T18:28:14.625Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:14.629Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:14.681Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:14.708Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:15.625Z [DEBUG] [useDeferredValue] Messages deferred by 1 (80→81)
+2026-02-25T18:28:15.627Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:15.629Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:15.658Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:15.661Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:16.634Z [DEBUG] [useDeferredValue] Messages deferred by 1 (81→82)
+2026-02-25T18:28:16.636Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:16.657Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:16.673Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:16.700Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:17.635Z [DEBUG] [useDeferredValue] Messages deferred by 1 (82→83)
+2026-02-25T18:28:17.639Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:17.642Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:17.670Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:17.676Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:18.633Z [DEBUG] [useDeferredValue] Messages deferred by 1 (83→84)
+2026-02-25T18:28:18.636Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:18.639Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:18.641Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:18.660Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:19.635Z [DEBUG] [useDeferredValue] Messages deferred by 1 (84→85)
+2026-02-25T18:28:19.637Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:19.640Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:19.642Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:19.660Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:20.636Z [DEBUG] [useDeferredValue] Messages deferred by 1 (85→86)
+2026-02-25T18:28:20.638Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:20.641Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:20.643Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:20.664Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:21.637Z [DEBUG] [useDeferredValue] Messages deferred by 1 (86→87)
+2026-02-25T18:28:21.641Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:21.651Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:21.673Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:22.637Z [DEBUG] [useDeferredValue] Messages deferred by 1 (87→88)
+2026-02-25T18:28:22.639Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:22.641Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:22.646Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:22.666Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:23.639Z [DEBUG] [useDeferredValue] Messages deferred by 1 (88→89)
+2026-02-25T18:28:23.641Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:23.644Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:23.648Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:23.672Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:24.639Z [DEBUG] [useDeferredValue] Messages deferred by 1 (89→90)
+2026-02-25T18:28:24.641Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:24.643Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:24.655Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:24.682Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:25.641Z [DEBUG] [useDeferredValue] Messages deferred by 1 (90→91)
+2026-02-25T18:28:25.643Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:25.646Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:25.664Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:26.647Z [DEBUG] [useDeferredValue] Messages deferred by 1 (91→92)
+2026-02-25T18:28:26.650Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:26.653Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:26.656Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:26.691Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:27.647Z [DEBUG] [useDeferredValue] Messages deferred by 1 (92→93)
+2026-02-25T18:28:27.652Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:27.657Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:27.669Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:27.703Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:28.649Z [DEBUG] [useDeferredValue] Messages deferred by 1 (93→94)
+2026-02-25T18:28:28.651Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:28.655Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:28.680Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:29.651Z [DEBUG] [useDeferredValue] Messages deferred by 1 (94→95)
+2026-02-25T18:28:29.655Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:29.660Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:29.662Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:29.685Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:30.651Z [DEBUG] [useDeferredValue] Messages deferred by 1 (95→96)
+2026-02-25T18:28:30.655Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:30.667Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:30.697Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:31.652Z [DEBUG] [useDeferredValue] Messages deferred by 1 (96→97)
+2026-02-25T18:28:31.654Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:31.657Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:31.678Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:32.657Z [DEBUG] [useDeferredValue] Messages deferred by 1 (97→98)
+2026-02-25T18:28:32.659Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:32.662Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:32.695Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:32.716Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:33.660Z [DEBUG] [useDeferredValue] Messages deferred by 1 (98→99)
+2026-02-25T18:28:33.665Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:33.673Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:33.702Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:33.720Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:34.663Z [DEBUG] [useDeferredValue] Messages deferred by 1 (99→100)
+2026-02-25T18:28:34.666Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:34.669Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:34.675Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:34.709Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:35.672Z [DEBUG] [useDeferredValue] Messages deferred by 1 (100→101)
+2026-02-25T18:28:35.678Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:35.681Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:35.688Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:35.717Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:36.678Z [DEBUG] [useDeferredValue] Messages deferred by 1 (101→102)
+2026-02-25T18:28:36.681Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:36.684Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:36.687Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:36.714Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:37.679Z [DEBUG] [useDeferredValue] Messages deferred by 1 (102→103)
+2026-02-25T18:28:37.681Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:37.683Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:37.685Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:37.707Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:38.681Z [DEBUG] [useDeferredValue] Messages deferred by 1 (103→104)
+2026-02-25T18:28:38.683Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:38.687Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:38.696Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:38.718Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:39.682Z [DEBUG] [useDeferredValue] Messages deferred by 1 (104→105)
+2026-02-25T18:28:39.684Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:39.687Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:39.689Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:39.711Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:40.684Z [DEBUG] [useDeferredValue] Messages deferred by 1 (105→106)
+2026-02-25T18:28:40.686Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:40.688Z [DEBUG] High write ratio: blit=0, write=1634 (100.0% writes), screen=56x80
+2026-02-25T18:28:40.691Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:40.711Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:28:41.686Z [DEBUG] [useDeferredValue] Messages deferred by 1 (106→107)
+2026-02-25T18:28:41.688Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:41.690Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:28:41.692Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:41.713Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:28:42.688Z [DEBUG] [useDeferredValue] Messages deferred by 1 (107→108)
+2026-02-25T18:28:42.690Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:42.693Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:28:42.699Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:42.731Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:28:43.688Z [DEBUG] [useDeferredValue] Messages deferred by 1 (108→109)
+2026-02-25T18:28:43.690Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:43.693Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:28:43.697Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:43.718Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:28:44.691Z [DEBUG] [useDeferredValue] Messages deferred by 1 (109→110)
+2026-02-25T18:28:44.694Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:44.696Z [DEBUG] High write ratio: blit=0, write=1588 (100.0% writes), screen=56x80
+2026-02-25T18:28:44.698Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:44.717Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:45.698Z [DEBUG] [useDeferredValue] Messages deferred by 1 (110→111)
+2026-02-25T18:28:45.702Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:45.705Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:45.709Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:45.733Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:46.697Z [DEBUG] [useDeferredValue] Messages deferred by 1 (111→112)
+2026-02-25T18:28:46.699Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:46.708Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:46.761Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:47.699Z [DEBUG] [useDeferredValue] Messages deferred by 1 (112→113)
+2026-02-25T18:28:47.702Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:47.705Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:47.708Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:47.734Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:48.702Z [DEBUG] [useDeferredValue] Messages deferred by 1 (113→114)
+2026-02-25T18:28:48.705Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:48.709Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:48.716Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:48.740Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:49.703Z [DEBUG] [useDeferredValue] Messages deferred by 1 (114→115)
+2026-02-25T18:28:49.706Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:49.709Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:49.716Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:49.739Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:50.704Z [DEBUG] [useDeferredValue] Messages deferred by 1 (115→116)
+2026-02-25T18:28:50.707Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:50.709Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:50.712Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:50.735Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:51.706Z [DEBUG] [useDeferredValue] Messages deferred by 1 (116→117)
+2026-02-25T18:28:51.709Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:51.712Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:51.731Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:52.710Z [DEBUG] [useDeferredValue] Messages deferred by 1 (117→118)
+2026-02-25T18:28:52.713Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:52.718Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:52.725Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:52.749Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:53.716Z [DEBUG] [useDeferredValue] Messages deferred by 1 (118→119)
+2026-02-25T18:28:53.725Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:53.730Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:53.735Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:53.760Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:54.717Z [DEBUG] [useDeferredValue] Messages deferred by 1 (119→120)
+2026-02-25T18:28:54.726Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:54.737Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:54.762Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:55.715Z [DEBUG] [useDeferredValue] Messages deferred by 1 (120→121)
+2026-02-25T18:28:55.719Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:55.723Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:55.731Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:55.753Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:56.778Z [DEBUG] [useDeferredValue] Messages deferred by 1 (121→122)
+2026-02-25T18:28:56.784Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:56.790Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:56.802Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:56.841Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:57.750Z [DEBUG] [useDeferredValue] Messages deferred by 1 (122→123)
+2026-02-25T18:28:57.773Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:57.828Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:57.885Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:57.889Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:28:58.755Z [DEBUG] [useDeferredValue] Messages deferred by 1 (123→124)
+2026-02-25T18:28:58.760Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:58.765Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:28:58.816Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:58.824Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:28:59.771Z [DEBUG] [useDeferredValue] Messages deferred by 1 (124→125)
+2026-02-25T18:28:59.796Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:59.816Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:28:59.846Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:00.778Z [DEBUG] [useDeferredValue] Messages deferred by 1 (125→126)
+2026-02-25T18:29:00.781Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:00.789Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:00.793Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:00.817Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:01.784Z [DEBUG] [useDeferredValue] Messages deferred by 1 (126→127)
+2026-02-25T18:29:01.796Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:01.805Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:01.817Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:01.847Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:02.784Z [DEBUG] [useDeferredValue] Messages deferred by 1 (127→128)
+2026-02-25T18:29:02.788Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:02.806Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:02.812Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:03.790Z [DEBUG] [useDeferredValue] Messages deferred by 1 (128→129)
+2026-02-25T18:29:03.795Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:03.802Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:03.816Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:03.828Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:04.796Z [DEBUG] [useDeferredValue] Messages deferred by 1 (129→130)
+2026-02-25T18:29:04.802Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:04.808Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:04.815Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:05.022Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:05.807Z [DEBUG] [useDeferredValue] Messages deferred by 1 (130→131)
+2026-02-25T18:29:05.875Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:05.900Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:06.261Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:06.271Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:06.818Z [DEBUG] [useDeferredValue] Messages deferred by 1 (131→132)
+2026-02-25T18:29:06.825Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:06.932Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:07.045Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:07.053Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:07.827Z [DEBUG] [useDeferredValue] Messages deferred by 1 (132→133)
+2026-02-25T18:29:07.847Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:07.869Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:07.893Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:07.919Z [DEBUG] High write ratio: blit=0, write=1589 (100.0% writes), screen=56x80
+2026-02-25T18:29:08.891Z [DEBUG] [useDeferredValue] Messages deferred by 1 (133→134)
+2026-02-25T18:29:08.896Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:08.902Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:08.910Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:08.947Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:09.562Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:10.208Z [DEBUG] [useDeferredValue] Messages deferred by 1 (134→135)
+2026-02-25T18:29:10.297Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:10.381Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:10.760Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:10.766Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:11.019Z [DEBUG] [useDeferredValue] Messages deferred by 1 (135→136)
+2026-02-25T18:29:11.054Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:11.110Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:11.715Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:11.902Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:12.035Z [DEBUG] [useDeferredValue] Messages deferred by 1 (136→137)
+2026-02-25T18:29:12.157Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:12.169Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:12.378Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:12.383Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:13.029Z [DEBUG] [useDeferredValue] Messages deferred by 1 (137→138)
+2026-02-25T18:29:13.037Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:13.126Z [DEBUG] High write ratio: blit=0, write=1590 (100.0% writes), screen=56x80
+2026-02-25T18:29:13.157Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:13.227Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:14.041Z [DEBUG] [useDeferredValue] Messages deferred by 1 (138→139)
+2026-02-25T18:29:14.047Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:14.053Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:14.173Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:14.179Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:15.078Z [DEBUG] [useDeferredValue] Messages deferred by 1 (139→140)
+2026-02-25T18:29:15.156Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:15.188Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:15.461Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:15.599Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:16.216Z [DEBUG] [useDeferredValue] Messages deferred by 1 (140→141)
+2026-02-25T18:29:16.270Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:16.275Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:16.331Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:16.352Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:17.205Z [DEBUG] [useDeferredValue] Messages deferred by 1 (141→142)
+2026-02-25T18:29:17.209Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:17.332Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:17.385Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:17.439Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:18.268Z [DEBUG] [useDeferredValue] Messages deferred by 1 (142→143)
+2026-02-25T18:29:18.276Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:18.418Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:18.660Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:18.674Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:19.255Z [DEBUG] [useDeferredValue] Messages deferred by 1 (143→144)
+2026-02-25T18:29:19.303Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:19.337Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:19.400Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:19.424Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:20.277Z [DEBUG] [useDeferredValue] Messages deferred by 1 (144→145)
+2026-02-25T18:29:20.308Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:20.315Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:20.351Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:20.566Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:20.629Z [DEBUG] Slow render: 61.3ms, screen: 56x80, damage: 80x56 at (0,0), changes: 17
+2026-02-25T18:29:21.304Z [DEBUG] [useDeferredValue] Messages deferred by 1 (145→146)
+2026-02-25T18:29:21.426Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:21.434Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:21.450Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:21.608Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:22.308Z [DEBUG] [useDeferredValue] Messages deferred by 1 (146→147)
+2026-02-25T18:29:22.316Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:22.324Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:22.331Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:22.559Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:23.304Z [DEBUG] [useDeferredValue] Messages deferred by 1 (147→148)
+2026-02-25T18:29:23.313Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:23.337Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:23.393Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:23.568Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:24.544Z [DEBUG] [useDeferredValue] Messages deferred by 1 (148→149)
+2026-02-25T18:29:24.574Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:24.626Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:24.991Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:24.997Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:25.465Z [DEBUG] [useDeferredValue] Messages deferred by 1 (149→150)
+2026-02-25T18:29:25.518Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:25.531Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:25.664Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:25.823Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:26.469Z [DEBUG] [useDeferredValue] Messages deferred by 1 (150→151)
+2026-02-25T18:29:26.475Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:26.517Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:26.774Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:27.022Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:27.612Z [DEBUG] [useDeferredValue] Messages deferred by 1 (151→152)
+2026-02-25T18:29:27.621Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:27.632Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:27.647Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:27.789Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:28.544Z [DEBUG] [useDeferredValue] Messages deferred by 1 (152→153)
+2026-02-25T18:29:28.553Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:28.563Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:28.764Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:28.784Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:29.535Z [DEBUG] [useDeferredValue] Messages deferred by 1 (153→154)
+2026-02-25T18:29:29.540Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:29.596Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:29.656Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:29.661Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:30.536Z [DEBUG] [useDeferredValue] Messages deferred by 1 (154→155)
+2026-02-25T18:29:30.542Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:30.615Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:30.628Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:30.676Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:31.542Z [DEBUG] [useDeferredValue] Messages deferred by 1 (155→156)
+2026-02-25T18:29:31.549Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:31.555Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:31.633Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:31.641Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:32.549Z [DEBUG] [useDeferredValue] Messages deferred by 1 (156→157)
+2026-02-25T18:29:32.557Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:32.571Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:32.641Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:32.648Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:33.558Z [DEBUG] [useDeferredValue] Messages deferred by 1 (157→158)
+2026-02-25T18:29:33.565Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:33.570Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:33.774Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:33.985Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:34.558Z [DEBUG] [useDeferredValue] Messages deferred by 1 (158→159)
+2026-02-25T18:29:34.565Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:34.573Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:34.584Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:34.746Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:35.571Z [DEBUG] [useDeferredValue] Messages deferred by 1 (159→160)
+2026-02-25T18:29:35.579Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:35.626Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:35.777Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:35.890Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:36.564Z [DEBUG] [useDeferredValue] Messages deferred by 1 (160→161)
+2026-02-25T18:29:36.568Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:36.619Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:36.745Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:36.751Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:37.572Z [DEBUG] [useDeferredValue] Messages deferred by 1 (161→162)
+2026-02-25T18:29:37.609Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:37.733Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:37.746Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:37.752Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:38.574Z [DEBUG] [useDeferredValue] Messages deferred by 1 (162→163)
+2026-02-25T18:29:38.584Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:38.663Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:38.695Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:38.731Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:39.575Z [DEBUG] [useDeferredValue] Messages deferred by 1 (163→164)
+2026-02-25T18:29:39.584Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:39.657Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:39.665Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:39.684Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:40.577Z [DEBUG] [useDeferredValue] Messages deferred by 1 (164→165)
+2026-02-25T18:29:40.586Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:40.594Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:40.628Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:40.634Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:41.577Z [DEBUG] [useDeferredValue] Messages deferred by 1 (165→166)
+2026-02-25T18:29:41.583Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:41.612Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:41.620Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:41.663Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:42.624Z [DEBUG] [useDeferredValue] Messages deferred by 1 (166→167)
+2026-02-25T18:29:42.629Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:42.636Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:42.644Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:42.686Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:43.602Z [DEBUG] [useDeferredValue] Messages deferred by 1 (167→168)
+2026-02-25T18:29:43.618Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:43.627Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:43.667Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:43.749Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:44.598Z [DEBUG] [useDeferredValue] Messages deferred by 1 (168→169)
+2026-02-25T18:29:44.603Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:44.610Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:44.639Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:45.610Z [DEBUG] [useDeferredValue] Messages deferred by 1 (169→170)
+2026-02-25T18:29:45.616Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:45.628Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:45.719Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:45.785Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:46.602Z [DEBUG] [useDeferredValue] Messages deferred by 1 (170→171)
+2026-02-25T18:29:46.608Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:46.628Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:46.660Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:46.687Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:47.076Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:47.602Z [DEBUG] [useDeferredValue] Messages deferred by 1 (171→172)
+2026-02-25T18:29:47.605Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:47.610Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:47.619Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:47.644Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:48.605Z [DEBUG] [useDeferredValue] Messages deferred by 1 (172→173)
+2026-02-25T18:29:48.609Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:48.614Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:48.617Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:48.639Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:49.605Z [DEBUG] [useDeferredValue] Messages deferred by 1 (173→174)
+2026-02-25T18:29:49.609Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:49.612Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:49.615Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:49.639Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:50.606Z [DEBUG] [useDeferredValue] Messages deferred by 1 (174→175)
+2026-02-25T18:29:50.612Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:50.618Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:50.641Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:51.607Z [DEBUG] [useDeferredValue] Messages deferred by 1 (175→176)
+2026-02-25T18:29:51.609Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:51.612Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:51.614Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:51.619Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:51.642Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:52.608Z [DEBUG] [useDeferredValue] Messages deferred by 1 (176→177)
+2026-02-25T18:29:52.611Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:52.614Z [DEBUG] High write ratio: blit=0, write=1591 (100.0% writes), screen=56x80
+2026-02-25T18:29:52.620Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:52.642Z [DEBUG] High write ratio: blit=0, write=1638 (100.0% writes), screen=56x80
+2026-02-25T18:29:53.612Z [DEBUG] [useDeferredValue] Messages deferred by 1 (177→178)
+2026-02-25T18:29:53.615Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:53.618Z [DEBUG] High write ratio: blit=0, write=1638 (100.0% writes), screen=56x80
+2026-02-25T18:29:53.626Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:53.650Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:54.612Z [DEBUG] [useDeferredValue] Messages deferred by 1 (178→179)
+2026-02-25T18:29:54.614Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:54.618Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:54.640Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:55.614Z [DEBUG] [useDeferredValue] Messages deferred by 1 (179→180)
+2026-02-25T18:29:55.616Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:55.619Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:55.621Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:55.643Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:56.615Z [DEBUG] [useDeferredValue] Messages deferred by 1 (180→181)
+2026-02-25T18:29:56.617Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:56.620Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:56.622Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:56.644Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:57.616Z [DEBUG] [useDeferredValue] Messages deferred by 1 (181→182)
+2026-02-25T18:29:57.618Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:57.621Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:57.623Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:57.645Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:58.616Z [DEBUG] [useDeferredValue] Messages deferred by 1 (182→183)
+2026-02-25T18:29:58.618Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:58.621Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:58.623Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:58.648Z [DEBUG] High write ratio: blit=0, write=1534 (100.0% writes), screen=56x80
+2026-02-25T18:29:59.617Z [DEBUG] [useDeferredValue] Messages deferred by 1 (183→184)
+2026-02-25T18:29:59.619Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:59.622Z [DEBUG] High write ratio: blit=0, write=1533 (100.0% writes), screen=56x80
+2026-02-25T18:29:59.623Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:29:59.645Z [DEBUG] High write ratio: blit=0, write=1533 (100.0% writes), screen=56x80
+2026-02-25T18:30:00.619Z [DEBUG] [useDeferredValue] Messages deferred by 1 (184→185)
+2026-02-25T18:30:00.621Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.624Z [DEBUG] High write ratio: blit=0, write=1533 (100.0% writes), screen=56x80
+2026-02-25T18:30:00.626Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.647Z [DEBUG] High write ratio: blit=0, write=1533 (100.0% writes), screen=56x80
+2026-02-25T18:30:00.935Z [DEBUG] Tool search disabled for model 'claude-haiku-4-5-20251001': model does not support tool_reference blocks. This feature is only available on Claude Sonnet 4+, Opus 4+, and newer models.
+2026-02-25T18:30:00.938Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.0c8; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:30:00.939Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.939Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:30:00.939Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:30:00.939Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.939Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:30:00.939Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.944Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.946Z [DEBUG] High write ratio: blit=0, write=1506 (100.0% writes), screen=55x80
+2026-02-25T18:30:00.947Z [DEBUG] Persisted tool result to /Users/yahelraviv/.claude/projects/-Users-yahelraviv/ddb5731a-b61c-42f7-9c26-96f73fa3d260/tool-results/toolu_01FrYxrFeuk6RHJazQLmSqCx.txt (33.1KB)
+2026-02-25T18:30:00.948Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2026-02-25T18:30:00.948Z [DEBUG] Found 5 hook matchers in settings
+2026-02-25T18:30:00.949Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-02-25T18:30:00.950Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-02-25T18:30:00.950Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-02-25T18:30:00.950Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-02-25T18:30:00.950Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-02-25T18:30:00.950Z [DEBUG] autocompact: tokens=19992 threshold=167000 effectiveWindow=180000
+2026-02-25T18:30:00.950Z [DEBUG] Auto tool search disabled: 0 tokens (threshold: 20000, 10% of context) [source: query]
+2026-02-25T18:30:00.953Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772044200953
+2026-02-25T18:30:00.953Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:30:00.953Z [DEBUG] Temp file written successfully, size: 8913 bytes
+2026-02-25T18:30:00.953Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:30:00.953Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772044200953 to /Users/yahelraviv/.claude.json
+2026-02-25T18:30:00.953Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:30:00.954Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.c31; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:30:00.954Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.954Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:30:00.954Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:30:00.954Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.954Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:30:00.954Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.955Z [DEBUG] [useDeferredValue] Messages deferred by 1 (185→186)
+2026-02-25T18:30:00.958Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.968Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:00.990Z [DEBUG] High write ratio: blit=0, write=1522 (100.0% writes), screen=54x80
+2026-02-25T18:30:02.129Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:30:02.136Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:02.691Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:30:04.340Z [DEBUG] [useDeferredValue] Messages deferred by 1 (186→187)
+2026-02-25T18:30:04.344Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:04.362Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2026-02-25T18:30:04.362Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:30:04.362Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-02-25T18:30:04.362Z [DEBUG] autocompact: tokens=20758 threshold=167000 effectiveWindow=180000
+2026-02-25T18:30:04.364Z [DEBUG] Auto tool search disabled: 0 tokens (threshold: 20000, 10% of context) [source: query]
+2026-02-25T18:30:04.368Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772044204368
+2026-02-25T18:30:04.368Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:30:04.369Z [DEBUG] Temp file written successfully, size: 8913 bytes
+2026-02-25T18:30:04.369Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:30:04.369Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772044204368 to /Users/yahelraviv/.claude.json
+2026-02-25T18:30:04.369Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:30:04.371Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772044204371
+2026-02-25T18:30:04.371Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:30:04.371Z [DEBUG] Temp file written successfully, size: 8913 bytes
+2026-02-25T18:30:04.371Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:30:04.371Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772044204371 to /Users/yahelraviv/.claude.json
+2026-02-25T18:30:04.371Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:30:04.372Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.42.c31; cc_entrypoint=cli; cch=00000;
+2026-02-25T18:30:04.372Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:04.372Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-02-25T18:30:04.372Z [DEBUG] [API:auth] OAuth token check starting
+2026-02-25T18:30:04.373Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.36451.1772044204373
+2026-02-25T18:30:04.373Z [DEBUG] Preserving file permissions: 100600
+2026-02-25T18:30:04.373Z [DEBUG] Temp file written successfully, size: 8913 bytes
+2026-02-25T18:30:04.373Z [DEBUG] Applied original permissions to temp file
+2026-02-25T18:30:04.373Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.36451.1772044204373 to /Users/yahelraviv/.claude.json
+2026-02-25T18:30:04.373Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-02-25T18:30:04.373Z [DEBUG] [API:auth] OAuth token check complete
+2026-02-25T18:30:04.374Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:04.374Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:04.376Z [DEBUG] [useDeferredValue] Messages deferred by 2 (186→188)
+2026-02-25T18:30:04.378Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:04.381Z [DEBUG] High write ratio: blit=0, write=1403 (100.0% writes), screen=50x80
+2026-02-25T18:30:04.381Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-02-25T18:30:04.398Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:04.401Z [DEBUG] High write ratio: blit=0, write=1722 (100.0% writes), screen=61x80
+2026-02-25T18:30:04.401Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:06.166Z [DEBUG] Stream started - received first chunk
+2026-02-25T18:30:06.275Z [DEBUG] Forked agent [prompt_suggestion] received message: type=assistant
+2026-02-25T18:30:06.306Z [DEBUG] Getting matching hook commands for SubagentStop with query:
+2026-02-25T18:30:06.306Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:30:06.306Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-02-25T18:30:06.306Z [DEBUG] Forked agent [prompt_suggestion] finished: 1 messages, types=[assistant], totalUsage: input=3 output=6 cacheRead=20405 cacheCreate=367
+2026-02-25T18:30:06.307Z [DEBUG] [Speculation] enabled=false
+2026-02-25T18:30:06.314Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:30:06.325Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T18:31:04.398Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2026-02-25T18:31:04.398Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T18:31:04.398Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)
+2026-02-25T19:08:02.266Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T19:08:02.523Z [ERROR] Error: Error: Failed to fetch version from https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/latest: ECONNREFUSED
+    at BN8 (/$bunfs/root/claude:3481:2077)
+    at processTicksAndRejections (native:7:39)
+2026-02-25T19:08:02.524Z [ERROR] Error: Error: Failed to fetch version from https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/latest: ECONNREFUSED
+    at BN8 (/$bunfs/root/claude:3481:2077)
+    at processTicksAndRejections (native:7:39)
+2026-02-25T19:08:02.538Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T19:08:07.091Z [ERROR] Error: Error: 1P event logging: 3 events failed to export (code=ECONNREFUSED, ECONNREFUSED)
+    at queueFailedEvents (/$bunfs/root/claude:2110:2350)
+    at async doExport (/$bunfs/root/claude:2110:1257)
+    at processTicksAndRejections (native:7:39)
+2026-02-25T19:08:07.092Z [ERROR] Error: Error: {"message":"Failed to export 3 events (code=ECONNREFUSED, ECONNREFUSED)","originalLine":"2110","originalColumn":"1409","line":"2110","column":"1409","sourceURL":"/$bunfs/root/claude","stack":"Error: Failed to export 3 events (code=ECONNREFUSED, ECONNREFUSED)\n    at doExport (/$bunfs/root/claude:2110:1409)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+    at error (/$bunfs/root/claude:2153:25028)
+    at <anonymous> (/$bunfs/root/claude:2105:20180)
+    at cd7 (/$bunfs/root/claude:2105:20724)
+    at <anonymous> (/$bunfs/root/claude:2106:17366)
+    at processTicksAndRejections (native:7:39)
+2026-02-25T19:38:01.787Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T19:38:01.906Z [DEBUG] Checking for native installer update to version 2.1.56
+2026-02-25T19:38:01.911Z [DEBUG] Version 2.1.56 already installed, updating symlink
+2026-02-25T19:38:01.912Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-02-25T19:38:01.912Z [DEBUG] Successfully updated to version 2.1.56
+2026-02-25T19:38:01.931Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T20:08:01.764Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T20:08:01.868Z [DEBUG] Checking for native installer update to version 2.1.58
+2026-02-25T20:08:01.877Z [DEBUG] Downloading native installer version 2.1.58
+2026-02-25T20:08:09.225Z [DEBUG] Atomically installed binary to /Users/yahelraviv/.local/share/claude/versions/2.1.58
+2026-02-25T20:08:09.230Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-02-25T20:08:09.231Z [DEBUG] Atomically updated symlink /Users/yahelraviv/.local/bin/claude -> /Users/yahelraviv/.local/share/claude/versions/2.1.58
+2026-02-25T20:08:09.231Z [DEBUG] Successfully updated to version 2.1.58
+2026-02-25T20:08:09.240Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T20:08:09.252Z [DEBUG] Acquired PID lock for 2.1.41 (PID 36451)
+2026-02-25T20:08:09.269Z [DEBUG] Released PID lock for 2.1.41
+2026-02-25T20:38:01.766Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T20:38:01.871Z [DEBUG] Checking for native installer update to version 2.1.58
+2026-02-25T20:38:01.875Z [DEBUG] Version 2.1.58 already installed, updating symlink
+2026-02-25T20:38:01.876Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-02-25T20:38:01.876Z [DEBUG] Successfully updated to version 2.1.58
+2026-02-25T20:38:01.881Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T21:08:01.771Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T21:08:01.885Z [DEBUG] Checking for native installer update to version 2.1.58
+2026-02-25T21:08:01.889Z [DEBUG] Version 2.1.58 already installed, updating symlink
+2026-02-25T21:08:01.889Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-02-25T21:08:01.889Z [DEBUG] Successfully updated to version 2.1.58
+2026-02-25T21:08:01.897Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T21:38:01.913Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T21:38:02.041Z [DEBUG] Checking for native installer update to version 2.1.58
+2026-02-25T21:38:02.045Z [DEBUG] Version 2.1.58 already installed, updating symlink
+2026-02-25T21:38:02.045Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-02-25T21:38:02.046Z [DEBUG] Successfully updated to version 2.1.58
+2026-02-25T21:38:02.053Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-02-25T21:50:22.783Z [DEBUG] Getting matching hook commands for SessionEnd with query: other
+2026-02-25T21:50:22.783Z [DEBUG] Found 0 hook matchers in settings
+2026-02-25T21:50:22.783Z [DEBUG] Matched 0 unique hooks for query "other" (0 before deduplication)

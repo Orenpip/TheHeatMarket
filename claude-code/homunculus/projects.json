@@ -1,0 +1,26 @@
+{
+  "984f050a8592": {
+    "name": "compass",
+    "root": "/Users/yahelraviv/compass",
+    "remote": "https://github.com/manthatwalks/compass.git",
+    "last_seen": "2026-03-16T17:50:43.779026Z"
+  },
+  "b200a432e581": {
+    "name": "db",
+    "root": "/Users/yahelraviv/compass/packages/db",
+    "remote": "",
+    "last_seen": "2026-03-15T06:43:34.724960Z"
+  },
+  "882c0639cc37": {
+    "name": "web",
+    "root": "/Users/yahelraviv/compass/apps/web",
+    "remote": "",
+    "last_seen": "2026-03-15T06:34:32.277444Z"
+  },
+  "8adea10b7d68": {
+    "name": "yahelraviv",
+    "root": "/Users/yahelraviv",
+    "remote": "",
+    "last_seen": "2026-03-21T16:53:26.449130Z"
+  }
+}

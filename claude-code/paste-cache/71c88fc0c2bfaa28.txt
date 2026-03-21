@@ -1,0 +1,42 @@
+02:27:51.281 
+Running build in Washington, D.C., USA (East) – iad1
+02:27:51.281 
+Build machine configuration: 2 cores, 8 GB
+02:27:51.449 
+Cloning github.com/manthatwalks/compass (Branch: main, Commit: 8b07ed0)
+02:27:52.521 
+Warning: Failed to fetch one or more git submodules
+02:27:52.533 
+Cloning completed: 1.084s
+02:27:54.154 
+Restored build cache from previous deployment (EH9Zgr69g8cmHLA8kGzNnResMuX7)
+02:27:54.377 
+Running "npx turbo-ignore @compass/web"
+02:27:57.986 
+npm warn exec The following package was not found and will be installed: turbo-ignore@2.8.13
+02:27:57.987 
+02:27:58.317 
+≫   Using Turborepo to determine if this project is affected by the commit...
+02:27:58.318 
+02:27:58.319 
+02:27:58.323 
+≫   Using "@compass/web" as workspace from arguments
+02:27:58.323 
+≫   Inferred turbo version "^2.3.3" from "package.json"
+02:27:58.324 
+≫   Using "build" as the task from the arguments
+02:27:58.324 
+02:27:58.327 
+≫   Found previous deployment ("7a01848965d27ec98289772b3234d9d4eedee4bb") for "@compass/web" on branch "main"
+02:27:58.327 
+02:27:58.327 
+≫   Analyzing results of `npx -y turbo@^2.3.3 run build --filter="@compass/web...[7a01848965d27ec98289772b3234d9d4eedee4bb]" --dry=json`
+02:27:58.327 
+02:28:01.198 
+≫   This project and its dependencies are not affected
+02:28:01.198 
+02:28:01.199 
+⏭ Ignoring the change
+02:28:01.199 
+02:28:01.211 
+The Deployment has been canceled as a result of running the command defined in the "Ignored Build Step" setting.

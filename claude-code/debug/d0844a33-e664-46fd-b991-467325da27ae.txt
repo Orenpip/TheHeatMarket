@@ -1,0 +1,100 @@
+2026-03-05T23:07:32.907Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:32.908Z [DEBUG] MDM settings load completed in 11ms
+2026-03-05T23:07:32.960Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:32.960Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Users/yahelraviv/compass/.claude/settings.json
+2026-03-05T23:07:32.978Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:32.978Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:32.978Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:32.978Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:32.978Z [DEBUG] [init] configureGlobalMTLS starting
+2026-03-05T23:07:32.978Z [DEBUG] [init] configureGlobalMTLS complete
+2026-03-05T23:07:32.978Z [DEBUG] [init] configureGlobalAgents starting
+2026-03-05T23:07:32.978Z [DEBUG] [init] configureGlobalAgents complete
+2026-03-05T23:07:32.979Z [DEBUG] Error log sink initialized
+2026-03-05T23:07:32.982Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:32.982Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:32.982Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:32.982Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Users/yahelraviv/compass/.claude/settings.json
+2026-03-05T23:07:32.982Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:32.982Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:32.982Z [DEBUG] Applying permission update: Adding 7 allow rule(s) to destination 'localSettings': ["Bash(pnpm add:*)","Bash(ls:*)","Bash(pnpm:*)","Bash(DIRECT_URL=\"postgresql://postgres.qfrdofuqxzwtqqfyltef:ceNmef-wucris-3jusqo@aws-1-us-east-1.pooler.supabase.com:5432/postgres\" DATABASE_URL=\"postgresql://postgres.qfrdofuqxzwtqqfyltef:ceNmef-wucris-3jusqo@aws-1-us-east-1.pooler.supabase.com:6543/postgres\" pnpm:*)","Bash(DIRECT_URL=\"postgresql://postgres:ceNmef-wucris-3jusqo@db.qfrdofuqxzwtqqfyltef.supabase.co:5432/postgres\" DATABASE_URL=\"postgresql://postgres.qfrdofuqxzwtqqfyltef:ceNmef-wucris-3jusqo@aws-1-us-east-1.pooler.supabase.com:6543/postgres\" pnpm:*)","Bash(git push:*)","Bash(./install.sh typescript:*)"]
+2026-03-05T23:07:32.982Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-03-05T23:07:32.983Z [DEBUG] [ToolSearch:optimistic] mode=tst, ENABLE_TOOL_SEARCH=undefined, result=true
+2026-03-05T23:07:32.984Z [DEBUG] [STARTUP] Running setup()...
+2026-03-05T23:07:32.997Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:32.997Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:32.999Z [DEBUG] Loading skills from: managed=/Library/Application Support/ClaudeCode/.claude/skills, user=/Users/yahelraviv/.claude/skills, project=[]
+2026-03-05T23:07:32.999Z [DEBUG] Error log sink initialized
+2026-03-05T23:07:33.001Z [DEBUG] [Claude in Chrome] Found chrome profiles: Profile 7, Profile 8, Profile 6, Profile 1, Default, Profile 4, Profile 3
+2026-03-05T23:07:33.002Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-03-05T23:07:33.002Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2026-03-05T23:07:33.002Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2026-03-05T23:07:33.002Z [DEBUG] Registered 0 hooks from 0 plugins
+2026-03-05T23:07:33.002Z [DEBUG] Total plugin skills loaded: 0
+2026-03-05T23:07:33.002Z [DEBUG] Total plugin commands loaded: 0
+2026-03-05T23:07:33.002Z [DEBUG] Acquired PID lock for 2.1.69 (PID 7046)
+2026-03-05T23:07:33.002Z [DEBUG] Acquired PID lock on running version: /Users/yahelraviv/.local/share/claude/versions/2.1.69
+2026-03-05T23:07:33.003Z [DEBUG] [STARTUP] setup() completed in 19ms
+2026-03-05T23:07:33.003Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-03-05T23:07:33.011Z [DEBUG] Git remote URL: https://github.com/manthatwalks/compass.git
+2026-03-05T23:07:33.011Z [DEBUG] Parsed repository: github.com/manthatwalks/compass from URL: https://github.com/manthatwalks/compass.git
+2026-03-05T23:07:33.019Z [DEBUG] Total plugin agents loaded: 0
+2026-03-05T23:07:33.024Z [DEBUG] Loaded 93 unique skills (93 unconditional, 0 conditional, managed: 0, user: 58, project: 0, additional: 0, legacy commands: 35)
+2026-03-05T23:07:33.024Z [DEBUG] getSkills returning: 93 skill dir commands, 0 plugin skills, 5 bundled skills, 0 builtin plugin skills
+2026-03-05T23:07:33.025Z [DEBUG] [STARTUP] Commands and agents loaded in 22ms
+2026-03-05T23:07:33.027Z [DEBUG] [STARTUP] Running showSetupScreens()...
+2026-03-05T23:07:33.043Z [DEBUG] Grove: Using fresh cached config
+2026-03-05T23:07:33.051Z [DEBUG] Path /Users/yahelraviv/compass already tracked for repo manthatwalks/compass
+2026-03-05T23:07:33.051Z [DEBUG] [Perfetto] initializePerfettoTracing called, env value: undefined
+2026-03-05T23:07:33.051Z [DEBUG] [3P telemetry] isTelemetryEnabled=false (CLAUDE_CODE_ENABLE_TELEMETRY=undefined)
+2026-03-05T23:07:33.052Z [DEBUG] [keybindings] KeybindingSetup initialized with 104 bindings, 0 warnings
+2026-03-05T23:07:33.057Z [DEBUG] [keybindings] Watching for changes to /Users/yahelraviv/.claude/keybindings.json
+2026-03-05T23:07:33.064Z [DEBUG] [Claude in Chrome] Found brave profiles: Profile 1, Default, Profile 2
+2026-03-05T23:07:33.065Z [DEBUG] [Claude in Chrome] Extension not found in any browser
+2026-03-05T23:07:33.235Z [DEBUG] [STARTUP] showSetupScreens() completed in 208ms
+2026-03-05T23:07:33.235Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-03-05T23:07:33.235Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-03-05T23:07:33.235Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-03-05T23:07:33.235Z [DEBUG] Starting background startup prefetches
+2026-03-05T23:07:33.235Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T23:07:33.235Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T23:07:33.236Z [DEBUG] [STARTUP] MCP configs resolved in 20ms (awaited at +254ms)
+2026-03-05T23:07:33.236Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:33.236Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:33.246Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:33.246Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:33.246Z [DEBUG] Total LSP servers loaded: 0
+2026-03-05T23:07:33.246Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T23:07:33.246Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:33.246Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:33.247Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:33.247Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:33.247Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2026-03-05T23:07:33.247Z [DEBUG] Found 1 hook matchers in settings
+2026-03-05T23:07:33.247Z [DEBUG] Matched 1 unique hooks for query "startup" (1 before deduplication)
+2026-03-05T23:07:33.247Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-03-05T23:07:33.247Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-03-05T23:07:33.247Z [DEBUG] LSP manager initialized with 0 servers
+2026-03-05T23:07:33.249Z [DEBUG] [Reconnection] computeInitialTeamContext: No teammate context set (not a teammate)
+2026-03-05T23:07:33.251Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.7046.1772752053251
+2026-03-05T23:07:33.251Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T23:07:33.251Z [DEBUG] Temp file written successfully, size: 13897 bytes
+2026-03-05T23:07:33.251Z [DEBUG] Applied original permissions to temp file
+2026-03-05T23:07:33.251Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.7046.1772752053251 to /Users/yahelraviv/.claude.json
+2026-03-05T23:07:33.251Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T23:07:33.252Z [DEBUG] LSP server manager initialized successfully
+2026-03-05T23:07:33.252Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-03-05T23:07:33.262Z [DEBUG] LSP Diagnostics: Resetting all state (0 pending, 0 files tracked)
+2026-03-05T23:07:33.290Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:33.290Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:33.290Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:33.290Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:33.290Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T23:07:33.290Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T23:07:33.290Z [DEBUG] Getting matching hook commands for SessionStart with query: resume
+2026-03-05T23:07:33.290Z [DEBUG] Found 1 hook matchers in settings
+2026-03-05T23:07:33.290Z [DEBUG] Matched 1 unique hooks for query "resume" (1 before deduplication)
+2026-03-05T23:07:33.291Z [DEBUG] FileHistory: Copied backup 3024fd98e8a960ad@v1 from session 0be74a79-b3e5-4e64-aa4e-e206ff75498a to d0844a33-e664-46fd-b991-467325da27ae
+2026-03-05T23:07:33.293Z [DEBUG] FileHistory: Copied backup 3024fd98e8a960ad@v2 from session 0be74a79-b3e5-4e64-aa4e-e206ff75498a to d0844a33-e664-46fd-b991-467325da27ae
+2026-03-05T23:07:33.293Z [DEBUG] FileHistory: Copied backup 294b01df398ff7ee@v1 from session 0be74a79-b3e5-4e64-aa4e-e206ff75498a to d0844a33-e664-46fd-b991-467325da27ae
+2026-03-05T23:07:33.294Z [DEBUG] FileHistory: Copied backup 07de2c37802b1a93@v1 from session 0be74a79-b3e5-4e64-aa4e-e206ff75498a to d0844a33-e664-46fd-b991-467325da27ae

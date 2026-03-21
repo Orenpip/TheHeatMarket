@@ -1,0 +1,15 @@
+yahelraviv@Yahels-MBP compass % >....                                           
+  - Copying the binary in build command — nft still didn't bundle it
+  - asyncWebAssembly: true webpack experiment — triggers the broken @webassemblyjs/wasm-parser bundled in Next.js 14
+  What's left:
+  1. Test full user flow — Complete onboarding, run a reflection session, verify AI synthesis works end-to-end
+  2. Set counselor role — At least one user needs the counselor role (via Clerk public_metadata) to access the dashboard
+  3. Add back functions config — maxDuration for long-running API routes (QStash webhooks). Was removed because path format didn't work from root vercel.json. Revisit
+   now that deployment is stable.
+  4. Fix TypeScript errors — Currently using ignoreBuildErrors: true. Non-blocking but should be cleaned up.
+  5. Remove --force from turbo build — Currently bypassing turbo cache in vercel.json buildCommand. Should be removed to speed up builds.
+  6. Clerk webhook reliability — The auto-create fallback in the student layout handles missed webhooks, but the webhook endpoint itself should be verified (correct
+  URL in Clerk dashboard, CLERK_WEBHOOK_SECRET matches).
+
+
+some more work has been done, but here is recent context

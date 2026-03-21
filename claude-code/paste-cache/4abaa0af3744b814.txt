@@ -1,0 +1,69 @@
+3/3 12:00 PM                                                                                                                                                          
+  COMPASS Project — Complete Summary
+                                                                                                                                                                      
+  What COMPASS Is                                           
+  COMPASS is a student career exploration platform — a full-stack Next.js web application that helps high school students reflect on their interests, activities, and
+  goals through monthly reflection sessions. Counselors can view student profiles and signals. An AI layer (powered by Claude) synthesizes student data into "signal
+  profiles" with interest clusters, character signals, and trajectory shifts.
+  Architecture
+  Monorepo (Turborepo + pnpm workspaces):
+  compass/
+  ├── apps/web/          — Next.js 14 App Router (student + counselor UI)
+  ├── packages/db/       — Prisma ORM + schema + generated client
+  ├── packages/ui/       — Shared UI components (shadcn/ui)
+  ├── packages/types/    — Shared TypeScript types
+  ├── packages/ai/       — Claude AI service for reflections/synthesis
+  ├── vercel.json        — Root Vercel deployment config
+  ├── turbo.json         — Turborepo task config
+  └── package.json       — Root workspace
+  Tech stack: Next.js 14, TypeScript, Tailwind CSS, shadcn/ui, Prisma 6, Supabase (PostgreSQL + pgvector), Clerk (auth), Upstash Redis + QStash (caching + job
+  queues), Vercel (hosting).
+  What We Built (9 completed tasks from the PDR)
+  1. Monorepo scaffold — Turborepo structure, pnpm workspaces, shared packages
+  2. Database package (packages/db) — Prisma schema with 14 models: Student, Counselor, School, ReflectionSession, Activity, Reflection, SignalProfile,
+  StudentPrivacySettings, MapNode, MapEdge, Notification, NotificationPreferences, PeerGroup, PeerGroupMember. Uses pgvector for embeddings.
+  3. Auth integration — Clerk middleware protecting all routes, Clerk webhook for user sync
+  4. Core APIs — REST endpoints for reflections, activities, sessions, notifications, privacy, data export/delete
+  5. AI service (packages/ai) — Claude-powered reflection prompting, signal synthesis, interest mapping
+  6. Student web app — Monthly reflection flow (pulse check → activity logging → guided reflections → summary), profile page, reflection history, career exploration
+  map
+  7. Counselor dashboard — Student list, individual student views, signal profiles, notification management
+  8. Notifications system — QStash-driven nudges, notification preferences, quiet hours
+  9. Mobile-responsive UI — Responsive layouts, mobile navigation
+  Task 10: Vercel Deployment (COMPLETE — app is live)
+  What was accomplished:
+  1. Vercel config fixed — Root vercel.json is the single source of truth (Root Directory is blank in Vercel UI). Contains framework, buildCommand, outputDirectory,
+  installCommand, ignoreCommand, headers.
+  2. Build succeeds — turbo run build --filter=@compass/web → Prisma generates → Next.js compiles → 33 pages.
+  3. Database connected — Prisma schema pushed to Supabase via prisma db push. pgvector extension active.
+  4. External services configured — Supabase, Clerk, Upstash Redis, QStash all set up with environment variables in Vercel.
+  5. Prisma runtime engine fixed — The native binary engine (libquery_engine-rhel-openssl-3.0.x.so.node) was never traced by Vercel's nft bundler. The WASM engine
+  alternative couldn't be parsed by Next.js 14's bundled webpack (parseVec could not cast the value). Solution: Custom webpack loader (apps/web/prisma-wasm-loader.js)
+   that inlines the 2.2MB WASM as base64 and compiles it via new WebAssembly.Module(buffer), bypassing the broken parser entirely. packages/db/src/index.ts imports
+  from ../generated/client/wasm. The next.config.mjs webpack rule uses type: "javascript/auto" so webpack treats the result as JS, not WASM. asyncWebAssembly is NOT
+  enabled.
+  6. Driver adapter connection fixed — @prisma/adapter-pg uses a pg Pool for direct DB access. The Pool must use DIRECT_URL (direct PostgreSQL), not DATABASE_URL
+  (pgbouncer), because pgbouncer uses different auth.
+  7. Student record resilience — (student)/layout.tsx auto-creates the student record from Clerk user data if the webhook missed it (e.g., DB was unreachable when the
+   webhook fired). Without this, a missing student record caused a redirect loop: / → /sign-in → / …
+  8. App is live and functional — Deployment works, Clerk auth works, DB queries succeed, onboarding flow accessible.
+  What didn't work (for posterity):
+  - binaryTargets = ["rhel-openssl-3.0.x"] in schema — binary generated but not traced by nft
+  - serverExternalPackages in next.config — didn't help with custom output path
+  - outputFileTracingRoot alone — not enough for monorepo custom Prisma output
+  - Non-cacheable turbo / --force flag — build caching wasn't the issue
+  - Copying the binary in build command — nft still didn't bundle it
+  - asyncWebAssembly: true webpack experiment — triggers the broken @webassemblyjs/wasm-parser bundled in Next.js 14
+  What's left:
+  1. Test full user flow — Complete onboarding, run a reflection session, verify AI synthesis works end-to-end
+  2. Set counselor role — At least one user needs the counselor role (via Clerk public_metadata) to access the dashboard
+  3. Add back functions config — maxDuration for long-running API routes (QStash webhooks). Was removed because path format didn't work from root vercel.json. Revisit
+   now that deployment is stable.
+  4. Fix TypeScript errors — Currently using ignoreBuildErrors: true. Non-blocking but should be cleaned up.
+  5. Remove --force from turbo build — Currently bypassing turbo cache in vercel.json buildCommand. Should be removed to speed up builds.
+  6. Clerk webhook reliability — The auto-create fallback in the student layout handles missed webhooks, but the webhook endpoint itself should be verified (correct
+  URL in Clerk dashboard, CLERK_WEBHOOK_SECRET matches).
+
+
+
+

@@ -1,0 +1,128 @@
+2026-03-03 06:08:43.492 [info] prisma:error 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Prisma Client could not locate the Query Engine for runtime "rhel-openssl-3.0.x".
+
+We detected that you are using Next.js, learn how to fix this: https://pris.ly/d/engine-not-found-nextjs.
+
+This is likely caused by a bundler that has not copied "libquery_engine-rhel-openssl-3.0.x.so.node" next to the resulting bundle.
+Ensure that "libquery_engine-rhel-openssl-3.0.x.so.node" has been copied next to the bundle or in "generated/client".
+
+We would appreciate if you could take the time to share some information with us.
+Please help us by answering a few questions: https://pris.ly/engine-not-found-bundler-investigation
+
+The following locations have been searched:
+  /var/task/apps/web/generated/client
+  /var/task/apps/web/.next/server
+  /vercel/path0/packages/db/generated/client
+  /var/task/apps/web/.prisma/client
+  /tmp/prisma-engines
+2026-03-03 06:08:43.492 [info] prisma:error 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Prisma Client could not locate the Query Engine for runtime "rhel-openssl-3.0.x".
+
+We detected that you are using Next.js, learn how to fix this: https://pris.ly/d/engine-not-found-nextjs.
+
+This is likely caused by a bundler that has not copied "libquery_engine-rhel-openssl-3.0.x.so.node" next to the resulting bundle.
+Ensure that "libquery_engine-rhel-openssl-3.0.x.so.node" has been copied next to the bundle or in "generated/client".
+
+We would appreciate if you could take the time to share some information with us.
+Please help us by answering a few questions: https://pris.ly/engine-not-found-bundler-investigation
+
+The following locations have been searched:
+  /var/task/apps/web/generated/client
+  /var/task/apps/web/.next/server
+  /vercel/path0/packages/db/generated/client
+  /var/task/apps/web/.prisma/client
+  /tmp/prisma-engines
+2026-03-03 06:08:43.496 [error] PrismaClientInitializationError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Prisma Client could not locate the Query Engine for runtime "rhel-openssl-3.0.x".
+
+We detected that you are using Next.js, learn how to fix this: https://pris.ly/d/engine-not-found-nextjs.
+
+This is likely caused by a bundler that has not copied "libquery_engine-rhel-openssl-3.0.x.so.node" next to the resulting bundle.
+Ensure that "libquery_engine-rhel-openssl-3.0.x.so.node" has been copied next to the bundle or in "generated/client".
+
+We would appreciate if you could take the time to share some information with us.
+Please help us by answering a few questions: https://pris.ly/engine-not-found-bundler-investigation
+
+The following locations have been searched:
+  /var/task/apps/web/generated/client
+  /var/task/apps/web/.next/server
+  /vercel/path0/packages/db/generated/client
+  /var/task/apps/web/.prisma/client
+  /tmp/prisma-engines
+    at l_.handleRequestError (/var/task/apps/web/.next/server/chunks/5905.js:114:8065)
+    at l_.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/5905.js:114:6848)
+    at l_.request (/var/task/apps/web/.next/server/chunks/5905.js:114:6555)
+    at async r (/var/task/apps/web/.next/server/chunks/5905.js:126:7482)
+    at async o (/var/task/apps/web/.next/server/app/(student)/page.js:1:13205) {
+  clientVersion: '6.19.2',
+  errorCode: undefined,
+  digest: '2960086264'
+}
+2026-03-03 06:08:43.497 [error] PrismaClientInitializationError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Prisma Client could not locate the Query Engine for runtime "rhel-openssl-3.0.x".
+
+We detected that you are using Next.js, learn how to fix this: https://pris.ly/d/engine-not-found-nextjs.
+
+This is likely caused by a bundler that has not copied "libquery_engine-rhel-openssl-3.0.x.so.node" next to the resulting bundle.
+Ensure that "libquery_engine-rhel-openssl-3.0.x.so.node" has been copied next to the bundle or in "generated/client".
+
+We would appreciate if you could take the time to share some information with us.
+Please help us by answering a few questions: https://pris.ly/engine-not-found-bundler-investigation
+
+The following locations have been searched:
+  /var/task/apps/web/generated/client
+  /var/task/apps/web/.next/server
+  /vercel/path0/packages/db/generated/client
+  /var/task/apps/web/.prisma/client
+  /tmp/prisma-engines
+    at l_.handleRequestError (/var/task/apps/web/.next/server/chunks/5905.js:114:8065)
+    at l_.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/5905.js:114:6848)
+    at l_.request (/var/task/apps/web/.next/server/chunks/5905.js:114:6555)
+    at async r (/var/task/apps/web/.next/server/chunks/5905.js:126:7482)
+    at async i (/var/task/apps/web/.next/server/app/(student)/page.js:1:18323)
+    at async u (/var/task/apps/web/.next/server/app/(student)/page.js:1:14384) {
+  clientVersion: '6.19.2',
+  errorCode: undefined,
+  digest: '2329333362'
+}
+2026-03-03 06:08:43.499 [error] PrismaClientInitializationError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Prisma Client could not locate the Query Engine for runtime "rhel-openssl-3.0.x".
+
+We detected that you are using Next.js, learn how to fix this: https://pris.ly/d/engine-not-found-nextjs.
+
+This is likely caused by a bundler that has not copied "libquery_engine-rhel-openssl-3.0.x.so.node" next to the resulting bundle.
+Ensure that "libquery_engine-rhel-openssl-3.0.x.so.node" has been copied next to the bundle or in "generated/client".
+
+We would appreciate if you could take the time to share some information with us.
+Please help us by answering a few questions: https://pris.ly/engine-not-found-bundler-investigation
+
+The following locations have been searched:
+  /var/task/apps/web/generated/client
+  /var/task/apps/web/.next/server
+  /vercel/path0/packages/db/generated/client
+  /var/task/apps/web/.prisma/client
+  /tmp/prisma-engines
+    at l_.handleRequestError (/var/task/apps/web/.next/server/chunks/5905.js:114:8065)
+    at l_.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/5905.js:114:6848)
+    at l_.request (/var/task/apps/web/.next/server/chunks/5905.js:114:6555)
+    at async r (/var/task/apps/web/.next/server/chunks/5905.js:126:7482)
+    at async o (/var/task/apps/web/.next/server/app/(student)/page.js:1:13205) {
+  clientVersion: '6.19.2',
+  errorCode: undefined,
+  digest: '2960086264'
+}

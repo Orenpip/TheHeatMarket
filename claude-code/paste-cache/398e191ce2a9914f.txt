@@ -1,0 +1,111 @@
+
+
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 329 bytes | 329.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/manthatwalks/compass.git
+   c1e20d9..a9812f3  main -> main
+yahelraviv@Yahels-MBP compass % ⏺ git add package.json 
+zsh: command not found: ⏺
+yahelraviv@Yahels-MBP compass % git add package.json   
+yahelraviv@Yahels-MBP compass % git commit -m "Pin Node to 20.x for Vercel"
+[main 98e68ec] Pin Node to 20.x for Vercel
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+yahelraviv@Yahels-MBP compass % git push 
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 328 bytes | 328.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/manthatwalks/compass.git
+   a9812f3..98e68ec  main -> main
+yahelraviv@Yahels-MBP compass % cd /Users/yahelraviv/compass
+yahelraviv@Yahels-MBP compass % npm install -g pnpm@9
+
+added 1 package in 738ms
+
+1 package is looking for funding
+  run `npm fund` for details
+yahelraviv@Yahels-MBP compass % pnpm install
+ WARN  Unsupported engine: wanted: {"node":"20.x"} (current: {"node":"v24.11.1","pnpm":"9.15.9"})
+Scope: all 7 workspace projects
+
+  ╭────────────────────────────────────────────────────────╮
+  │                                                        │
+  │          Update available! 9.15.9 → 10.30.3.           │
+  │                       Changelog:                       │
+  │   https://github.com/pnpm/pnpm/releases/tag/v10.30.3   │
+  │           Run "pnpm add -g pnpm" to update.            │
+  │                                                        │
+  ╰────────────────────────────────────────────────────────╯
+
+apps/web                                 |  WARN  deprecated eslint@8.57.1
+apps/web                                 |  WARN  deprecated next@14.2.29 react-native@0.76.7: 15.78 kB/24.42 MB
+Downloading react-native@0.76.7: 24.42 MB/24.42 MB, done
+Downloading next@14.2.29: 20.76 MB/20.76 MB, done
+Downloading prisma@6.19.2: 17.62 MB/17.62 MB, done
+Downloading @prisma/client@6.19.2: 27.25 MB/27.25 MB, done
+Downloading @clerk/clerk-js@5.125.4: 6.60 MB/6.60 MB, done
+Downloading jsc-android@250231.0.0: 32.05 MB/32.05 MB, done
+Downloading @next/swc-darwin-arm64@14.2.29: 37.19 MB/37.19 MB,Downloading turbo-darwin-arm64@2.8.12: 13.03 MB/13.03 MB, done
+Downloading @clerk/localizations@3.37.2: 5.98 MB/5.98 MB, done
+ WARN  13 deprecated subdependencies found: @babel/plugin-proposal-class-properties@7.18.6, @babel/plugin-proposal-nullish-coalescing-operator@7.18.6, @babel/plugin-proposal-optional-chaining@7.21.0, @humanwhocodes/config-array@0.13.0, @humanwhocodes/object-schema@2.0.3, @xmldom/xmldom@0.7.13, glob@10.3.10, glob@10.5.0, glob@7.2.3, inflight@1.0.6, rimraf@2.6.3, rimraf@3.0.2, tar@6.2.1
+Packages: +1369
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 1439, reused 0, downloaded 1374, added 1369, done
+node_modules/.pnpm/browser-tabs-lock@1.3.0/node_modules/browser-tabs-lock: Running postinstall script...
+node_modules/.pnpm/@clerk+shared@3.47.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@clerk/shared: Running postinstall script...
+node_modules/.pnpm/core-js@3.41.0/node_modules/core-js: Runninnode_modules/.pnpm/browser-tabs-lock@1.3.0/node_modules/browsenode_modules/.pnpm/@clerk+shared@3.47.2_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@clerk/shared: Running postinstall script, done in 89msn 84ms6.0.6/node_modules/utf-8-validate: Running install script...
+node_modules/.pnpm/@prisma+engines@6.19.2/node_modules/@prisma/engines: Running postinstall script...
+node_modules/.pnpm/bufferutil@4.1.0/node_modules/bufferutil: Running install script, done in 1s/node_modules/esbuild: Runninnode_modules/.pnpm/utf-8-validate@6.0.6/node_modules/utf-8-validate: Running install script, done in 1.3sin 854mss/unrs-resonode_modules/.pnpm/unrs-resolver@1.11.1/node_modules/unrs-resolver: Running postinstall script, done in 439ms
+node_modules/.pnpm/prisma@6.19.2_typescript@5.9.3/node_modulesnode_modules/.pnpm/prisma@6.19.2_typescript@5.9.3/node_modules/prisma: Running preinstall script, done in 37ms
+node_modules/.pnpm/@prisma+client@6.19.2_prisma@6.19.2_typescript@5.9.3__typescript@5.9.3/node_modules/@prisma/client: Runninode_modules/.pnpm/@prisma+client@6.19.2_prisma@6.19.2_typescript@5.9.3__typescript@5.9.3/node_modules/@prisma/client: Running postinstall script, done in 1.9s
+
+devDependencies:
++ @upstash/qstash 2.9.0
++ prettier 3.8.1
++ tsx 4.21.0
++ turbo 2.8.12
++ typescript 5.9.3
+
+ WARN  Issues with peer dependencies found
+apps/mobile
+├─┬ expo 52.0.49
+│ └─┬ @expo/cli 0.22.28
+│   └─┬ @react-native/dev-middleware 0.76.9
+│     └─┬ ws 6.2.3
+│       └── ✕ unmet peer utf-8-validate@^5.0.2: found 6.0.6
+├─┬ react-native 0.76.7
+│ └─┬ react-devtools-core 5.3.2
+│   └─┬ ws 7.5.10
+│     └── ✕ unmet peer utf-8-validate@^5.0.2: found 6.0.6
+└─┬ @clerk/clerk-expo 2.19.30
+  └─┬ @clerk/clerk-js 5.125.4
+    └─┬ @solana/wallet-adapter-react 0.15.39
+      └─┬ @solana/wallet-standard-wallet-adapter-react 1.1.4
+        └─┬ @solana/wallet-standard-wallet-adapter-base 1.1.4
+          └── ✕ unmet peer bs58@^6.0.0: found 5.0.0
+
+Done in 24.5s using pnpm v9.15.9
+yahelraviv@Yahels-MBP compass % git add pnpm-lock.yaml
+yahelraviv@Yahels-MBP compass % git commit -m "Add pnpm lockfile"
+[main 66a4136] Add pnpm lockfile
+ 1 file changed, 13924 insertions(+)
+ create mode 100644 pnpm-lock.yaml
+yahelraviv@Yahels-MBP compass % git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 149.96 KiB | 12.50 MiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/manthatwalks/compass.git
+   98e68ec..66a4136  main -> main
+yahelraviv@Yahels-MBP compass % 

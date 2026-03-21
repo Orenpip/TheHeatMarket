@@ -1,0 +1,162 @@
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+export interface SynthesisInput {
+  studentId: string;
+  sessionId?: string;
+  activities: {
+    name: string;
+    category: string;
+    excitement?: number | null;
+    hoursPerWeek?: number | null;
+    isOngoing?: boolean;
+  }[];
+  reflections: {
+    promptText: string;
+    responseText?: string | null;
+    promptType: string;
+  }[];
+  previousProfile?: {
+    breadthScore: number;
+    interestClusters: unknown;
+    compressedSummary?: string | null;
+  } | null;
+}
+
+export interface SynthesisResult {
+  interestClusters: object[];
+  characterSignals: object[];
+  trajectoryShifts: object[];
+  gapDetection: object;
+  breadthScore: number;
+  compressedSummary: string;
+}
+
+function buildPrompt(input: SynthesisInput): string {
+  const today = new Date().toISOString().split("T")[0]!;
+
+  let activitiesText = "";
+  if (input.activities.length > 0) {
+    const lines = input.activities.map(
+      (a) =>
+        `- ${a.name} [${a.category}]: excitement ${a.excitement ?? "?"}/5, ${a.hoursPerWeek ?? "?"} hrs/wk, ongoing=${a.isOngoing ?? true}`
+    );
+    activitiesText = "ALL ACTIVITIES:\n" + lines.join("\n");
+  }
+
+  let reflectionsText = "";
+  if (input.reflections.length > 0) {
+    const lines = input.reflections
+      .filter((r) => r.responseText)
+      .slice(0, 15)
+      .map(
+        (r) =>
+          `[${r.promptType}] Q: ${r.promptText.slice(0, 100)}\nA: ${r.responseText!.slice(0, 400)}`
+      );
+    reflectionsText = "REFLECTION HISTORY:\n\n" + lines.join("\n\n");
+  }
+
+  let prevProfileText = "";
+  if (input.previousProfile) {
+    const clusters = Array.isArray(input.previousProfile.interestClusters)
+      ? (input.previousProfile.interestClusters as { label?: string }[]).map(
+          (c) => c.label
+        )
+      : [];
+    prevProfileText = `
+PREVIOUS SIGNAL PROFILE (for comparison/continuity):
+Breadth Score: ${input.previousProfile.breadthScore}
+Interest Clusters: ${JSON.stringify(clusters)}
+Previous summary: ${(input.previousProfile.compressedSummary ?? "").slice(0, 300)}
+`;
+  }
+
+  return `You are a longitudinal student analyst for COMPASS, an educational tool for high school students.
+Analyze this student's complete history to synthesize a signal profile.
+
+Date: ${today}
+
+${activitiesText}
+
+${reflectionsText}
+
+${prevProfileText}
+
+Synthesize a comprehensive signal profile. Your analysis must be:
+1. Evidence-based — cite specific activities/reflections
+2. Non-prescriptive — frame interests as "emerging" or "strong," never as fixed destiny
+3. Cross-domain aware — notice when technical + creative + social interests overlap
+4. Breadth-aware — score 0-100 based on domain diversity (not just number of activities)
+
+Breadth Score guidelines:
+- 0-20: Very narrow (1-2 domains)
+- 21-40: Developing breadth (3 domains)
+- 41-60: Moderate breadth (4-5 domains)
+- 61-80: Broad (6-7 diverse domains)
+- 81-100: Highly interdisciplinary (8+ domains with deep engagement)
+
+Respond with ONLY valid JSON matching this exact schema:
+{
+  "interestClusters": [
+    {
+      "id": "cluster-1",
+      "label": "Descriptive label",
+      "strength": "strong | moderate | emerging",
+      "evidenceCount": 3,
+      "domains": ["Technology"],
+      "lastSeen": "${today.slice(0, 7)}",
+      "trend": "rising | stable | declining"
+    }
+  ],
+  "characterSignals": [
+    {
+      "trait": "Trait name",
+      "description": "2-3 sentence description with specific evidence",
+      "evidenceExamples": ["Example 1", "Example 2"],
+      "confidence": "high | medium | low"
+    }
+  ],
+  "trajectoryShifts": [],
+  "gapDetection": {
+    "underexploredAreas": ["Area 1"],
+    "suggestedExpansions": ["Next step 1"],
+    "lastUpdated": "${today}"
+  },
+  "breadthScore": 45,
+  "compressedSummary": "300-400 word narrative summary in third person."
+}`;
+}
+
+export async function synthesizeProfile(
+  input: SynthesisInput
+): Promise<SynthesisResult> {
+  const message = await client.messages.create({
+    model: "claude-sonnet-4-6",
+    max_tokens: 4096,
+    system:
+      "You are a longitudinal student analyst. You identify patterns in students' interests, activities, and reflections to help them understand themselves better. Always respond with valid JSON only. Never prescribe what students should do.",
+    messages: [{ role: "user", content: buildPrompt(input) }],
+  });
+
+  let content = (message.content[0] as { text: string }).text.trim();
+
+  if (content.startsWith("```")) {
+    const parts = content.split("```");
+    content = parts[1] ?? "";
+    if (content.startsWith("json")) content = content.slice(4);
+    content = content.trim();
+  }
+
+  const data = JSON.parse(content) as Record<string, unknown>;
+
+  return {
+    interestClusters: (data.interestClusters as object[]) ?? [],
+    characterSignals: (data.characterSignals as object[]) ?? [],
+    trajectoryShifts: (data.trajectoryShifts as object[]) ?? [],
+    gapDetection: (data.gapDetection as object) ?? {},
+    breadthScore: typeof data.breadthScore === "number" ? data.breadthScore : 0,
+    compressedSummary:
+      typeof data.compressedSummary === "string" ? data.compressedSummary : "",
+  };
+}

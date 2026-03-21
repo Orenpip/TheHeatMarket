@@ -1,0 +1,51 @@
+Step 2: Clerk                                                 
+                                         
+  Go to: https://clerk.com → Create application                 
+                                                            
+  1. Name it compass                                            
+  2. Enable Email sign-in (disable social for now — you can add
+  later)
+  3. Click Create application
+
+  ---
+  Get your keys
+
+  Go to Clerk Dashboard → API Keys
+
+  Copy these two:
+  - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY — starts with pk_test_...
+  - CLERK_SECRET_KEY — starts with sk_test_...
+
+  ---
+  Configure user roles (critical)
+
+  COMPASS uses publicMetadata.role on the Clerk user to
+  distinguish students vs counselors. You need to set this up so
+   the webhook handler knows which DB table to write to.
+
+  Go to Clerk Dashboard → Users — when you create test users
+  manually, you'll set role via the API or dashboard. For now
+  just know:
+  - Students: { "role": "student" }
+  - Counselors: { "role": "counselor" }
+
+  You can set this in the Clerk dashboard by clicking a user →
+  Metadata → Public and entering:
+  { "role": "student" }
+
+  ---
+  Configure session token (so the mobile app can get a JWT)
+
+  Go to Sessions → Customize session token
+
+  Add this claim so the mobile API client gets the role in the
+  token:
+  {
+    "role": "{{user.public_metadata.role}}"
+  }
+
+  ---
+  One thing to note about the webhook
+
+  Don't set up the webhook yet — that's Step 3, after Vercel is
+  deployed and you have a live URL. Save your keys for now.

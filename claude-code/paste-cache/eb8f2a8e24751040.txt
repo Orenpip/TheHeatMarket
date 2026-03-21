@@ -1,0 +1,16 @@
+ Context: The app has a "Career & Education Map" that shows an interactive graph of career paths,
+  college majors, industries, and programs. This map is stored in a MapNode and MapEdge table in the
+  Supabase database. The seed data (about 40 career nodes across 12 industries, 8 major nodes, 8
+  program nodes, and edges connecting them) is already written in packages/db/src/seed.ts. The table is
+   currently empty, which is why the map shows "Map is being built" even after completing a reflection.
+
+  What to do: Run the seed script against the production Supabase database using the same connection
+  strings from Vercel.
+
+  Command to run from the root of the monorepo:
+  DIRECT_URL="<your-direct-url>" DATABASE_URL="<your-database-url>" pnpm --filter @compass/db seed
+
+  Expected outcome: The script will print lines like ✅ Industry: Technology, ✅ Major: Computer
+  Science, etc., and end with 🎉 Seed complete!. After this, when a student visits the Map tab, it will
+   show the full career graph. The map uses upsert operations, so running it multiple times is safe —
+  it won't create duplicates.

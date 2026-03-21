@@ -1,0 +1,852 @@
+2026-03-05T04:25:49.933Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:49.933Z [DEBUG] MDM settings load completed in 12ms
+2026-03-05T04:25:49.978Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:49.978Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Users/yahelraviv/compass/.claude/settings.json
+2026-03-05T04:25:49.993Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:49.993Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:49.993Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:49.993Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:49.994Z [DEBUG] [init] configureGlobalMTLS starting
+2026-03-05T04:25:49.994Z [DEBUG] [init] configureGlobalMTLS complete
+2026-03-05T04:25:49.994Z [DEBUG] [init] configureGlobalAgents starting
+2026-03-05T04:25:49.994Z [DEBUG] [init] configureGlobalAgents complete
+2026-03-05T04:25:49.995Z [DEBUG] Error log sink initialized
+2026-03-05T04:25:49.999Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:49.999Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:49.999Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:49.999Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Users/yahelraviv/compass/.claude/settings.json
+2026-03-05T04:25:50.000Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:50.000Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:50.000Z [DEBUG] Applying permission update: Adding 3 allow rule(s) to destination 'localSettings': ["Bash(pnpm add:*)","Bash(ls:*)","Bash(pnpm:*)"]
+2026-03-05T04:25:50.000Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-03-05T04:25:50.001Z [DEBUG] [ToolSearch:optimistic] mode=tst, ENABLE_TOOL_SEARCH=undefined, result=true
+2026-03-05T04:25:50.001Z [DEBUG] [STARTUP] Running setup()...
+2026-03-05T04:25:50.003Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:50.003Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:50.003Z [DEBUG] Loading skills from: managed=/Library/Application Support/ClaudeCode/.claude/skills, user=/Users/yahelraviv/.claude/skills, project=[]
+2026-03-05T04:25:50.004Z [DEBUG] Error log sink initialized
+2026-03-05T04:25:50.005Z [DEBUG] [Claude in Chrome] Found chrome profiles: Profile 7, Profile 8, Profile 6, Profile 1, Default, Profile 4, Profile 3
+2026-03-05T04:25:50.005Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-03-05T04:25:50.005Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2026-03-05T04:25:50.005Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2026-03-05T04:25:50.005Z [DEBUG] Registered 0 hooks from 0 plugins
+2026-03-05T04:25:50.005Z [DEBUG] Total plugin skills loaded: 0
+2026-03-05T04:25:50.005Z [DEBUG] Total plugin commands loaded: 0
+2026-03-05T04:25:50.010Z [DEBUG] Cannot acquire lock for 2.1.69 - held by PID 99274
+2026-03-05T04:25:50.010Z [ERROR] Error: Error: NON-FATAL: Lock acquisition failed for /Users/yahelraviv/.local/share/claude/versions/2.1.69 (expected in multi-process scenarios)
+    at NS_ (/$bunfs/root/src/entrypoints/cli.js:2397:2066)
+    at zpR (/$bunfs/root/src/entrypoints/cli.js:2397:1210)
+    at processTicksAndRejections (native:7:39)
+2026-03-05T04:25:50.010Z [DEBUG] Loaded 0 unique skills (0 unconditional, 0 conditional, managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-03-05T04:25:50.010Z [DEBUG] getSkills returning: 0 skill dir commands, 0 plugin skills, 5 bundled skills, 0 builtin plugin skills
+2026-03-05T04:25:50.011Z [DEBUG] [STARTUP] setup() completed in 10ms
+2026-03-05T04:25:50.011Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-03-05T04:25:50.011Z [DEBUG] Total plugin agents loaded: 0
+2026-03-05T04:25:50.011Z [DEBUG] [STARTUP] Commands and agents loaded in 0ms
+2026-03-05T04:25:50.014Z [DEBUG] [STARTUP] Running showSetupScreens()...
+2026-03-05T04:25:50.017Z [DEBUG] Grove: Using fresh cached config
+2026-03-05T04:25:50.029Z [DEBUG] [Perfetto] initializePerfettoTracing called, env value: undefined
+2026-03-05T04:25:50.029Z [DEBUG] [3P telemetry] isTelemetryEnabled=false (CLAUDE_CODE_ENABLE_TELEMETRY=undefined)
+2026-03-05T04:25:50.032Z [DEBUG] [keybindings] KeybindingSetup initialized with 104 bindings, 0 warnings
+2026-03-05T04:25:50.038Z [DEBUG] Git remote URL: https://github.com/manthatwalks/compass.git
+2026-03-05T04:25:50.038Z [DEBUG] Parsed repository: github.com/manthatwalks/compass from URL: https://github.com/manthatwalks/compass.git
+2026-03-05T04:25:50.038Z [DEBUG] Path /Users/yahelraviv/compass already tracked for repo manthatwalks/compass
+2026-03-05T04:25:50.038Z [DEBUG] [keybindings] Watching for changes to /Users/yahelraviv/.claude/keybindings.json
+2026-03-05T04:25:50.039Z [DEBUG] Git remote URL: https://github.com/manthatwalks/compass.git
+2026-03-05T04:25:50.039Z [DEBUG] Parsed repository: github.com/manthatwalks/compass from URL: https://github.com/manthatwalks/compass.git
+2026-03-05T04:25:50.049Z [DEBUG] [Claude in Chrome] Found brave profiles: Profile 1, Default, Profile 2
+2026-03-05T04:25:50.050Z [DEBUG] [Claude in Chrome] Extension not found in any browser
+2026-03-05T04:25:50.114Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.884.1772684750114
+2026-03-05T04:25:50.114Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T04:25:50.114Z [DEBUG] Temp file written successfully, size: 11641 bytes
+2026-03-05T04:25:50.114Z [DEBUG] Applied original permissions to temp file
+2026-03-05T04:25:50.114Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.884.1772684750114 to /Users/yahelraviv/.claude.json
+2026-03-05T04:25:50.114Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T04:25:50.115Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.884.1772684750115
+2026-03-05T04:25:50.115Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T04:25:50.115Z [DEBUG] Temp file written successfully, size: 11686 bytes
+2026-03-05T04:25:50.115Z [DEBUG] Applied original permissions to temp file
+2026-03-05T04:25:50.115Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.884.1772684750115 to /Users/yahelraviv/.claude.json
+2026-03-05T04:25:50.115Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T04:25:50.175Z [DEBUG] [STARTUP] showSetupScreens() completed in 161ms
+2026-03-05T04:25:50.176Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-03-05T04:25:50.176Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-03-05T04:25:50.176Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-03-05T04:25:50.176Z [DEBUG] Starting background startup prefetches
+2026-03-05T04:25:50.177Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T04:25:50.177Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T04:25:50.177Z [DEBUG] [STARTUP] MCP configs resolved in 5ms (awaited at +177ms)
+2026-03-05T04:25:50.178Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:50.178Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:50.178Z [DEBUG] Total LSP servers loaded: 0
+2026-03-05T04:25:50.178Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T04:25:50.178Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:50.178Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:50.178Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:50.178Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:50.178Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2026-03-05T04:25:50.178Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:25:50.178Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2026-03-05T04:25:50.178Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-03-05T04:25:50.178Z [DEBUG] LSP manager initialized with 0 servers
+2026-03-05T04:25:50.179Z [DEBUG] LSP server manager initialized successfully
+2026-03-05T04:25:50.179Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-03-05T04:25:50.181Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:50.181Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:50.181Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-03-05T04:25:50.183Z [DEBUG] [Reconnection] computeInitialTeamContext: No teammate context set (not a teammate)
+2026-03-05T04:25:50.184Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.884.1772684750184
+2026-03-05T04:25:50.184Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T04:25:50.184Z [DEBUG] Temp file written successfully, size: 11686 bytes
+2026-03-05T04:25:50.184Z [DEBUG] Applied original permissions to temp file
+2026-03-05T04:25:50.184Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.884.1772684750184 to /Users/yahelraviv/.claude.json
+2026-03-05T04:25:50.184Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T04:25:50.199Z [DEBUG] [keybindings] KeybindingSetup initialized with 104 bindings, 0 warnings
+2026-03-05T04:25:50.323Z [DEBUG] [REPL:mount] REPL mounted, disabled=false
+2026-03-05T04:25:50.323Z [DEBUG] Official marketplace auto-install skipped: already_attempted
+2026-03-05T04:25:50.323Z [DEBUG] performStartupChecks called
+2026-03-05T04:25:50.323Z [DEBUG] Starting background plugin installations
+2026-03-05T04:25:50.324Z [DEBUG] FileHistory: Added snapshot for 497bdd92-3858-4df5-95b1-77da56abb7ae, tracking 0 files
+2026-03-05T04:25:50.324Z [DEBUG] No CLAUDE.md/rules files found
+2026-03-05T04:25:50.331Z [DEBUG] performBackgroundPluginInstallations called
+2026-03-05T04:25:50.937Z [DEBUG] [claudeai-mcp] Checking gate (cached)...
+2026-03-05T04:25:50.938Z [DEBUG] [claudeai-mcp] Gate returned: true
+2026-03-05T04:25:50.938Z [DEBUG] [claudeai-mcp] Fetching from https://api.anthropic.com/v1/mcp_servers?limit=1000
+2026-03-05T04:25:50.940Z [DEBUG] AutoUpdaterWrapper: Installation type: native
+2026-03-05T04:25:50.941Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-03-05T04:25:50.941Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-03-05T04:25:50.941Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-03-05T04:25:50.942Z [DEBUG] Sending 3 skills via attachment (initial, 3 total sent)
+2026-03-05T04:25:50.942Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-03-05T04:25:50.943Z [WARN] [3P telemetry] Event dropped (no event logger initialized): user_prompt
+2026-03-05T04:25:50.943Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:50.943Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:50.943Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:50.943Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:50.943Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-03-05T04:25:50.943Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:25:50.943Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:25:50.943Z [DEBUG] FileHistory: Making snapshot for message e1540fff-9e84-497a-aed6-2498f1a0b680
+2026-03-05T04:25:50.943Z [DEBUG] FileHistory: Added snapshot for e1540fff-9e84-497a-aed6-2498f1a0b680, tracking 0 files
+2026-03-05T04:25:50.955Z [DEBUG] Security messages are fresh (<1h old), skipping fetch
+2026-03-05T04:25:50.956Z [DEBUG] Org fast mode: disabled (extra_usage_disabled)
+2026-03-05T04:25:50.956Z [DEBUG] Watching for changes in setting files /Users/yahelraviv/.claude/settings.json, /Users/yahelraviv/compass/.claude/settings.json, /Users/yahelraviv/compass/.claude/settings.local.json...
+2026-03-05T04:25:50.969Z [DEBUG] Loaded plugins - Enabled: 0, Disabled: 0, Commands: 0, Agents: 0, Errors: 0
+2026-03-05T04:25:50.971Z [DEBUG] [useDeferredValue] Messages deferred by 2 (0→2)
+2026-03-05T04:25:50.987Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:50.994Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T04:25:50.997Z [DEBUG] Total plugin output styles loaded: 0
+2026-03-05T04:25:50.999Z [DEBUG] Ripgrep first use test: PASSED (mode=builtin, path=/Users/yahelraviv/.local/share/claude/versions/2.1.69)
+2026-03-05T04:25:51.012Z [DEBUG] autocompact: tokens=189 threshold=167000 effectiveWindow=180000
+2026-03-05T04:25:51.012Z [DEBUG] Dynamic tool loading: 0/21 deferred tools included
+2026-03-05T04:25:51.013Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.69.109; cc_entrypoint=cli; cch=00000;
+2026-03-05T04:25:51.013Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:51.013Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T04:25:51.013Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T04:25:51.013Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:51.013Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T04:25:51.013Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:51.016Z [DEBUG] [claudeai-mcp] Fetched 2 servers
+2026-03-05T04:25:51.017Z [DEBUG] CLAUDE_CODE_WEBSOCKET_AUTH_FILE_DESCRIPTOR not set, no file descriptor token available
+2026-03-05T04:25:51.017Z [DEBUG] MCP server "claude.ai Gmail": Initializing claude.ai proxy transport for server mcpsrv_01BwEVHvsY36LqDGbaybRXEs
+2026-03-05T04:25:51.017Z [DEBUG] MCP server "claude.ai Gmail": Using claude.ai proxy at https://mcp-proxy.anthropic.com/v1/mcp/mcpsrv_01BwEVHvsY36LqDGbaybRXEs
+2026-03-05T04:25:51.017Z [DEBUG] MCP server "claude.ai Gmail": claude.ai proxy transport created successfully
+2026-03-05T04:25:51.018Z [DEBUG] MCP server "claude.ai Gmail": Starting connection with timeout of 30000ms
+2026-03-05T04:25:51.018Z [DEBUG] MCP server "claude.ai Google Calendar": Initializing claude.ai proxy transport for server mcpsrv_012isYxbokCyw21TSPQF2Qhb
+2026-03-05T04:25:51.018Z [DEBUG] MCP server "claude.ai Google Calendar": Using claude.ai proxy at https://mcp-proxy.anthropic.com/v1/mcp/mcpsrv_012isYxbokCyw21TSPQF2Qhb
+2026-03-05T04:25:51.018Z [DEBUG] MCP server "claude.ai Google Calendar": claude.ai proxy transport created successfully
+2026-03-05T04:25:51.019Z [DEBUG] MCP server "claude.ai Google Calendar": Starting connection with timeout of 30000ms
+2026-03-05T04:25:51.020Z [DEBUG] [useDeferredValue] Messages deferred by 2 (0→2)
+2026-03-05T04:25:51.020Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:51.026Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:51.101Z [DEBUG] Checking for native installer update to version 2.1.69
+2026-03-05T04:25:51.101Z [DEBUG] Found 2.1.69 at /Users/yahelraviv/.local/bin/claude, skipping install
+2026-03-05T04:25:51.102Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:51.216Z [DEBUG] rg error (signal=null, code=2, stderr: rg: /Users/yahelraviv/.claude/plugins/cache: IO error for operation on /Users/yahelraviv/.claude/plugins/cache: No such file or directory (os error 2)
+), 0 results
+2026-03-05T04:25:51.226Z [DEBUG] SSH config check: code=255 configured=false
+2026-03-05T04:25:51.238Z [DEBUG] git pull: cwd=/Users/yahelraviv/.claude/plugins/marketplaces/claude-plugins-official ref=default
+2026-03-05T04:25:51.252Z [DEBUG] MCP server "claude.ai Gmail": claude.ai proxy connection failed after 235ms: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYjJHfB5vDKHFJMzFsU3y"}
+2026-03-05T04:25:51.252Z [ERROR] MCP server "claude.ai Gmail" Error: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYjJHfB5vDKHFJMzFsU3y"}
+2026-03-05T04:25:51.253Z [DEBUG] MCP server "claude.ai Gmail": Authentication required for claude.ai proxy server
+2026-03-05T04:25:51.259Z [DEBUG] MCP server "claude.ai Google Calendar": claude.ai proxy connection failed after 241ms: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYjJHf9bc9JUHMzMq3H3g"}
+2026-03-05T04:25:51.259Z [ERROR] MCP server "claude.ai Google Calendar" Error: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYjJHf9bc9JUHMzMq3H3g"}
+2026-03-05T04:25:51.259Z [DEBUG] MCP server "claude.ai Google Calendar": Authentication required for claude.ai proxy server
+2026-03-05T04:25:51.272Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:51.273Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:51.398Z [DEBUG] Successfully refreshed marketplace: claude-plugins-official
+2026-03-05T04:25:51.398Z [DEBUG] Plugin autoupdate: checking installed plugins
+2026-03-05T04:25:51.459Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:51.956Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:52.255Z [DEBUG] Stream started - received first chunk
+2026-03-05T04:25:52.259Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:52.783Z [DEBUG] [useDeferredValue] Messages deferred by 1 (2→3)
+2026-03-05T04:25:52.785Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:52.793Z [DEBUG] [useDeferredValue] Messages deferred by 2 (2→4)
+2026-03-05T04:25:52.794Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:52.800Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:52.806Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:52.806Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:52.806Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:52.806Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:52.806Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2026-03-05T04:25:52.806Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:25:52.806Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:25:52.808Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:52.809Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T04:25:52.826Z [DEBUG] Full reset (shrink->below): prevHeight=24, nextHeight=22, viewport=24
+2026-03-05T04:25:55.412Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:55.420Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:55.420Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:55.421Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:55.423Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:55.423Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:55.424Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:55.839Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:55.844Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:55.844Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:55.852Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:55.953Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:55.955Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:25:55.955Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:25:55.956Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:25:56.943Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:31.845Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude/settings.json.tmp.884.1772684791845
+2026-03-05T04:26:31.845Z [DEBUG] Preserving file permissions: 100644
+2026-03-05T04:26:31.846Z [DEBUG] Temp file written successfully, size: 27 bytes
+2026-03-05T04:26:31.846Z [DEBUG] Applied original permissions to temp file
+2026-03-05T04:26:31.846Z [DEBUG] Renaming /Users/yahelraviv/.claude/settings.json.tmp.884.1772684791845 to /Users/yahelraviv/.claude/settings.json
+2026-03-05T04:26:31.846Z [DEBUG] File /Users/yahelraviv/.claude/settings.json written atomically
+2026-03-05T04:26:31.847Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:31.847Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Users/yahelraviv/compass/.claude/settings.json
+2026-03-05T04:26:31.848Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:31.848Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:26:31.849Z [DEBUG] FileHistory: Making snapshot for message 52f10b72-f6a5-4e65-afca-841ee5129782
+2026-03-05T04:26:31.849Z [DEBUG] FileHistory: Added snapshot for 52f10b72-f6a5-4e65-afca-841ee5129782, tracking 0 files
+2026-03-05T04:26:31.850Z [DEBUG] [useDeferredValue] Messages deferred by 3 (4→7)
+2026-03-05T04:26:31.861Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T04:26:31.862Z [DEBUG] [useDeferredValue] Messages deferred by 3 (4→7)
+2026-03-05T04:26:31.864Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:31.864Z [DEBUG] AutoUpdaterWrapper: Installation type: native
+2026-03-05T04:26:31.865Z [DEBUG] [useDeferredValue] Messages deferred by 3 (4→7)
+2026-03-05T04:26:31.867Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:31.867Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T04:26:31.869Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:31.876Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:31.924Z [DEBUG] Checking for native installer update to version 2.1.69
+2026-03-05T04:26:31.924Z [DEBUG] Found 2.1.69 at /Users/yahelraviv/.local/bin/claude, skipping install
+2026-03-05T04:26:31.925Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:33.826Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:37.768Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:39.113Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:39.115Z [DEBUG] Full reset (shrink->below): prevHeight=25, nextHeight=24, viewport=24
+2026-03-05T04:26:39.202Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:39.310Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:39.438Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:39.504Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:39.628Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:39.688Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:39.768Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:39.911Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:40.024Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:40.117Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:40.309Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:40.376Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:40.833Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:40.936Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.024Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.186Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.222Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.340Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.415Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.541Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.611Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.730Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.790Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.861Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:41.970Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:42.071Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:42.138Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:42.226Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:42.829Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:43.291Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-03-05T04:26:43.291Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-03-05T04:26:43.291Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-03-05T04:26:43.291Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-03-05T04:26:43.292Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:43.292Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:26:43.292Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:43.292Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:26:43.292Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-03-05T04:26:43.292Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:26:43.292Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:26:43.292Z [DEBUG] FileHistory: Making snapshot for message a3ad881e-d809-4a84-b04b-1be7dce60d81
+2026-03-05T04:26:43.292Z [DEBUG] FileHistory: Added snapshot for a3ad881e-d809-4a84-b04b-1be7dce60d81, tracking 0 files
+2026-03-05T04:26:43.293Z [DEBUG] [useDeferredValue] Messages deferred by 1 (7→8)
+2026-03-05T04:26:43.295Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:43.296Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:43.299Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T04:26:43.301Z [DEBUG] autocompact: tokens=6042 threshold=167000 effectiveWindow=180000
+2026-03-05T04:26:43.301Z [DEBUG] Dynamic tool loading: 0/21 deferred tools included
+2026-03-05T04:26:43.302Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.69.109; cc_entrypoint=cli; cch=00000;
+2026-03-05T04:26:43.302Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:43.302Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T04:26:43.302Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T04:26:43.302Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:43.302Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T04:26:43.302Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:43.303Z [DEBUG] [useDeferredValue] Messages deferred by 1 (7→8)
+2026-03-05T04:26:43.304Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:43.305Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:44.186Z [DEBUG] Stream started - received first chunk
+2026-03-05T04:26:44.187Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:44.187Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:26:44.187Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:44.187Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:26:44.187Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2026-03-05T04:26:44.187Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:26:44.187Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:26:44.188Z [DEBUG] [useDeferredValue] Messages deferred by 1 (8→9)
+2026-03-05T04:26:44.189Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:44.190Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T04:26:44.194Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:44.235Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:44.435Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:45.583Z [DEBUG] Stored paste 78fe00fe362e9d61 to /Users/yahelraviv/.claude/paste-cache/78fe00fe362e9d61.txt
+2026-03-05T04:26:45.585Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-03-05T04:26:45.585Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-03-05T04:26:45.585Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-03-05T04:26:45.585Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-03-05T04:26:45.586Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:45.587Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:26:45.587Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:45.587Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:26:45.587Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-03-05T04:26:45.587Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:26:45.587Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:26:45.587Z [DEBUG] FileHistory: Making snapshot for message 784837da-ad46-451c-bb7d-ae15efa6496b
+2026-03-05T04:26:45.587Z [DEBUG] FileHistory: Added snapshot for 784837da-ad46-451c-bb7d-ae15efa6496b, tracking 0 files
+2026-03-05T04:26:45.588Z [DEBUG] [useDeferredValue] Messages deferred by 1 (9→10)
+2026-03-05T04:26:45.590Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:45.590Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:45.594Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T04:26:45.595Z [DEBUG] autocompact: tokens=6469 threshold=167000 effectiveWindow=180000
+2026-03-05T04:26:45.595Z [DEBUG] Dynamic tool loading: 0/21 deferred tools included
+2026-03-05T04:26:45.596Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.69.109; cc_entrypoint=cli; cch=00000;
+2026-03-05T04:26:45.596Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:45.596Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T04:26:45.596Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T04:26:45.596Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:45.596Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T04:26:45.596Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:45.598Z [DEBUG] [useDeferredValue] Messages deferred by 1 (9→10)
+2026-03-05T04:26:45.599Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:45.602Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:45.611Z [DEBUG] High write ratio: blit=1920, write=3305 (63.3% writes), screen=73x80
+2026-03-05T04:26:46.557Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:46.681Z [DEBUG] Stream started - received first chunk
+2026-03-05T04:26:46.686Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:47.518Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:47.567Z [DEBUG] [useDeferredValue] Messages deferred by 1 (10→11)
+2026-03-05T04:26:47.569Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:47.572Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:47.918Z [DEBUG] [useDeferredValue] Messages deferred by 1 (11→12)
+2026-03-05T04:26:47.921Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:47.926Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:47.941Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:47.941Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:26:47.941Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:26:47.941Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:26:47.941Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2026-03-05T04:26:47.941Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:26:47.941Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:26:47.943Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:26:47.945Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T04:27:17.580Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.626Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.634Z [DEBUG] High write ratio: blit=510, write=4051 (88.8% writes), screen=75x82
+2026-03-05T04:27:24.640Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.644Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.648Z [DEBUG] High write ratio: blit=984, write=3846 (79.6% writes), screen=75x84
+2026-03-05T04:27:24.661Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.666Z [DEBUG] High write ratio: blit=984, write=3889 (79.8% writes), screen=75x85
+2026-03-05T04:27:24.681Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.685Z [DEBUG] High write ratio: blit=984, write=3932 (80.0% writes), screen=75x86
+2026-03-05T04:27:24.696Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.701Z [DEBUG] High write ratio: blit=984, write=3975 (80.2% writes), screen=75x87
+2026-03-05T04:27:24.706Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.709Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.729Z [DEBUG] High write ratio: blit=984, write=4018 (80.3% writes), screen=74x88
+2026-03-05T04:27:24.740Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.743Z [DEBUG] High write ratio: blit=984, write=4061 (80.5% writes), screen=74x89
+2026-03-05T04:27:24.756Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.789Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.792Z [DEBUG] High write ratio: blit=984, write=4104 (80.7% writes), screen=74x90
+2026-03-05T04:27:24.854Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.919Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:24.923Z [DEBUG] High write ratio: blit=984, write=4147 (80.8% writes), screen=74x91
+2026-03-05T04:27:24.937Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.008Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.037Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.041Z [DEBUG] High write ratio: blit=984, write=4190 (81.0% writes), screen=74x92
+2026-03-05T04:27:25.064Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.130Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.134Z [DEBUG] High write ratio: blit=984, write=4233 (81.1% writes), screen=74x93
+2026-03-05T04:27:25.138Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.187Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.210Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.214Z [DEBUG] High write ratio: blit=984, write=4186 (81.0% writes), screen=73x94
+2026-03-05T04:27:25.242Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.291Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:27:25.294Z [DEBUG] High write ratio: blit=984, write=4228 (81.1% writes), screen=73x95
+2026-03-05T04:27:25.301Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:01.247Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:01.405Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:01.512Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:01.656Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:01.840Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:02.175Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:02.369Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:02.487Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:02.761Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:02.952Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:03.088Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:03.156Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:03.259Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:03.508Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:03.799Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:03.899Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:03.991Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:04.167Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:04.275Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:04.365Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:04.504Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:04.592Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:04.691Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:04.854Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:04.920Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:04.999Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.111Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.262Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.471Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.824Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-03-05T04:28:05.824Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-03-05T04:28:05.824Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-03-05T04:28:05.824Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-03-05T04:28:05.825Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:28:05.825Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:28:05.825Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:28:05.825Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:28:05.825Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-03-05T04:28:05.825Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:28:05.825Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:28:05.825Z [DEBUG] FileHistory: Making snapshot for message 9ec27043-4710-4c99-a603-19f0195069f9
+2026-03-05T04:28:05.826Z [DEBUG] FileHistory: Added snapshot for 9ec27043-4710-4c99-a603-19f0195069f9, tracking 0 files
+2026-03-05T04:28:05.826Z [DEBUG] [useDeferredValue] Messages deferred by 1 (12→13)
+2026-03-05T04:28:05.830Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.830Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.835Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T04:28:05.838Z [DEBUG] autocompact: tokens=6629 threshold=167000 effectiveWindow=180000
+2026-03-05T04:28:05.839Z [DEBUG] Dynamic tool loading: 0/21 deferred tools included
+2026-03-05T04:28:05.839Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.69.109; cc_entrypoint=cli; cch=00000;
+2026-03-05T04:28:05.839Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.839Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T04:28:05.839Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T04:28:05.840Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.840Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T04:28:05.840Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.841Z [DEBUG] [useDeferredValue] Messages deferred by 1 (12→13)
+2026-03-05T04:28:05.842Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:05.844Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:06.471Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:12.332Z [DEBUG] Stream started - received first chunk
+2026-03-05T04:28:12.339Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:14.524Z [DEBUG] [useDeferredValue] Messages deferred by 1 (13→14)
+2026-03-05T04:28:14.528Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:14.548Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:28:14.548Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:28:14.549Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:28:14.549Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:28:14.549Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2026-03-05T04:28:14.549Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:28:14.549Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:28:14.551Z [DEBUG] [useDeferredValue] Messages deferred by 1 (13→14)
+2026-03-05T04:28:14.563Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:28:14.566Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T04:28:14.573Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:29:14.582Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:29:14.583Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:29:14.583Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:29:14.583Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:29:14.584Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2026-03-05T04:29:14.584Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:29:14.585Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)
+2026-03-05T04:29:33.093Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:29:53.524Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:15.291Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:16.339Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:25.043Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:25.921Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:26.636Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:26.753Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:26.905Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:27.316Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:27.479Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:27.715Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:27.861Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:28.862Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:29.059Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:29.203Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:29.282Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:29.718Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:29.823Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:29.828Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:30.825Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:31.344Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-03-05T04:30:31.345Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-03-05T04:30:31.345Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-03-05T04:30:31.345Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-03-05T04:30:31.346Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:31.346Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:31.346Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:31.346Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:31.346Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-03-05T04:30:31.346Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:30:31.346Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:30:31.347Z [DEBUG] FileHistory: Making snapshot for message 69c6d226-e0bd-404f-8b2b-755f543b021a
+2026-03-05T04:30:31.347Z [DEBUG] FileHistory: Added snapshot for 69c6d226-e0bd-404f-8b2b-755f543b021a, tracking 0 files
+2026-03-05T04:30:31.348Z [DEBUG] [useDeferredValue] Messages deferred by 1 (14→15)
+2026-03-05T04:30:31.352Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:31.352Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:31.357Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T04:30:31.360Z [DEBUG] autocompact: tokens=6714 threshold=167000 effectiveWindow=180000
+2026-03-05T04:30:31.361Z [DEBUG] Dynamic tool loading: 0/21 deferred tools included
+2026-03-05T04:30:31.361Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.69.109; cc_entrypoint=cli; cch=00000;
+2026-03-05T04:30:31.361Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:31.362Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T04:30:31.362Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T04:30:31.362Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:31.362Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T04:30:31.362Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:31.364Z [DEBUG] [useDeferredValue] Messages deferred by 1 (14→15)
+2026-03-05T04:30:31.364Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:31.366Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:32.287Z [DEBUG] Stream started - received first chunk
+2026-03-05T04:30:32.290Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:32.320Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:32.946Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:34.407Z [DEBUG] [useDeferredValue] Messages deferred by 1 (15→16)
+2026-03-05T04:30:34.410Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:34.419Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:36.022Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:36.232Z [DEBUG] [useDeferredValue] Messages deferred by 1 (16→17)
+2026-03-05T04:30:36.235Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:36.256Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:36.256Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:36.256Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:36.256Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:36.256Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2026-03-05T04:30:36.256Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:30:36.256Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:30:36.257Z [DEBUG] [useDeferredValue] Messages deferred by 1 (16→17)
+2026-03-05T04:30:36.260Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:36.263Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T04:30:36.264Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:36.286Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:36.460Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:36.619Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:36.732Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:36.978Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:37.203Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:37.437Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:37.655Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:37.764Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:38.220Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:38.323Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:38.327Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:38.979Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-03-05T04:30:38.979Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-03-05T04:30:38.979Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-03-05T04:30:38.980Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-03-05T04:30:38.981Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:38.981Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:38.981Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:38.981Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:38.981Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-03-05T04:30:38.981Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:30:38.981Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:30:38.982Z [DEBUG] FileHistory: Making snapshot for message 2754ea0a-851e-4492-8f4b-ce2c9a883919
+2026-03-05T04:30:38.982Z [DEBUG] FileHistory: Added snapshot for 2754ea0a-851e-4492-8f4b-ce2c9a883919, tracking 0 files
+2026-03-05T04:30:38.983Z [DEBUG] [useDeferredValue] Messages deferred by 1 (17→18)
+2026-03-05T04:30:38.988Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:38.988Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:38.993Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T04:30:38.994Z [DEBUG] autocompact: tokens=7159 threshold=167000 effectiveWindow=180000
+2026-03-05T04:30:38.995Z [DEBUG] Dynamic tool loading: 0/21 deferred tools included
+2026-03-05T04:30:38.995Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.69.109; cc_entrypoint=cli; cch=00000;
+2026-03-05T04:30:38.995Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:38.995Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T04:30:38.995Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T04:30:38.996Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:38.996Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T04:30:38.996Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:38.997Z [DEBUG] [useDeferredValue] Messages deferred by 1 (17→18)
+2026-03-05T04:30:38.998Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:39.001Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:39.956Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:40.920Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:41.880Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:42.844Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:43.803Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:44.767Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:45.726Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:45.750Z [DEBUG] Stream started - received first chunk
+2026-03-05T04:30:45.753Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:46.688Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:47.513Z [DEBUG] [useDeferredValue] Messages deferred by 1 (18→19)
+2026-03-05T04:30:47.516Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:47.525Z [DEBUG] [useDeferredValue] Messages deferred by 1 (18→19)
+2026-03-05T04:30:47.526Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:47.529Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:47.646Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.010Z [DEBUG] [useDeferredValue] Messages deferred by 1 (19→20)
+2026-03-05T04:30:48.016Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.020Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.032Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.091Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.093Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.111Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.120Z [DEBUG] executePreToolHooks called for tool: ToolSearch
+2026-03-05T04:30:48.120Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:48.120Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:48.120Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:48.120Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:48.120Z [DEBUG] Getting matching hook commands for PreToolUse with query: ToolSearch
+2026-03-05T04:30:48.120Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:30:48.120Z [DEBUG] Matched 0 unique hooks for query "ToolSearch" (0 before deduplication)
+2026-03-05T04:30:48.124Z [DEBUG] ToolSearchTool: cache invalidated - deferred tools changed
+2026-03-05T04:30:48.124Z [DEBUG] ToolSearchTool: selected Bash
+2026-03-05T04:30:48.126Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:48.126Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:48.126Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:48.126Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:48.126Z [DEBUG] Getting matching hook commands for PostToolUse with query: ToolSearch
+2026-03-05T04:30:48.126Z [DEBUG] Found 5 hook matchers in settings
+2026-03-05T04:30:48.126Z [DEBUG] Matched 0 unique hooks for query "ToolSearch" (0 before deduplication)
+2026-03-05T04:30:48.126Z [DEBUG] [useDeferredValue] Messages deferred by 1 (20→21)
+2026-03-05T04:30:48.127Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.129Z [DEBUG] High write ratio: blit=0, write=5903 (100.0% writes), screen=103x95
+2026-03-05T04:30:48.135Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.243Z [DEBUG] [useDeferredValue] Messages deferred by 1 (21→22)
+2026-03-05T04:30:48.245Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.248Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.254Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.276Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-03-05T04:30:48.276Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-03-05T04:30:48.276Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-03-05T04:30:48.276Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-03-05T04:30:48.277Z [DEBUG] autocompact: tokens=7303 threshold=167000 effectiveWindow=180000
+2026-03-05T04:30:48.277Z [DEBUG] Dynamic tool loading: found 1 discovered tools in message history
+2026-03-05T04:30:48.279Z [DEBUG] Dynamic tool loading: 1/21 deferred tools included
+2026-03-05T04:30:48.279Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.69.109; cc_entrypoint=cli; cch=00000;
+2026-03-05T04:30:48.280Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.280Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T04:30:48.280Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T04:30:48.280Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.280Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T04:30:48.280Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.282Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:48.613Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:49.574Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:50.535Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:51.498Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:52.458Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:53.327Z [DEBUG] Stream started - received first chunk
+2026-03-05T04:30:53.337Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:53.419Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:53.745Z [DEBUG] executePreToolHooks called for tool: Bash
+2026-03-05T04:30:53.745Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:53.745Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:53.746Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:53.746Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:53.746Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2026-03-05T04:30:53.746Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:30:53.746Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-03-05T04:30:53.762Z [DEBUG] [useDeferredValue] Messages deferred by 1 (22→23)
+2026-03-05T04:30:53.763Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:53.765Z [DEBUG] High write ratio: blit=0, write=5903 (100.0% writes), screen=103x95
+2026-03-05T04:30:53.770Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:30:53.772Z [DEBUG] tree-sitter: loaded from embedded
+2026-03-05T04:30:53.779Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "DIRECT_URL=\"postgresql://postgres.qfrdofuqxzwtqqfyltef:ceNmef-wucris-3jusqo@aws-1-us-east-1.pooler.supabase.com:5432/postgres\" DATABASE_URL=\"postgresql://postgres.qfrdofuqxzwtqqfyltef:ceNmef-wucris-3jusqo@aws-1-us-east-1.pooler.supabase.com:6543/postgres\" pnpm --filter @compass/db db:push"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2026-03-05T04:30:53.780Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2026-03-05T04:30:53.780Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:53.780Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:53.780Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:53.780Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:53.780Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2026-03-05T04:30:53.780Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:30:53.780Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-03-05T04:30:53.782Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:53.782Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:53.787Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T04:30:53.795Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:53.795Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:59.795Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:59.796Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:59.796Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:30:59.796Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:30:59.796Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2026-03-05T04:30:59.796Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:30:59.796Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2026-03-05T04:31:25.978Z [DEBUG] Persisting permission update: addRules to source 'localSettings'
+2026-03-05T04:31:25.978Z [DEBUG] Persisting 1 allow rule(s) to localSettings
+2026-03-05T04:31:25.979Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:31:25.979Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:31:25.981Z [DEBUG] Writing to temp file: /Users/yahelraviv/compass/.claude/settings.local.json.tmp.884.1772685085981
+2026-03-05T04:31:25.981Z [DEBUG] Preserving file permissions: 100644
+2026-03-05T04:31:25.982Z [DEBUG] Temp file written successfully, size: 397 bytes
+2026-03-05T04:31:25.982Z [DEBUG] Applied original permissions to temp file
+2026-03-05T04:31:25.982Z [DEBUG] Renaming /Users/yahelraviv/compass/.claude/settings.local.json.tmp.884.1772685085981 to /Users/yahelraviv/compass/.claude/settings.local.json
+2026-03-05T04:31:25.982Z [DEBUG] File /Users/yahelraviv/compass/.claude/settings.local.json written atomically
+2026-03-05T04:31:25.986Z [DEBUG] Applying permission update: Adding 1 allow rule(s) to destination 'localSettings': ["Bash(DIRECT_URL=\"postgresql://postgres.qfrdofuqxzwtqqfyltef:ceNmef-wucris-3jusqo@aws-1-us-east-1.pooler.supabase.com:5432/postgres\" DATABASE_URL=\"postgresql://postgres.qfrdofuqxzwtqqfyltef:ceNmef-wucris-3jusqo@aws-1-us-east-1.pooler.supabase.com:6543/postgres\" pnpm:*)"]
+2026-03-05T04:31:25.987Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:31:25.987Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Users/yahelraviv/compass/.claude/settings.json
+2026-03-05T04:31:25.988Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:31:25.988Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:31:25.993Z [DEBUG] Creating shell snapshot for zsh (/bin/zsh)
+2026-03-05T04:31:25.993Z [DEBUG] Looking for shell config file: /Users/yahelraviv/.zshrc
+2026-03-05T04:31:25.994Z [DEBUG] Snapshots directory: /Users/yahelraviv/.claude/shell-snapshots
+2026-03-05T04:31:25.994Z [DEBUG] Creating snapshot at: /Users/yahelraviv/.claude/shell-snapshots/snapshot-zsh-1772685085994-e1zmha.sh
+2026-03-05T04:31:25.994Z [DEBUG] Execution timeout: 10000ms
+2026-03-05T04:31:26.005Z [DEBUG] High write ratio: blit=0, write=6067 (100.0% writes), screen=107x95
+2026-03-05T04:31:26.007Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T04:31:26.008Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:26.009Z [DEBUG] AutoUpdaterWrapper: Installation type: native
+2026-03-05T04:31:26.010Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:26.015Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:26.149Z [DEBUG] Checking for native installer update to version 2.1.69
+2026-03-05T04:31:26.149Z [DEBUG] Found 2.1.69 at /Users/yahelraviv/.local/bin/claude, skipping install
+2026-03-05T04:31:26.150Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:26.364Z [DEBUG] Shell snapshot created successfully (141592 bytes)
+2026-03-05T04:31:26.365Z [DEBUG] No session environment scripts found
+2026-03-05T04:31:26.365Z [DEBUG] Spawning shell without login (-l flag skipped)
+2026-03-05T04:31:26.967Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:27.932Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:28.895Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:29.379Z [DEBUG] [useDeferredValue] Messages deferred by 1 (23→24)
+2026-03-05T04:31:29.382Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:29.395Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:29.854Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:30.371Z [DEBUG] [useDeferredValue] Messages deferred by 1 (24→25)
+2026-03-05T04:31:30.373Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:30.379Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:30.815Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:31.374Z [DEBUG] [useDeferredValue] Messages deferred by 1 (25→26)
+2026-03-05T04:31:31.377Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:31.388Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:31.776Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:32.374Z [DEBUG] [useDeferredValue] Messages deferred by 1 (26→27)
+2026-03-05T04:31:32.377Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:32.383Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:32.735Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:33.380Z [DEBUG] [useDeferredValue] Messages deferred by 1 (27→28)
+2026-03-05T04:31:33.381Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:33.390Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:33.700Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:34.038Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:31:34.038Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:31:34.038Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:31:34.038Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:31:34.038Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2026-03-05T04:31:34.038Z [DEBUG] Found 5 hook matchers in settings
+2026-03-05T04:31:34.038Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2026-03-05T04:31:34.039Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-03-05T04:31:34.039Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-03-05T04:31:34.039Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-03-05T04:31:34.039Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-03-05T04:31:34.039Z [DEBUG] autocompact: tokens=10861 threshold=167000 effectiveWindow=180000
+2026-03-05T04:31:34.039Z [DEBUG] Dynamic tool loading: found 1 discovered tools in message history
+2026-03-05T04:31:34.039Z [DEBUG] Dynamic tool loading: 1/21 deferred tools included
+2026-03-05T04:31:34.040Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.69.109; cc_entrypoint=cli; cch=00000;
+2026-03-05T04:31:34.040Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:34.040Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T04:31:34.040Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T04:31:34.040Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:34.040Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T04:31:34.040Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:34.041Z [DEBUG] [useDeferredValue] Messages deferred by 1 (28→29)
+2026-03-05T04:31:34.042Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:34.043Z [DEBUG] High write ratio: blit=0, write=6067 (100.0% writes), screen=107x95
+2026-03-05T04:31:34.046Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:34.660Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:35.621Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:35.735Z [DEBUG] Stream started - received first chunk
+2026-03-05T04:31:35.740Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:36.587Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:37.148Z [DEBUG] [useDeferredValue] Messages deferred by 1 (29→30)
+2026-03-05T04:31:37.152Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:37.162Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:37.173Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:31:37.173Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:31:37.173Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:31:37.173Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:31:37.173Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2026-03-05T04:31:37.173Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T04:31:37.173Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T04:31:37.176Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:31:37.179Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T04:32:16.522Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:35:50.370Z [DEBUG] Cleaned up old image cache: /Users/yahelraviv/.claude/image-cache/49773662-f00d-434c-956a-e4824f62886e
+2026-03-05T04:37:14.772Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:16.018Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:16.115Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:16.117Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:17.620Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:19.782Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:20.191Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:20.679Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:20.897Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:21.397Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:21.400Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:22.396Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:22.525Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:22.533Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:37:22.535Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:37:22.536Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:22.545Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:37:22.545Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:37:22.546Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:22.727Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:22.729Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:37:22.729Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:37:22.731Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:37:22.731Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:37:22.732Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:22.837Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:22.839Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:37:22.839Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:37:22.840Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:23.023Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:23.029Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:37:23.029Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:37:23.031Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:23.179Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:23.182Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:37:23.182Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:37:23.185Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:23.255Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T04:37:23.261Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T04:37:23.261Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: /Library/Application Support/ClaudeCode/managed-settings.json
+2026-03-05T04:37:23.264Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable

@@ -1,0 +1,39 @@
+# ============================================================
+# COMPASS — Environment Variables
+# Copy this file to .env.local and fill in your values
+# ============================================================
+
+# --- Database (Supabase) ---
+DATABASE_URL="postgresql://postgres:[PASSWORD]@db.[PROJECT].supabase.co:6543/postgres?pgbouncer=true"
+DIRECT_URL="postgresql://postgres:[PASSWORD]@db.[PROJECT].supabase.co:5432/postgres"
+
+# --- Auth (Clerk) ---
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
+CLERK_SECRET_KEY="sk_test_..."
+CLERK_WEBHOOK_SECRET="whsec_..."
+NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
+NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/onboarding"
+
+# --- AI Service (FastAPI on Railway) ---
+AI_SERVICE_URL="https://compass-ai-service.railway.app"
+AI_SERVICE_SECRET_KEY="generate-a-strong-secret-here"
+
+# --- Anthropic (used in AI service) ---
+ANTHROPIC_API_KEY="sk-ant-..."
+
+# --- Voyage AI (embeddings) ---
+VOYAGE_API_KEY="pa-..."
+
+# --- Queue (Upstash QStash) ---
+QSTASH_TOKEN="..."
+QSTASH_CURRENT_SIGNING_KEY="sig_..."
+QSTASH_NEXT_SIGNING_KEY="sig_..."
+
+# --- Cache (Upstash Redis) ---
+UPSTASH_REDIS_REST_URL="https://[instance].upstash.io"
+UPSTASH_REDIS_REST_TOKEN="..."
+
+# --- App ---
+NEXT_PUBLIC_APP_URL="http://localhost:3000"

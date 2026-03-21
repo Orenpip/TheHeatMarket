@@ -1,0 +1,19 @@
+{
+  "framework": "nextjs",
+  "installCommand": "pnpm install",
+  "buildCommand": "turbo run build --filter=@compass/web",
+  "outputDirectory": "apps/web/.next",
+  "ignoreCommand": "npx turbo-ignore @compass/web",
+  "regions": ["iad1"],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ]
+}

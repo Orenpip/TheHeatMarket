@@ -1,0 +1,62 @@
+copy / /app, .
+1s
+
+pnpm --filter @compass/web build
+29s
+> @compass/web@0.0.2 build /app/apps/web
+> next build
+ ⚠ Invalid next.config.mjs options detected: 
+ ⚠     Unrecognized key(s) in object: 'outputFileTracingRoot' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ `experimental.outputFileTracingRoot` has been moved to `outputFileTracingRoot`. Please update your next.config.mjs file accordingly.
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+   ▲ Next.js 15.5.12
+   - Experiments (use with caution):
+     · outputFileTracingRoot: "/app/"
+     · optimizePackageImports
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (192kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled successfully in 16.4s
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+   Generating static pages (0/35) ...
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'url' property is missing or undefined in your Redis config.
+[Upstash Redis] The 'token' property is missing or undefined in your Redis config.
+   Generating static pages (8/35) 
+Error occurred prerendering page "/reflect". Read more: https://nextjs.org/docs/messages/prerender-error
+Error: @clerk/clerk-react: Missing publishableKey. You can get your key at https://dashboard.clerk.com/last-active?path=api-keys.
+
+    at Object.throwMissingPublishableKeyError (.next/server/chunks/9870.js:30:1483)
+    at <unknown> (.next/server/chunks/9870.js:40:62252) {
+  digest: '2498946216'
+}
+Export encountered an error on /(student)/reflect/page: /reflect, exiting the build.
+ ⨯ Next.js build worker exited with code: 1 and signal: null
+/app/apps/web:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @compass/web@0.0.2 build: `next build`
+Exit status 1
+ERROR: failed to build: failed to solve: process "sh -c pnpm --filter @compass/web build" did not complete successfully: exit code: 1

@@ -1,0 +1,74 @@
+Project: Compass                                           
+                                                                                                                                                                                                            
+  What it is: A student self-reflection platform. High schoolers complete structured reflection sessions every 3 weeks, an AI synthesizes their responses into a "signal profile" (interest clusters,       
+  breadth score, trajectory patterns), and counselors get a dashboard view of their students. There's also a personalized career/major map driven by pgvector similarity search.                            
+                                                                                                                                                                                                            
+  Stack: Next.js 14 (app router) + Turborepo monorepo. Clerk for auth (student / counselor / admin roles). Supabase PostgreSQL + Prisma ORM. Anthropic (claude-sonnet-4-6) for synthesis, Voyage AI for
+  embeddings. QStash for background jobs. Upstash Redis for caching. FastAPI Python service for AI work. React Native mobile app (apps/mobile) not touched.
+  ---
+  What was done this session
+  Security
+  - SSL rejectUnauthorized: false → true on DB connection (was allowing MITM)
+  - Security headers added to Next.js (X-Frame-Options, CSP, X-Content-Type-Options, etc.)
+  - CORS allow_origins=["*"] → [settings.app_url] in Python AI service
+  - Rate limiting added to 3 AI-heavy endpoints (session create: 10/hr, session submit: 5/hr, personalized map: 20/min)
+  - Input validation added to reflections, onboarding, notifications routes
+  - Embedding array validated (1024-dim floats) before raw SQL in personalized map
+  Bug fixes
+  - BUG-1: EMBED_PROFILE QStash job type was unhandled — now implemented
+  - BUG-2: pgvector raw SQL ran with unvalidated AI output — now validated first
+  - BUG-4: Session completedCount counted started sessions, not completed ones
+  - BUG-5: weekKey used wrong math (Math.ceil(date/7)) — replaced with ISO 8601 getISOWeekKey()
+  - Synthesis idempotency: signalProfile.create → upsert in both submit route and QStash handler (QStash has at-least-once delivery)
+  - Duplicate reflection create race condition (concurrent autosaves)
+  - SessionWizard step count hardcoded as "5", now dynamic
+  - PulseCheckStep didn't check response.ok before advancing
+  - TemplateManager delete/toggle didn't check response.ok
+  API error handling (all 33 routes)
+  - Centralized AuthError class + apiError() in lib/auth.ts
+  - All catch blocks now return correct HTTP status codes (401/403/500) instead of always 400
+  Privacy
+  - shareSignals toggle now persists — fans out to all 4 DB fields
+  - shareSummary — new DB field + migration, toggle now persists
+  - Privacy settings loaded from DB when entering step 5 (reflects actual saved state)
+  - "Make everything private" reset now also sets shareSummary: false
+  DB migrations (3 applied)
+  1. 0_init — baseline of existing schema
+  2. add-signal-profile-session-id-unique — added sessionId + @@unique([studentId, sessionId])
+  3. signal-profile-not-null-add-share-summary — sessionId NOT NULL, added shareSummary
+  Maintainability
+  - COOLDOWN_DAYS extracted from 4 files → single lib/constants.ts
+  - parsePrompts() called 3× per template render → called once
+  - synthesize.ts: type-safe content block handling, proper JSON parse error handling, improved code fence stripping
+  ---
+  What still needs to be done
+  You need to act on these (can't be automated)
+  ┌─────┬────────────────────────────────────────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │  #  │                          What                          │                                                                Why                                                                │
+  ├─────┼────────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ 1   │ Set APP_URL=https://your-domain.com in AI service .env │ CORS fix only works if the env var is set                                                                                         │
+  ├─────┼────────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ 2   │ Enable ESLint in builds                                │ next.config.mjs has ignoreDuringBuilds: true — left off to avoid breaking prod, but should be fixed once lint errors are resolved │
+  └─────┴────────────────────────────────────────────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+  Needs product/design decision from you first
+  ┌─────┬───────────────────────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │  #  │                 What                  │                                                                        Options                                                                        │
+  ├─────┼───────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ 3   │ Counselor API — does it respect       │ The compressedSummary is returned to counselors in /api/counselor/students/[id]/summary — need to filter it if shareSummary: false. Straightforward   │
+  │     │ shareSummary?                         │ join, just needs a decision to do it.                                                                                                                 │
+  ├─────┼───────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ 4   │ Mobile app (apps/mobile)              │ Completely untouched — unknown state                                                                                                                  │
+  └─────┴───────────────────────────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+  Larger engineering work (multi-day)
+  ┌─────┬─────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │  #  │                  What                   │                                                                 Notes                                                                  │
+  ├─────┼─────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ 5   │ Rate limiting on more endpoints         │ Currently only on 3 routes. Other mutation endpoints (activities, reflections POST) have no rate limiting                              │
+  ├─────┼─────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ 6   │ Tests                                   │ Zero test coverage across the codebase — 80% target per your coding standards                                                          │
+  ├─────┼─────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ 7   │ DIRECT_URL for migrations going forward │ Using migrate deploy (no shadow DB) works but means migration SQL must always be hand-reviewed. Worth documenting in a CONTRIBUTING.md │
+  └─────┴─────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+  ---
+  The most immediately impactful thing to do next is #3 — the counselor summary API probably leaks the compressedSummary regardless of shareSummary. Want me to fix that?
+

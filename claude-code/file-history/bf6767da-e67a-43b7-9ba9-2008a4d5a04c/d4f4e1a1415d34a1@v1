@@ -1,0 +1,87 @@
+# Fix Vercel Deployment — Root Cause & Solution
+
+## Context
+
+The COMPASS Next.js app builds successfully every time (Prisma generates, webpack compiles, 33 pages generated) but Vercel fails with:
+```
+Error: No Output Directory named "public" found after the Build completed.
+```
+
+We've been through 15+ iterations of fixes. The build itself is solved. The **only** remaining issue is Vercel not recognizing the output.
+
+## Root Cause
+
+**Vercel is reading the WRONG vercel.json.**
+
+Evidence from build logs:
+- Build runs from `/vercel/path0` (monorepo root) — proving Root Directory is blank/root
+- `Running "npx turbo-ignore @compass/web"` — this comes from **root** `vercel.json`
+- `Running "pnpm run build"` — this is the ROOT package.json's `build` script
+- No trace of `cd ../.. && pnpm exec turbo...` — the command from `apps/web/vercel.json`
+
+**When Root Directory is blank**, Vercel reads `/vercel.json` (root). The root `vercel.json` currently contains ONLY:
+```json
+{
+  "ignoreCommand": "npx turbo-ignore @compass/web"
+}
+```
+
+No `framework`. No `outputDirectory`. So Vercel defaults to "Other" framework → looks for `public/` directory → fails.
+
+Meanwhile, `apps/web/vercel.json` has all the correct config (buildCommand, installCommand, outputDirectory) **but is completely ignored** because Root Directory is at root.
+
+## The Fix
+
+Put all Vercel configuration in the **root** `vercel.json`, since that's what Vercel actually reads.
+
+### File: `/compass/vercel.json` (replace entire contents)
+```json
+{
+  "framework": "nextjs",
+  "installCommand": "pnpm install",
+  "buildCommand": "turbo run build --filter=@compass/web",
+  "outputDirectory": "apps/web/.next",
+  "ignoreCommand": "npx turbo-ignore @compass/web",
+  "regions": ["iad1"],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### File: `/compass/apps/web/vercel.json` — DELETE this file
+It's not being read. Having two vercel.json files has been the source of confusion throughout this entire debugging saga.
+
+### Vercel UI Settings (verify)
+- **Root Directory**: blank (leave empty)
+- **All Override toggles**: OFF
+- **Node.js version**: 20.x
+
+No other UI changes needed. The root `vercel.json` controls everything.
+
+### What about the `functions` config (maxDuration)?
+The `apps/web/vercel.json` had `functions` config for extended timeouts on certain API routes. These are **not critical for deployment** — they only matter for long-running routes like QStash webhooks. We'll add them back AFTER the first successful deploy, once we confirm the `functions` path format works from root-level vercel.json.
+
+## Why This Approach
+
+1. **Eliminates the Root Directory confusion** — we've failed to reliably set Root Directory to `apps/web` multiple times. By putting config in root vercel.json, we don't depend on that UI setting at all.
+2. **Eliminates the two-vercel.json confusion** — one file, one source of truth.
+3. **The build already works from root** — `turbo build` from root has been successfully compiling all 33 pages. We just need Vercel to find the output.
+4. **`framework: "nextjs"` is a valid vercel.json field** — it tells Vercel to process the output as a Next.js app (serverless functions, routing, etc.)
+
+## Verification
+
+After pushing the changes:
+1. Vercel should clone, install, and build as before (turbo → prisma generate → next build → 33 pages)
+2. After build, Vercel should find `.next` at `apps/web/.next`
+3. Vercel should process it as a Next.js app (not "Other"/static)
+4. Deployment should succeed and produce a working URL
+5. Visiting the URL should show the Clerk sign-in page (since middleware protects all routes)

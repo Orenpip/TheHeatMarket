@@ -1,0 +1,33 @@
+{
+  "framework": "nextjs",
+  "installCommand": "pnpm install",
+  "buildCommand": "turbo run build --filter=@compass/web",
+  "outputDirectory": "apps/web/.next",
+  "ignoreCommand": "npx turbo-ignore @compass/web",
+  "regions": ["iad1"],
+  "functions": {
+    "apps/web/app/api/webhooks/qstash/route.ts": {
+      "maxDuration": 300
+    },
+    "apps/web/app/api/sessions/[id]/submit/route.ts": {
+      "maxDuration": 30
+    },
+    "apps/web/app/api/map/personalized/route.ts": {
+      "maxDuration": 30
+    },
+    "apps/web/app/api/counselor/students/[id]/meeting-prep/route.ts": {
+      "maxDuration": 60
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ]
+}

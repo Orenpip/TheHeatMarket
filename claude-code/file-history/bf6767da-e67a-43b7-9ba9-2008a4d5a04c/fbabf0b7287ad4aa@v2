@@ -1,0 +1,20 @@
+# Vercel Deployment - COMPASS
+
+## Setup (working as of March 2026)
+- **Root Directory**: blank (empty) in Vercel UI
+- **All Override toggles**: OFF
+- **Node.js**: 20.x
+- **Config**: Single `vercel.json` at monorepo root (not in apps/web)
+
+## Root vercel.json contains
+- `"framework": "nextjs"`
+- `"buildCommand": "turbo run build --filter=@compass/web"`
+- `"outputDirectory": "apps/web/.next"`
+- `"installCommand": "pnpm install"`
+- `"ignoreCommand": "npx turbo-ignore @compass/web"`
+
+## Key lessons
+- With Root Directory blank, Vercel reads `/vercel.json` (root), NOT `apps/web/vercel.json`
+- `next` must be in root `package.json` devDependencies for Vercel to detect the Next.js version
+- After adding deps to root package.json, must run `pnpm install` to update lockfile
+- The `functions` config (maxDuration) was deferred — add back after confirming deploy works

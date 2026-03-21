@@ -1,0 +1,568 @@
+# OpenClaw
+
+OpenClaw is a personal AI assistant platform that you run on your own devices. It provides a unified control plane (Gateway) that connects to multiple messaging channels including WhatsApp, Telegram, Slack, Discord, Google Chat, Signal, iMessage, Microsoft Teams, Matrix, and WebChat. The Gateway handles sessions, presence, configuration, cron jobs, webhooks, and tool execution while maintaining conversation continuity across channels.
+
+The platform supports voice interaction (wake word, talk mode), browser automation, canvas-driven visual workspaces, and companion apps for macOS, iOS, and Android. OpenClaw uses a skills-based architecture where capabilities are taught via `SKILL.md` files, and supports multiple AI model providers including Anthropic, OpenAI, and custom endpoints with automatic failover and auth rotation.
+
+## Installation
+
+Install and run the onboarding wizard for guided setup.
+
+```bash
+# Install globally via npm or pnpm
+npm install -g openclaw@latest
+# or: pnpm add -g openclaw@latest
+
+# Run the onboarding wizard (installs daemon, configures workspace)
+openclaw onboard --install-daemon
+
+# Start the gateway
+openclaw gateway --port 18789 --verbose
+```
+
+## Gateway CLI
+
+Run and manage the WebSocket control plane server.
+
+```bash
+# Start gateway in foreground
+openclaw gateway
+
+# Start with specific options
+openclaw gateway --port 18789 --bind loopback --verbose
+
+# Run in development mode (creates dev config if missing)
+openclaw gateway --dev
+
+# Reset dev environment
+openclaw gateway --dev --reset
+
+# Check gateway health
+openclaw gateway health --url ws://127.0.0.1:18789
+
+# Get gateway status (service + RPC probe)
+openclaw gateway status
+openclaw gateway status --json
+
+# Probe all reachable gateways (local and remote)
+openclaw gateway probe
+openclaw gateway probe --json
+
+# Low-level RPC call
+openclaw gateway call status
+openclaw gateway call logs.tail --params '{"sinceMs": 60000}'
+
+# Discover gateways via Bonjour/mDNS
+openclaw gateway discover --timeout 4000
+openclaw gateway discover --json | jq '.beacons[].wsUrl'
+
+# Service management
+openclaw gateway install --port 18789 --force
+openclaw gateway start
+openclaw gateway stop
+openclaw gateway restart
+openclaw gateway uninstall
+```
+
+## Configuration
+
+OpenClaw reads JSON5 configuration from `~/.openclaw/openclaw.json` with hot-reload support.
+
+```json5
+// ~/.openclaw/openclaw.json
+{
+  // Agent configuration
+  agents: {
+    defaults: {
+      workspace: "~/.openclaw/workspace",
+      model: {
+        primary: "anthropic/claude-sonnet-4-5",
+        fallbacks: ["openai/gpt-5.2"],
+      },
+      models: {
+        "anthropic/claude-sonnet-4-5": { alias: "Sonnet" },
+        "openai/gpt-5.2": { alias: "GPT" },
+      },
+    },
+  },
+
+  // Session management
+  session: {
+    dmScope: "per-channel-peer", // main | per-peer | per-channel-peer | per-account-channel-peer
+    threadBindings: {
+      enabled: true,
+      ttlHours: 24,
+    },
+    reset: {
+      mode: "daily",
+      atHour: 4,
+      idleMinutes: 120,
+    },
+    maintenance: {
+      mode: "enforce",
+      pruneAfter: "30d",
+      maxEntries: 500,
+      rotateBytes: "10mb",
+    },
+  },
+
+  // Channel configurations
+  channels: {
+    whatsapp: {
+      dmPolicy: "pairing", // pairing | allowlist | open | disabled
+      allowFrom: ["+15551234567"],
+      groupPolicy: "allowlist",
+      groupAllowFrom: ["+15551234567"],
+    },
+    telegram: {
+      enabled: true,
+      botToken: "123:abc",
+      dmPolicy: "pairing",
+      groups: { "*": { requireMention: true } },
+    },
+    discord: {
+      token: "YOUR_DISCORD_BOT_TOKEN",
+      dmPolicy: "pairing",
+    },
+    slack: {
+      botToken: "xoxb-...",
+      appToken: "xapp-...",
+    },
+  },
+
+  // Browser automation
+  browser: {
+    enabled: true,
+    defaultProfile: "openclaw",
+    color: "#FF4500",
+    headless: false,
+    profiles: {
+      openclaw: { cdpPort: 18800, color: "#FF4500" },
+      work: { cdpPort: 18801, color: "#0066CC" },
+    },
+  },
+
+  // Webhook ingress
+  hooks: {
+    enabled: true,
+    token: "shared-secret",
+    path: "/hooks",
+    defaultSessionKey: "hook:ingress",
+    allowRequestSessionKey: false,
+  },
+}
+```
+
+```bash
+# CLI configuration commands
+openclaw config get agents.defaults.workspace
+openclaw config set agents.defaults.heartbeat.every "2h"
+openclaw config unset tools.web.search.apiKey
+
+# Interactive configuration
+openclaw configure
+```
+
+## WhatsApp Channel
+
+Production-ready WhatsApp Web integration via Baileys.
+
+```bash
+# Link WhatsApp account via QR code
+openclaw channels login --channel whatsapp
+
+# Link specific account
+openclaw channels login --channel whatsapp --account work
+
+# Start gateway to connect
+openclaw gateway
+
+# Approve pairing requests
+openclaw pairing list whatsapp
+openclaw pairing approve whatsapp <CODE>
+```
+
+```json5
+// WhatsApp configuration
+{
+  channels: {
+    whatsapp: {
+      dmPolicy: "allowlist",
+      allowFrom: ["+15551234567", "+15559876543"],
+      groupPolicy: "allowlist",
+      groupAllowFrom: ["+15551234567"],
+      selfChatMode: true, // for personal-number setups
+    },
+  },
+}
+```
+
+## Telegram Channel
+
+Production-ready Telegram bot integration via grammY.
+
+```bash
+# Configure bot token (get from @BotFather)
+openclaw config set channels.telegram.botToken "123456:ABCDEF"
+
+# Start gateway
+openclaw gateway
+
+# Approve first DM
+openclaw pairing list telegram
+openclaw pairing approve telegram <CODE>
+
+# Find your Telegram user ID
+curl "https://api.telegram.org/bot<bot_token>/getUpdates"
+```
+
+```json5
+// Telegram configuration
+{
+  channels: {
+    telegram: {
+      enabled: true,
+      botToken: "123456:ABCDEF",
+      dmPolicy: "pairing",
+      allowFrom: ["tg:123456789"], // numeric user IDs
+      groups: { "*": { requireMention: true } },
+      groupPolicy: "allowlist",
+      groupAllowFrom: ["tg:123456789"],
+    },
+  },
+}
+```
+
+## Agent Commands
+
+Run agent turns via the Gateway or send messages programmatically.
+
+```bash
+# Run agent turn with delivery
+openclaw agent --to +15555550123 --message "status update" --deliver
+
+# Target specific agent
+openclaw agent --agent ops --message "Summarize logs"
+
+# With thinking level
+openclaw agent --session-id 1234 --message "Summarize inbox" --thinking medium
+
+# Cross-channel delivery
+openclaw agent --agent ops --message "Generate report" \
+  --deliver --reply-channel slack --reply-to "#reports"
+```
+
+## Message CLI
+
+Send messages and perform channel actions across all supported channels.
+
+```bash
+# Send message to WhatsApp
+openclaw message send --channel whatsapp --target "+15551234567" --message "Hello!"
+
+# Send to Discord channel
+openclaw message send --channel discord --target "channel:123456789" --message "Update"
+
+# Send to Slack
+openclaw message send --channel slack --target "channel:C1234567890" --message "Alert"
+
+# Send with media
+openclaw message send --channel telegram --target "123456789" \
+  --message "Check this out" --media /path/to/image.png
+
+# Create poll (WhatsApp/Telegram/Discord)
+openclaw message poll --channel telegram --target "123456789" \
+  --poll-question "What time works?" \
+  --poll-option "9am" --poll-option "10am" --poll-option "11am" \
+  --poll-multi
+
+# React to message
+openclaw message react --channel discord --target "channel:123" \
+  --message-id "456789" --emoji "thumbsup"
+
+# Read messages
+openclaw message read --channel discord --target "channel:123" --limit 10
+
+# Edit message
+openclaw message edit --channel slack --target "channel:C123" \
+  --message-id "1234567890.123456" --message "Updated content"
+
+# Delete message
+openclaw message delete --channel discord --target "channel:123" --message-id "456789"
+```
+
+## Browser Automation
+
+Managed Chrome/Chromium browser for agent-controlled automation.
+
+```bash
+# Check browser status
+openclaw browser --browser-profile openclaw status
+
+# Start managed browser
+openclaw browser --browser-profile openclaw start
+
+# Open URL
+openclaw browser --browser-profile openclaw open https://example.com
+
+# Take snapshot
+openclaw browser --browser-profile openclaw snapshot
+
+# Configure browser executable
+openclaw config set browser.executablePath "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+```
+
+```json5
+// Browser configuration
+{
+  browser: {
+    enabled: true,
+    defaultProfile: "openclaw",
+    color: "#FF4500",
+    headless: false,
+    noSandbox: false,
+    attachOnly: false,
+    executablePath: "/usr/bin/brave-browser",
+    ssrfPolicy: {
+      dangerouslyAllowPrivateNetwork: true,
+    },
+    profiles: {
+      openclaw: { cdpPort: 18800, color: "#FF4500" },
+      work: { cdpPort: 18801, color: "#0066CC" },
+      remote: { cdpUrl: "http://10.0.0.42:9222", color: "#00AA00" },
+    },
+  },
+}
+```
+
+## Webhooks
+
+HTTP webhook endpoints for external system integration.
+
+```bash
+# Wake the agent (main session)
+curl -X POST http://127.0.0.1:18789/hooks/wake \
+  -H "Authorization: Bearer shared-secret" \
+  -H "Content-Type: application/json" \
+  -d '{"text": "New email received", "mode": "now"}'
+
+# Run isolated agent turn
+curl -X POST http://127.0.0.1:18789/hooks/agent \
+  -H "Authorization: Bearer shared-secret" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "message": "Process this alert",
+    "name": "GitHub",
+    "agentId": "hooks",
+    "deliver": true,
+    "channel": "slack",
+    "to": "#alerts",
+    "model": "openai/gpt-5.2-mini",
+    "thinking": "low",
+    "timeoutSeconds": 120
+  }'
+```
+
+```json5
+// Webhook configuration
+{
+  hooks: {
+    enabled: true,
+    token: "${OPENCLAW_HOOKS_TOKEN}",
+    path: "/hooks",
+    defaultSessionKey: "hook:ingress",
+    allowRequestSessionKey: false,
+    allowedSessionKeyPrefixes: ["hook:"],
+    allowedAgentIds: ["hooks", "main"],
+    presets: ["gmail"], // enable built-in Gmail mapping
+  },
+}
+```
+
+## Cron Jobs
+
+Built-in scheduler for recurring tasks and wakeups.
+
+```bash
+# Create one-shot reminder
+openclaw cron add \
+  --name "Reminder" \
+  --at "2026-02-01T16:00:00Z" \
+  --session main \
+  --system-event "Reminder: check the docs draft" \
+  --wake now \
+  --delete-after-run
+
+# Create recurring job with delivery
+openclaw cron add \
+  --name "Morning brief" \
+  --cron "0 7 * * *" \
+  --tz "America/Los_Angeles" \
+  --session isolated \
+  --message "Summarize overnight updates." \
+  --announce \
+  --channel slack \
+  --to "channel:C1234567890"
+
+# List jobs
+openclaw cron list
+
+# Run job immediately
+openclaw cron run <job-id>
+
+# View job runs
+openclaw cron runs --id <job-id>
+
+# Edit job
+openclaw cron edit <job-id> --name "Updated name"
+
+# Delete job
+openclaw cron delete <job-id>
+```
+
+## Skills
+
+AgentSkills-compatible skill folders that teach the agent capabilities.
+
+```markdown
+<!-- ~/.openclaw/workspace/skills/my-skill/SKILL.md -->
+---
+name: my-custom-skill
+description: Generate reports from data sources
+metadata: {"openclaw": {"requires": {"bins": ["uv"], "env": ["API_KEY"]}, "primaryEnv": "API_KEY"}}
+---
+
+# My Custom Skill
+
+This skill helps generate reports from various data sources.
+
+## Usage
+
+Call this skill when the user asks for report generation...
+```
+
+```bash
+# Install skill from ClawHub
+clawhub install <skill-slug>
+
+# Update all installed skills
+clawhub update --all
+
+# List loaded skills
+openclaw skills list
+
+# Skill locations (precedence order):
+# 1. <workspace>/skills (highest)
+# 2. ~/.openclaw/skills (managed/local)
+# 3. bundled skills (lowest)
+```
+
+## Nodes
+
+Companion devices that connect to the Gateway for canvas, camera, and system commands.
+
+```bash
+# List connected nodes
+openclaw nodes list
+openclaw nodes status
+
+# Describe node capabilities
+openclaw nodes describe --node <idOrNameOrIp>
+
+# Approve pending node pairing
+openclaw devices list
+openclaw devices approve <requestId>
+
+# Start node host on remote machine
+openclaw node run --host <gateway-host> --port 18789 --display-name "Build Node"
+
+# Install as service
+openclaw node install --host <gateway-host> --port 18789 --display-name "Build Node"
+openclaw node restart
+
+# Invoke node command
+openclaw nodes invoke --node <idOrNameOrIp> \
+  --command canvas.eval \
+  --params '{"javaScript":"location.href"}'
+
+# Configure exec to use node
+openclaw config set tools.exec.host node
+openclaw config set tools.exec.node "<id-or-name>"
+
+# Add to node allowlist
+openclaw approvals allowlist add --node <id|name|ip> "/usr/bin/uname"
+```
+
+## Session Management
+
+Control conversation continuity and isolation across channels.
+
+```bash
+# List sessions
+openclaw sessions list
+
+# Get session info
+openclaw sessions info --session-id <id>
+
+# Reset session
+openclaw sessions reset --session-id <id>
+
+# Cleanup stale sessions
+openclaw sessions cleanup --dry-run --json
+openclaw sessions cleanup
+
+# Security audit for DM settings
+openclaw security audit
+```
+
+```json5
+// Session configuration for multi-user setups
+{
+  session: {
+    // Isolate DM context per channel + sender (recommended)
+    dmScope: "per-channel-peer",
+
+    // Link identities across channels
+    identityLinks: {
+      "wa:+15551234567": "user:alice",
+      "tg:123456789": "user:alice",
+    },
+
+    // Maintenance settings
+    maintenance: {
+      mode: "enforce",
+      pruneAfter: "30d",
+      maxEntries: 500,
+      maxDiskBytes: "1gb",
+      highWaterBytes: "800mb",
+    },
+  },
+}
+```
+
+## Doctor and Diagnostics
+
+Built-in diagnostics and repair tools.
+
+```bash
+# Run diagnostics
+openclaw doctor
+
+# Auto-fix issues
+openclaw doctor --fix
+openclaw doctor --yes
+
+# Health check
+openclaw health
+
+# View logs
+openclaw logs
+openclaw logs --follow
+
+# Status overview
+openclaw status
+```
+
+OpenClaw is designed for personal, single-user AI assistant deployments with a focus on local-first operation and multi-channel flexibility. The Gateway serves as the central control plane, managing sessions across messaging platforms while maintaining conversation context and tool capabilities. Common integration patterns include using webhooks for external system triggers (GitHub, email, monitoring), cron jobs for scheduled tasks (daily summaries, reminders), and browser automation for web-based workflows.
+
+For production deployments, OpenClaw supports Tailscale Serve/Funnel for secure remote access, Docker sandboxing for untrusted sessions, and multi-agent routing for specialized workloads. The skills system enables extensibility through AgentSkills-compatible folders, while the plugin architecture supports community-developed integrations. Security features include DM pairing for unknown senders, exec allowlists for system commands, and per-session isolation for multi-user scenarios.

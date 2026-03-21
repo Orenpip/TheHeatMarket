@@ -1,0 +1,34 @@
+{
+  "name": "compass",
+  "private": true,
+  "scripts": {
+    "postinstall": "pnpm --filter @compass/db exec prisma generate",
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:generate": "turbo db:generate",
+    "db:migrate": "turbo db:migrate",
+    "db:seed": "pnpm --filter @compass/db seed",
+    "scripts:register-crons": "tsx scripts/register-crons.ts",
+    "scripts:embed-map-nodes": "tsx scripts/embed-map-nodes.ts"
+  },
+  "pnpm": {
+    "overrides": {
+      "glob": ">=10.5.0"
+    }
+  },
+  "devDependencies": {
+    "next": "^15",
+    "turbo": "^2.3.3",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "tsx": "^4.19.2",
+    "@upstash/qstash": "^2.7.21"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

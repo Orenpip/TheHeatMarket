@@ -1,0 +1,1261 @@
+     1→     1→# COMPASS — Product Design Requirements (PDR)
+     2→     2→## A Student Operating System for Self-Authorship
+     3→     3→
+     4→     4→---
+     5→     5→
+     6→     6→## 1. PRODUCT VISION
+     7→     7→
+     8→     8→### 1.1 One-Line Summary
+     9→     9→Compass is a longitudinal student operating system that turns raw high school experience into directional clarity — not by telling students what to do, but by making their own signals visible and expanding their awareness of what's possible.
+    10→    10→
+    11→    11→### 1.2 Core Philosophy
+    12→    12→The product is built on five principles derived from real student experience:
+    13→    13→
+    14→    14→1. **Neuroplasticity as foundation** — Identity is a variable, not a constant. The system treats students as becoming, not being.
+    15→    15→2. **Read, apply, compound** — Curiosity without application is trivia. The system connects intellectual interest to real-world experimentation.
+    16→    16→3. **Discipline shapes identity** — Character formation (focus, endurance, frustration tolerance) matters as much as intellectual preference.
+    17→    17→4. **Intrinsic motivation over external validation** — The system never optimizes for prestige. It optimizes for engagement and growth.
+    18→    18→5. **Community as accelerant** — No one keeps you accountable like a peer. The system connects students in exploration, not competition.
+    19→    19→
+    20→    20→### 1.3 The Problem
+    21→    21→High school students suffer from **directional blindness**, not lack of ability. They generate signals constantly (books they read, classes they enjoy, activities they choose) but no system helps them see the pattern. By the time they discover career paths, major combinations, and industry pipelines, years have been wasted in reactive prestige-chasing.
+    22→    22→
+    23→    23→Current tools (Naviance, Scoir, CollegeBoard) extract information from students for institutional purposes. Compass inverts this: everything belongs to the student first.
+    24→    24→
+    25→    25→### 1.4 The Solution
+    26→    26→A **reflection engine** — not a direction engine. It functions as a mirror with memory:
+    27→    27→- Tracks what students are actually doing and thinking
+    28→    28→- Surfaces patterns they don't consciously see
+    29→    29→- Expands their awareness of career paths, programs, and opportunities
+    30→    30→- Never prescribes direction — only reveals the map
+    31→    31→
+    32→    32→### 1.5 What Compass Is NOT
+    33→    33→- Not an admissions optimizer
+    34→    34→- Not a career quiz
+    35→    35→- Not an AI essay writer
+    36→    36→- Not a college ranking tool
+    37→    37→- Not a ChatGPT wrapper
+    38→    38→- Not a surveillance tool for schools or parents
+    39→    39→
+    40→    40→---
+    41→    41→
+    42→    42→## 2. USER PERSONAS
+    43→    43→
+    44→    44→### 2.1 Primary: The Intense Drifter (Student)
+    45→    45→- High school student (grades 9–12), ages 14–18
+    46→    46→- Motivated and hardworking but lacks directional clarity
+    47→    47→- Doesn't know what industries exist, what majors combine into, or what career architectures look like
+    48→    48→- Generates strong signals through their choices but can't see the pattern
+    49→    49→- Needs map visibility, not motivation
+    50→    50→
+    51→    51→### 2.2 Secondary: The Overwhelmed Counselor
+    52→    52→- School guidance counselor managing 300–500+ students
+    53→    53→- Meets each student 1-3 times per year
+    54→    54→- Knows almost nothing about most students' evolving interests
+    55→    55→- Needs a synthesized dashboard showing each student's trajectory
+    56→    56→- Does NOT need raw data — needs patterns and gaps
+    57→    57→
+    58→    58→### 2.3 Tertiary: The Anxious Parent (Future Phase)
+    59→    59→- Wants reassurance their child is on track
+    60→    60→- Currently spends money on admissions consultants out of fear
+    61→    61→- Needs a "peace of mind" view — not surveillance
+    62→    62→- Only sees what the student explicitly shares
+    63→    63→
+    64→    64→---
+    65→    65→
+    66→    66→## 3. CORE FEATURES
+    67→    67→
+    68→    68→### 3.1 Monthly Structured Reflection (School Integration)
+    69→    69→The primary data input mechanism. Designed to be used during existing advisory/homeroom periods (~20 minutes/month).
+    70→    70→
+    71→    71→**Session Flow:**
+    72→    72→1. **Check-in pulse** — Quick emotional/energy state (not a mood tracker — a context setter)
+    73→    73→2. **Activity log update** — What have you been doing this month? Classes, clubs, books, projects, hobbies, jobs, volunteer work. Semi-structured input with smart suggestions based on prior entries.
+    74→    74→3. **Reflection prompts** — 2-3 AI-generated questions personalized to the student's trajectory. These are the core product differentiator. Examples:
+    75→    75→   - "You've spent time on both debate and coding this semester. What do you think connects those two interests?"
+    76→    76→   - "Last month you said you were curious about how businesses work. Have you explored that further, or has your curiosity shifted?"
+    77→    77→   - "You mentioned feeling energized by your chemistry lab. What specifically about it felt alive?"
+    78→    78→4. **Map moment** — After reflection, the system surfaces 1-2 "did you know?" expansions: career paths, programs, competitions, or industries related to the student's emerging signals.
+    79→    79→5. **Privacy review** — Student sees a summary of what would be visible to their counselor and toggles individual items on/off before submitting.
+    80→    80→
+    81→    81→**Data captured per session:**
+    82→    82→- Activities (structured: category, time invested, enjoyment level)
+    83→    83→- Free-text reflections
+    84→    84→- Prompted response data
+    85→    85→- Privacy selections
+    86→    86→- Engagement metrics (time spent, depth of responses)
+    87→    87→
+    88→    88→### 3.2 Signal Mining Engine (AI Backend)
+    89→    89→The intelligence layer that identifies patterns across a student's longitudinal data.
+    90→    90→
+    91→    91→**Pattern Detection:**
+    92→    92→- Interest clustering — groups activities and reflections into emerging theme areas
+    93→    93→- Intensity tracking — measures depth of engagement vs. surface-level participation
+    94→    94→- Trajectory shifts — detects when interests evolve, merge, or diverge over time
+    95→    95→- Character signals — identifies traits like discipline, leadership, creativity, analytical thinking based on activity patterns and reflections
+    96→    96→- Gap detection — flags areas the student hasn't explored that align with their emerging patterns
+    97→    97→
+    98→    98→**Signal Output (used by other features):**
+    99→    99→- Evolving interest profile (updated monthly)
+   100→   100→- Exploration breadth score (how widely has the student looked?)
+   101→   101→- Depth indicators per interest area
+   102→   102→- Confidence markers (how strong is each signal?)
+   103→   103→- Suggested exploration prompts for the next month
+   104→   104→
+   105→   105→### 3.3 The Map (Career/Education Landscape)
+   106→   106→A living, personalized visualization of possibilities. NOT a static database — a dynamic landscape that shifts as the student evolves.
+   107→   107→
+   108→   108→**Map Contents:**
+   109→   109→- Career paths and their actual architectures (entry points, progressions, pivots)
+   110→   110→- College major combinations and what they enable
+   111→   111→- Industry pipelines (which schools feed which industries, which majors lead where)
+   112→   112→- Recruiting patterns (target schools, typical paths, timeline)
+   113→   113→- Competitions, research programs, internships, and experiential opportunities
+   114→   114→- Double/triple major viability at specific schools
+   115→   115→- Non-obvious connections (e.g., philosophy + systems engineering + consulting)
+   116→   116→
+   117→   117→**Personalization:**
+   118→   118→- The visible portion of the map highlights areas relevant to the student's signals
+   119→   119→- New regions illuminate as new signals emerge
+   120→   120→- Previously explored areas show "you've been here" indicators
+   121→   121→- Unexplored adjacent areas glow as suggested expansions
+   122→   122→- The map never hides information — students can always browse the full landscape
+   123→   123→
+   124→   124→**Data Sources (to be built and maintained):**
+   125→   125→- BLS occupational data
+   126→   126→- University program catalogs
+   127→   127→- LinkedIn career path data (aggregated/anonymized)
+   128→   128→- Competition and program databases
+   129→   129→- Recruiting pipeline data from public sources
+   130→   130→- Alumni outcome data where available
+   131→   131→
+   132→   132→### 3.4 Proactive Notification System
+   133→   133→The key differentiator from a ChatGPT wrapper. The system comes to the student with the right question or opportunity at the right time.
+   134→   134→
+   135→   135→**Notification Types:**
+   136→   136→
+   137→   137→1. **Reflection Nudges** — Between monthly sessions, contextual prompts based on recent activity or upcoming decisions.
+   138→   138→   - "You registered for AP Physics next semester. What drew you to that choice?"
+   139→   139→   - "It's been 3 months since you mentioned interest in writing. Still curious, or has that shifted?"
+   140→   140→
+   141→   141→2. **Opportunity Alerts** — Timely, relevant opportunities the student wouldn't have found on their own.
+   142→   142→   - "There's a philosophy essay competition with a deadline in 3 weeks. Based on your reflections, you might find the prompt interesting."
+   143→   143→   - "MIT has a free online course on systems thinking that starts next month."
+   144→   144→
+   145→   145→3. **Map Expansions** — "Did you know?" moments that widen peripheral vision.
+   146→   146→   - "Students who enjoy both math and philosophy often thrive in operations research. Here's what that field looks like."
+   147→   147→   - "UVA has a Systems Engineering program that combines technical and strategic thinking — and it's a pipeline to consulting."
+   148→   148→
+   149→   149→4. **Peer Connection Prompts** — Prompts to engage with matched exploration peers (see 3.6).
+   150→   150→
+   151→   151→**Notification Rules:**
+   152→   152→- Maximum 2-3 notifications per week (quality over quantity)
+   153→   153→- Every notification must be either a reflection prompt, a map expansion, or a timely opportunity
+   154→   154→- Notifications are never generic — always personalized to the student's trajectory
+   155→   155→- Student controls notification frequency and can mute categories
+   156→   156→- No notification should feel like marketing
+   157→   157→
+   158→   158→### 3.5 Counselor Dashboard
+   159→   159→A synthesized view of student trajectories — NOT raw data.
+   160→   160→
+   161→   161→**What counselors see (by default):**
+   162→   162→- Student's top 3-5 emerging interest areas with confidence levels
+   163→   163→- Exploration breadth score
+   164→   164→- Recent trajectory shifts ("This student's interests have shifted from X toward Y")
+   165→   165→- Engagement level (is the student actively reflecting or disengaged?)
+   166→   166→- Suggested conversation starters for the next 1:1 meeting
+   167→   167→- Flagged gaps ("This student hasn't explored anything related to their strongest signals")
+   168→   168→
+   169→   169→**What counselors do NOT see (unless student shares):**
+   170→   170→- Raw reflection text
+   171→   171→- Specific books read or content consumed
+   172→   172→- Emotional check-in data
+   173→   173→- Any item the student has toggled off
+   174→   174→
+   175→   175→**Counselor Tools:**
+   176→   176→- Filter/sort students by engagement level, interest area, or grade
+   177→   177→- Batch view for identifying students who need attention
+   178→   178→- Meeting prep view — one-page summary per student before a scheduled meeting
+   179→   179→- Ability to send a personalized reflection prompt to a specific student
+   180→   180→
+   181→   181→### 3.6 Peer Exploration Network
+   182→   182→Lightweight social layer focused on shared exploration, not competition.
+   183→   183→
+   184→   184→**Matching Logic:**
+   185→   185→- Students matched into small groups (3-5) based on similar exploration phase or overlapping interests
+   186→   186→- NOT based on GPA, test scores, or achievement level
+   187→   187→- Can be cross-school (for broader perspective) or within-school (for accountability)
+   188→   188→
+   189→   189→**Interaction Model:**
+   190→   190→- Anonymized or first-name-only profiles
+   191→   191→- Shared reflection prompts that the group responds to
+   192→   192→- "Someone in your group discovered X this month" — inspiration without comparison
+   193→   193→- No rankings, no metrics visible to peers
+   194→   194→- Opt-in only
+   195→   195→
+   196→   196→### 3.7 Future Simulation (Phase 2)
+   197→   197→Shows possible trajectories based on the student's emerging signals.
+   198→   198→
+   199→   199→**Not prediction — illustration:**
+   200→   200→- "If you lean into engineering + philosophy, here's what 10 years might look like"
+   201→   201→- Shows 3-5 possible paths based on current signals
+   202→   202→- Each path shows: typical education route, career progression, skills developed, lifestyle characteristics
+   203→   203→- Updates as signals evolve
+   204→   204→- Explicitly framed as possibilities, not prescriptions
+   205→   205→
+   206→   206→### 3.8 Student Privacy Control Center
+   207→   207→The trust architecture is a core product feature, not a compliance checkbox.
+   208→   208→
+   209→   209→**Privacy Principles:**
+   210→   210→- Everything belongs to the student first
+   211→   211→- Default state: private (student opts IN to sharing, not out)
+   212→   212→- Granular control: per-item toggling after every session
+   213→   213→- Audit log: student can always see exactly what their counselor has access to
+   214→   214→- Data portability: student can export their entire history at any time
+   215→   215→- Deletion rights: student can delete any data at any time
+   216→   216→
+   217→   217→**Privacy Dashboard:**
+   218→   218→- Real-time view of what the counselor can currently see
+   219→   219→- Toggle controls for each shared item
+   220→   220→- History of what was shared and when
+   221→   221→- One-click "make everything private" emergency option
+   222→   222→
+   223→   223→---
+   224→   224→
+   225→   225→## 4. UI/UX DESIGN SYSTEM
+   226→   226→
+   227→   227→### 4.1 Design Philosophy: Glass Clarity
+   228→   228→The visual language communicates trust, quality, and transparency. Inspired by Apple's glassmorphism but with purposeful restraint.
+   229→   229→
+   230→   230→**Core Aesthetic: "Glass OS"**
+   231→   231→- The interface should feel like looking through a clean window — everything is visible, nothing is hidden
+   232→   232→- Transparency as literal design metaphor: frosted glass panels, subtle translucency, light refraction effects
+   233→   233→- High contrast content on soft, luminous backgrounds
+   234→   234→- The premium feel signals to students: "this system takes you seriously"
+   235→   235→
+   236→   236→### 4.2 Color System
+   237→   237→
+   238→   238→```
+   239→   239→/* Primary palette */
+   240→   240→--glass-white: rgba(255, 255, 255, 0.72);
+   241→   241→--glass-white-hover: rgba(255, 255, 255, 0.85);
+   242→   242→--glass-border: rgba(255, 255, 255, 0.18);
+   243→   243→--glass-shadow: rgba(0, 0, 0, 0.06);
+   244→   244→
+   245→   245→/* Background — subtle gradient mesh, not flat */
+   246→   246→--bg-primary: #F2F4F7;
+   247→   247→--bg-gradient-start: #E8ECF4;
+   248→   248→--bg-gradient-end: #F7F0EB;
+   249→   249→
+   250→   250→/* Text */
+   251→   251→--text-primary: #1A1A2E;
+   252→   252→--text-secondary: #6B7280;
+   253→   253→--text-tertiary: #9CA3AF;
+   254→   254→
+   255→   255→/* Accent — restrained, single accent color */
+   256→   256→--accent-primary: #3B82F6;
+   257→   257→--accent-soft: rgba(59, 130, 246, 0.08);
+   258→   258→--accent-border: rgba(59, 130, 246, 0.2);
+   259→   259→
+   260→   260→/* Signal strength indicators */
+   261→   261→--signal-strong: #10B981;
+   262→   262→--signal-moderate: #F59E0B;
+   263→   263→--signal-emerging: #8B5CF6;
+   264→   264→
+   265→   265→/* Privacy indicator */
+   266→   266→--private: #6B7280;
+   267→   267→--shared: #3B82F6;
+   268→   268→
+   269→   269→/* Glassmorphism effects */
+   270→   270→backdrop-filter: blur(20px) saturate(180%);
+   271→   271→-webkit-backdrop-filter: blur(20px) saturate(180%);
+   272→   272→border: 1px solid var(--glass-border);
+   273→   273→box-shadow: 0 8px 32px var(--glass-shadow);
+   274→   274→```
+   275→   275→
+   276→   276→### 4.3 Typography
+   277→   277→
+   278→   278→```
+   279→   279→/* Display / Headers — clean, geometric sans-serif */
+   280→   280→--font-display: 'SF Pro Display', -apple-system, 'Helvetica Neue', sans-serif;
+   281→   281→
+   282→   282→/* Body — highly readable, warm */
+   283→   283→--font-body: 'SF Pro Text', -apple-system, 'Helvetica Neue', sans-serif;
+   284→   284→
+   285→   285→/* Monospace — for data/metrics */
+   286→   286→--font-mono: 'SF Mono', 'Fira Code', monospace;
+   287→   287→
+   288→   288→/* Scale */
+   289→   289→--text-xs: 0.75rem;    /* 12px — metadata */
+   290→   290→--text-sm: 0.875rem;   /* 14px — secondary content */
+   291→   291→--text-base: 1rem;     /* 16px — body */
+   292→   292→--text-lg: 1.125rem;   /* 18px — emphasis */
+   293→   293→--text-xl: 1.25rem;    /* 20px — section headers */
+   294→   294→--text-2xl: 1.5rem;    /* 24px — page headers */
+   295→   295→--text-3xl: 1.875rem;  /* 30px — hero text */
+   296→   296→
+   297→   297→/* Tracking and leading */
+   298→   298→--tracking-tight: -0.02em;
+   299→   299→--tracking-normal: 0;
+   300→   300→--leading-relaxed: 1.65;
+   301→   301→--leading-snug: 1.35;
+   302→   302→```
+   303→   303→
+   304→   304→**Note for implementation:** If building as a web app, substitute with Google Fonts alternatives:
+   305→   305→- Display: `'Plus Jakarta Sans'` or `'Outfit'`
+   306→   306→- Body: `'Inter'` only as fallback — prefer `'Source Sans 3'` or `'Nunito Sans'`
+   307→   307→- The font should feel warm and trustworthy, not cold and corporate
+   308→   308→
+   309→   309→### 4.4 Component Library
+   310→   310→
+   311→   311→**Glass Card (Primary Container)**
+   312→   312→```
+   313→   313→.glass-card {
+   314→   314→  background: var(--glass-white);
+   315→   315→  backdrop-filter: blur(20px) saturate(180%);
+   316→   316→  -webkit-backdrop-filter: blur(20px) saturate(180%);
+   317→   317→  border: 1px solid var(--glass-border);
+   318→   318→  border-radius: 16px;
+   319→   319→  box-shadow: 0 8px 32px var(--glass-shadow);
+   320→   320→  padding: 24px;
+   321→   321→  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+   322→   322→}
+   323→   323→
+   324→   324→.glass-card:hover {
+   325→   325→  background: var(--glass-white-hover);
+   326→   326→  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+   327→   327→  transform: translateY(-1px);
+   328→   328→}
+   329→   329→```
+   330→   330→
+   331→   331→**Privacy Toggle**
+   332→   332→```
+   333→   333→/* Inline toggle that appears next to every shareable item */
+   334→   334→/* Green dot = shared with counselor, Gray dot = private */
+   335→   335→/* Tap to toggle — no modal, no confirmation for individual items */
+   336→   336→/* Smooth color transition: 200ms ease */
+   337→   337→```
+   338→   338→
+   339→   339→**Signal Strength Indicator**
+   340→   340→```
+   341→   341→/* Horizontal bar or radial indicator */
+   342→   342→/* Three states: Emerging (purple), Moderate (amber), Strong (green) */
+   343→   343→/* Animate on data update — grows/shrinks smoothly */
+   344→   344→/* Tooltip on hover/tap shows: "Based on N reflections over M months" */
+   345→   345→```
+   346→   346→
+   347→   347→**Map Node**
+   348→   348→```
+   349→   349→/* Circular node with glow effect based on relevance to student */
+   350→   350→/* Connected by subtle lines showing relationships */
+   351→   351→/* Nodes pulse gently when newly relevant */
+   352→   352→/* Tap to expand: shows description, typical path, related programs */
+   353→   353→/* Glass card popup on expansion */
+   354→   354→```
+   355→   355→
+   356→   356→**Notification Card**
+   357→   357→```
+   358→   358→/* Slides in from right on mobile, appears in notification panel on desktop */
+   359→   359→/* Three visual variants based on type: */
+   360→   360→/*   Reflection — warm amber accent */
+   361→   361→/*   Opportunity — blue accent with deadline indicator */
+   362→   362→/*   Map expansion — purple accent */
+   363→   363→/* Swipe to dismiss, tap to engage */
+   364→   364→/* Timestamp shows relative time: "2 hours ago" */
+   365→   365→```
+   366→   366→
+   367→   367→### 4.5 Layout Principles
+   368→   368→
+   369→   369→- **Maximum content width:** 720px for reading/reflection views (optimal readability)
+   370→   370→- **Generous whitespace:** minimum 24px between sections, 16px between related elements
+   371→   371→- **Single-column primary flow** on mobile — no side-by-side cramming
+   372→   372→- **The Map** is the exception — it's a full-viewport interactive canvas
+   373→   373→- **Progressive disclosure:** show the essential, reveal depth on interaction
+   374→   374→- **No visual clutter:** every element earns its place on screen
+   375→   375→- **Animations:** subtle and purposeful. Entry animations use staggered fade-up (50ms delay between elements). No bouncing, no spinning, no gratuitous motion.
+   376→   376→
+   377→   377→### 4.6 Mobile-First Design
+   378→   378→- Primary usage will be on phones (notifications, quick reflections)
+   379→   379→- Monthly sessions may be on school Chromebooks/laptops
+   380→   380→- Touch targets: minimum 44px
+   381→   381→- Bottom navigation bar with 4 tabs: Home, Map, Reflections, Profile
+   382→   382→- Counselor dashboard is desktop-only (or tablet landscape)
+   383→   383→
+   384→   384→### 4.7 Dark Mode
+   385→   385→- Support system-level dark mode preference
+   386→   386→- Glass effect inverts: dark translucent panels on dark background
+   387→   387→- Accent colors remain the same
+   388→   388→- Text inverts to light
+   389→   389→- Background becomes deep navy mesh gradient, not pure black
+   390→   390→
+   391→   391→```
+   392→   392→/* Dark mode overrides */
+   393→   393→--glass-white: rgba(30, 30, 46, 0.72);
+   394→   394→--glass-border: rgba(255, 255, 255, 0.08);
+   395→   395→--bg-primary: #0F0F1A;
+   396→   396→--bg-gradient-start: #111128;
+   397→   397→--bg-gradient-end: #1A1520;
+   398→   398→--text-primary: #E5E7EB;
+   399→   399→--text-secondary: #9CA3AF;
+   400→   400→```
+   401→   401→
+   402→   402→---
+   403→   403→
+   404→   404→## 5. TECHNICAL ARCHITECTURE
+   405→   405→
+   406→   406→### 5.1 System Overview
+   407→   407→
+   408→   408→```
+   409→   409→┌─────────────────────────────────────────────────────────┐
+   410→   410→│                    CLIENT LAYER                          │
+   411→   411→│  ┌──────────┐  ┌──────────────┐  ┌──────────────────┐  │
+   412→   412→│  │ Mobile   │  │ Web App      │  │ Counselor        │  │
+   413→   413→│  │ (React   │  │ (React/Next) │  │ Dashboard        │  │
+   414→   414→│  │  Native) │  │              │  │ (Next.js)        │  │
+   415→   415→│  └────┬─────┘  └──────┬───────┘  └────────┬─────────┘  │
+   416→   416→└───────┼────────────────┼──────────────────┼─────────────┘
+   417→   417→        │                │                  │
+   418→   418→        ▼                ▼                  ▼
+   419→   419→┌─────────────────────────────────────────────────────────┐
+   420→   420→│                    API GATEWAY                           │
+   421→   421→│              (Authentication + Rate Limiting)             │
+   422→   422→└────────────────────────┬────────────────────────────────┘
+   423→   423→                         │
+   424→   424→        ┌────────────────┼────────────────────┐
+   425→   425→        ▼                ▼                    ▼
+   426→   426→┌──────────────┐ ┌──────────────┐  ┌─────────────────────┐
+   427→   427→│ Core API     │ │ AI Service   │  │ Notification Service │
+   428→   428→│ (Node/       │ │ (Python)     │  │ (Node)               │
+   429→   429→│  Express or  │ │              │  │                      │
+   430→   430→│  Next API)   │ │ - Signal     │  │ - Push notifications │
+   431→   431→│              │ │   Mining     │  │ - Email digests      │
+   432→   432→│ - Auth       │ │ - Prompt     │  │ - Scheduling engine  │
+   433→   433→│ - CRUD       │ │   Generation │  │ - Frequency control  │
+   434→   434→│ - Privacy    │ │ - Map        │  │                      │
+   435→   435→│   controls   │ │   Matching   │  │                      │
+   436→   436→│ - Session    │ │ - Profile    │  │                      │
+   437→   437→│   management │ │   Synthesis  │  │                      │
+   438→   438→└──────┬───────┘ └──────┬───────┘  └──────────┬──────────┘
+   439→   439→       │                │                      │
+   440→   440→       ▼                ▼                      ▼
+   441→   441→┌─────────────────────────────────────────────────────────┐
+   442→   442→│                    DATA LAYER                            │
+   443→   443→│  ┌──────────────┐  ┌──────────┐  ┌──────────────────┐  │
+   444→   444→│  │ PostgreSQL   │  │ Vector   │  │ Redis            │  │
+   445→   445→│  │ (Primary DB) │  │ Store    │  │ (Cache +         │  │
+   446→   446→│  │              │  │ (Pinecone│  │  Session +        │  │
+   447→   447→│  │ - Users      │  │  or      │  │  Rate Limiting)   │  │
+   448→   448→│  │ - Sessions   │  │  pgvector│  │                   │  │
+   449→   449→│  │ - Activities │  │ )        │  │                   │  │
+   450→   450→│  │ - Reflections│  │          │  │                   │  │
+   451→   451→│  │ - Privacy    │  │ - RAG    │  │                   │  │
+   452→   452→│  │   settings   │  │   index  │  │                   │  │
+   453→   453→│  │ - Map data   │  │ - Signal │  │                   │  │
+   454→   454→│  │              │  │   embeds │  │                   │  │
+   455→   455→│  └──────────────┘  └──────────┘  └──────────────────┘  │
+   456→   456→└─────────────────────────────────────────────────────────┘
+   457→   457→```
+   458→   458→
+   459→   459→### 5.2 Technology Stack
+   460→   460→
+   461→   461→**Frontend:**
+   462→   462→- React Native (mobile — iOS and Android from single codebase)
+   463→   463→- Next.js (web app + counselor dashboard)
+   464→   464→- Tailwind CSS (styling with custom glass design tokens)
+   465→   465→- Framer Motion (animations)
+   466→   466→- Mapbox GL or D3.js (for The Map visualization)
+   467→   467→
+   468→   468→**Backend:**
+   469→   469→- Node.js with Express or Next.js API routes (core API)
+   470→   470→- Python FastAPI (AI service — signal mining, prompt generation, profile synthesis)
+   471→   471→- Bull/BullMQ (job queue for async AI processing and notifications)
+   472→   472→
+   473→   473→**Database:**
+   474→   474→- PostgreSQL (primary relational data)
+   475→   475→- pgvector extension (vector embeddings for RAG and signal matching)
+   476→   476→- Redis (caching, session management, rate limiting)
+   477→   477→
+   478→   478→**AI/ML:**
+   479→   479→- Anthropic Claude API (reflection prompt generation, signal synthesis, map matching)
+   480→   480→- Text embeddings (for RAG retrieval of student context)
+   481→   481→- Tiered model routing: lightweight model for notifications/simple queries, powerful model for deep reflections and synthesis
+   482→   482→
+   483→   483→**Infrastructure:**
+   484→   484→- Vercel or AWS (hosting)
+   485→   485→- Firebase Cloud Messaging or OneSignal (push notifications)
+   486→   486→- S3/CloudFlare R2 (file storage if needed)
+   487→   487→- HIPAA/FERPA-compliant infrastructure (student data protection)
+   488→   488→
+   489→   489→### 5.3 AI Cost Architecture
+   490→   490→
+   491→   491→**Per-student monthly budget target: $2–5**
+   492→   492→
+   493→   493→**Cost control strategies:**
+   494→   494→
+   495→   495→1. **RAG over full context** — Never stuff full student history into every call. Store all data in PostgreSQL + vector store. Retrieve only relevant slices per interaction (3–8k tokens instead of 50–100k).
+   496→   496→
+   497→   497→2. **Compressed student profile** — A living summary document (1–2k tokens) updated monthly after each session. This travels with every interaction as base context.
+   498→   498→
+   499→   499→3. **Tiered model routing:**
+   500→   500→   - Routine notifications and opportunity alerts → lightweight model (Claude Haiku tier, ~$0.01/interaction)
+   501→   501→   - Monthly reflection prompt generation → mid-tier model (~$0.03/interaction)
+   502→   502→   - Deep signal synthesis and profile updates → top-tier model (~$0.05–0.08/interaction)
+   503→   503→   - Estimated 80% of interactions use the cheap tier
+   504→   504→
+   505→   505→4. **Batch processing** — Signal mining and profile synthesis run as batch jobs after monthly sessions, not real-time. Opportunity matching runs as a nightly cron against the full student database.
+   506→   506→
+   507→   507→5. **Structured interaction model** — Prompted reflections with specific questions (not open-ended chat) naturally constrain token usage while producing better data.
+   508→   508→
+   509→   509→**Cost breakdown per student per month (estimated):**
+   510→   510→| Component | Interactions | Cost/Interaction | Monthly Cost |
+   511→   511→|---|---|---|---|
+   512→   512→| Monthly session prompts | 3–5 | $0.03–0.05 | $0.15–0.25 |
+   513→   513→| Signal synthesis (batch) | 1 | $0.08–0.15 | $0.08–0.15 |
+   514→   514→| Profile update (batch) | 1 | $0.05–0.10 | $0.05–0.10 |
+   515→   515→| Notifications (2–3/week) | 8–12 | $0.01–0.02 | $0.08–0.24 |
+   516→   516→| Opportunity matching (batch) | 4 (weekly) | $0.02–0.05 | $0.08–0.20 |
+   517→   517→| **Subtotal AI costs** | | | **$0.44–0.94** |
+   518→   518→| Infrastructure/DB/hosting (amortized) | | | $1.00–2.00 |
+   519→   519→| **Total per student/month** | | | **$1.44–2.94** |
+   520→   520→
+   521→   521→---
+   522→   522→
+   523→   523→## 6. DATA MODEL
+   524→   524→
+   525→   525→### 6.1 Core Entities
+   526→   526→
+   527→   527→```sql
+   528→   528→-- Users
+   529→   529→CREATE TABLE students (
+   530→   530→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   531→   531→  email VARCHAR(255) UNIQUE,
+   532→   532→  first_name VARCHAR(100),
+   533→   533→  last_name VARCHAR(100),
+   534→   534→  grade_level INT CHECK (grade_level BETWEEN 9 AND 12),
+   535→   535→  school_id UUID REFERENCES schools(id),
+   536→   536→  created_at TIMESTAMPTZ DEFAULT NOW(),
+   537→   537→  updated_at TIMESTAMPTZ DEFAULT NOW(),
+   538→   538→  onboarding_completed BOOLEAN DEFAULT FALSE
+   539→   539→);
+   540→   540→
+   541→   541→CREATE TABLE counselors (
+   542→   542→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   543→   543→  email VARCHAR(255) UNIQUE,
+   544→   544→  first_name VARCHAR(100),
+   545→   545→  last_name VARCHAR(100),
+   546→   546→  school_id UUID REFERENCES schools(id),
+   547→   547→  created_at TIMESTAMPTZ DEFAULT NOW()
+   548→   548→);
+   549→   549→
+   550→   550→CREATE TABLE schools (
+   551→   551→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   552→   552→  name VARCHAR(255),
+   553→   553→  district VARCHAR(255),
+   554→   554→  state VARCHAR(2),
+   555→   555→  tier VARCHAR(20), -- 'free', 'licensed'
+   556→   556→  license_expires_at TIMESTAMPTZ,
+   557→   557→  created_at TIMESTAMPTZ DEFAULT NOW()
+   558→   558→);
+   559→   559→
+   560→   560→-- Monthly Reflection Sessions
+   561→   561→CREATE TABLE reflection_sessions (
+   562→   562→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   563→   563→  student_id UUID REFERENCES students(id),
+   564→   564→  session_date DATE,
+   565→   565→  pulse_check JSONB, -- { energy: 1-5, openness: 1-5, context_note: "..." }
+   566→   566→  completed_at TIMESTAMPTZ,
+   567→   567→  duration_seconds INT,
+   568→   568→  created_at TIMESTAMPTZ DEFAULT NOW()
+   569→   569→);
+   570→   570→
+   571→   571→-- Activities (logged during sessions or between them)
+   572→   572→CREATE TABLE activities (
+   573→   573→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   574→   574→  student_id UUID REFERENCES students(id),
+   575→   575→  session_id UUID REFERENCES reflection_sessions(id),
+   576→   576→  category VARCHAR(50), -- 'academic', 'extracurricular', 'reading', 'project', 'work', 'volunteer', 'hobby'
+   577→   577→  title VARCHAR(255),
+   578→   578→  description TEXT,
+   579→   579→  hours_invested DECIMAL(5,1),
+   580→   580→  enjoyment_level INT CHECK (enjoyment_level BETWEEN 1 AND 5),
+   581→   581→  start_date DATE,
+   582→   582→  end_date DATE, -- NULL if ongoing
+   583→   583→  is_ongoing BOOLEAN DEFAULT TRUE,
+   584→   584→  created_at TIMESTAMPTZ DEFAULT NOW()
+   585→   585→);
+   586→   586→
+   587→   587→-- Reflections (responses to prompts)
+   588→   588→CREATE TABLE reflections (
+   589→   589→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   590→   590→  student_id UUID REFERENCES students(id),
+   591→   591→  session_id UUID REFERENCES reflection_sessions(id),
+   592→   592→  prompt_text TEXT, -- the question asked
+   593→   593→  response_text TEXT, -- the student's answer
+   594→   594→  prompt_type VARCHAR(30), -- 'pattern', 'exploration', 'identity', 'connection'
+   595→   595→  is_shared_with_counselor BOOLEAN DEFAULT FALSE, -- student controls this
+   596→   596→  created_at TIMESTAMPTZ DEFAULT NOW()
+   597→   597→);
+   598→   598→
+   599→   599→-- Signal Profiles (AI-generated, updated monthly)
+   600→   600→CREATE TABLE signal_profiles (
+   601→   601→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   602→   602→  student_id UUID REFERENCES students(id),
+   603→   603→  generated_at TIMESTAMPTZ DEFAULT NOW(),
+   604→   604→  interest_clusters JSONB,
+   605→   605→  -- [{ name: "systems thinking", strength: 0.82, confidence: 0.7,
+   606→   606→  --    evidence: ["activity:uuid", "reflection:uuid"], trend: "growing" }]
+   607→   607→  exploration_breadth_score DECIMAL(3,2), -- 0.00 to 1.00
+   608→   608→  character_signals JSONB,
+   609→   609→  -- [{ trait: "discipline", strength: 0.9, evidence: [...] }]
+   610→   610→  trajectory_shifts JSONB,
+   611→   611→  -- [{ from: "pure science", toward: "science + philosophy", detected_at: "2025-03" }]
+   612→   612→  gaps JSONB,
+   613→   613→  -- [{ area: "business/economics", relevance: 0.7, suggestion: "..." }]
+   614→   614→  compressed_summary TEXT, -- 1-2k token natural language summary for AI context
+   615→   615→  version INT DEFAULT 1
+   616→   616→);
+   617→   617→
+   618→   618→-- Privacy Controls
+   619→   619→CREATE TABLE privacy_settings (
+   620→   620→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   621→   621→  student_id UUID REFERENCES students(id),
+   622→   622→  reflection_id UUID REFERENCES reflections(id),
+   623→   623→  activity_id UUID REFERENCES activities(id),
+   624→   624→  -- One of the above two will be set, not both
+   625→   625→  shared_with_counselor BOOLEAN DEFAULT FALSE,
+   626→   626→  toggled_at TIMESTAMPTZ DEFAULT NOW()
+   627→   627→);
+   628→   628→
+   629→   629→-- The Map (Career/Education Landscape — reference data)
+   630→   630→CREATE TABLE map_nodes (
+   631→   631→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   632→   632→  node_type VARCHAR(30), -- 'career', 'major', 'industry', 'program', 'competition', 'skill'
+   633→   633→  title VARCHAR(255),
+   634→   634→  description TEXT,
+   635→   635→  metadata JSONB,
+   636→   636→  -- careers: { avg_salary, growth_rate, entry_paths, typical_education }
+   637→   637→  -- majors: { schools_offering, common_combinations, career_outlets }
+   638→   638→  -- programs: { school, url, application_deadline, eligibility }
+   639→   639→  parent_id UUID REFERENCES map_nodes(id), -- hierarchical structure
+   640→   640→  embedding VECTOR(1536), -- for similarity matching to student signals
+   641→   641→  created_at TIMESTAMPTZ DEFAULT NOW(),
+   642→   642→  updated_at TIMESTAMPTZ DEFAULT NOW()
+   643→   643→);
+   644→   644→
+   645→   645→CREATE TABLE map_edges (
+   646→   646→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   647→   647→  source_id UUID REFERENCES map_nodes(id),
+   648→   648→  target_id UUID REFERENCES map_nodes(id),
+   649→   649→  relationship_type VARCHAR(30), -- 'leads_to', 'combines_with', 'requires', 'related'
+   650→   650→  strength DECIMAL(3,2) -- 0.00 to 1.00
+   651→   651→);
+   652→   652→
+   653→   653→-- Notifications
+   654→   654→CREATE TABLE notifications (
+   655→   655→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   656→   656→  student_id UUID REFERENCES students(id),
+   657→   657→  notification_type VARCHAR(30), -- 'reflection_nudge', 'opportunity', 'map_expansion', 'peer_prompt'
+   658→   658→  title VARCHAR(255),
+   659→   659→  body TEXT,
+   660→   660→  related_map_node_id UUID REFERENCES map_nodes(id),
+   661→   661→  delivered_at TIMESTAMPTZ,
+   662→   662→  read_at TIMESTAMPTZ,
+   663→   663→  acted_on BOOLEAN DEFAULT FALSE,
+   664→   664→  created_at TIMESTAMPTZ DEFAULT NOW()
+   665→   665→);
+   666→   666→
+   667→   667→-- Notification preferences
+   668→   668→CREATE TABLE notification_preferences (
+   669→   669→  student_id UUID PRIMARY KEY REFERENCES students(id),
+   670→   670→  max_per_week INT DEFAULT 3,
+   671→   671→  reflection_nudges BOOLEAN DEFAULT TRUE,
+   672→   672→  opportunity_alerts BOOLEAN DEFAULT TRUE,
+   673→   673→  map_expansions BOOLEAN DEFAULT TRUE,
+   674→   674→  peer_prompts BOOLEAN DEFAULT TRUE,
+   675→   675→  quiet_hours_start TIME DEFAULT '21:00',
+   676→   676→  quiet_hours_end TIME DEFAULT '08:00'
+   677→   677→);
+   678→   678→
+   679→   679→-- Peer Exploration Groups
+   680→   680→CREATE TABLE peer_groups (
+   681→   681→  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   682→   682→  name VARCHAR(100),
+   683→   683→  formed_at TIMESTAMPTZ DEFAULT NOW(),
+   684→   684→  active BOOLEAN DEFAULT TRUE
+   685→   685→);
+   686→   686→
+   687→   687→CREATE TABLE peer_group_members (
+   688→   688→  peer_group_id UUID REFERENCES peer_groups(id),
+   689→   689→  student_id UUID REFERENCES students(id),
+   690→   690→  joined_at TIMESTAMPTZ DEFAULT NOW(),
+   691→   691→  display_name VARCHAR(50), -- first name only or anonymous handle
+   692→   692→  PRIMARY KEY (peer_group_id, student_id)
+   693→   693→);
+   694→   694→```
+   695→   695→
+   696→   696→### 6.2 Vector Store Schema (for RAG)
+   697→   697→
+   698→   698→```
+   699→   699→Collection: student_reflections
+   700→   700→- id: reflection UUID
+   701→   701→- student_id: student UUID
+   702→   702→- embedding: vector(1536)
+   703→   703→- text: original reflection text
+   704→   704→- metadata: { session_date, prompt_type, interest_clusters }
+   705→   705→
+   706→   706→Collection: student_activities
+   707→   707→- id: activity UUID
+   708→   708→- student_id: student UUID
+   709→   709→- embedding: vector(1536)
+   710→   710→- text: activity description
+   711→   711→- metadata: { category, enjoyment_level, hours }
+   712→   712→
+   713→   713→Collection: map_nodes
+   714→   714→- id: node UUID
+   715→   715→- embedding: vector(1536)
+   716→   716→- text: node description
+   717→   717→- metadata: { node_type, title }
+   718→   718→```
+   719→   719→
+   720→   720→---
+   721→   721→
+   722→   722→## 7. API ROUTES
+   723→   723→
+   724→   724→### 7.1 Authentication
+   725→   725→```
+   726→   726→POST   /api/auth/register          -- Student or counselor registration
+   727→   727→POST   /api/auth/login             -- Login (email + password or SSO)
+   728→   728→POST   /api/auth/logout
+   729→   729→POST   /api/auth/refresh           -- Token refresh
+   730→   730→GET    /api/auth/me                -- Current user profile
+   731→   731→```
+   732→   732→
+   733→   733→### 7.2 Student Routes
+   734→   734→```
+   735→   735→GET    /api/student/profile                  -- Get own profile
+   736→   736→PUT    /api/student/profile                  -- Update profile
+   737→   737→GET    /api/student/signal-profile           -- Latest AI-generated signal profile
+   738→   738→GET    /api/student/signal-profile/history   -- All historical profiles (trajectory view)
+   739→   739→```
+   740→   740→
+   741→   741→### 7.3 Reflection Sessions
+   742→   742→```
+   743→   743→POST   /api/sessions                     -- Start new monthly session
+   744→   744→GET    /api/sessions                     -- List all sessions
+   745→   745→GET    /api/sessions/:id                 -- Get session details
+   746→   746→PUT    /api/sessions/:id                 -- Update session (save progress)
+   747→   747→POST   /api/sessions/:id/complete        -- Mark session complete, trigger AI processing
+   748→   748→
+   749→   749→POST   /api/sessions/:id/activities      -- Add activity to session
+   750→   750→PUT    /api/activities/:id               -- Update activity
+   751→   751→DELETE /api/activities/:id               -- Remove activity
+   752→   752→
+   753→   753→POST   /api/sessions/:id/reflections     -- Submit reflection response
+   754→   754→PUT    /api/reflections/:id              -- Edit reflection
+   755→   755→```
+   756→   756→
+   757→   757→### 7.4 AI Endpoints
+   758→   758→```
+   759→   759→POST   /api/ai/generate-prompts         -- Generate personalized reflection prompts for a session
+   760→   760→POST   /api/ai/synthesize-profile       -- Trigger signal profile generation
+   761→   761→POST   /api/ai/match-opportunities      -- Find matching map nodes for a student
+   762→   762→POST   /api/ai/generate-notification    -- Generate a contextual notification
+   763→   763→```
+   764→   764→
+   765→   765→### 7.5 Privacy
+   766→   766→```
+   767→   767→GET    /api/privacy/shared               -- List all items currently shared with counselor
+   768→   768→PUT    /api/privacy/reflection/:id       -- Toggle sharing for a reflection
+   769→   769→PUT    /api/privacy/activity/:id         -- Toggle sharing for an activity
+   770→   770→PUT    /api/privacy/bulk                 -- Bulk update sharing settings
+   771→   771→POST   /api/privacy/make-all-private     -- Emergency: revoke all sharing
+   772→   772→GET    /api/privacy/audit-log            -- View history of sharing changes
+   773→   773→```
+   774→   774→
+   775→   775→### 7.6 Map
+   776→   776→```
+   777→   777→GET    /api/map/nodes                    -- Get map nodes (filtered by type, relevance)
+   778→   778→GET    /api/map/nodes/:id                -- Get node details + connections
+   779→   779→GET    /api/map/personalized             -- Get map highlighting student-relevant areas
+   780→   780→GET    /api/map/explore/:area            -- Browse a specific area of the map
+   781→   781→GET    /api/map/search?q=               -- Search map nodes
+   782→   782→```
+   783→   783→
+   784→   784→### 7.7 Notifications
+   785→   785→```
+   786→   786→GET    /api/notifications                -- List notifications (paginated)
+   787→   787→PUT    /api/notifications/:id/read       -- Mark as read
+   788→   788→PUT    /api/notifications/:id/acted      -- Mark as acted on
+   789→   789→GET    /api/notifications/preferences    -- Get notification preferences
+   790→   790→PUT    /api/notifications/preferences    -- Update notification preferences
+   791→   791→```
+   792→   792→
+   793→   793→### 7.8 Counselor Routes
+   794→   794→```
+   795→   795→GET    /api/counselor/students                    -- List assigned students
+   796→   796→GET    /api/counselor/students/:id/summary        -- Synthesized student view (privacy-filtered)
+   797→   797→GET    /api/counselor/students/:id/meeting-prep   -- One-page meeting prep summary
+   798→   798→GET    /api/counselor/overview                    -- Dashboard overview (engagement, trends)
+   799→   799→POST   /api/counselor/students/:id/prompt         -- Send a custom reflection prompt to student
+   800→   800→GET    /api/counselor/flags                       -- Students needing attention
+   801→   801→```
+   802→   802→
+   803→   803→### 7.9 Peer Groups
+   804→   804→```
+   805→   805→GET    /api/peers/group                  -- Get current peer group
+   806→   806→GET    /api/peers/group/reflections      -- Shared group reflection prompts
+   807→   807→POST   /api/peers/group/respond          -- Respond to group prompt
+   808→   808→```
+   809→   809→
+   810→   810→### 7.10 Data Export
+   811→   811→```
+   812→   812→GET    /api/export/my-data               -- Full student data export (JSON)
+   813→   813→DELETE /api/export/delete-my-data        -- GDPR/FERPA deletion request
+   814→   814→```
+   815→   815→
+   816→   816→---
+   817→   817→
+   818→   818→## 8. AI PROMPT ARCHITECTURE
+   819→   819→
+   820→   820→### 8.1 Reflection Prompt Generation
+   821→   821→
+   822→   822→**System prompt template:**
+   823→   823→```
+   824→   824→You are the reflection engine for Compass, a student development platform.
+   825→   825→
+   826→   826→Your job is to generate 2-3 personalized reflection questions for a high school student
+   827→   827→based on their history and recent activity.
+   828→   828→
+   829→   829→Rules:
+   830→   830→- Never prescribe direction. Only ask questions that help the student see their own patterns.
+   831→   831→- Never reference grades, rankings, or college admissions directly.
+   832→   832→- Questions should be warm, curious, and non-judgmental.
+   833→   833→- At least one question should connect two seemingly unrelated interests or activities.
+   834→   834→- At least one question should gently expand the student's awareness of something new.
+   835→   835→- Questions should be open-ended but specific enough to prompt real thought (not "how are you feeling?").
+   836→   836→- Keep questions under 30 words each.
+   837→   837→- Never repeat a question the student has been asked before.
+   838→   838→
+   839→   839→Student compressed profile:
+   840→   840→{compressed_summary}
+   841→   841→
+   842→   842→Recent activities (last 30 days):
+   843→   843→{recent_activities}
+   844→   844→
+   845→   845→Recent reflections (last 2 sessions):
+   846→   846→{recent_reflections}
+   847→   847→
+   848→   848→Previously asked questions (avoid repeating):
+   849→   849→{previous_prompts}
+   850→   850→
+   851→   851→Generate 2-3 reflection questions.
+   852→   852→```
+   853→   853→
+   854→   854→### 8.2 Signal Synthesis
+   855→   855→
+   856→   856→**System prompt template:**
+   857→   857→```
+   858→   858→You are the signal analysis engine for Compass.
+   859→   859→
+   860→   860→Analyze the student's complete activity and reflection history to identify:
+   861→   861→1. Interest clusters — groups of related interests with strength scores (0-1)
+   862→   862→2. Character signals — traits evidenced by behavior patterns
+   863→   863→3. Trajectory shifts — how interests have evolved over time
+   864→   864→4. Exploration gaps — areas aligned with their signals they haven't explored
+   865→   865→5. A compressed natural language summary (under 400 words) capturing who this student is becoming
+   866→   866→
+   867→   867→Rules:
+   868→   868→- Base all analysis on evidence (specific activities, reflections, patterns)
+   869→   869→- Never project or assume. If evidence is weak, say so.
+   870→   870→- Identify non-obvious connections between interests
+   871→   871→- Note when intensity is high but direction is unclear (this is normal and valuable)
+   872→   872→- Frame everything in terms of "emerging" and "evolving" — never as fixed traits
+   873→   873→
+   874→   874→Full student history:
+   875→   875→{full_activity_history}
+   876→   876→{full_reflection_history}
+   877→   877→
+   878→   878→Previous signal profile (if exists):
+   879→   879→{previous_profile}
+   880→   880→
+   881→   881→Generate the updated signal profile as JSON matching the signal_profiles schema.
+   882→   882→```
+   883→   883→
+   884→   884→### 8.3 Notification Generation
+   885→   885→
+   886→   886→**System prompt template:**
+   887→   887→```
+   888→   888→You are the notification engine for Compass.
+   889→   889→
+   890→   890→Generate a single notification for a student based on their profile and a trigger event.
+   891→   891→
+   892→   892→Trigger: {trigger_type}
+   893→   893→- "reflection_nudge": A between-session question based on recent signals
+   894→   894→- "opportunity_match": A specific opportunity (competition, program, course) that matches their signals
+   895→   895→- "map_expansion": A "did you know?" insight connecting their interests to something new
+   896→   896→
+   897→   897→Rules:
+   898→   898→- Title: max 8 words, specific and intriguing (not generic)
+   899→   899→- Body: max 50 words, conversational and warm
+   900→   900→- Must feel personally relevant, never mass-produced
+   901→   901→- Never use urgency tactics or FOMO language
+   902→   902→- For opportunities: include deadline if applicable
+   903→   903→- For map expansions: connect explicitly to something the student has shown interest in
+   904→   904→
+   905→   905→Student compressed profile:
+   906→   906→{compressed_summary}
+   907→   907→
+   908→   908→Trigger details:
+   909→   909→{trigger_data}
+   910→   910→
+   911→   911→Generate notification title and body.
+   912→   912→```
+   913→   913→
+   914→   914→### 8.4 Counselor Meeting Prep
+   915→   915→
+   916→   916→**System prompt template:**
+   917→   917→```
+   918→   918→Generate a one-page meeting prep summary for a school counselor.
+   919→   919→
+   920→   920→Rules:
+   921→   921→- Use only data the student has shared (shared_with_counselor = true)
+   922→   922→- Lead with the 2-3 most actionable insights
+   923→   923→- Suggest 2-3 specific conversation starters
+   924→   924→- Flag any concerning patterns (disengagement, narrowing exploration, extended confusion)
+   925→   925→- Never include raw reflection text — only synthesized insights
+   926→   926→- Keep under 300 words
+   927→   927→- Tone: professional but warm
+   928→   928→
+   929→   929→Shared student data:
+   930→   930→{shared_activities}
+   931→   931→{shared_signal_profile}
+   932→   932→{engagement_metrics}
+   933→   933→
+   934→   934→Generate the meeting prep summary.
+   935→   935→```
+   936→   936→
+   937→   937→---
+   938→   938→
+   939→   939→## 9. NOTIFICATION SCHEDULING ENGINE
+   940→   940→
+   941→   941→### 9.1 Scheduling Rules
+   942→   942→
+   943→   943→```javascript
+   944→   944→const NOTIFICATION_RULES = {
+   945→   945→  maxPerWeek: 3,                    // Hard cap per student
+   946→   946→  minIntervalHours: 48,             // Minimum time between notifications
+   947→   947→  quietHoursDefault: {
+   948→   948→    start: '21:00',
+   949→   949→    end: '08:00'
+   950→   950→  },
+   951→   951→  priorityOrder: [
+   952→   952→    'opportunity_deadline',          // Time-sensitive opportunities first
+   953→   953→    'reflection_nudge',              // Between-session prompts
+   954→   954→    'map_expansion',                 // "Did you know?" moments
+   955→   955→    'peer_prompt'                    // Group activity
+   956→   956→  ],
+   957→   957→  cooldownAfterSession: 72,         // Hours after monthly session before notifications resume
+   958→   958→  disengagementThreshold: 60,       // Days without interaction before changing strategy
+   959→   959→};
+   960→   960→```
+   961→   961→
+   962→   962→### 9.2 Notification Pipeline
+   963→   963→
+   964→   964→```
+   965→   965→1. Trigger Detection (runs daily)
+   966→   966→   ├── Opportunity scanner: new deadlines matching student signals
+   967→   967→   ├── Reflection timer: days since last reflection > threshold
+   968→   968→   ├── Map expansion: new connections identified in signal update
+   969→   969→   └── Peer activity: group has new shared prompt
+   970→   970→
+   971→   971→2. Candidate Generation
+   972→   972→   ├── AI generates notification content per trigger
+   973→   973→   ├── Deduplication check against recent notifications
+   974→   974→   └── Relevance scoring against student profile
+   975→   975→
+   976→   976→3. Scheduling
+   977→   977→   ├── Check student's weekly notification count
+   978→   978→   ├── Check minimum interval since last notification
+   979→   979→   ├── Respect quiet hours
+   980→   980→   ├── Priority-rank candidates
+   981→   981→   └── Schedule top candidate(s) within weekly budget
+   982→   982→
+   983→   983→4. Delivery
+   984→   984→   ├── Push notification (mobile)
+   985→   985→   ├── In-app notification (always)
+   986→   986→   └── Weekly email digest (optional, for low-push-engagement students)
+   987→   987→```
+   988→   988→
+   989→   989→---
+   990→   990→
+   991→   991→## 10. PRIVACY & COMPLIANCE
+   992→   992→
+   993→   993→### 10.1 Data Classification
+   994→   994→
+   995→   995→| Data Type | Owner | Default Visibility | Student Control |
+   996→   996→|---|---|---|---|
+   997→   997→| Raw reflections | Student | Private | Per-item toggle |
+   998→   998→| Activities | Student | Private | Per-item toggle |
+   999→   999→| Pulse check-ins | Student | Private | Cannot be shared |
+  1000→  1000→| Signal profile (synthesized) | Student | Shared (summary only) | Can restrict |
+  1001→  1001→| Exploration breadth score | Student | Shared | Can hide |
+  1002→  1002→| Engagement metrics | System | Shared with counselor | Cannot hide (school integration) |
+  1003→  1003→| Map interactions | Student | Private | N/A |
+  1004→  1004→| Notification history | Student | Private | N/A |
+  1005→  1005→| Peer group activity | Student | Visible to group | Can leave group |
+  1006→  1006→
+  1007→  1007→### 10.2 Compliance Requirements
+  1008→  1008→
+  1009→  1009→**FERPA (Family Educational Rights and Privacy Act):**
+  1010→  1010→- Student records protected under FERPA if school is the customer
+  1011→  1011→- Parents have access rights for students under 18 (handle via parent portal in future phase)
+  1012→  1012→- School must have legitimate educational interest for counselor access
+  1013→  1013→- Data cannot be shared with third parties without consent
+  1014→  1014→
+  1015→  1015→**COPPA (Children's Online Privacy Protection Act):**
+  1016→  1016→- Applies to users under 13 — if supporting grade 9 (some students are 13), COPPA compliance required
+  1017→  1017→- Verifiable parental consent for under-13 users
+  1018→  1018→- Recommend initial launch for grades 10–12 to simplify compliance
+  1019→  1019→
+  1020→  1020→**State Student Privacy Laws:**
+  1021→  1021→- Many states have additional student data privacy laws
+  1022→  1022→- No selling student data, ever
+  1023→  1023→- No targeted advertising based on student data
+  1024→  1024→- Transparent data practices
+  1025→  1025→
+  1026→  1026→### 10.3 Security Requirements
+  1027→  1027→
+  1028→  1028→- Encryption at rest (AES-256) for all student data
+  1029→  1029→- Encryption in transit (TLS 1.3)
+  1030→  1030→- Row-level security in PostgreSQL (students can only access their own data)
+  1031→  1031→- Counselors can only access students at their school with sharing enabled
+  1032→  1032→- API authentication via JWT with short expiration + refresh tokens
+  1033→  1033→- Rate limiting on all endpoints
+  1034→  1034→- Audit logging for all data access
+  1035→  1035→- Annual third-party security audit
+  1036→  1036→- SOC 2 Type II compliance (target for year 2)
+  1037→  1037→- Data residency: US-only servers for US schools
+  1038→  1038→
+  1039→  1039→---
+  1040→  1040→
+  1041→  1041→## 11. REVENUE MODEL
+  1042→  1042→
+  1043→  1043→### 11.1 Revenue Streams (Layered)
+  1044→  1044→
+  1045→  1045→**Stream 1: School Licensing (Primary — Year 1)**
+  1046→  1046→- Free tier: up to 50 students, basic features, limited AI interactions
+  1047→  1047→- Licensed tier: $1,000–3,000/year per school (unlimited students)
+  1048→  1048→- Includes: counselor dashboard, full AI features, monthly session framework
+  1049→  1049→- Sold as: "guidance counselor augmentation" into existing ed-tech budgets
+  1050→  1050→
+  1051→  1051→**Stream 2: University/Program Visibility (Year 2+)**
+  1052→  1052→- Universities and programs pay to be discoverable on The Map for matching student profiles
+  1053→  1053→- NOT advertising — transparent, consent-driven, clearly labeled as "sponsored visibility"
+  1054→  1054→- Students can opt into being discoverable by programs (consent-based matching)
+  1055→  1055→- Pricing: per-impression or per-engagement, TBD based on volume
+  1056→  1056→- Revenue per student potentially $50–200/year from this channel alone
+  1057→  1057→
+  1058→  1058→**Stream 3: Parent Dashboard (Year 2+)**
+  1059→  1059→- Optional paid tier: $10–15/month
+  1060→  1060→- Shows synthesized view of student's exploration (only what student has shared)
+  1061→  1061→- Peace-of-mind metrics: exploration breadth, engagement level, timeline awareness
+  1062→  1062→- Replaces $200/hour admissions consultant anxiety spending
+  1063→  1063→
+  1064→  1064→**Stream 4: Grants & Partnerships (Ongoing)**
+  1065→  1065→- Title I school subsidies via education foundations
+  1066→  1066→- College access nonprofit partnerships
+  1067→  1067→- State education department grants
+  1068→  1068→
+  1069→  1069→### 11.2 Unit Economics Target
+  1070→  1070→
+  1071→  1071→| Metric | Target |
+  1072→  1072→|---|---|
+  1073→  1073→| AI cost per student/month | $1.50–3.00 |
+  1074→  1074→| Infrastructure cost per student/month | $0.50–1.00 |
+  1075→  1075→| Total COGS per student/month | $2.00–4.00 |
+  1076→  1076→| School license revenue per student/month | $1.50–5.00 |
+  1077→  1077→| University visibility revenue per student/month (at scale) | $4.00–17.00 |
+  1078→  1078→| Blended gross margin target | 60–75% |
+  1079→  1079→
+  1080→  1080→---
+  1081→  1081→
+  1082→  1082→## 12. IMPLEMENTATION ROADMAP
+  1083→  1083→
+  1084→  1084→### Phase 1: Core Loop (Months 1–3)
+  1085→  1085→Build the minimum that proves the product works at one school.
+  1086→  1086→
+  1087→  1087→- Student onboarding flow
+  1088→  1088→- Monthly reflection session (all 5 steps)
+  1089→  1089→- Activity logging
+  1090→  1090→- AI reflection prompt generation
+  1091→  1091→- Basic signal profile generation
+  1092→  1092→- Privacy controls (per-item toggling)
+  1093→  1093→- Push notifications (reflection nudges only)
+  1094→  1094→- Mobile app (React Native) + web app
+  1095→  1095→- Basic counselor dashboard (student list + synthesized summaries)
+  1096→  1096→
+  1097→  1097→### Phase 2: The Map + Notifications (Months 4–6)
+  1098→  1098→Add the features that differentiate from a wrapper.
+  1099→  1099→
+  1100→  1100→- Career/education landscape database (initial population)
+  1101→  1101→- Interactive Map visualization
+  1102→  1102→- Personalized map highlighting based on student signals
+  1103→  1103→- Opportunity alert notifications
+  1104→  1104→- Map expansion notifications
+  1105→  1105→- Notification scheduling engine
+  1106→  1106→- Counselor meeting prep feature
+  1107→  1107→- Data export capability
+  1108→  1108→
+  1109→  1109→### Phase 3: Social + Simulation (Months 7–9)
+  1110→  1110→Add the community and forward-looking features.
+  1111→  1111→
+  1112→  1112→- Peer exploration groups
+  1113→  1113→- Group reflection prompts
+  1114→  1114→- Future simulation (trajectory illustration)
+  1115→  1115→- Enhanced signal mining (character signals, trajectory shifts)
+  1116→  1116→- Gap detection and exploration suggestions
+  1117→  1117→- School admin dashboard
+  1118→  1118→
+  1119→  1119→### Phase 4: Scale + Revenue (Months 10–12)
+  1120→  1120→Add revenue diversification and scale infrastructure.
+  1121→  1121→
+  1122→  1122→- Parent dashboard
+  1123→  1123→- University/program visibility marketplace
+  1124→  1124→- Multi-school deployment tooling
+  1125→  1125→- Advanced analytics for schools
+  1126→  1126→- API for school system integrations (SIS, LMS)
+  1127→  1127→- FERPA compliance audit
+  1128→  1128→- SOC 2 preparation
+  1129→  1129→
+  1130→  1130→---
+  1131→  1131→
+  1132→  1132→## 13. SUCCESS METRICS
+  1133→  1133→
+  1134→  1134→### 13.1 Student Engagement
+  1135→  1135→- Monthly active session completion rate > 70%
+  1136→  1136→- Notification open rate > 40%
+  1137→  1137→- Notification action rate > 15%
+  1138→  1138→- Average reflection depth (word count + thoughtfulness score) increasing over time
+  1139→  1139→- Return usage between sessions (checking map, reviewing profile) > 30% of students weekly
+  1140→  1140→
+  1141→  1141→### 13.2 Product Impact
+  1142→  1142→- Exploration breadth score increasing across cohort over time
+  1143→  1143→- Number of "new discovery" moments (student engages with a map node for the first time) > 2/month average
+  1144→  1144→- Student-reported directional clarity (survey) improving semester over semester
+  1145→  1145→- Counselor-reported meeting quality improvement
+  1146→  1146→- College application list diversity (students applying to programs they discovered through Compass)
+  1147→  1147→
+  1148→  1148→### 13.3 Business Health
+  1149→  1149→- School retention rate > 90% year-over-year
+  1150→  1150→- Net Promoter Score > 50 (students), > 60 (counselors)
+  1151→  1151→- AI cost per student staying under $5/month as features expand
+  1152→  1152→- Student acquisition cost (via school channel) < $5/student
+  1153→  1153→
+  1154→  1154→---
+  1155→  1155→
+  1156→  1156→## 14. DESIGN MOCKUP SPECIFICATIONS
+  1157→  1157→
+  1158→  1158→### 14.1 Key Screens to Build
+  1159→  1159→
+  1160→  1160→**Student Mobile App:**
+  1161→  1161→1. **Home** — Glass card showing current signal profile summary, next session countdown, recent notifications
+  1162→  1162→2. **Monthly Session** — Step-by-step reflection flow (pulse → activities → prompts → map moment → privacy review)
+  1163→  1163→3. **The Map** — Full-screen interactive visualization with personal highlighting
+  1164→  1164→4. **Reflections History** — Timeline view of all past sessions and responses
+  1165→  1165→5. **Profile** — Signal profile visualization, privacy controls, notification settings, data export
+  1166→  1166→6. **Notification Detail** — Expanded view of any notification with context and action options
+  1167→  1167→
+  1168→  1168→**Counselor Dashboard (Desktop):**
+  1169→  1169→1. **Overview** — Student grid with engagement indicators, filterable/sortable
+  1170→  1170→2. **Student Detail** — Synthesized profile, shared signals, conversation starters, meeting prep
+  1171→  1171→3. **Flags** — Students needing attention (disengagement, narrowing, extended confusion)
+  1172→  1172→4. **Analytics** — Cohort-level exploration trends, engagement metrics
+  1173→  1173→
+  1174→  1174→### 14.2 Interaction Patterns
+  1175→  1175→
+  1176→  1176→- **Reflection inputs:** Large, comfortable text areas with gentle placeholder prompts. No character limits. Auto-save every 10 seconds.
+  1177→  1177→- **Privacy toggles:** Inline, immediate, no modal confirmation for individual items. Subtle animation showing state change (gray → blue dot). Batch toggle available at session review step.
+  1178→  1178→- **Map navigation:** Pinch-to-zoom, tap-to-expand nodes. Smooth transitions. Related nodes animate connections when a node is selected. Personal relevance shown via glow intensity.
+  1179→  1179→- **Notifications:** Arrive as standard push notifications. In-app, they appear in a dedicated feed with type-coded accent colors. Swipe to dismiss, tap to engage. No badge count anxiety — just a subtle indicator.
+  1180→  1180→
+  1181→  1181→---
+  1182→  1182→
+  1183→  1183→## APPENDIX A: EXAMPLE REFLECTION PROMPTS
+  1184→  1184→
+  1185→  1185→These illustrate the quality and specificity the AI should target:
+  1186→  1186→
+  1187→  1187→**Pattern-connecting prompts:**
+  1188→  1188→- "You've been spending time on both robotics and creative writing. On the surface they seem different — what do you think they have in common for you?"
+  1189→  1189→- "Last month you mentioned loving the problem-solving in AP Chem. This month you joined Mock Trial. What kind of challenge do you keep seeking out?"
+  1190→  1190→
+  1191→  1191→**Exploration-expanding prompts:**
+  1192→  1192→- "You mentioned being curious about how businesses make decisions. Have you ever looked into what management consulting actually involves day-to-day?"
+  1193→  1193→- "Your interest in psychology and data keeps coming up. There's a growing field called behavioral economics that sits at that intersection. Does that resonate?"
+  1194→  1194→
+  1195→  1195→**Identity-probing prompts:**
+  1196→  1196→- "If you could be known for one thing by the time you graduate, what would you want it to be?"
+  1197→  1197→- "You described feeling 'alive' during your debate tournament. What specifically about that experience created that feeling?"
+  1198→  1198→
+  1199→  1199→**Gentle challenge prompts:**
+  1200→  1200→- "You've been focused on STEM activities for 6 months straight. Is there a non-STEM interest you've been curious about but haven't made time for?"
+  1201→  1201→- "You mentioned wanting to be 'the best' at what you do. How do you decide what counts as 'the best' — is it external recognition or internal satisfaction?"
+  1202→  1202→
+  1203→  1203→---
+  1204→  1204→
+  1205→  1205→## APPENDIX B: THE MAP — INITIAL DATA CATEGORIES
+  1206→  1206→
+  1207→  1207→The Map should launch with coverage across these domains:
+  1208→  1208→
+  1209→  1209→**Career Families:**
+  1210→  1210→Technology, Finance, Consulting, Healthcare, Engineering, Law, Education, Media, Government/Policy, Science/Research, Arts/Design, Entrepreneurship, Nonprofit/Social Impact
+  1211→  1211→
+  1212→  1212→**Per Career Family, include:**
+  1213→  1213→- 5–15 specific career paths with descriptions
+  1214→  1214→- Typical education routes (major → entry role → progression)
+  1215→  1215→- Target school pipelines (which schools feed which firms/industries)
+  1216→  1216→- Salary ranges and growth trajectories
+  1217→  1217→- Required vs. helpful skills
+  1218→  1218→- Day-in-the-life descriptions
+  1219→  1219→- Non-obvious entry points and lateral transitions
+  1220→  1220→
+  1221→  1221→**Education Nodes:**
+  1222→  1222→- Major programs at top 100 US universities
+  1223→  1223→- Notable double-major combinations and what they enable
+  1224→  1224→- Unique/distinctive programs (UVA Systems Engineering, Stanford Symbolic Systems, etc.)
+  1225→  1225→- Study abroad programs by field
+  1226→  1226→- Gap year programs
+  1227→  1227→- Summer research opportunities by field
+  1228→  1228→
+  1229→  1229→**Opportunity Nodes (Updated Regularly):**
+  1230→  1230→- National competitions by field (with deadlines)
+  1231→  1231→- Summer programs and internships for high schoolers
+  1232→  1232→- Online courses and certifications
+  1233→  1233→- Research opportunities
+  1234→  1234→- Volunteer and leadership programs
+  1235→  1235→- Scholarship programs by interest area
+  1236→  1236→
+  1237→  1237→---
+  1238→  1238→
+  1239→  1239→## APPENDIX C: COUNSELOR CONVERSATION STARTERS (EXAMPLES)
+  1240→  1240→
+  1241→  1241→Generated by the AI based on shared student signals:
+  1242→  1242→
+  1243→  1243→- "I noticed you've been exploring both engineering and philosophy this year. I'm curious — how do you see those connecting?"
+  1244→  1244→- "Your signal profile shows a strong pattern around systems thinking. Have you heard of operations research or systems engineering as fields?"
+  1245→  1245→- "It looks like you haven't explored much outside STEM this year. Is that by choice, or would you be open to hearing about some adjacent areas?"
+  1246→  1246→- "Your engagement has been really high this semester. What's been driving that energy?"
+  1247→  1247→
+  1248→  1248→---
+  1249→  1249→
+  1250→  1250→*End of PDR — Compass v1.0*
+  1251→  1251→*This document is designed to be fed to an AI development assistant for full application implementation.*
+  1252→  1252→
+  1253→
+  1254→<system-reminder>
+  1255→Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+  1256→</system-reminder>
+  1257→
+
+<system-reminder>
+Whenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.
+</system-reminder>

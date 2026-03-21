@@ -1,0 +1,58 @@
+2026-03-06 03:12:52.281 [error] PrismaClientKnownRequestError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Error opening a TLS connection: self-signed certificate in certificate chain
+    at i9.handleRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:8008)
+    at i9.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:7090)
+    at i9.request (/var/task/apps/web/.next/server/chunks/7535.js:21:6803)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async i (/var/task/apps/web/.next/server/chunks/7535.js:33:7529)
+    at async d (/var/task/apps/web/.next/server/app/(student)/page.js:1:19616)
+    at async x (/var/task/apps/web/.next/server/app/(student)/page.js:1:14946) {
+  code: 'P1011',
+  clientVersion: '6.19.2',
+  meta: {
+    modelName: 'Student',
+    message: 'self-signed certificate in certificate chain'
+  },
+  digest: '2270343491'
+}
+2026-03-06 03:12:52.294 [error] PrismaClientKnownRequestError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Error opening a TLS connection: self-signed certificate in certificate chain
+    at i9.handleRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:8008)
+    at i9.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:7090)
+    at i9.request (/var/task/apps/web/.next/server/chunks/7535.js:21:6803)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async i (/var/task/apps/web/.next/server/chunks/7535.js:33:7529)
+    at async d (/var/task/apps/web/.next/server/app/(student)/page.js:1:13577) {
+  code: 'P1011',
+  clientVersion: '6.19.2',
+  meta: {
+    modelName: 'Student',
+    message: 'self-signed certificate in certificate chain'
+  },
+  digest: '2838649734'
+}
+2026-03-06 03:12:52.296 [error] PrismaClientKnownRequestError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Error opening a TLS connection: self-signed certificate in certificate chain
+    at i9.handleRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:8008)
+    at i9.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:7090)
+    at i9.request (/var/task/apps/web/.next/server/chunks/7535.js:21:6803)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async i (/var/task/apps/web/.next/server/chunks/7535.js:33:7529)
+    at async d (/var/task/apps/web/.next/server/app/(student)/page.js:1:13577) {
+  code: 'P1011',
+  clientVersion: '6.19.2',
+  meta: {
+    modelName: 'Student',
+    message: 'self-signed certificate in certificate chain'
+  },
+  digest: '2838649734'
+}

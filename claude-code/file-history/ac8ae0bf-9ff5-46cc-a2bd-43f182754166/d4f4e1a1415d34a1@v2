@@ -1,0 +1,725 @@
+# COMPASS — Full Implementation Plan
+
+## Context
+Build the entire COMPASS application from scratch — a longitudinal student operating system for high school self-authorship. The product helps students see patterns in their own interests/activities and expand career/education awareness, without telling them what to do.
+
+This plan follows the phased roadmap from the PDR (12 months → 4 phases) but executes them sequentially as code deliverables.
+
+---
+
+## Tech Stack (Locked)
+| Layer | Choice |
+|---|---|
+| Monorepo | Turborepo + pnpm |
+| Web + Dashboard | Next.js 14 (App Router) |
+| Mobile | Expo (React Native) |
+| Styling | Tailwind CSS + custom glass tokens |
+| Animation | Framer Motion (web) / Reanimated (mobile) |
+| Auth | Clerk |
+| Database | Supabase (PostgreSQL + pgvector) |
+| ORM | Prisma |
+| AI | Anthropic Claude API (haiku for cheap, sonnet for synthesis) |
+| Embeddings | Voyage AI (`voyage-3`) |
+| AI Service | Python FastAPI on Railway |
+| Queue | Upstash QStash (serverless-safe) |
+| Cache | Upstash Redis |
+| Push Notifications | Expo Push Notifications |
+| Map Viz | D3.js |
+| Hosting | Vercel (web) + Railway (AI service) |
+
+---
+
+## Monorepo Structure
+```
+compass/
+├── apps/
+│   ├── web/              # Next.js — student web app + counselor dashboard
+│   ├── mobile/           # Expo — iOS/Android
+│   └── ai-service/       # Python FastAPI — signal mining, prompts, synthesis
+├── packages/
+│   ├── db/               # Prisma schema + client
+│   ├── types/            # Shared TypeScript types
+│   ├── ui/               # Shared React components (glass design system)
+│   └── config/           # Shared tsconfig, tailwind, eslint
+├── turbo.json
+├── pnpm-workspace.yaml
+└── package.json
+```
+
+---
+
+## Implementation Phases
+
+### PHASE 1 — Project Foundation (Steps 1–4)
+
+#### Step 1: Monorepo Scaffold
+**Files to create:**
+- `package.json` (root) — workspace config, turbo scripts
+- `pnpm-workspace.yaml` — workspace globs
+- `turbo.json` — pipeline: build, dev, lint, test
+- `.env.example` — all required env vars documented
+- `.gitignore`
+- `packages/config/tsconfig.base.json`
+- `packages/config/tailwind.config.ts` — glass design tokens
+- `packages/config/eslint.config.js`
+
+**Key design tokens (Tailwind):**
+```js
+// Glass OS design system
+colors: {
+  'glass-white': 'rgba(255,255,255,0.72)',
+  'bg-primary': '#F2F4F7',
+  'accent-primary': '#3B82F6',
+  'signal-strong': '#10B981',
+  'signal-moderate': '#F59E0B',
+  'signal-emerging': '#8B5CF6',
+  'text-primary': '#1A1A2E',
+}
+// backdrop-filter: blur(20px) saturate(180%)
+// border: 1px solid rgba(255,255,255,0.18)
+```
+
+#### Step 2: Packages Setup
+**`packages/types/src/`** — TypeScript interfaces:
+- `student.ts` — Student, Counselor, School
+- `session.ts` — ReflectionSession, Activity, Reflection
+- `signals.ts` — SignalProfile, InterestCluster, CharacterSignal, TrajectoryShift
+- `map.ts` — MapNode, MapEdge, PersonalizedMapData
+- `notifications.ts` — Notification, NotificationPreferences
+- `index.ts` — barrel export
+
+**`packages/ui/src/`** — Shared components:
+- `GlassCard.tsx` — primary container with glassmorphism
+- `GlassPanel.tsx` — lighter glass variant
+- `SignalBadge.tsx` — interest tag with colored dot
+- `Button.tsx` — variants: primary, ghost, glass
+- `PrivacyToggle.tsx` — gray/blue dot toggle
+- `animations.ts` — Framer Motion variants (staggerContainer, fadeUpVariant, scaleIn)
+- `index.ts` — barrel export
+
+**`packages/db/`:**
+- `prisma/schema.prisma` — full data model (see Step 3)
+- `src/index.ts` — Prisma client singleton
+- `src/seed.ts` — map node seeding script
+
+#### Step 3: Database Schema (Critical Path)
+**`packages/db/prisma/schema.prisma`** — full schema:
+
+```prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [pgvector(map: "vector")]
+}
+
+enum Role { STUDENT COUNSELOR ADMIN }
+enum ActivityCategory { ACADEMIC EXTRACURRICULAR READING PROJECT WORK VOLUNTEER HOBBY }
+enum PromptType { PATTERN EXPLORATION IDENTITY CHALLENGE }
+enum NotificationType { REFLECTION_NUDGE OPPORTUNITY MAP_EXPANSION PEER_PROMPT }
+enum MapNodeType { CAREER MAJOR INDUSTRY PROGRAM SKILL VALUE }
+enum EdgeType { REQUIRES LEADS_TO RELATED ALTERNATIVE }
+
+model Student {
+  id                    String   @id @default(cuid())
+  clerkId               String   @unique
+  email                 String   @unique
+  firstName             String
+  lastName              String
+  gradeLevel            Int?     // 9-12
+  schoolId              String?
+  onboardingCompleted   Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  school                School?  @relation(fields: [schoolId], references: [id])
+  sessions              ReflectionSession[]
+  activities            Activity[]
+  reflections           Reflection[]
+  signalProfiles        SignalProfile[]
+  notifications         Notification[]
+  notificationPrefs     NotificationPreferences?
+  privacySettings       StudentPrivacySettings?
+  peerMemberships       PeerGroupMember[]
+}
+
+model Counselor {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  firstName String
+  lastName  String
+  schoolId  String
+  createdAt DateTime @default(now())
+  school    School   @relation(fields: [schoolId], references: [id])
+}
+
+model School {
+  id             String    @id @default(cuid())
+  name           String
+  district       String?
+  state          String?
+  tier           String    @default("free") // free | licensed
+  licenseExpires DateTime?
+  createdAt      DateTime  @default(now())
+  students       Student[]
+  counselors     Counselor[]
+}
+
+model ReflectionSession {
+  id              String    @id @default(cuid())
+  studentId       String
+  monthKey        String    // "2025-03" format for uniqueness
+  pulseScore      Int?      // 1-10
+  pulseNote       String?
+  completedAt     DateTime?
+  durationSeconds Int?
+  createdAt       DateTime  @default(now())
+  student         Student   @relation(fields: [studentId], references: [id])
+  activities      Activity[]
+  reflections     Reflection[]
+  @@unique([studentId, monthKey])
+}
+
+model Activity {
+  id            String           @id @default(cuid())
+  studentId     String
+  sessionId     String?
+  category      ActivityCategory
+  name          String
+  description   String?
+  hoursPerWeek  Decimal?
+  excitement    Int?             // 1-5
+  isOngoing     Boolean          @default(true)
+  startDate     DateTime?
+  endDate       DateTime?
+  createdAt     DateTime         @default(now())
+  student       Student          @relation(fields: [studentId], references: [id])
+  session       ReflectionSession? @relation(fields: [sessionId], references: [id])
+}
+
+model Reflection {
+  id                    String    @id @default(cuid())
+  studentId             String
+  sessionId             String
+  promptText            String
+  responseText          String?
+  promptType            PromptType
+  isSharedWithCounselor Boolean   @default(false)
+  wordCount             Int?
+  createdAt             DateTime  @default(now())
+  student               Student   @relation(fields: [studentId], references: [id])
+  session               ReflectionSession @relation(fields: [sessionId], references: [id])
+}
+
+model SignalProfile {
+  id                String   @id @default(cuid())
+  studentId         String
+  interestClusters  Json     @default("[]")
+  characterSignals  Json     @default("[]")
+  trajectoryShifts  Json     @default("[]")
+  gapDetection      Json     @default("{}")
+  breadthScore      Float    @default(0)
+  compressedSummary String?
+  lastSynthesizedAt DateTime?
+  synthesisVersion  Int      @default(1)
+  createdAt         DateTime @default(now())
+  student           Student  @relation(fields: [studentId], references: [id])
+}
+
+model StudentPrivacySettings {
+  studentId              String  @id
+  shareInterestClusters  Boolean @default(true)
+  shareBreadthScore      Boolean @default(true)
+  shareTrajectoryShifts  Boolean @default(true)
+  shareCharacterSignals  Boolean @default(true)
+  updatedAt              DateTime @updatedAt
+  student                Student @relation(fields: [studentId], references: [id])
+}
+
+model MapNode {
+  id          String      @id @default(cuid())
+  type        MapNodeType
+  label       String
+  description String?
+  metadata    Json        @default("{}")
+  parentId    String?
+  embedding   Unsupported("vector(1024)")?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  parent      MapNode?    @relation("MapHierarchy", fields: [parentId], references: [id])
+  children    MapNode[]   @relation("MapHierarchy")
+  outEdges    MapEdge[]   @relation("MapEdgeSource")
+  inEdges     MapEdge[]   @relation("MapEdgeTarget")
+  notifications Notification[]
+}
+
+model MapEdge {
+  id         String   @id @default(cuid())
+  sourceId   String
+  targetId   String
+  weight     Float    @default(0.5)
+  edgeType   EdgeType @default(RELATED)
+  source     MapNode  @relation("MapEdgeSource", fields: [sourceId], references: [id])
+  target     MapNode  @relation("MapEdgeTarget", fields: [targetId], references: [id])
+}
+
+model Notification {
+  id               String           @id @default(cuid())
+  studentId        String
+  type             NotificationType
+  title            String
+  body             String
+  relatedNodeId    String?
+  deliveredAt      DateTime?
+  readAt           DateTime?
+  actedOn          Boolean          @default(false)
+  createdAt        DateTime         @default(now())
+  student          Student          @relation(fields: [studentId], references: [id])
+  relatedNode      MapNode?         @relation(fields: [relatedNodeId], references: [id])
+}
+
+model NotificationPreferences {
+  studentId         String  @id
+  maxPerWeek        Int     @default(3)
+  reflectionNudges  Boolean @default(true)
+  opportunityAlerts Boolean @default(true)
+  mapExpansions     Boolean @default(true)
+  peerPrompts       Boolean @default(true)
+  quietHoursStart   String  @default("21:00")
+  quietHoursEnd     String  @default("08:00")
+  student           Student @relation(fields: [studentId], references: [id])
+}
+
+model PeerGroup {
+  id        String   @id @default(cuid())
+  name      String?
+  active    Boolean  @default(true)
+  formedAt  DateTime @default(now())
+  members   PeerGroupMember[]
+}
+
+model PeerGroupMember {
+  groupId     String
+  studentId   String
+  displayName String
+  joinedAt    DateTime @default(now())
+  group       PeerGroup @relation(fields: [groupId], references: [id])
+  student     Student   @relation(fields: [studentId], references: [id])
+  @@id([groupId, studentId])
+}
+```
+
+#### Step 4: Auth Layer
+**`apps/web/`:**
+- `middleware.ts` — Clerk `authMiddleware`, protect all routes except `/sign-in`, `/sign-up`, `/api/webhooks/*`
+- `app/api/webhooks/clerk/route.ts` — sync user → Student or Counselor in Postgres based on `publicMetadata.role`
+- `lib/auth.ts` — `requireStudent()` and `requireCounselor()` helpers that return DB record from Clerk userId
+
+---
+
+### PHASE 2 — Core API (Steps 5–8)
+
+#### Step 5: Session & Reflection API
+**`apps/web/app/api/`:**
+
+```
+sessions/
+  route.ts          POST: create session for current month (unique on studentId+monthKey)
+                    GET: list all sessions
+  [id]/
+    route.ts        GET: session detail with activities + reflections
+    submit/
+      route.ts      POST: mark complete, enqueue QStash synthesis job
+activities/
+  route.ts          POST: add activity
+  [id]/
+    route.ts        PUT: update, DELETE: remove
+reflections/
+  route.ts          POST: save reflection response
+  [id]/
+    route.ts        PATCH: update isSharedWithCounselor
+```
+
+#### Step 6: Privacy & Student Profile API
+```
+privacy/
+  route.ts          GET: current settings, PUT: update settings
+  audit/route.ts    GET: sharing history
+  reset/route.ts    POST: make everything private
+students/
+  profile/route.ts  GET: own profile, PUT: update
+  signal-profile/route.ts GET: latest signal profile
+  onboarding/route.ts POST: save onboarding data
+export/
+  route.ts          GET: full data export JSON
+  delete/route.ts   DELETE: GDPR deletion
+```
+
+#### Step 7: Map API
+```
+map/
+  nodes/route.ts           GET: all nodes (filterable by type)
+  nodes/[id]/route.ts      GET: node detail + connected edges
+  personalized/route.ts    GET: nodes ranked by similarity to student's signal embedding
+  search/route.ts          GET: ?q= text search
+```
+
+**Personalized map query (key algorithm):**
+1. Fetch student's `compressedSummary` from `SignalProfile`
+2. Call Voyage AI to get embedding of the summary
+3. Run pgvector similarity search: `ORDER BY embedding <-> $1 LIMIT 50`
+4. Return nodes with injected `similarity` score
+5. Cache result in Upstash Redis for 1 hour
+
+#### Step 8: Counselor & Notification API
+```
+counselor/
+  students/route.ts              GET: assigned students list with breadth scores
+  students/[id]/summary/route.ts GET: privacy-filtered synthesized view
+  students/[id]/meeting-prep/route.ts GET: AI-generated meeting prep (cached 24h)
+  flags/route.ts                 GET: disengaged/narrow students
+
+notifications/
+  route.ts                       GET: paginated list
+  [id]/read/route.ts             PUT: mark read
+  [id]/acted/route.ts            PUT: mark acted on
+  preferences/route.ts           GET/PUT: notification settings
+```
+
+---
+
+### PHASE 3 — AI Service (Steps 9–11)
+
+#### Step 9: FastAPI App Structure
+**`apps/ai-service/`:**
+```
+app/
+  main.py               FastAPI app, CORS, auth middleware (verify AI_SERVICE_SECRET_KEY header)
+  routers/
+    reflection.py       POST /reflection-prompts
+    synthesis.py        POST /synthesize-profile
+    notifications.py    POST /generate-notification
+    counselor.py        POST /meeting-prep
+  services/
+    rag_service.py      Compressed profile retrieval, vector search
+    embedding_service.py Voyage AI embeddings
+  prompts/
+    reflection.py       Reflection prompt generation templates
+    synthesis.py        Signal synthesis templates
+    notifications.py    Notification generation templates
+    counselor.py        Meeting prep templates
+  models/
+    requests.py         Pydantic request/response models
+  config.py             Settings from env vars
+requirements.txt
+Dockerfile
+railway.toml
+```
+
+#### Step 10: AI Prompt Implementations
+
+**Reflection prompts (`/reflection-prompts`):**
+- Input: studentId → fetch compressedSummary + recent 30-day activities + last 2 sessions' reflections + previously asked prompts
+- Model: `claude-haiku-4-5` (cheap, structured output)
+- Output: `[{ promptText, promptType }]` (2-3 questions)
+- Rules: never prescribe direction, connect cross-domain interests, expand awareness, no repeats, <30 words each
+
+**Signal synthesis (`/synthesize-profile`):**
+- Input: studentId → fetch FULL activity + reflection history + previous profile
+- Model: `claude-sonnet-4-6` (deep analysis)
+- Output: full SignalProfile JSON (interestClusters, characterSignals, trajectoryShifts, gapDetection, breadthScore, compressedSummary)
+- Rules: evidence-based, frame as "emerging" never fixed, note non-obvious connections
+
+**Notification generation (`/generate-notification`):**
+- Input: studentId + trigger_type + trigger_data → fetch compressedSummary
+- Model: `claude-haiku-4-5`
+- Output: `{ title (≤8 words), body (≤50 words) }`
+- Rules: specific not generic, never urgency/FOMO, personalized to trajectory
+
+**Meeting prep (`/meeting-prep`):**
+- Input: studentId + counselorId → fetch ONLY privacy-shared data
+- Model: `claude-haiku-4-5`
+- Output: ≤300 word summary with 2-3 conversation starters and flags
+- Rules: synthesized not raw, professional+warm tone
+
+#### Step 11: Embedding Pipeline
+- On `Activity` create: generate Voyage AI embedding → store in `map_nodes`-parallel index
+- On `SignalProfile` update: generate embedding of `compressedSummary` → store for map personalization
+- Use `voyage-3` model (1024-dim vectors)
+- Batch embed on first synthesis; incremental thereafter
+
+---
+
+### PHASE 4 — Student Web App (Steps 12–15)
+
+#### Step 12: App Shell & Routing
+**`apps/web/app/`:**
+```
+(auth)/
+  sign-in/page.tsx          Clerk SignIn component
+  sign-up/page.tsx          Clerk SignUp component
+(student)/
+  layout.tsx                BottomNav (Home/Map/Reflections/Profile)
+  page.tsx                  Home dashboard
+  reflect/
+    page.tsx                Start/continue session CTA
+    [sessionId]/
+      page.tsx              5-step session wizard
+      complete/page.tsx     Completion screen
+  map/page.tsx              Interactive D3 map
+  reflections/page.tsx      History timeline
+  profile/page.tsx          Signal profile + privacy + settings
+  onboarding/page.tsx       First-time onboarding wizard
+(counselor)/
+  layout.tsx                Sidebar nav
+  dashboard/page.tsx        Student grid overview
+  students/[id]/page.tsx    Student detail + meeting prep
+  flags/page.tsx            Students needing attention
+```
+
+#### Step 13: Home Dashboard
+**`app/(student)/page.tsx`** — glass cards showing:
+- Current signal profile summary (top 3-5 interest clusters with trend indicators)
+- Next session countdown ("Your monthly reflection opens in X days")
+- Recent notifications (last 2)
+- Exploration breadth score bar
+- Map moment CTA ("3 new areas match your profile")
+
+Components:
+- `SignalSummary.tsx` — interest clusters with signal strength indicators
+- `BreadthBar.tsx` — animated progress bar 0-100
+- `SessionCountdown.tsx` — days to next monthly session
+- `NotificationPreview.tsx` — 2-card notification strip
+
+#### Step 14: Monthly Reflection Session Wizard
+**`app/(student)/reflect/[sessionId]/page.tsx`** — 5-step wizard:
+
+**Step 1 — Pulse Check:**
+- 1-10 energy slider (not a mood tracker — context setter)
+- Optional free text: "What's on your mind?"
+- Large, comfortable input, no judgment framing
+
+**Step 2 — Activity Logger:**
+- List existing activities (ongoing)
+- "Add Activity" form: name, category selector, excitement rating (1-5 stars), hours/week
+- Smart suggestions based on prior entries
+- "Continue to Reflection" CTA
+
+**Step 3 — AI Reflection Prompts:**
+- Fetch prompts from `/api/ai/reflection-prompts` (calls AI service)
+- Display 2-3 questions one at a time or stacked
+- Large textarea per question, auto-save every 10 seconds
+- Word count indicator
+- No character limit
+
+**Step 4 — Map Moment:**
+- Show 1-2 "did you know?" map expansions based on this session's activities
+- Cards showing a career/major/opportunity adjacent to their signals
+- "Add to my map" bookmarking
+- Optional "skip" if student just wants to submit
+
+**Step 5 — Privacy Review:**
+- Checklist of signal data categories (toggles default ON)
+- Per-reflection sharing (default OFF)
+- "What your counselor will see" live preview
+- "Submit Reflection" CTA
+- Triggers `/api/sessions/[id]/submit`
+
+#### Step 15: The Map (D3.js)
+**`app/(student)/map/page.tsx`** + **`components/map/MapCanvas.tsx`:**
+
+```
+MapCanvas.tsx
+├── D3ForceGraph (nodes as circles, edges as lines)
+├── Node rendering:
+│   ├── Size = relevance to student (similarity score)
+│   ├── Glow effect = personalized (CSS radial-gradient)
+│   ├── Color = node type (career=blue, major=purple, industry=green, program=amber)
+│   └── Pulse animation = newly relevant nodes
+├── MapNodeDetail.tsx (glass panel on node click)
+├── MapSearchBar.tsx (text search, filters by type)
+├── MapLegend.tsx (type color key)
+└── PersonalizationToggle.tsx (show all vs. personalized view)
+```
+
+D3 force simulation: charge repulsion, link distance by edge weight, center gravity. Pinch-to-zoom, drag-to-pan. Mobile: touch-friendly with larger tap targets.
+
+---
+
+### PHASE 5 — Counselor Dashboard (Step 16)
+
+#### Step 16: Counselor Views
+**`app/(counselor)/dashboard/page.tsx`:**
+- Student grid: name, grade, top 2 interests, breadth score bar, engagement indicator (dot: green/amber/red)
+- Sort by: breadth, engagement, grade, last active
+- Filter by: interest area, engagement level
+- "Needs attention" flag indicators
+
+**`app/(counselor)/students/[id]/page.tsx`:**
+- Synthesized interest profile (never raw text)
+- Trajectory visualization (shift arrows)
+- Suggested conversation starters (AI-generated)
+- Engagement timeline
+- "Send Reflection Prompt" — counselor can send a custom prompt to student
+- Meeting prep PDF/print view
+
+---
+
+### PHASE 6 — Notification System (Step 17)
+
+#### Step 17: QStash Scheduling Engine
+**`apps/web/app/api/webhooks/qstash/route.ts`** — receives jobs:
+
+**Job types:**
+- `WEEKLY_NUDGE_SWEEP` — runs every Monday 9am
+  - For each active student: check days since last reflection, generate nudge if eligible
+  - Respect: maxPerWeek cap, 48hr minimum interval, quiet hours, cooldown after session (72hr)
+- `OPPORTUNITY_SWEEP` — runs nightly
+  - Match upcoming opportunities (deadlines within 3 weeks) against student signal embeddings
+- `POST_SESSION_SYNTHESIS` — triggered on session submit
+  - Call AI service `/synthesize-profile`
+  - Update SignalProfile in DB
+  - Invalidate Redis caches
+
+**Scheduling:** Register QStash cron jobs on deploy via `scripts/register-crons.ts`
+
+**Notification delivery:**
+- Web: store in `notifications` table → poll on home page
+- Mobile (Phase 2): Expo Push Notifications via `expo-server-sdk`
+
+---
+
+### PHASE 7 — Mobile App (Step 18)
+
+#### Step 18: Expo App
+**`apps/mobile/`:**
+```
+app/
+  (tabs)/
+    index.tsx         Home (mirrors web home)
+    map.tsx           Simplified map (WebView of web map or native D3)
+    reflections.tsx   Session history
+    profile.tsx       Signal profile + settings
+  reflect/
+    [sessionId].tsx   Full 5-step session (native UI)
+  onboarding.tsx      First launch flow
+components/
+  GlassCard.tsx       Native glass (BlurView)
+  SignalBadge.tsx
+  ActivityCard.tsx
+  NotificationCard.tsx
+lib/
+  api.ts              API client pointing to Vercel URL
+  notifications.ts    Expo push notification registration
+```
+
+Key mobile differences:
+- `expo-blur` for glass effect (iOS) / fallback for Android
+- `expo-notifications` for push registration + handling
+- Bottom tab navigator (4 tabs)
+- Haptic feedback on key interactions (`expo-haptics`)
+
+---
+
+### PHASE 8 — Data Seeding (Step 19)
+
+#### Step 19: Map Data Population
+**`packages/db/src/seed.ts`** — seed script with initial map data:
+
+Career families (13 total from PDR): Technology, Finance, Consulting, Healthcare, Engineering, Law, Education, Media, Government/Policy, Science/Research, Arts/Design, Entrepreneurship, Nonprofit
+
+Per family: 5-15 specific career nodes with:
+- `metadata.medianSalary`, `metadata.growthRate`
+- `metadata.educationRequired`
+- `metadata.skills[]`, `metadata.entryPaths[]`
+- `metadata.dayInTheLife`
+
+Education nodes: top 100 US universities' notable programs, double-major combinations, distinctive programs (UVA Systems Engineering, Stanford Symbolic Systems, etc.)
+
+Opportunity nodes: national competitions by field, summer programs, online courses, research opportunities
+
+After seeding: run Voyage AI embedding batch job on all map nodes (`scripts/embed-map-nodes.ts`)
+
+---
+
+### PHASE 9 — Testing & Deployment (Step 20)
+
+#### Step 20: Deployment Setup
+**Vercel (web):**
+- Root dir: `apps/web`
+- Build: `turbo build --filter=web`
+- All env vars set in dashboard
+- Clerk webhook → `/api/webhooks/clerk`
+- QStash registered crons
+
+**Railway (ai-service):**
+- Dockerfile deploy
+- Health endpoint: `GET /health`
+- Auto-deploy on push to `main`
+
+**Vercel env vars required:**
+```
+DATABASE_URL, DIRECT_URL
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, CLERK_WEBHOOK_SECRET
+AI_SERVICE_URL, AI_SERVICE_SECRET_KEY
+QSTASH_TOKEN, QSTASH_CURRENT_SIGNING_KEY, QSTASH_NEXT_SIGNING_KEY
+UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN
+NEXT_PUBLIC_APP_URL
+```
+
+**Railway env vars required:**
+```
+ANTHROPIC_API_KEY
+DATABASE_URL (non-pooled Supabase URL)
+VOYAGE_API_KEY
+AI_SERVICE_SECRET_KEY
+```
+
+---
+
+## Build Order (Critical Path)
+
+```
+Week 1:  Step 1-2   → Monorepo scaffold + packages (types, ui, config, db)
+Week 2:  Step 3     → Database schema → Supabase setup → migrations
+Week 3:  Step 4     → Auth (Clerk) → webhook → user sync
+Week 4:  Step 5-6   → Session, reflection, privacy, student profile APIs
+Week 5:  Step 7-8   → Map API + Counselor API
+Week 6:  Step 9-10  → AI Service (FastAPI) → all 4 prompt implementations
+Week 7:  Step 11    → Embedding pipeline (Voyage AI + pgvector)
+Week 8:  Step 12-13 → Web app shell + Home dashboard
+Week 9:  Step 14    → Monthly reflection session wizard (core UX)
+Week 10: Step 15    → The Map (D3.js)
+Week 11: Step 16    → Counselor dashboard
+Week 12: Step 17    → Notification system (QStash)
+Week 13: Step 18    → Mobile app (Expo)
+Week 14: Step 19    → Map data seeding + embedding batch
+Week 15: Step 20    → Deployment (Vercel + Railway + Expo)
+```
+
+---
+
+## Key Architectural Decisions
+
+**Why QStash over Bull:** Vercel serverless has no persistent process. QStash delivers jobs as HTTP POST callbacks — the only viable pattern.
+
+**Why compressed profiles:** Full student history = 10k+ tokens at 5 sessions. Monthly synthesis (claude-sonnet, expensive, once/month) compresses to 400-word summary. All other calls use only that summary (claude-haiku, cheap).
+
+**Why RLS + API-layer privacy:** RLS in Supabase is the security guarantee. API filtering is the UX feature. Both needed.
+
+**Why Voyage AI:** Anthropic has no standalone embedding API. Voyage AI (Anthropic partner) provides `voyage-3` (1024-dim, optimized for semantic similarity).
+
+---
+
+## Verification Plan
+1. Auth flow: Sign up as student → Clerk webhook → Student row in Supabase ✓
+2. Session flow: Create session → add activities → get AI prompts → submit → QStash job → SignalProfile updated ✓
+3. Privacy: Counselor sees only opted-in items; raw reflections hidden by default ✓
+4. Map: Personalized query returns nodes ranked by vector similarity ✓
+5. Notifications: Weekly sweep respects frequency caps, quiet hours, 72hr post-session cooldown ✓
+6. Counselor dashboard: Shows synthesized (not raw) data, filtered by privacy settings ✓

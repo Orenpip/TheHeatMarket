@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "sessionId": "2d8b7934-e46a-430a-94f9-7b4d061e783c",
+      "fullPath": "/Users/yahelraviv/.claude/projects/-Users-yahelraviv-habit-roaster/2d8b7934-e46a-430a-94f9-7b4d061e783c.jsonl",
+      "fileMtime": 1768702738552,
+      "firstPrompt": "do you see the UI issue in the image whereby when a user pulls down the habits list, the entire thing gets pulled down and the photo looks strange?",
+      "messageCount": 43,
+      "created": "2026-01-17T18:09:36.903Z",
+      "modified": "2026-01-18T02:18:58.406Z",
+      "gitBranch": "main",
+      "projectPath": "/Users/yahelraviv/habit-roaster",
+      "isSidechain": false
+    },
+    {
+      "sessionId": "0818f4b7-4dc4-4e59-9d96-b51d844eb4e7",
+      "fullPath": "/Users/yahelraviv/.claude/projects/-Users-yahelraviv-habit-roaster/0818f4b7-4dc4-4e59-9d96-b51d844eb4e7.jsonl",
+      "fileMtime": 1768701204251,
+      "firstPrompt": "how can I test the notifications work",
+      "messageCount": 84,
+      "created": "2026-01-17T13:00:39.127Z",
+      "modified": "2026-01-18T01:53:23.719Z",
+      "gitBranch": "",
+      "projectPath": "/Users/yahelraviv/habit-roaster",
+      "isSidechain": false
+    },
+    {
+      "sessionId": "f032eb02-9877-4525-bc88-41340db6cca0",
+      "fullPath": "/Users/yahelraviv/.claude/projects/-Users-yahelraviv-habit-roaster/f032eb02-9877-4525-bc88-41340db6cca0.jsonl",
+      "fileMtime": 1768701671487,
+      "firstPrompt": "Unknown skill: suggestprompt",
+      "messageCount": 6,
+      "created": "2026-01-18T02:00:12.327Z",
+      "modified": "2026-01-18T02:01:11.461Z",
+      "gitBranch": "",
+      "projectPath": "/Users/yahelraviv/habit-roaster",
+      "isSidechain": false
+    }
+  ]
+}

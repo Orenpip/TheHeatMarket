@@ -1,0 +1,99 @@
+# Compass Project Memory
+
+## Project Overview
+Student self-reflection platform. Students do structured sessions every 3 weeks → AI synthesizes into signal profiles → counselors get dashboard. Turborepo monorepo.
+
+## Stack
+- `apps/web` — Next.js 14 app router, deployed on **Vercel**
+- `apps/ai-service` — FastAPI Python, deployed on **Railway**
+- `apps/mobile` — React Native (untouched)
+- `packages/db` — Prisma ORM + pg driver, Supabase PostgreSQL
+- Clerk auth (roles: student/counselor/admin via publicMetadata)
+- Upstash Redis (caching) + QStash (background jobs)
+- Anthropic claude-sonnet-4-6 for synthesis, Voyage AI for embeddings (1024-dim)
+- pgvector on MapNode.embedding for semantic similarity search
+
+## Key Files
+- `packages/db/prisma/schema.prisma` — DB schema
+- `apps/web/lib/auth.ts` — AuthError class + apiError() + requireStudent/Counselor/Admin
+- `apps/web/lib/redis.ts` — Redis client + rateLimiters + CACHE_KEYS/TTL
+- `apps/web/lib/constants.ts` — COOLDOWN_DAYS = 21
+- `apps/web/lib/utils.ts` — getISOWeekKey() (UTC-based ISO week calculation)
+- `apps/web/lib/privacy-utils.ts` — withShareSignals() helper
+- `apps/web/lib/synthesize.ts` — AI synthesis helpers
+- `apps/web/app/api/webhooks/qstash/route.ts` — background job handler
+- `packages/db/src/index.ts` — pg Pool config (SSL: rejectUnauthorized=false with optional DB_SSL_CA env var)
+
+## DB Migrations (3 applied to Supabase)
+1. `0_init` — baseline
+2. `add-signal-profile-session-id-unique` — sessionId + @@unique([studentId, sessionId])
+3. `signal-profile-not-null-add-share-summary` — sessionId NOT NULL, shareSummary field
+
+## Migration Workflow (Supabase can't do shadow DB)
+```bash
+cd packages/db
+pnpm db:migrate-new <name>   # generates SQL via prisma migrate diff
+pnpm db:migrate-deploy        # applies with prisma migrate deploy
+```
+Never use `prisma migrate dev` or `prisma migrate reset` — shadow DB fails on Supabase.
+
+## What Was Fixed
+### Security
+- SSL: rejectUnauthorized=false (Supabase CA not in Node trust store; DB_SSL_CA env var enables full verification)
+- Security headers in next.config.mjs
+- CORS wildcard → settings.app_url in AI service
+- Rate limiting: sessions(10/hr), submit(5/hr), map(20/min), reflections(30/hr), activities(30/hr), counselorMeetingPrep(10/hr)
+- Input validation on all routes
+- Embedding array validated before raw SQL
+
+### Bugs Fixed
+- BUG-1: EMBED_PROFILE QStash job unhandled → now implemented
+- BUG-4: completedCount counted started sessions → fixed to count completed
+- BUG-5: weekKey used wrong math → getISOWeekKey() with proper ISO 8601
+- Synthesis idempotency: signalProfile.create → upsert in both submit route and QStash handler
+- Duplicate reflection create race condition
+- parsePrompts called 3x per render → once
+
+### API
+- All 33 routes use apiError() — returns 401/403/500 correctly
+- AuthError class with typed status codes
+
+### Privacy
+- shareSignals toggle → fans out to all 4 DB fields (shareInterestClusters/shareBreadthScore/shareTrajectoryShifts/shareCharacterSignals)
+- shareSummary → new DB field, persists via PUT /api/privacy
+- Counselor summary/meeting-prep routes now respect shareSummary
+- Privacy reset also sets shareSummary=false
+
+### Maintainability
+- COOLDOWN_DAYS in lib/constants.ts (was in 4 files)
+- getISOWeekKey in lib/utils.ts (was inline in qstash route, had timezone bug)
+
+## Tests (32 passing)
+- `__tests__/lib/utils.test.ts` — getISOWeekKey (7 tests)
+- `__tests__/lib/auth.test.ts` — AuthError, apiError (8 tests)
+- `__tests__/lib/constants.test.ts` — COOLDOWN_DAYS (2 tests)
+- `__tests__/api/privacy.test.ts` — withShareSignals, GET/PUT (10 tests)
+- `__tests__/api/sessions.test.ts` — cooldown, rate limit, template selection (5 tests)
+- Run: `pnpm test` in apps/web
+- Coverage: `pnpm test:coverage`
+
+## Railway AI Service Setup
+- Root directory must be set to `apps/ai-service` in Railway settings
+- Watch paths: `apps/ai-service/**`
+- Port: 8000
+- Env vars needed: ANTHROPIC_API_KEY, VOYAGE_API_KEY, DATABASE_URL (direct, port 5432), AI_SERVICE_SECRET_KEY, APP_URL
+- Vercel needs: AI_SERVICE_URL (no trailing slash), AI_SERVICE_SECRET_KEY (same value)
+
+## Vercel Env Vars Needed
+- DATABASE_URL, DIRECT_URL (Supabase)
+- NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, CLERK_WEBHOOK_SECRET
+- UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN
+- QSTASH_TOKEN, QSTASH_CURRENT_SIGNING_KEY, QSTASH_NEXT_SIGNING_KEY
+- AI_SERVICE_URL, AI_SERVICE_SECRET_KEY
+- NEXT_PUBLIC_APP_URL
+
+## Known Remaining Items
+- ESLint ignoreDuringBuilds: true in next.config.mjs (TODO: fix lint errors and enable)
+- Mobile app (apps/mobile) untouched
+- More test coverage needed (currently only core logic tested)
+- DB_SSL_CA env var optional for full Supabase cert chain verification

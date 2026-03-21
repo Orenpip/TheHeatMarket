@@ -1,0 +1,79 @@
+What COMPASS Is
+
+Student career exploration platform. High schoolers complete structured reflection sessions every 3 weeks → AI (Claude + Voyage AI) synthesizes responses into "signal profiles" (interest clusters, character signals, trajectory shifts, breadth score, compressed summary) → counselors see filtered dashboards. A pgvector-powered map surfaces personalized career/major recommendations.
+
+Architecture
+
+text
+compass/
+├── apps/web/          — Next.js 14 App Router (student + counselor + admin UI) → Vercel
+├── apps/ai-service/   — FastAPI Python (synthesis, embeddings, prompts) → Railway
+├── apps/mobile/       — React Native (untouched)
+├── packages/db/       — Prisma 6 WASM + Supabase schema
+├── packages/ui/       — Shared components
+├── CONTRIBUTING.md    — Migration workflow docs
+Stack: Next.js 14, TypeScript, Tailwind, Prisma 6 (WASM engine), Supabase PostgreSQL + pgvector, Clerk auth, Upstash Redis + QStash, Anthropic claude-sonnet-4-6, Voyage AI (1024-dim embeddings)
+
+Database (14 models, 3 migrations applied) Key models: Student, Counselor, ReflectionSession, ReflectionTemplate, Activity, Reflection, SignalProfile, StudentPrivacySettings, MapNode (pgvector), Notification, NotificationPreferences. Key constraints:
+
+SignalProfile.@@unique([studentId, sessionId]) — prevents duplicate synthesis on QStash retry
+SignalProfile.sessionId NOT NULL
+StudentPrivacySettings.shareSummary Boolean @default(true)
+Migration workflow:
+
+bash
+cd packages/db
+pnpm db:migrate-new <name>    # generates SQL via prisma migrate diff
+pnpm db:migrate-deploy        # applies with prisma migrate deploy
+Deployment State Web → Vercel ✅
+
+Prisma uses WASM engine + custom webpack loader (inlines 2.2MB WASM as base64 — bypasses Next.js 14's broken wasm parser)
+pg Pool uses DIRECT_URL not pgbouncer for driver adapter
+SSL: rejectUnauthorized: false (Supabase CA not in Node trust store; set DB_SSL_CA env var with base64 Supabase cert for full verification)
+Student layout auto-creates student record if Clerk webhook missed it
+Next.js ESLint builds are now enforced (ignoreDuringBuilds: false in 
+
+next.config.mjs
+)
+Turbo builds cached faster (removed --force from 
+
+vercel.json
+)
+AI Service → Railway ✅
+
+Root Directory: apps/ai-service, Watch Paths: apps/ai-service/**, Port: 8000
+All routes protected by X-Service-Key header
+Vercel needs: AI_SERVICE_URL (no trailing slash), AI_SERVICE_SECRET_KEY
+What Was Fixed This Session
+
+Security & Settings
+
+SSL rejectUnauthorized + Supabase CA escape hatch via DB_SSL_CA env var
+Security headers (X-Frame-Options, CSP, X-Content-Type-Options, etc.)
+CORS wildcard → locked to APP_URL in Python service
+Rate limiting on endpoints (sessions, submit, map, reflections, activities, counselor meeting-prep)
+API Error Handling: AuthError class + apiError() in lib/auth.ts, catching 401/403/500 correctly
+Core Logic & Bugs
+
+EMBED_PROFILE QStash job was silently unhandled → implemented
+weekKey fixed timezone bug via ISO 8601 getISOWeekKey()
+Synthesis uses upsert for idempotency (QStash delivers at-least-once)
+Fix concurrent reflection autosaves and unvalidated AI embedding before raw pgvector SQL
+D3 map dimensions fixed (uses window.innerWidth/Height)
+Framer-motion v11 missing AnimatePresence unmount crash fixed
+Recent Web Fixes (The Latest Push)
+
+Next.js ESLint enabled in build configuration.
+React Unescaped Entities (', ") fixed in MeetingPrepPanel.tsx.
+<Link> replacement from standard <a> tags in MapCanvas.tsx for proper single-page routing.
+Upstash redis.set(key, value, {ex: ttl}) invalid argument format fixed in meeting-prep/route.ts.
+Tests — 32 passing, 0 failing apps/web/__tests__/ ├── lib/utils.test.ts — 7 tests (timezone bug caught) ├── lib/auth.test.ts — 8 tests (Auth Error checks) ├── lib/constants.test.ts — 2 tests ├── api/privacy.test.ts — 10 tests (GET/PUT fan-out) └── api/sessions.test.ts — 5 tests (rate limit, template selection) Run: pnpm test | pnpm test:coverage
+
+What's Still Open
+
+Your Action Needed:
+
+Set APP_URL in Railway env vars → CORS only works with correct Vercel domain
+Verify Clerk webhook URL in Clerk dashboard matches Vercel deployment URL
+Optional: download Supabase CA cert → set DB_SSL_CA in Vercel for full TLS verification
+Product & Engineering decisions: 4. Mobile app (apps/mobile) — untouched, unknown state 5. More test coverage — currently core logic only; API routes and components need more

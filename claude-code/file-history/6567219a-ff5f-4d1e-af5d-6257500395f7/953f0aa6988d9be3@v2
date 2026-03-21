@@ -1,0 +1,59 @@
+import { requireStudent } from "@/lib/auth";
+import { prisma } from "@compass/db";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+
+export default async function ReflectPage() {
+  const student = await requireStudent();
+
+  const now = new Date();
+  const monthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+
+  // Check for existing session this month
+  const existingSession = await prisma.reflectionSession.findFirst({
+    where: { studentId: student.id, monthKey },
+  });
+
+  if (existingSession && !existingSession.completedAt) {
+    // Resume in-progress session
+    redirect(`/reflect/${existingSession.id}`);
+  }
+
+  if (existingSession?.completedAt) {
+    // Already completed this month
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="glass-card p-8 text-center max-w-sm">
+          <div className="text-5xl mb-4">✓</div>
+          <h2 className="text-xl font-bold text-[#1A1A2E] mb-2">
+            All caught up for {now.toLocaleString("default", { month: "long" })}
+          </h2>
+          <p className="text-[#6B7280] text-sm mb-6">
+            Your monthly reflection is complete. Come back next month to continue building your signal profile.
+          </p>
+          <Link href="/" className="btn-primary">
+            Back to Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="glass-card p-8 text-center max-w-sm">
+        <div className="text-5xl mb-4">🧭</div>
+        <h2 className="text-xl font-bold text-[#1A1A2E] mb-2">
+          {now.toLocaleString("default", { month: "long" })} Reflection
+        </h2>
+        <p className="text-[#6B7280] text-sm mb-6">
+          10–15 minutes to capture what&apos;s been on your mind, what you&apos;ve been doing, and what&apos;s curious to you.
+        </p>
+        <StartSessionButton studentId={student.id} monthKey={monthKey} />
+      </div>
+    </div>
+  );
+}
+
+// Client component for starting session
+import StartSessionButton from "@/components/session/StartSessionButton";

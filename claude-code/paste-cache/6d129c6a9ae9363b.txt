@@ -1,0 +1,52 @@
+13:09:26.640 Running build in Washington, D.C., USA (East) – iad1
+13:09:26.640 Build machine configuration: 2 cores, 8 GB
+13:09:26.768 Cloning github.com/manthatwalks/compass (Branch: main, Commit: 98e68ec)
+13:09:26.769 Previous build caches not available.
+13:09:27.045 Cloning completed: 277.000ms
+13:09:29.310 Running "vercel build"
+13:09:29.939 Vercel CLI 50.23.2
+13:09:30.526 Running "install" command: `npm i -g pnpm@9 && pnpm install`...
+13:09:32.065 
+13:09:32.065 added 1 package in 1s
+13:09:32.066 
+13:09:32.066 1 package is looking for funding
+13:09:32.066   run `npm fund` for details
+13:09:32.483 Scope: all 7 workspace projects
+13:09:32.526  WARN  GET https://registry.npmjs.org/prisma error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.527  WARN  GET https://registry.npmjs.org/tsx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.527  WARN  GET https://registry.npmjs.org/typescript error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.528  WARN  GET https://registry.npmjs.org/@prisma%2Fclient error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.528  WARN  GET https://registry.npmjs.org/@types%2Freact error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.528  WARN  GET https://registry.npmjs.org/@types%2Freact-dom error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.529  WARN  GET https://registry.npmjs.org/@babel%2Fcore error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.529  WARN  GET https://registry.npmjs.org/@clerk%2Fclerk-expo error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.530  WARN  GET https://registry.npmjs.org/@expo%2Fvector-icons error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.530  WARN  GET https://registry.npmjs.org/expo error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.531  WARN  GET https://registry.npmjs.org/expo-blur error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:32.531  WARN  GET https://registry.npmjs.org/expo-font error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:09:42.529  WARN  GET https://registry.npmjs.org/prisma error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.530  WARN  GET https://registry.npmjs.org/tsx error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.530  WARN  GET https://registry.npmjs.org/typescript error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.530  WARN  GET https://registry.npmjs.org/@prisma%2Fclient error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.531  WARN  GET https://registry.npmjs.org/@types%2Freact error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.531  WARN  GET https://registry.npmjs.org/@types%2Freact-dom error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.531  WARN  GET https://registry.npmjs.org/@babel%2Fcore error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.532  WARN  GET https://registry.npmjs.org/@clerk%2Fclerk-expo error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.532  WARN  GET https://registry.npmjs.org/@expo%2Fvector-icons error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.533  WARN  GET https://registry.npmjs.org/expo error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.533  WARN  GET https://registry.npmjs.org/expo-blur error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:09:42.533  WARN  GET https://registry.npmjs.org/expo-font error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+13:10:42.552  WARN  GET https://registry.npmjs.org/expo-haptics error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.553  ERR_PNPM_META_FETCH_FAIL  GET https://registry.npmjs.org/prisma: Value of "this" must be of type URLSearchParams
+13:10:42.554  WARN  GET https://registry.npmjs.org/expo-linking error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.555  WARN  GET https://registry.npmjs.org/expo-notifications error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.556  WARN  GET https://registry.npmjs.org/expo-router error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.557  WARN  GET https://registry.npmjs.org/expo-secure-store error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.559  WARN  GET https://registry.npmjs.org/expo-splash-screen error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.560  WARN  GET https://registry.npmjs.org/expo-status-bar error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.561  WARN  GET https://registry.npmjs.org/expo-system-ui error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.561  WARN  GET https://registry.npmjs.org/react-native-reanimated error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.562  WARN  GET https://registry.npmjs.org/react-native-screens error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.562  WARN  GET https://registry.npmjs.org/@types%2Fd3 error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.562  WARN  GET https://registry.npmjs.org/@types%2Fnode error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+13:10:42.571 Error: Command "npm i -g pnpm@9 && pnpm install" exited with 1

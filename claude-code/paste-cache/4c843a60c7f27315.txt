@@ -1,0 +1,24 @@
+ WARN  GET https://registry.npmjs.org/@babel%2Fcore error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/@clerk%2Fclerk-expo error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/@expo%2Fvector-icons error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/expo error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/expo-blur error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/expo-font error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/prisma error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/tsx error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/typescript error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/@prisma%2Fclient error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/@types%2Freact error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/@types%2Freact-dom error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/@babel%2Fcore error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/@clerk%2Fclerk-expo error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/@expo%2Fvector-icons error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/expo error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/expo-blur error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/expo-font error (ERR_INVALID_THIS). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/expo-haptics error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ ERR_PNPM_META_FETCH_FAIL  GET https://registry.npmjs.org/prisma: Value of "this" must be of type URLSearchParams
+ WARN  GET https://registry.npmjs.org/expo-linking error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/expo-notifications error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/expo-router error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+

@@ -1,0 +1,52 @@
+import { NextResponse } from "next/server";
+import { requireStudent } from "@/lib/auth";
+import { prisma } from "@compass/db";
+import { z } from "zod";
+import { ActivityCategory } from "@compass/db";
+
+const createActivitySchema = z.object({
+  sessionId: z.string().optional(),
+  category: z.nativeEnum(ActivityCategory),
+  name: z.string().min(1).max(200),
+  description: z.string().max(1000).optional(),
+  hoursPerWeek: z.number().min(0).max(168).optional(),
+  excitement: z.number().min(1).max(5).optional(),
+  isOngoing: z.boolean().default(true),
+  startDate: z.string().datetime().optional(),
+  endDate: z.string().datetime().optional(),
+});
+
+export async function POST(req: Request) {
+  try {
+    const student = await requireStudent();
+    const body = await req.json();
+    const data = createActivitySchema.parse(body);
+
+    // Validate session belongs to student if provided
+    if (data.sessionId) {
+      const session = await prisma.reflectionSession.findFirst({
+        where: { id: data.sessionId, studentId: student.id },
+      });
+      if (!session) {
+        return NextResponse.json(
+          { error: "Session not found" },
+          { status: 404 }
+        );
+      }
+    }
+
+    const activity = await prisma.activity.create({
+      data: {
+        studentId: student.id,
+        ...data,
+        startDate: data.startDate ? new Date(data.startDate) : undefined,
+        endDate: data.endDate ? new Date(data.endDate) : undefined,
+      },
+    });
+
+    return NextResponse.json(activity, { status: 201 });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 400 });
+  }
+}

@@ -1,0 +1,74 @@
+yahelraviv@Yahels-MBP compass % cd /Users/yahelraviv/compass && git add package.json && git commit -m "Fix postinstall: use pnpm filter to find prisma binary" && git push
+[main de7cb2b] Fix postinstall: use pnpm filter to find prisma binary
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 384 bytes | 384.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/manthatwalks/compass.git
+   c6546ed..de7cb2b  main -> main
+yahelraviv@Yahels-MBP compass % cd /Users/yahelraviv/compass && git add turbo.json apps/web/next.config.mjs && git commit -m "Fix Prisma runtime: disable db cache, set outputFileTracingRoot for monorepo" && git push
+[main 6920bd1] Fix Prisma runtime: disable db cache, set outputFileTracingRoot for monorepo
+ 2 files changed, 10 insertions(+)
+Enumerating objects: 11, done.
+Counting objects: 100% (11/11), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 727 bytes | 727.00 KiB/s, done.
+Total 6 (delta 5), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (5/5), completed with 5 local objects.
+To https://github.com/manthatwalks/compass.git
+   de7cb2b..6920bd1  main -> main
+yahelraviv@Yahels-MBP compass %   cd /Users/yahelraviv/compass && git add vercel.json && git commit -m "Copy Prisma engine binary to .next/server after build" && git push
+[main 754f448] Copy Prisma engine binary to .next/server after build
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 425 bytes | 425.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/manthatwalks/compass.git
+   6920bd1..754f448  main -> main
+yahelraviv@Yahels-MBP compass %   cd /Users/yahelraviv/compass && git add vercel.json && git commit -m "Copy Prisma engine binary to .next/server after build" && git push
+
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+yahelraviv@Yahels-MBP compass % cd /Users/yahelraviv/compass && git add packages/db/package.json packages/db/prisma/schema.prisma packages/db/src/index.ts vercel.json apps/web/next.config.mjs pnpm-lock.yaml && git commit -m "Switch to Prisma pg driver adapter — eliminates native binary entirely" && git pus                         
+[main 2233a46] Switch to Prisma pg driver adapter — eliminates native binary entirely
+ 6 files changed, 153 insertions(+), 12 deletions(-)
+git: 'pus' is not a git command. See 'git --help'.
+
+The most similar commands are
+    push
+    pull
+yahelraviv@Yahels-MBP compass % cd /Users/yahelraviv/compass && git add packages/db/package.json packages/db/prisma/schema.prisma packages/db/src/index.ts vercel.json apps/web/next.config.mjs pnpm-lock.yaml && git commit -m "Switch to Prisma pg driver adapter — eliminates native binary entirely" && git push
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+yahelraviv@Yahels-MBP compass % git add packages/db/package.json packages/db/prisma/schema.prisma packages/db/src/index.ts vercel.json apps/web/next.config.mjs pnpm-lock.yaml
+yahelraviv@Yahels-MBP compass % git commit -m "Switch to Prisma pg driver adapter — eliminates native binary entirely"
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+yahelraviv@Yahels-MBP compass % git push
+Enumerating objects: 27, done.
+Counting objects: 100% (27/27), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (14/14), 3.56 KiB | 910.00 KiB/s, done.
+Total 14 (delta 8), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (8/8), completed with 8 local objects.
+To https://github.com/manthatwalks/compass.git
+   ccb9327..2233a46  main -> main
+yahelraviv@Yahels-MBP compass % 

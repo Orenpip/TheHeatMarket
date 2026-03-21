@@ -1,0 +1,285 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../generated/client"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [pgvector(map: "vector")]
+}
+
+enum Role {
+  STUDENT
+  COUNSELOR
+  ADMIN
+}
+
+enum ActivityCategory {
+  ACADEMIC
+  EXTRACURRICULAR
+  READING
+  PROJECT
+  WORK
+  VOLUNTEER
+  HOBBY
+}
+
+enum PromptType {
+  PATTERN
+  EXPLORATION
+  IDENTITY
+  CHALLENGE
+}
+
+enum NotificationType {
+  REFLECTION_NUDGE
+  OPPORTUNITY
+  MAP_EXPANSION
+  PEER_PROMPT
+}
+
+enum MapNodeType {
+  CAREER
+  MAJOR
+  INDUSTRY
+  PROGRAM
+  SKILL
+  VALUE
+}
+
+enum EdgeType {
+  REQUIRES
+  LEADS_TO
+  RELATED
+  ALTERNATIVE
+}
+
+model Student {
+  id                  String   @id @default(cuid())
+  clerkId             String   @unique
+  email               String   @unique
+  firstName           String
+  lastName            String
+  gradeLevel          Int?     // 9-12
+  schoolId            String?
+  onboardingCompleted Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  school              School?                @relation(fields: [schoolId], references: [id])
+  sessions            ReflectionSession[]
+  activities          Activity[]
+  reflections         Reflection[]
+  signalProfiles      SignalProfile[]
+  notifications       Notification[]
+  notificationPrefs   NotificationPreferences?
+  privacySettings     StudentPrivacySettings?
+  peerMemberships     PeerGroupMember[]
+}
+
+model Counselor {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  firstName String
+  lastName  String
+  schoolId  String
+  createdAt DateTime @default(now())
+
+  school    School   @relation(fields: [schoolId], references: [id])
+}
+
+model School {
+  id             String    @id @default(cuid())
+  name           String
+  district       String?
+  state          String?
+  tier           String    @default("free") // free | licensed
+  licenseExpires DateTime?
+  createdAt      DateTime  @default(now())
+
+  students       Student[]
+  counselors     Counselor[]
+}
+
+model ReflectionTemplate {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  orderNum    Int      // 1-10, order students encounter it
+  yearKey     String   // "2026"
+  prompts     Json     // [{text: "...", type: "PATTERN|EXPLORATION|IDENTITY|CHALLENGE"}]
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  sessions    ReflectionSession[]
+
+  @@unique([yearKey, orderNum])
+}
+
+model ReflectionSession {
+  id              String    @id @default(cuid())
+  studentId       String
+  monthKey        String?   // kept for legacy data; null for template-based sessions
+  templateId      String?
+  sessionNumber   Int?      // 1-indexed position for this student
+  pulseScore      Int?      // 1-10
+  pulseNote       String?
+  completedAt     DateTime?
+  durationSeconds Int?
+  createdAt       DateTime  @default(now())
+
+  student         Student            @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  template        ReflectionTemplate? @relation(fields: [templateId], references: [id])
+  activities      Activity[]
+  reflections     Reflection[]
+}
+
+model Activity {
+  id           String           @id @default(cuid())
+  studentId    String
+  sessionId    String?
+  category     ActivityCategory
+  name         String
+  description  String?
+  hoursPerWeek Decimal?
+  excitement   Int?             // 1-5
+  isOngoing    Boolean          @default(true)
+  startDate    DateTime?
+  endDate      DateTime?
+  createdAt    DateTime         @default(now())
+
+  student      Student            @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session      ReflectionSession? @relation(fields: [sessionId], references: [id])
+}
+
+model Reflection {
+  id                    String    @id @default(cuid())
+  studentId             String
+  sessionId             String
+  promptText            String
+  responseText          String?
+  promptType            PromptType
+  isSharedWithCounselor Boolean   @default(false)
+  wordCount             Int?
+  createdAt             DateTime  @default(now())
+
+  student               Student           @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  session               ReflectionSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model SignalProfile {
+  id                String    @id @default(cuid())
+  studentId         String
+  sessionId         String
+  interestClusters  Json      @default("[]")
+  characterSignals  Json      @default("[]")
+  trajectoryShifts  Json      @default("[]")
+  gapDetection      Json      @default("{}")
+  breadthScore      Float     @default(0)
+  compressedSummary String?
+  lastSynthesizedAt DateTime?
+  synthesisVersion  Int       @default(1)
+  createdAt         DateTime  @default(now())
+
+  student           Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, sessionId])
+}
+
+model StudentPrivacySettings {
+  studentId              String   @id
+  shareInterestClusters  Boolean  @default(true)
+  shareBreadthScore      Boolean  @default(true)
+  shareTrajectoryShifts  Boolean  @default(true)
+  shareCharacterSignals  Boolean  @default(true)
+  shareSummary           Boolean  @default(true)
+  updatedAt              DateTime @updatedAt
+
+  student                Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+model MapNode {
+  id          String      @id @default(cuid())
+  type        MapNodeType
+  label       String
+  description String?
+  metadata    Json        @default("{}")
+  parentId    String?
+  embedding   Unsupported("vector(1024)")?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  parent        MapNode?       @relation("MapHierarchy", fields: [parentId], references: [id])
+  children      MapNode[]      @relation("MapHierarchy")
+  outEdges      MapEdge[]      @relation("MapEdgeSource")
+  inEdges       MapEdge[]      @relation("MapEdgeTarget")
+  notifications Notification[]
+}
+
+model MapEdge {
+  id       String   @id @default(cuid())
+  sourceId String
+  targetId String
+  weight   Float    @default(0.5)
+  edgeType EdgeType @default(RELATED)
+
+  source   MapNode  @relation("MapEdgeSource", fields: [sourceId], references: [id], onDelete: Cascade)
+  target   MapNode  @relation("MapEdgeTarget", fields: [targetId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceId, targetId])
+}
+
+model Notification {
+  id            String           @id @default(cuid())
+  studentId     String
+  type          NotificationType
+  title         String
+  body          String
+  relatedNodeId String?
+  deliveredAt   DateTime?
+  readAt        DateTime?
+  actedOn       Boolean          @default(false)
+  createdAt     DateTime         @default(now())
+
+  student       Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  relatedNode   MapNode? @relation(fields: [relatedNodeId], references: [id])
+}
+
+model NotificationPreferences {
+  studentId         String  @id
+  maxPerWeek        Int     @default(3)
+  reflectionNudges  Boolean @default(true)
+  opportunityAlerts Boolean @default(true)
+  mapExpansions     Boolean @default(true)
+  peerPrompts       Boolean @default(true)
+  quietHoursStart   String  @default("21:00")
+  quietHoursEnd     String  @default("08:00")
+
+  student           Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+model PeerGroup {
+  id       String   @id @default(cuid())
+  name     String?
+  active   Boolean  @default(true)
+  formedAt DateTime @default(now())
+
+  members  PeerGroupMember[]
+}
+
+model PeerGroupMember {
+  groupId     String
+  studentId   String
+  displayName String
+  joinedAt    DateTime  @default(now())
+
+  group       PeerGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  student     Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@id([groupId, studentId])
+}

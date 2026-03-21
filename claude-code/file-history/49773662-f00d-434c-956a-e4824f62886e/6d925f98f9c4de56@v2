@@ -1,0 +1,73 @@
+import { NextResponse } from "next/server";
+import { requireStudent } from "@/lib/auth";
+import { prisma } from "@compass/db";
+import { generateReflectionPrompts } from "@/lib/synthesize";
+import { z } from "zod";
+
+export const maxDuration = 30;
+
+const bodySchema = z.object({
+  sessionId: z.string(),
+});
+
+const FALLBACK_PROMPTS = [
+  {
+    promptText: "What activity from the past month felt most engaging or alive to you?",
+    promptType: "PATTERN" as const,
+  },
+  {
+    promptText: "What's something you've been curious about lately but haven't had time to explore?",
+    promptType: "EXPLORATION" as const,
+  },
+];
+
+export async function POST(req: Request) {
+  try {
+    const student = await requireStudent();
+    const body = await req.json();
+    const { sessionId } = bodySchema.parse(body);
+
+    const session = await prisma.reflectionSession.findFirst({
+      where: { id: sessionId, studentId: student.id },
+    });
+
+    if (!session) {
+      return NextResponse.json({ error: "Session not found" }, { status: 404 });
+    }
+
+    const [signalProfile, recentActivities, recentReflections] =
+      await Promise.all([
+        prisma.signalProfile.findFirst({
+          where: { studentId: student.id },
+          orderBy: { createdAt: "desc" },
+          select: { compressedSummary: true },
+        }),
+        prisma.activity.findMany({
+          where: { studentId: student.id },
+          orderBy: { createdAt: "desc" },
+          take: 15,
+        }),
+        prisma.reflection.findMany({
+          where: { studentId: student.id },
+          orderBy: { createdAt: "desc" },
+          take: 10,
+          select: { promptText: true, responseText: true, promptType: true },
+        }),
+      ]);
+
+    const prompts = await generateReflectionPrompts({
+      compressedSummary: signalProfile?.compressedSummary ?? undefined,
+      recentActivities: recentActivities.map((a) => ({
+        ...a,
+        hoursPerWeek: a.hoursPerWeek ? Number(a.hoursPerWeek) : null,
+      })),
+      recentReflections,
+      previousPrompts: recentReflections.map((r) => r.promptText),
+    });
+
+    return NextResponse.json({ prompts });
+  } catch (error) {
+    console.error("Prompt generation error:", error);
+    return NextResponse.json({ prompts: FALLBACK_PROMPTS });
+  }
+}

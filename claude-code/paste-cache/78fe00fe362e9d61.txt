@@ -1,0 +1,26 @@
+Step 1: Run the DB schema migration
+                                                                                                       
+  Context: This is a Next.js + Prisma monorepo deployed on Vercel, with a Supabase PostgreSQL database.
+   The Prisma schema lives at packages/db/prisma/schema.prisma. We recently changed the schema: the
+  ReflectionSession model had its monthKey field changed from required to optional (nullable), the
+  unique constraint @@unique([studentId, monthKey]) was removed, and a new templateId and sessionNumber
+   field were added. A new model ReflectionTemplate was also added. None of this has been applied to
+  the production database yet.
+
+  What to do: Run prisma db push against the production Supabase database to apply the schema changes.
+  This is safe — all changes are additive (adding nullable columns, a new table, removing a unique
+  constraint).
+
+  What you need: The DATABASE_URL and DIRECT_URL values from your Vercel environment variables (visible
+   in Vercel → Project → Settings → Environment Variables). These are Supabase connection strings.
+  DIRECT_URL is the direct (non-pooled) connection and is what you need for migrations.
+
+  Command to run from the root of the monorepo:
+  DIRECT_URL="<your-direct-url>" DATABASE_URL="<your-database-url>" pnpm --filter @compass/db db:push
+
+  If that doesn't work, try:
+  DIRECT_URL="<your-direct-url>" DATABASE_URL="<your-database-url>" pnpm --filter @compass/db exec
+  prisma db push
+
+  Expected outcome: Prisma connects to Supabase and applies the schema changes. It should print
+  something like "Your database is now in sync with your Prisma schema." No data will be lost.

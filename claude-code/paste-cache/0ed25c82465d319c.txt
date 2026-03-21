@@ -1,0 +1,28 @@
+yahelraviv@Yahels-MBP compass %   cd /Users/yahelraviv/compass/packages/db && npx prisma migrate dev --name init                                                        
+                                                                                                                                                                      
+  Environment variables loaded from .env                                                                                                                                  
+  Prisma schema loaded from prisma/schema.prisma                                                                                                                      
+  Datasource "db": PostgreSQL database "postgres", schema "public" at "aws-1-us-east-1.pooler.supabase.com:5432"                                                          
+                                                                                                                                                                      
+  Error: P1000: Authentication failed against database server, the provided database credentials for `postgres` are not valid.                                        
+                                                                                                                                                                      
+  Please make sure to provide valid database credentials for the database server at the configured address.                                                           
+  yahelraviv@Yahels-MBP db %                                                                                                                                          
+
+⏺ The password or connection string is wrong. Go to your Supabase dashboard:
+
+  Settings → Database → Connection string → URI tab                                                                                                                       
+   
+  Make sure you're using the Session mode connection (port 5432) for DIRECT_URL — that's the one Prisma Migrate uses. Double-check:                                       
+                                                            
+  1. The password is correct (the one you set when creating the project)
+  2. The [YOUR-PASSWORD] placeholder is actually replaced with your real password
+  3. No extra spaces or quotes issues in the .env file
+
+  Update your packages/db/.env and try again:
+
+  cd /Users/yahelraviv/compass/packages/db && npx prisma migrate dev --name init
+
+ [Image #65] (↑ to select)                                                                                                                                                
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ how do i find my supabase keys    

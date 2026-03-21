@@ -1,0 +1,27 @@
+2026-03-05 05:01:19.111 [error] Error: Connection terminated unexpectedly
+    at /var/task/apps/web/.next/server/chunks/8427.js:8:1639
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ew.performIO (/var/task/apps/web/.next/server/chunks/8427.js:8:87299)
+    at async ew.queryRaw (/var/task/apps/web/.next/server/chunks/8427.js:8:84158)
+    at async /var/task/apps/web/.next/server/chunks/7535.js:2:39682 {
+  clientVersion: '6.19.2',
+  digest: '2793296447'
+}
+2026-03-05 05:01:19.113 [error] Error: Connection terminated unexpectedly
+    at /var/task/apps/web/.next/server/chunks/8427.js:8:1639
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ew.performIO (/var/task/apps/web/.next/server/chunks/8427.js:8:87299)
+    at async ew.queryRaw (/var/task/apps/web/.next/server/chunks/8427.js:8:84158)
+    at async /var/task/apps/web/.next/server/chunks/7535.js:2:39682 {
+  clientVersion: '6.19.2',
+  digest: '2793296447'
+}
+2026-03-05 05:01:19.117 [error] Error: Connection terminated unexpectedly
+    at /var/task/apps/web/.next/server/chunks/8427.js:8:1639
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ew.performIO (/var/task/apps/web/.next/server/chunks/8427.js:8:87299)
+    at async ew.queryRaw (/var/task/apps/web/.next/server/chunks/8427.js:8:84158)
+    at async /var/task/apps/web/.next/server/chunks/7535.js:2:39682 {
+  clientVersion: '6.19.2',
+  digest: '2793296447'
+}

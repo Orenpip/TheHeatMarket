@@ -1,0 +1,46 @@
+2026-03-05 05:09:57.211 [error] PrismaClientUnknownRequestError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "XX000", message: "Circuit breaker open: Unable to establish connection to upstream database", severity: "FATAL", detail: None, column: None, hint: None }), transient: false })
+    at i9.handleRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:8195)
+    at i9.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:7090)
+    at i9.request (/var/task/apps/web/.next/server/chunks/7535.js:21:6803)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async i (/var/task/apps/web/.next/server/chunks/7535.js:33:7529)
+    at async a (/var/task/apps/web/.next/server/app/(student)/page.js:1:19297)
+    at async m (/var/task/apps/web/.next/server/app/(student)/page.js:1:14933) {
+  clientVersion: '6.19.2',
+  digest: '831777474'
+}
+2026-03-05 05:09:57.235 [error] PrismaClientUnknownRequestError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "XX000", message: "Circuit breaker open: Unable to establish connection to upstream database", severity: "FATAL", detail: None, column: None, hint: None }), transient: false })
+    at i9.handleRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:8195)
+    at i9.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:7090)
+    at i9.request (/var/task/apps/web/.next/server/chunks/7535.js:21:6803)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async i (/var/task/apps/web/.next/server/chunks/7535.js:33:7529)
+    at async d (/var/task/apps/web/.next/server/app/(student)/page.js:1:13579) {
+  clientVersion: '6.19.2',
+  digest: '2527228790'
+}
+2026-03-05 05:09:57.237 [error] PrismaClientUnknownRequestError: 
+Invalid `prisma.student.findUnique()` invocation:
+
+
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(PostgresError { code: "XX000", message: "Circuit breaker open: Unable to establish connection to upstream database", severity: "FATAL", detail: None, column: None, hint: None }), transient: false })
+    at i9.handleRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:8195)
+    at i9.handleAndLogRequestError (/var/task/apps/web/.next/server/chunks/7535.js:21:7090)
+    at i9.request (/var/task/apps/web/.next/server/chunks/7535.js:21:6803)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async i (/var/task/apps/web/.next/server/chunks/7535.js:33:7529)
+    at async d (/var/task/apps/web/.next/server/app/(student)/page.js:1:13579) {
+  clientVersion: '6.19.2',
+  digest: '2527228790'
+}

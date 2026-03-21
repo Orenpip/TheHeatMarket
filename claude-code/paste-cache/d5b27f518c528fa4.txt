@@ -1,0 +1,41 @@
+1. Run database migrations                                                                                                                                              
+                                                                                                                                                                          
+  Your Prisma schema needs to be applied to Supabase. Create a .env file locally first:                                                                                   
+                                                                                                                                                                          
+  cd /Users/yahelraviv/compass/packages/db                                                                                                                                
+                                                                                                                                                                          
+  Create .env there (or in the compass root) with your DATABASE_URL and DIRECT_URL from Supabase. Then:                                                                   
+                                                                                                                                                                          
+  npx prisma migrate dev --name init                                                                                                                                      
+                                                                                                                                                                          
+  This creates all the tables.                                                                                                                                            
+                                                                                                                                                                          
+  2. Verify Vercel env vars                                                                                                                                               
+
+  Make sure all these are set in Vercel dashboard (Settings → Environment Variables):
+  - DATABASE_URL and DIRECT_URL
+  - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY
+  - CLERK_WEBHOOK_SECRET
+  - QSTASH_TOKEN, QSTASH_CURRENT_SIGNING_KEY, QSTASH_NEXT_SIGNING_KEY
+  - UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN
+  - NEXT_PUBLIC_APP_URL (your Vercel deployment URL)
+
+  3. Set up Clerk webhook
+
+  In your Clerk dashboard → Webhooks → Add Endpoint:
+  - URL: https://your-vercel-url.vercel.app/api/webhooks/clerk
+  - Events: user.created, user.updated, user.deleted
+  - Copy the signing secret → set as CLERK_WEBHOOK_SECRET in Vercel
+
+  4. Sign up
+
+  Go to your deployed URL, sign up with Google or email. The Clerk webhook will create your Student record in the database.
+
+  5. Set your role
+
+  By default users are students. To make yourself a counselor too, go to Clerk dashboard → Users → your user → Public Metadata → add:
+  { "role": "COUNSELOR" }
+
+  ---
+  Have you already run the Prisma migration against Supabase? That's the critical first step — without it there are no tables.
+

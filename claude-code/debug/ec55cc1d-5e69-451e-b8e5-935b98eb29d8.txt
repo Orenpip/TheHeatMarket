@@ -1,0 +1,418 @@
+2026-03-05T02:34:47.526Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T02:34:47.526Z [DEBUG] MDM settings load completed in 12ms
+2026-03-05T02:34:47.599Z [DEBUG] [init] configureGlobalMTLS starting
+2026-03-05T02:34:47.599Z [DEBUG] [init] configureGlobalMTLS complete
+2026-03-05T02:34:47.599Z [DEBUG] [init] configureGlobalAgents starting
+2026-03-05T02:34:47.599Z [DEBUG] [init] configureGlobalAgents complete
+2026-03-05T02:34:47.603Z [DEBUG] Applying permission update: Adding 15 allow rule(s) to destination 'localSettings': ["Bash(grep:*)","Bash(ls:*)","Bash(python3:*)","Bash(npx prisma:*)","Bash(pnpm install:*)","WebFetch(domain:pris.ly)","WebFetch(domain:www.prisma.io)","WebSearch","Bash(git add:*)","Bash(find:*)","Bash(head:*)","Bash(npx tsc:*)","Bash(pnpm:*)","Bash(git push:*)","WebFetch(domain:context7.com)"]
+2026-03-05T02:34:47.603Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-03-05T02:34:47.604Z [DEBUG] [ToolSearch:optimistic] mode=tst-auto, ENABLE_TOOL_SEARCH=undefined, result=true
+2026-03-05T02:34:47.604Z [DEBUG] [STARTUP] Running setup()...
+2026-03-05T02:34:47.605Z [DEBUG] Git remote URL: null
+2026-03-05T02:34:47.605Z [DEBUG] No git remote URL found
+2026-03-05T02:34:47.605Z [DEBUG] Loading skills from: managed=/Library/Application Support/ClaudeCode/.claude/skills, user=/Users/yahelraviv/.claude/skills, project=[]
+2026-03-05T02:34:47.605Z [DEBUG] Error log sink initialized
+2026-03-05T02:34:47.608Z [DEBUG] [Claude in Chrome] Found chrome profiles: Profile 7, Profile 8, Profile 6, Profile 1, Default, Profile 4, Profile 3
+2026-03-05T02:34:47.609Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-03-05T02:34:47.609Z [DEBUG] Found 0 plugins (0 enabled, 0 disabled)
+2026-03-05T02:34:47.609Z [DEBUG] getPluginSkills: Processing 0 enabled plugins
+2026-03-05T02:34:47.609Z [DEBUG] Total plugin skills loaded: 0
+2026-03-05T02:34:47.609Z [DEBUG] Total plugin commands loaded: 0
+2026-03-05T02:34:47.609Z [DEBUG] Registered 0 hooks from 0 plugins
+2026-03-05T02:34:47.610Z [DEBUG] Loaded 0 unique skills (0 unconditional, 0 conditional, managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-03-05T02:34:47.610Z [DEBUG] getSkills returning: 0 skill dir commands, 0 plugin skills, 5 bundled skills
+2026-03-05T02:34:47.610Z [DEBUG] Acquired PID lock for 2.1.66 (PID 98348)
+2026-03-05T02:34:47.610Z [DEBUG] Acquired PID lock on running version: /Users/yahelraviv/.local/share/claude/versions/2.1.66
+2026-03-05T02:34:47.645Z [DEBUG] [Claude in Chrome] Found brave profiles: Profile 1, Default, Profile 2
+2026-03-05T02:34:47.647Z [DEBUG] [Claude in Chrome] Extension not found in any browser
+2026-03-05T02:34:47.657Z [DEBUG] [STARTUP] setup() completed in 53ms
+2026-03-05T02:34:47.657Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-03-05T02:34:47.657Z [DEBUG] Total plugin agents loaded: 0
+2026-03-05T02:34:47.657Z [DEBUG] [STARTUP] Commands and agents loaded in 0ms
+2026-03-05T02:34:47.659Z [DEBUG] [STARTUP] Running showSetupScreens()...
+2026-03-05T02:34:47.660Z [DEBUG] [keybindings] KeybindingSetup initialized with 104 bindings, 0 warnings
+2026-03-05T02:34:47.671Z [DEBUG] [keybindings] Watching for changes to /Users/yahelraviv/.claude/keybindings.json
+2026-03-05T02:34:47.682Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.98348.1772678087682
+2026-03-05T02:34:47.682Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T02:34:47.682Z [DEBUG] Temp file written successfully, size: 10914 bytes
+2026-03-05T02:34:47.682Z [DEBUG] Applied original permissions to temp file
+2026-03-05T02:34:47.682Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.98348.1772678087682 to /Users/yahelraviv/.claude.json
+2026-03-05T02:34:47.683Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T02:34:47.993Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.98348.1772678087993
+2026-03-05T02:34:47.993Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T02:34:47.993Z [DEBUG] Temp file written successfully, size: 10914 bytes
+2026-03-05T02:34:47.993Z [DEBUG] Applied original permissions to temp file
+2026-03-05T02:34:47.993Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.98348.1772678087993 to /Users/yahelraviv/.claude.json
+2026-03-05T02:34:47.994Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T02:34:48.595Z [DEBUG] Grove: Cache stale, returning cached data and refreshing in background
+2026-03-05T02:34:48.608Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2026-03-05T02:34:48.608Z [DEBUG] [Perfetto] initializePerfettoTracing called, env value: undefined
+2026-03-05T02:34:48.608Z [DEBUG] [3P telemetry] isTelemetryEnabled=false (CLAUDE_CODE_ENABLE_TELEMETRY=undefined)
+2026-03-05T02:34:48.725Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.98348.1772678088725
+2026-03-05T02:34:48.725Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T02:34:48.725Z [DEBUG] Temp file written successfully, size: 10914 bytes
+2026-03-05T02:34:48.725Z [DEBUG] Applied original permissions to temp file
+2026-03-05T02:34:48.725Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.98348.1772678088725 to /Users/yahelraviv/.claude.json
+2026-03-05T02:34:48.726Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T02:34:48.980Z [DEBUG] [STARTUP] showSetupScreens() completed in 1321ms
+2026-03-05T02:34:48.980Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-03-05T02:34:48.980Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-03-05T02:34:48.980Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-03-05T02:34:48.981Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T02:34:48.981Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T02:34:48.984Z [DEBUG] Total LSP servers loaded: 0
+2026-03-05T02:34:48.984Z [DEBUG] [STARTUP] MCP configs loaded in 1381ms
+2026-03-05T02:34:48.988Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-03-05T02:34:48.988Z [DEBUG] LSP manager initialized with 0 servers
+2026-03-05T02:34:48.988Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T02:34:48.991Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2026-03-05T02:34:48.991Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T02:34:48.991Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2026-03-05T02:34:48.991Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-03-05T02:34:48.991Z [DEBUG] LSP server manager initialized successfully
+2026-03-05T02:34:48.991Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-03-05T02:34:48.992Z [DEBUG] [Reconnection] computeInitialTeamContext: No teammate context set (not a teammate)
+2026-03-05T02:34:48.993Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.98348.1772678088993
+2026-03-05T02:34:48.993Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T02:34:48.994Z [DEBUG] Temp file written successfully, size: 10914 bytes
+2026-03-05T02:34:48.994Z [DEBUG] Applied original permissions to temp file
+2026-03-05T02:34:48.994Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.98348.1772678088993 to /Users/yahelraviv/.claude.json
+2026-03-05T02:34:48.994Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T02:34:49.013Z [DEBUG] [keybindings] KeybindingSetup initialized with 104 bindings, 0 warnings
+2026-03-05T02:34:49.158Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.98348.1772678089158
+2026-03-05T02:34:49.158Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T02:34:49.158Z [DEBUG] Temp file written successfully, size: 10914 bytes
+2026-03-05T02:34:49.158Z [DEBUG] Applied original permissions to temp file
+2026-03-05T02:34:49.158Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.98348.1772678089158 to /Users/yahelraviv/.claude.json
+2026-03-05T02:34:49.159Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T02:34:49.161Z [DEBUG] [REPL:mount] REPL mounted, disabled=false
+2026-03-05T02:34:49.161Z [DEBUG] Official marketplace auto-install skipped: already_attempted
+2026-03-05T02:34:49.161Z [DEBUG] performStartupChecks called
+2026-03-05T02:34:49.161Z [DEBUG] Starting background plugin installations
+2026-03-05T02:34:49.162Z [DEBUG] Loaded 1 CLAUDE.md/rules files:
+  [AutoMem] /Users/yahelraviv/.claude/projects/-Users-yahelraviv/memory/MEMORY.md (462 chars)
+2026-03-05T02:34:49.163Z [DEBUG] performBackgroundPluginInstallations called
+2026-03-05T02:34:49.396Z [DEBUG] [claudeai-mcp] Checking gate (cached)...
+2026-03-05T02:34:49.396Z [DEBUG] [claudeai-mcp] Gate returned: true
+2026-03-05T02:34:49.396Z [DEBUG] [claudeai-mcp] Fetching from https://api.anthropic.com/v1/mcp_servers?limit=1000
+2026-03-05T02:34:49.397Z [DEBUG] AutoUpdaterWrapper: Installation type: native
+2026-03-05T02:34:49.401Z [DEBUG] Setting installation status: 0 marketplaces, 0 installable plugins, 0 uninstallable plugins
+2026-03-05T02:34:49.404Z [DEBUG] Fetching plugin security messages from https://raw.githubusercontent.com/anthropics/claude-plugins-official/refs/heads/security/security.json
+2026-03-05T02:34:49.406Z [DEBUG] Org fast mode: disabled (extra_usage_disabled)
+2026-03-05T02:34:49.406Z [DEBUG] Watching for changes in setting files /Users/yahelraviv/.claude/settings.json, /Users/yahelraviv/.claude/settings.local.json...
+2026-03-05T02:34:49.411Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:49.429Z [DEBUG] Security messages saved successfully
+2026-03-05T02:34:49.429Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:49.439Z [DEBUG] Loaded plugins - Enabled: 0, Disabled: 0, Commands: 0, Agents: 0, Errors: 0
+2026-03-05T02:34:49.440Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:49.480Z [DEBUG] [claudeai-mcp] Fetched 2 servers
+2026-03-05T02:34:49.480Z [DEBUG] CLAUDE_CODE_WEBSOCKET_AUTH_FILE_DESCRIPTOR not set, no file descriptor token available
+2026-03-05T02:34:49.480Z [DEBUG] MCP server "claude.ai Google Calendar": Initializing claude.ai proxy transport for server mcpsrv_012isYxbokCyw21TSPQF2Qhb
+2026-03-05T02:34:49.480Z [DEBUG] MCP server "claude.ai Google Calendar": Using claude.ai proxy at https://mcp-proxy.anthropic.com/v1/mcp/mcpsrv_012isYxbokCyw21TSPQF2Qhb
+2026-03-05T02:34:49.480Z [DEBUG] MCP server "claude.ai Google Calendar": claude.ai proxy transport created successfully
+2026-03-05T02:34:49.482Z [DEBUG] MCP server "claude.ai Google Calendar": Starting connection with timeout of 30000ms
+2026-03-05T02:34:49.482Z [DEBUG] MCP server "claude.ai Gmail": Initializing claude.ai proxy transport for server mcpsrv_01BwEVHvsY36LqDGbaybRXEs
+2026-03-05T02:34:49.482Z [DEBUG] MCP server "claude.ai Gmail": Using claude.ai proxy at https://mcp-proxy.anthropic.com/v1/mcp/mcpsrv_01BwEVHvsY36LqDGbaybRXEs
+2026-03-05T02:34:49.482Z [DEBUG] MCP server "claude.ai Gmail": claude.ai proxy transport created successfully
+2026-03-05T02:34:49.482Z [DEBUG] MCP server "claude.ai Gmail": Starting connection with timeout of 30000ms
+2026-03-05T02:34:49.483Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:49.573Z [DEBUG] Checking for native installer update to version 2.1.69
+2026-03-05T02:34:49.574Z [DEBUG] Downloading native installer version 2.1.69
+2026-03-05T02:34:49.772Z [DEBUG] MCP server "claude.ai Gmail": claude.ai proxy connection failed after 290ms: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYj9pcFHUKxFshFhXUBds"}
+2026-03-05T02:34:49.772Z [ERROR] MCP server "claude.ai Gmail" Error: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYj9pcFHUKxFshFhXUBds"}
+2026-03-05T02:34:49.773Z [DEBUG] MCP server "claude.ai Gmail": Authentication required for claude.ai proxy server
+2026-03-05T02:34:49.791Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:49.816Z [DEBUG] MCP server "claude.ai Google Calendar": claude.ai proxy connection failed after 336ms: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYj9pcKFXCokkFF4DuVaF"}
+2026-03-05T02:34:49.816Z [ERROR] MCP server "claude.ai Google Calendar" Error: Streamable HTTP error: Error POSTing to endpoint: {"type":"error","error":{"type":"authentication_error","message":"MCP server requires authentication but no OAuth token is configured."},"request_id":"req_011CYj9pcKFXCokkFF4DuVaF"}
+2026-03-05T02:34:49.816Z [DEBUG] MCP server "claude.ai Google Calendar": Authentication required for claude.ai proxy server
+2026-03-05T02:34:49.835Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:49.924Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:49.980Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:49.987Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:49.989Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:51.409Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:51.426Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:51.609Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:51.617Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:51.800Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:51.805Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:52.331Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:52.345Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:52.380Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:52.389Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:54.381Z [DEBUG] SSH config check: code=255 configured=false
+2026-03-05T02:34:54.537Z [DEBUG] git pull: cwd=/Users/yahelraviv/.claude/plugins/marketplaces/claude-plugins-official ref=default
+2026-03-05T02:34:55.471Z [DEBUG] Successfully refreshed marketplace: claude-plugins-official
+2026-03-05T02:34:55.471Z [DEBUG] Plugin autoupdate: checking installed plugins
+2026-03-05T02:34:57.061Z [DEBUG] [useDeferredValue] Messages deferred by 2 (0→2)
+2026-03-05T02:34:57.071Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:57.087Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T02:34:57.091Z [DEBUG] AutoUpdaterWrapper: Installation type: native
+2026-03-05T02:34:57.098Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.98348.1772678097098
+2026-03-05T02:34:57.098Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T02:34:57.098Z [DEBUG] Temp file written successfully, size: 10937 bytes
+2026-03-05T02:34:57.098Z [DEBUG] Applied original permissions to temp file
+2026-03-05T02:34:57.098Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.98348.1772678097098 to /Users/yahelraviv/.claude.json
+2026-03-05T02:34:57.098Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T02:34:57.099Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.98348.1772678097099
+2026-03-05T02:34:57.099Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T02:34:57.100Z [DEBUG] Temp file written successfully, size: 10968 bytes
+2026-03-05T02:34:57.100Z [DEBUG] Applied original permissions to temp file
+2026-03-05T02:34:57.100Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.98348.1772678097099 to /Users/yahelraviv/.claude.json
+2026-03-05T02:34:57.100Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T02:34:57.101Z [DEBUG] [useDeferredValue] Messages deferred by 2 (0→2)
+2026-03-05T02:34:57.106Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:57.109Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T02:34:57.115Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:57.117Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:57.531Z [DEBUG] Checking for native installer update to version 2.1.69
+2026-03-05T02:34:57.534Z [DEBUG] Downloading native installer version 2.1.69
+2026-03-05T02:34:57.986Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:58.082Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:58.139Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:58.259Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:58.425Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:58.509Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:58.615Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:58.977Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:59.113Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:59.310Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:59.440Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:59.520Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:59.680Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:59.778Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:34:59.815Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:00.080Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:00.141Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:00.298Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:00.322Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:00.405Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:00.546Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:00.630Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:00.736Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:00.832Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:01.212Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:01.213Z [DEBUG] Atomically installed binary to /Users/yahelraviv/.local/share/claude/versions/2.1.69
+2026-03-05T02:35:01.215Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-03-05T02:35:01.215Z [DEBUG] Atomically updated symlink /Users/yahelraviv/.local/bin/claude -> /Users/yahelraviv/.local/share/claude/versions/2.1.69
+2026-03-05T02:35:01.216Z [DEBUG] Successfully updated to version 2.1.69
+2026-03-05T02:35:01.217Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:01.220Z [DEBUG] Acquired PID lock for 2.1.56 (PID 98348)
+2026-03-05T02:35:01.236Z [DEBUG] Released PID lock for 2.1.56
+2026-03-05T02:35:01.326Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:01.414Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:01.526Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:01.641Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:01.732Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.013Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.125Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.307Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.390Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.480Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.538Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.634Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.743Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.868Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:02.973Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:03.088Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:03.164Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:03.354Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:03.438Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:03.551Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:03.647Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:03.723Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:03.807Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:04.002Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-03-05T02:35:04.002Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-03-05T02:35:04.002Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-03-05T02:35:04.002Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-03-05T02:35:04.003Z [DEBUG] Sending 3 skills via attachment (initial, 3 total sent)
+2026-03-05T02:35:04.004Z [WARN] [3P telemetry] Event dropped (no event logger initialized): user_prompt
+2026-03-05T02:35:04.005Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2026-03-05T02:35:04.005Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T02:35:04.005Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T02:35:04.006Z [DEBUG] FileHistory: Added snapshot for ca6f6458-ebd0-4368-a07f-a94c02684603, tracking 0 files
+2026-03-05T02:35:04.009Z [DEBUG] [useDeferredValue] Messages deferred by 2 (2→4)
+2026-03-05T02:35:04.014Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:04.014Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:04.020Z [DEBUG] Started caffeinate to prevent sleep
+2026-03-05T02:35:04.020Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:04.025Z [DEBUG] Total plugin output styles loaded: 0
+2026-03-05T02:35:04.027Z [DEBUG] autocompact: tokens=205 threshold=167000 effectiveWindow=180000
+2026-03-05T02:35:04.027Z [DEBUG] Auto tool search disabled: 0 tokens (threshold: 20000, 10% of context) [source: query]
+2026-03-05T02:35:04.030Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.66.c3c; cc_entrypoint=cli; cch=00000;
+2026-03-05T02:35:04.030Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:04.030Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-03-05T02:35:04.030Z [DEBUG] [API:auth] OAuth token check starting
+2026-03-05T02:35:04.030Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:04.030Z [DEBUG] [API:auth] OAuth token check complete
+2026-03-05T02:35:04.031Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:04.038Z [DEBUG] [useDeferredValue] Messages deferred by 2 (2→4)
+2026-03-05T02:35:04.039Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:04.043Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:04.982Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:05.944Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:06.675Z [DEBUG] Atomically installed binary to /Users/yahelraviv/.local/share/claude/versions/2.1.69
+2026-03-05T02:35:06.677Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-03-05T02:35:06.677Z [DEBUG] Successfully updated to version 2.1.69
+2026-03-05T02:35:06.678Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:06.905Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:07.332Z [DEBUG] Stream started - received first chunk
+2026-03-05T02:35:07.337Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:07.346Z [DEBUG] [useDeferredValue] Messages deferred by 1 (4→5)
+2026-03-05T02:35:07.347Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:07.357Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:07.867Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:08.568Z [DEBUG] [useDeferredValue] Messages deferred by 1 (5→6)
+2026-03-05T02:35:08.571Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:08.586Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2026-03-05T02:35:08.586Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T02:35:08.586Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2026-03-05T02:35:08.589Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.98348.1772678108589
+2026-03-05T02:35:08.589Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T02:35:08.589Z [DEBUG] Temp file written successfully, size: 10995 bytes
+2026-03-05T02:35:08.589Z [DEBUG] Applied original permissions to temp file
+2026-03-05T02:35:08.589Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.98348.1772678108589 to /Users/yahelraviv/.claude.json
+2026-03-05T02:35:08.590Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T02:35:08.591Z [DEBUG] Writing to temp file: /Users/yahelraviv/.claude.json.tmp.98348.1772678108591
+2026-03-05T02:35:08.591Z [DEBUG] Preserving file permissions: 100600
+2026-03-05T02:35:08.591Z [DEBUG] Temp file written successfully, size: 10996 bytes
+2026-03-05T02:35:08.591Z [DEBUG] Applied original permissions to temp file
+2026-03-05T02:35:08.591Z [DEBUG] Renaming /Users/yahelraviv/.claude.json.tmp.98348.1772678108591 to /Users/yahelraviv/.claude.json
+2026-03-05T02:35:08.591Z [DEBUG] File /Users/yahelraviv/.claude.json written atomically
+2026-03-05T02:35:08.593Z [DEBUG] [useDeferredValue] Messages deferred by 1 (5→6)
+2026-03-05T02:35:08.599Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:08.603Z [DEBUG] Stopped caffeinate, allowing sleep
+2026-03-05T02:35:08.609Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:35:37.361Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:36:08.611Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2026-03-05T02:36:08.611Z [DEBUG] Found 0 hook matchers in settings
+2026-03-05T02:36:08.611Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)
+2026-03-05T02:40:28.556Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:44:56.123Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.109Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.127Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.171Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.206Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.239Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.287Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.335Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.730Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.740Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.755Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.774Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:27.810Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:28.777Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:28.836Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:28.846Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.023Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.241Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.275Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.413Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.544Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.581Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.621Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.680Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.742Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.784Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.806Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.838Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.899Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.960Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:29.992Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.024Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.064Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.098Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.129Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.161Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.182Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.218Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.364Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.435Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:30.482Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:35.082Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:35.611Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.467Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.477Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.492Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.499Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.518Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.522Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.539Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.554Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.580Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.612Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.654Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.734Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.766Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:48.875Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.359Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.366Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.371Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.400Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.404Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.415Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.436Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.475Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.483Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.524Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.532Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.573Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.589Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.605Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.654Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:49.663Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.007Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.069Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.124Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.208Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.348Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.404Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.411Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.549Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.594Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.666Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.881Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:50.923Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:51.695Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:51.789Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:52.496Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:52.658Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:53.071Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:53.080Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:53.143Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:53.200Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:53.249Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:53.299Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:53.321Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:53.655Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.038Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.049Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.089Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.171Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.251Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.436Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.488Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.525Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.572Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.638Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.702Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:45:54.751Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T02:46:53.462Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T03:11:05.918Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T03:11:05.962Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T03:11:06.196Z [DEBUG] Checking for native installer update to version 2.1.69
+2026-03-05T03:11:06.198Z [DEBUG] Version 2.1.69 already installed, updating symlink
+2026-03-05T03:11:06.199Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-03-05T03:11:06.199Z [DEBUG] Successfully updated to version 2.1.69
+2026-03-05T03:11:06.203Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T03:43:20.235Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T03:43:20.316Z [DEBUG] detectFileEncoding failed for expected reason: ENOENT
+2026-03-05T03:43:20.929Z [DEBUG] Checking for native installer update to version 2.1.69
+2026-03-05T03:43:20.942Z [DEBUG] Version 2.1.69 already installed, updating symlink
+2026-03-05T03:43:20.942Z [DEBUG] Created directory /Users/yahelraviv/.local/bin for symlink
+2026-03-05T03:43:20.942Z [DEBUG] Successfully updated to version 2.1.69
+2026-03-05T03:43:20.952Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T03:43:48.205Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T03:43:52.259Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable
+2026-03-05T03:43:53.393Z [DEBUG] Fast mode unavailable: Fast mode requires extra usage billing · /extra-usage to enable

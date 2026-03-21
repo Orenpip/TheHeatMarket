@@ -1,0 +1,75 @@
+  Deploying the AI Service on Railway
+
+  1 — Create account + project
+
+  1. Go to railway.app → Login with GitHub
+  2. Add billing (Hobby plan, $5/month + usage)
+  3. New Project → Deploy from GitHub Repo → select compass
+
+  2 — Critical monorepo setting
+
+  In Railway: Service → Settings → Source → Root Directory, set it to:
+  apps/ai-service
+  This is the most important step. Without it Railway tries to build from the repo root and can't find the Dockerfile.
+
+  Also set Watch Paths to apps/ai-service/** so it only rebuilds when the AI service actually changes (not on every web app push).
+
+  3 — Set environment variables
+
+  In Service → Variables → RAW Editor, paste:
+
+  ANTHROPIC_API_KEY=sk-ant-...
+  VOYAGE_API_KEY=pa-...
+  DATABASE_URL=postgresql://postgres.XXXX:PASSWORD@db.XXXX.supabase.co:5432/postgres?sslmode=require
+  AI_SERVICE_SECRET_KEY=<run `openssl rand -hex 32` to generate this>
+  APP_URL=https://your-app.vercel.app
+  ENVIRONMENT=production
+
+  - DATABASE_URL → Supabase dashboard → Settings → Database → Direct connection (port 5432, not the pooler 6543)
+  - AI_SERVICE_SECRET_KEY → generate a strong random string, you'll put the same value in Vercel
+  - Do NOT add a PORT variable — Railway injects it automatically
+
+  4 — Get your public URL
+
+  Service → Settings → Networking → Generate Domain → you get something like:
+  https://compass-ai-service-production.up.railway.app
+
+  5 — Wire back to Vercel
+
+  In Vercel → Project → Settings → Environment Variables, add:
+
+  ┌───────────────────────┬──────────────────────────────────────────────────────────────────────────┐
+  │          Key          │                                  Value                                   │
+  ├───────────────────────┼──────────────────────────────────────────────────────────────────────────┤
+  │ AI_SERVICE_URL        │ https://compass-ai-service-production.up.railway.app (no trailing slash) │
+  ├───────────────────────┼──────────────────────────────────────────────────────────────────────────┤
+  │ AI_SERVICE_SECRET_KEY │ Same value you set in Railway                                            │
+  └───────────────────────┴──────────────────────────────────────────────────────────────────────────┘
+
+  Then redeploy Vercel for the vars to take effect.
+
+  6 — Verify it's working
+
+  # Health check (no auth needed)
+  curl https://your-railway-url.up.railway.app/health
+  # → {"status": "ok", "service": "compass-ai"}
+
+  # Check auth is enforced
+  curl -X POST https://your-railway-url.up.railway.app/embed \
+    -H "Content-Type: application/json" \
+    -d '{"text": "test"}'
+  # → 401 Unauthorized
+
+  # Test embeddings end-to-end
+  curl -X POST https://your-railway-url.up.railway.app/embed \
+    -H "Content-Type: application/json" \
+    -H "X-Service-Key: YOUR_SECRET_KEY" \
+    -d '{"text": "I love robotics and volunteering"}'
+  # → {"embedding": [0.012, -0.045, ...]}  (1024 floats)
+
+  You can also browse to https://your-railway-url.up.railway.app/docs for the full interactive API explorer (FastAPI auto-generates it, no auth required to view docs).
+
+  One thing to watch
+
+  Railway Hobby plan may cold-start after inactivity (5–10s delay on first request). If that's annoying, upgrade to Pro and enable Always On in service settings.
+

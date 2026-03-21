@@ -1,0 +1,15 @@
+
+Find in logs
+⌘F
+Running build in Washington, D.C., USA (East) – iad1
+Build machine configuration: 2 cores, 8 GB
+Cloning github.com/manthatwalks/compass (Branch: main, Commit: a9812f3)
+Previous build caches not available.
+Cloning completed: 288.000ms
+Warning: Due to "engines": { "node": ">=20.0.0" } in your `package.json` file, the Node.js Version defined in your Project Settings ("20.x") will not apply, Node.js Version "24.x" will be used instead. Learn More: https://vercel.link/node-version
+Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+Running "vercel build"
+Vercel CLI 50.23.2
+Warning: Due to "engines": { "node": ">=20.0.0" } in your `package.json` file, the Node.js Version defined in your Project Settings ("20.x") will not apply, Node.js Version "24.x" will be used instead. Learn More: https://vercel.link/node-version
+Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+Running "install" command: `npm i -g pnpm@9 && pnpm install`...

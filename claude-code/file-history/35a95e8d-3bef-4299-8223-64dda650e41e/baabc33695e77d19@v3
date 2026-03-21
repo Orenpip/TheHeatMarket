@@ -1,0 +1,231 @@
+# COMPASS Project — Complete Summary
+MAR 06 ~3:20 AM
+
+## What COMPASS Is
+
+COMPASS is a student career exploration platform — a full-stack Next.js web application that helps
+high school students reflect on their interests, activities, and goals through structured reflection
+sessions every 3 weeks. Counselors can view student profiles and signals. An AI layer (Claude +
+Voyage AI) synthesizes student data into "signal profiles" with interest clusters, character
+signals, trajectory shifts, and a compressed summary. A pgvector-powered map surfaces personalized
+career/major recommendations.
+
+---
+
+## Architecture
+
+Monorepo (Turborepo + pnpm workspaces):
+```
+compass/
+├── apps/web/          — Next.js 15 App Router (student + counselor + admin UI) → Vercel
+├── apps/ai-service/   — FastAPI Python (AI endpoints: synthesis, embeddings, prompts) → Railway
+├── packages/db/       — Prisma ORM + schema + Supabase WASM client
+├── packages/ui/       — Shared UI components
+├── packages/types/    — Shared TypeScript types
+├── packages/config/   — Shared tsconfig/eslint
+├── turbo.json         — Turborepo task config
+└── CONTRIBUTING.md    — Migration workflow docs
+```
+
+**Tech stack:** Next.js 15.5.12, TypeScript, Tailwind CSS, Prisma 6 (WASM), Supabase (PostgreSQL +
+pgvector), Clerk (auth — student/counselor/admin roles), Upstash Redis (caching) + QStash
+(background jobs), Anthropic claude-sonnet-4-6 (synthesis), Voyage AI (1024-dim embeddings),
+Vercel (web hosting), Railway (AI service hosting).
+
+**Note:** apps/mobile was removed. Next.js upgraded from 14 to 15 in this session.
+
+---
+
+## Database Schema (14 models)
+
+Student, Counselor, School, ReflectionSession, ReflectionTemplate, Activity, Reflection,
+SignalProfile, StudentPrivacySettings, MapNode (pgvector), MapEdge, Notification,
+NotificationPreferences, PeerGroup, PeerGroupMember.
+
+**Key constraints:**
+- `SignalProfile` has `@@unique([studentId, sessionId])` — prevents duplicate synthesis on QStash retry
+- `sessionId NOT NULL` on SignalProfile — enforced at DB level
+- `StudentPrivacySettings` has `shareSummary Boolean @default(true)`
+- `MapEdge` uses `sourceId`/`targetId` — API must map to `source`/`target` for D3 forceLink
+
+**3 Prisma migrations applied to Supabase:**
+1. `0_init` — baseline of existing schema
+2. `add-signal-profile-session-id-unique` — sessionId + @@unique
+3. `signal-profile-not-null-add-share-summary` — sessionId NOT NULL, shareSummary field
+
+**Migration workflow (Supabase can't run shadow DB):**
+```bash
+cd packages/db
+pnpm db:migrate-new <name>    # generates SQL via prisma migrate diff
+pnpm db:migrate-deploy         # applies with prisma migrate deploy
+# Never use: prisma migrate dev / prisma migrate reset
+```
+
+---
+
+## Deployment
+
+### Web (Vercel)
+- Root Directory blank in Vercel UI; `vercel.json` at repo root is source of truth
+- `next` must be in root `package.json` devDeps — Vercel uses it for framework detection
+- Prisma uses WASM engine + custom webpack loader (`apps/web/prisma-wasm-loader.js`)
+- `packages/db/src/index.ts` uses pg Pool with `DIRECT_URL` (not pgbouncer) for driver adapter
+- SSL: `rejectUnauthorized: false` (Supabase CA not in Node trust store)
+- Student layout auto-creates student record if Clerk webhook missed it (prevents redirect loop)
+- `export const dynamic = "force-dynamic"` on root layout — prevents Clerk prerender crash
+- `outputFileTracingRoot` at top-level of next.config (NOT inside experimental) — Next.js 15 change
+
+### AI Service (Railway)
+- Root Directory in Railway: `apps/ai-service`
+- Watch Paths: `apps/ai-service/**`
+- Port: 8000
+- All routes protected by `X-Service-Key` header (checked against `AI_SERVICE_SECRET_KEY`)
+- Health check: GET /health → `{"status": "ok", "service": "compass-ai"}`
+- Was failing to deploy due to next@14.2.29 vulnerability — fixed by upgrade to v15
+
+### Required Vercel Env Vars
+DATABASE_URL, DIRECT_URL, NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY,
+CLERK_WEBHOOK_SECRET, UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN, QSTASH_TOKEN,
+QSTASH_CURRENT_SIGNING_KEY, QSTASH_NEXT_SIGNING_KEY, AI_SERVICE_URL (no trailing slash),
+AI_SERVICE_SECRET_KEY, NEXT_PUBLIC_APP_URL
+
+### Required Railway Env Vars
+ANTHROPIC_API_KEY, VOYAGE_API_KEY, DATABASE_URL (direct, port 5432), AI_SERVICE_SECRET_KEY,
+APP_URL (Vercel domain, for CORS)
+
+---
+
+## API Routes (33 routes)
+
+Student: /api/sessions, /api/sessions/[id], /api/sessions/[id]/submit, /api/sessions/prompts,
+/api/reflections, /api/reflections/[id], /api/activities, /api/activities/[id],
+/api/students/onboarding, /api/students/profile, /api/students/signal-profile,
+/api/notifications, /api/notifications/[id]/read, /api/notifications/[id]/acted,
+/api/notifications/preferences, /api/privacy, /api/privacy/reset, /api/privacy/audit,
+/api/export, /api/export/delete, /api/map/nodes, /api/map/nodes/[id],
+/api/map/personalized, /api/map/search
+
+Counselor: /api/counselor/students, /api/counselor/students/[id]/summary,
+/api/counselor/students/[id]/meeting-prep, /api/counselor/flags
+
+Admin: /api/admin/templates, /api/admin/templates/[id]
+
+Webhooks: /api/webhooks/clerk, /api/webhooks/qstash
+
+---
+
+## Pages
+
+Student: / (home), /map, /reflect, /reflect/[sessionId], /reflect/[sessionId]/complete,
+/reflections, /profile, /onboarding
+Counselor: /dashboard, /flags, /students/[id]
+Admin: /templates
+Auth: /sign-in, /sign-up
+Other: /map-embed
+
+---
+
+## Key Bug Fixes This Session
+
+### Deployment
+- Railway blocked by next@14.2.29 CVEs → upgraded to 15.5.12
+- `next` was missing from root package.json → Vercel couldn't detect framework
+- `outputFileTracingRoot` was inside `experimental` → moved to top-level (Next.js 15)
+- `force-dynamic` added to root layout → prevents Clerk prerender crash
+- turbo-ignore was skipping builds due to same commit hash
+
+### Map Crashes (client-side exceptions)
+- MapEdge `sourceId`/`targetId` returned from API but D3 needs `source`/`target` → fixed in personalized route
+- D3 reads `parentElement.clientHeight` which is 0 inside `max-w-2xl` layout → fixed to use `window.innerWidth/Height`
+- framer-motion v11: `exit` on `motion.div` without `AnimatePresence` throws on unmount → wrapped in AnimatePresence
+- `redis.setex(key, ttl, value)` has wrong arg order for @upstash/redis → use `redis.set(key, value, {ex: ttl})`
+
+### Security (previous session)
+- Rate limiting on 6 endpoints, security headers, CORS locked to APP_URL
+- Embedding validated before pgvector raw SQL
+- AuthError class + apiError() — all 33 routes return proper 401/403/500
+
+### Data/Logic
+- EMBED_PROFILE QStash job unhandled → implemented
+- weekKey UTC bug → getISOWeekKey() in lib/utils.ts
+- signalProfile.create → upsert for idempotency
+- completedCount counted started sessions → fixed to count completedAt NOT NULL
+
+---
+
+## Tests (32 passing, 0 failing)
+
+Vitest. Run: `pnpm test` / `pnpm test:coverage`
+`__tests__/lib/utils.test.ts` (7), `__tests__/lib/auth.test.ts` (8),
+`__tests__/lib/constants.test.ts` (2), `__tests__/api/privacy.test.ts` (10),
+`__tests__/api/sessions.test.ts` (5)
+
+---
+
+## Key Files
+- `apps/web/lib/auth.ts` — AuthError + apiError + requireStudent/Counselor/Admin
+- `apps/web/lib/redis.ts` — Redis client + rateLimiters + CACHE_KEYS/TTL
+- `apps/web/lib/constants.ts` — COOLDOWN_DAYS = 21
+- `apps/web/lib/utils.ts` — getISOWeekKey() (UTC ISO 8601)
+- `apps/web/lib/privacy-utils.ts` — withShareSignals()
+- `apps/web/lib/synthesize.ts` — AI synthesis (Claude)
+- `apps/web/lib/ai-service.ts` — HTTP client for Railway AI service
+- `apps/web/app/api/webhooks/qstash/route.ts` — background job handler
+- `apps/web/app/api/webhooks/clerk/route.ts` — user sync webhook
+- `packages/db/src/index.ts` — pg Pool + WASM Prisma client
+- `packages/db/prisma/schema.prisma` — DB schema
+- `apps/ai-service/app/main.py` — FastAPI entry point
+
+---
+
+## What's Still Open
+
+### Needs action
+1. **MapCanvas double-fetch** — when personalized=false, fetches /api/map/personalized for edges (wrong + wastes rate limit)
+2. **More tests** — 32 cover core logic only; API routes + components need coverage
+3. **maxDuration** — QStash webhook needs >10s Vercel function timeout
+4. **APP_URL in Railway** — CORS fix requires correct Vercel domain (user must set in Railway dashboard)
+5. **Clerk webhook URL** — verify in Clerk dashboard matches Vercel deployment URL (user action)
+6. **Map nodes need seeding** — DB has no MapNode records yet; map shows "being built" empty state
+
+### Fixed by antigravity (MAR 15)
+- redis.set arg order fixed in meeting-prep route
+- ESLint enabled in next.config.mjs (ignoreDuringBuilds: false)
+- Unescaped entities fixed in MeetingPrepPanel.tsx
+- `<a>` → `<Link>` in MapCanvas.tsx
+
+### New Feature: Explore Tab (implemented MAR 15)
+**Status: Code complete, migration pending (needs Supabase SQL editor)**
+
+New schema models: `Opportunity` (GLOBAL/SCHOOL scope, pgvector embedding, category enums), `StudentOpportunityInteraction` (single row per student-opportunity, nullable timestamps for save/dismiss/click/apply)
+
+Migration file: `packages/db/prisma/migrations/20260315070000_add-opportunities/migration.sql`
+After running SQL in Supabase: `cd packages/db && npx prisma migrate resolve --applied 20260315070000_add-opportunities`
+
+New files:
+- `apps/web/app/api/explore/route.ts` — GET, pgvector + hybrid scoring (70% cosine, 15% recency, 15% deadline)
+- `apps/web/app/api/explore/[id]/interact/route.ts` — POST save/dismiss/click/apply
+- `apps/web/app/api/counselor/opportunities/route.ts` — GET/POST counselor CRUD
+- `apps/web/app/api/counselor/opportunities/[id]/route.ts` — PATCH/DELETE
+- `apps/web/components/explore/OpportunityCard.tsx` + `ExplorePageContent.tsx`
+- `apps/web/app/(student)/explore/page.tsx`
+- `apps/web/components/counselor/OpportunityForm.tsx` + `OpportunityTable.tsx`
+- `apps/web/app/(counselor)/opportunities/page.tsx`
+- `apps/ai-service/app/routers/explore.py` — `/explain-match` (Claude Haiku)
+
+Modified:
+- `lib/redis.ts` — new cache keys + rate limiters for explore
+- `lib/ai-service.ts` — `explainMatch()` method
+- `components/BottomNav.tsx` — Explore nav item (5 items now, px-3)
+- `components/counselor/CounselorSidebar.tsx` — Opportunities nav item
+- `app/(student)/page.tsx` — Explore CTA card
+- `app/api/webhooks/qstash/route.ts` — EMBED_OPPORTUNITY job type
+- `apps/ai-service/app/main.py` — explore router registered
+- `apps/ai-service/app/models/requests.py` — ExplainMatch request/response models
+
+## Agent Instructions
+- Use **planner** agent before any new feature implementation
+- Use **architect** agent for schema changes and API design
+- Use **code-reviewer** after writing code
+- Use **tdd-guide** for every bug fix or new feature
+- Project-level CLAUDE.md created at `/Users/yahelraviv/compass/CLAUDE.md`

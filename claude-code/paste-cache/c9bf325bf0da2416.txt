@@ -1,0 +1,83 @@
+COMPASS Project — Complete Summary                                                                                                                                  
+   
+  What COMPASS Is                                                                                                                                                     
+                                                                                                                                                                    
+  COMPASS is a student career exploration platform — a full-stack Next.js web application that helps high school students reflect on their interests, activities, and 
+  goals through monthly reflection sessions. Counselors can view student profiles and signals. An AI layer (powered by Claude) synthesizes student data into "signal
+  profiles" with interest clusters, character signals, and trajectory shifts.
+
+  Architecture
+
+  Monorepo (Turborepo + pnpm workspaces):
+  compass/
+  ├── apps/web/          — Next.js 14 App Router (student + counselor UI)
+  ├── packages/db/       — Prisma ORM + schema + generated client
+  ├── packages/ui/       — Shared UI components (shadcn/ui)
+  ├── packages/types/    — Shared TypeScript types
+  ├── packages/ai/       — Claude AI service for reflections/synthesis
+  ├── vercel.json        — Root Vercel deployment config
+  ├── turbo.json         — Turborepo task config
+  └── package.json       — Root workspace
+
+  Tech stack: Next.js 14, TypeScript, Tailwind CSS, shadcn/ui, Prisma 6, Supabase (PostgreSQL + pgvector), Clerk (auth), Upstash Redis + QStash (caching + job
+  queues), Vercel (hosting).
+
+  What We Built (9 completed tasks from the PDR)
+
+  1. Monorepo scaffold — Turborepo structure, pnpm workspaces, shared packages
+  2. Database package (packages/db) — Prisma schema with 14 models: Student, Counselor, School, ReflectionSession, Activity, Reflection, SignalProfile,
+  StudentPrivacySettings, MapNode, MapEdge, Notification, NotificationPreferences, PeerGroup, PeerGroupMember. Uses pgvector for embeddings.
+  3. Auth integration — Clerk middleware protecting all routes, Clerk webhook for user sync
+  4. Core APIs — REST endpoints for reflections, activities, sessions, notifications, privacy, data export/delete
+  5. AI service (packages/ai) — Claude-powered reflection prompting, signal synthesis, interest mapping
+  6. Student web app — Monthly reflection flow (pulse check → activity logging → guided reflections → summary), profile page, reflection history, career exploration
+  map
+  7. Counselor dashboard — Student list, individual student views, signal profiles, notification management
+  8. Notifications system — QStash-driven nudges, notification preferences, quiet hours
+  9. Mobile-responsive UI — Responsive layouts, mobile navigation
+
+  Task 10: Vercel Deployment (current — in progress)
+
+  What's been accomplished:
+
+  1. Vercel config fixed — Root vercel.json is the single source of truth (Root Directory is blank in Vercel UI). Contains framework: "nextjs", buildCommand,
+  outputDirectory, installCommand, ignoreCommand, headers.
+  2. Build succeeds — turbo run build --filter=@compass/web → Prisma generates → Next.js compiles → 33 pages. This has been working reliably.
+  3. Database connected — Prisma schema pushed to Supabase via prisma db push. pgvector extension active.
+  4. External services configured — Supabase, Clerk, Upstash Redis, QStash all set up with environment variables in Vercel.
+  5. Deployment reaches Vercel — The app deploys, Vercel processes it as a Next.js app.
+
+  What's broken (the one remaining blocker):
+
+  Prisma crashes at runtime with PrismaClientInitializationError: Could not locate Query Engine for runtime "rhel-openssl-3.0.x".
+
+  The build generates a native binary (libquery_engine-rhel-openssl-3.0.x.so.node) but Vercel's serverless function bundler (nft) doesn't include it. At runtime,
+  Prisma can't find the engine and crashes.
+
+  Root cause identified: packages/db/src/index.ts imports from ../generated/client which resolves to index.js (library engine — needs native binary). The generated
+  client also has a wasm.js export that uses a WASM engine (no native binary needed).
+
+  What we tried that didn't work:
+
+  - Adding binaryTargets = ["rhel-openssl-3.0.x"] to schema
+  - Adding serverExternalPackages to next.config
+  - Adding outputFileTracingRoot to next.config
+  - Making @compass/db#build non-cacheable in turbo.json
+  - Copying the binary in the build command
+  - Adding @prisma/adapter-pg driver adapter (only replaces DB connection, still needs query engine)
+  - Adding --force to turbo build command
+
+  The fix (approved plan, about to implement):
+
+  1. Change imports in packages/db/src/index.ts from ../generated/client to ../generated/client/wasm
+  2. Add asyncWebAssembly webpack experiment to apps/web/next.config.mjs
+
+  What's left after the Prisma fix:
+
+  1. Verify deployment works — Clerk sign-in page should load, DB queries should succeed
+  2. Test user sign-up flow — Sign up, Clerk webhook creates Student record in DB
+  3. Set counselor role — At least one user needs the counselor role to access the dashboard
+  4. Add back functions config — maxDuration for long-running API routes (QStash webhooks). Was removed because path format didn't work from root vercel.json. Will
+  revisit after deployment works.
+  5. Fix TypeScript errors — Currently using ignoreBuildErrors: true. Non-blocking but should be cleaned up.
+  6. Remove --force from turbo build — Currently bypassing turbo cache. Should be removed once deployment is stable to speed up builds.

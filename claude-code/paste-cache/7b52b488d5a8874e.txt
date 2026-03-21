@@ -1,0 +1,93 @@
+  COMPASS Project — Complete Summary                                                                                                                                                                                                        
+                                                                                                                                                                                                                                              
+  What COMPASS Is                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                              
+  Student career exploration platform. High schoolers complete structured reflection sessions every 3 weeks → AI (Claude + Voyage AI) synthesizes responses into "signal profiles" (interest clusters, character signals, trajectory shifts,
+  breadth score, compressed summary) → counselors see filtered dashboards. A pgvector-powered map surfaces personalized career/major recommendations.
+  ---
+  Architecture
+  compass/
+  ├── apps/web/          — Next.js 14 App Router (student + counselor + admin UI) → Vercel
+  ├── apps/ai-service/   — FastAPI Python (synthesis, embeddings, prompts) → Railway
+  ├── apps/mobile/       — React Native (untouched)
+  ├── packages/db/       — Prisma 6 WASM + Supabase schema
+  ├── packages/ui/       — Shared components
+  ├── CONTRIBUTING.md    — Migration workflow docs
+  Stack: Next.js 14, TypeScript, Tailwind, Prisma 6 (WASM engine), Supabase PostgreSQL + pgvector, Clerk auth, Upstash Redis + QStash, Anthropic claude-sonnet-4-6, Voyage AI (1024-dim embeddings)
+  ---
+  Database (14 models, 3 migrations applied)
+  Key models: Student, Counselor, ReflectionSession, ReflectionTemplate, Activity, Reflection, SignalProfile, StudentPrivacySettings, MapNode (pgvector), Notification, NotificationPreferences.
+  Key constraints added this session:
+  - SignalProfile.@@unique([studentId, sessionId]) — prevents duplicate synthesis on QStash retry
+  - SignalProfile.sessionId NOT NULL
+  - StudentPrivacySettings.shareSummary Boolean @default(true)
+  Migration workflow (Supabase blocks shadow DB, so migrate dev doesn't work):
+  cd packages/db
+  pnpm db:migrate-new <name>    # generates SQL via prisma migrate diff
+  pnpm db:migrate-deploy         # applies with prisma migrate deploy
+  ---
+  Deployment State
+  Web → Vercel ✅
+  - Prisma uses WASM engine + custom webpack loader (inlines 2.2MB WASM as base64 — bypasses Next.js 14's broken wasm parser)
+  - pg Pool uses DIRECT_URL not pgbouncer for driver adapter
+  - SSL: rejectUnauthorized: false (Supabase CA not in Node trust store; set DB_SSL_CA env var with base64 Supabase cert for full verification)
+  - Student layout auto-creates student record if Clerk webhook missed it (prevents redirect loop)
+  - Currently failing redeployment — need build logs
+  AI Service → Railway ✅ (newly set up)
+  - Root Directory: apps/ai-service, Watch Paths: apps/ai-service/**, Port: 8000
+  - All routes protected by X-Service-Key header
+  - Vercel needs: AI_SERVICE_URL (no trailing slash), AI_SERVICE_SECRET_KEY
+  ---
+  What Was Fixed This Session
+  Security
+  - SSL rejectUnauthorized + Supabase CA escape hatch via DB_SSL_CA env var
+  - Security headers (X-Frame-Options, CSP, X-Content-Type-Options, etc.)
+  - CORS wildcard → locked to APP_URL in Python service
+  - Rate limiting on 6 endpoints: sessions (10/hr), submit (5/hr), map (20/min), reflections (30/hr), activities (30/hr), counselor meeting-prep (10/hr)
+  - Embedding validated (1024 floats, all finite) before raw SQL
+  Bugs
+  - EMBED_PROFILE QStash job was silently unhandled → implemented
+  - weekKey used Math.ceil(date/7) (wrong) → ISO 8601 getISOWeekKey() (also had timezone bug caught by tests)
+  - Synthesis ran signalProfile.create → upsert for idempotency (QStash delivers at-least-once)
+  - completedCount counted started sessions → counts completedAt NOT NULL
+  - pgvector raw SQL ran with unvalidated AI embedding → validated first
+  - Reflection create race condition (concurrent autosaves)
+  - PulseCheckStep, TemplateManager didn't check response.ok
+  API Error Handling (all 33 routes)
+  - AuthError class + apiError() in lib/auth.ts
+  - All catch blocks now return 401/403/500 correctly (was always 400)
+  Privacy
+  - shareSignals toggle → fans out to all 4 DB fields atomically
+  - shareSummary → new DB field, persists on toggle, counselor routes respect it
+  - Privacy settings loaded from DB on step 5 entry (was always defaulting to true)
+  - Privacy reset clears all 5 fields including shareSummary
+  Maintainability
+  - COOLDOWN_DAYS → single lib/constants.ts
+  - getISOWeekKey → lib/utils.ts (fixed UTC bug)
+  - withShareSignals → lib/privacy-utils.ts
+  - parsePrompts called 1× per render (was 3×)
+  ---
+  Tests — 32 passing, 0 failing
+  apps/web/__tests__/
+  ├── lib/utils.test.ts      — 7 tests (getISOWeekKey, caught real timezone bug)
+  ├── lib/auth.test.ts       — 8 tests (AuthError, apiError, no info leakage)
+  ├── lib/constants.test.ts  — 2 tests
+  ├── api/privacy.test.ts    — 10 tests (withShareSignals, GET/PUT fan-out)
+  └── api/sessions.test.ts   — 5 tests (cooldown, rate limit, template selection)
+  Run: pnpm test | pnpm test:coverage
+  ---
+  What's Still Open
+  Blocking right now:
+  1. Vercel redeployment failure — need build logs
+  Your action needed:
+  2. Set APP_URL in Railway env vars → CORS only works with correct Vercel domain
+  3. Verify Clerk webhook URL in Clerk dashboard matches Vercel deployment URL
+  4. Enable ESLint builds — ignoreDuringBuilds: true in next.config.mjs (fix lint errors first)
+  5. Optional: download Supabase CA cert → set DB_SSL_CA in Vercel for full TLS verification
+  Product decisions:
+  6. Mobile app (apps/mobile) — untouched, unknown state
+  7. maxDuration config for long-running routes (QStash webhook needs >10s timeout)
+  Engineering:
+  8. More test coverage — currently core logic only; API routes and components need more
+  9. Remove --force from turbo build in vercel.json — speeds up builds once stable
+

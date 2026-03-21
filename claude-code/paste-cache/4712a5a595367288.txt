@@ -1,0 +1,59 @@
+Compass — Project Summary                                                                            
+                                                                                                       
+  What it is: A web app for high school students to track their personal growth through periodic       
+  reflections. A counselor/admin writes curated reflection templates; students complete them over the  
+  year and the app generates a "signal profile" showing patterns in their interests, character, and    
+  trajectory.                                                                                          
+                                                                                                     
+  ---                                                                                                  
+  Tech Stack                                                                                           
+                                                                                                       
+  - Frontend/Backend: Next.js 14 (app router), hosted on Vercel                                        
+  - Database: Supabase (PostgreSQL), Prisma ORM with WASM client + pg driver adapter                   
+  - Auth: Clerk (roles: student, counselor, admin via publicMetadata)                                  
+  - AI: Anthropic SDK directly in Next.js — claude-sonnet-4-6 for synthesis, claude-haiku-4-5 for      
+  prompts                                                                                              
+  - Monorepo: pnpm workspaces + Turborepo (apps/web, packages/db)
+  ---
+  Core User Flow
+  1. Admin writes reflection templates (10/year, curated) at /admin/templates
+  2. Student completes reflections every 3 weeks (hard cap), working through templates in order
+  3. On submit, the app runs synthesis via Anthropic to generate a SignalProfile (interest clusters,
+  character signals, trajectory shifts, breadth score)
+  4. Student sees their signals on the home page and a career/education map of nodes personalized to
+  their profile
+  ---
+  Data Models (key ones)
+  ┌────────────────────┬─────────────────────────────────────────────────────────────────────┐
+  │       Model        │                               Purpose                               │
+  ├────────────────────┼─────────────────────────────────────────────────────────────────────┤
+  │ Student            │ Core user record, linked to Clerk                                   │
+  ├────────────────────┼─────────────────────────────────────────────────────────────────────┤
+  │ ReflectionTemplate │ Admin-written prompts (title, description, ordered, year-keyed)     │
+  ├────────────────────┼─────────────────────────────────────────────────────────────────────┤
+  │ ReflectionSession  │ A student's instance of a template — tracks completion, pulse score │
+  ├────────────────────┼─────────────────────────────────────────────────────────────────────┤
+  │ Activity           │ What the student does (academic, extracurricular, etc.)             │
+  ├────────────────────┼─────────────────────────────────────────────────────────────────────┤
+  │ Reflection         │ Student's written responses to prompts                              │
+  ├────────────────────┼─────────────────────────────────────────────────────────────────────┤
+  │ SignalProfile      │ AI-synthesized output — interest clusters, character signals, etc.  │
+  ├────────────────────┼─────────────────────────────────────────────────────────────────────┤
+  │ MapNode / MapEdge  │ Career/major/industry graph (seeded, ~200+ nodes)                   │
+  └────────────────────┴─────────────────────────────────────────────────────────────────────┘
+  ---
+  Current Status
+  - Reflection flow: Working — template-based, 3-week cooldown, session wizard
+  - Synthesis: Code is correct (runs synchronously on submit via Anthropic SDK)
+  - Map: Seed data is in production DB
+  - Signals not showing: The SignalProfile from the old session isn't being found — likely because the
+  session was completed before synthesis code existed, OR there's a DB connectivity issue preventing
+  synthesis from running
+  - DB connectivity: Ongoing — recently switched from pgbouncer transaction pooler to direct connection
+   to fix circuit breaker issues; latest deploy in progress
+  ---
+  Active Issues
+  1. DB connection — circuit breaker was triggered; switching to direct connection URL should fix it
+  2. Signals not showing on home page — need to verify synthesis ran for the existing completed session
+  3. Map client-side error — crashes on load (image #10), likely a code bug unrelated to DB
+

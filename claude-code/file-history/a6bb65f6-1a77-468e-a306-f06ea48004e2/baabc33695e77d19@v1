@@ -1,0 +1,188 @@
+# COMPASS Project — Complete Summary
+
+## What COMPASS Is
+
+COMPASS is a student career exploration platform — a full-stack Next.js web application that helps
+high school students reflect on their interests, activities, and goals through structured reflection
+sessions every 3 weeks. Counselors can view student profiles and signals. An AI layer (Claude +
+Voyage AI) synthesizes student data into "signal profiles" with interest clusters, character
+signals, trajectory shifts, and a compressed summary. A pgvector-powered map surfaces personalized
+career/major recommendations.
+
+---
+
+## Architecture
+
+Monorepo (Turborepo + pnpm workspaces):
+```
+compass/
+├── apps/web/          — Next.js 14 App Router (student + counselor + admin UI)
+├── apps/ai-service/   — FastAPI Python (AI endpoints: synthesis, embeddings, prompts)
+├── apps/mobile/       — React Native (untouched)
+├── packages/db/       — Prisma ORM + schema + Supabase WASM client
+├── packages/ui/       — Shared UI components
+├── packages/types/    — Shared TypeScript types
+├── packages/config/   — Shared tsconfig/eslint
+├── turbo.json         — Turborepo task config
+└── CONTRIBUTING.md    — Migration workflow docs
+```
+
+**Tech stack:** Next.js 14, TypeScript, Tailwind CSS, Prisma 6 (WASM), Supabase (PostgreSQL +
+pgvector), Clerk (auth — student/counselor/admin roles), Upstash Redis (caching) + QStash
+(background jobs), Anthropic claude-sonnet-4-6 (synthesis), Voyage AI (1024-dim embeddings),
+Vercel (web hosting), Railway (AI service hosting).
+
+---
+
+## Database Schema (14 models)
+
+Student, Counselor, School, ReflectionSession, ReflectionTemplate, Activity, Reflection,
+SignalProfile, StudentPrivacySettings, MapNode (pgvector), MapEdge, Notification,
+NotificationPreferences, PeerGroup, PeerGroupMember.
+
+**Key constraints:**
+- `SignalProfile` has `@@unique([studentId, sessionId])` — prevents duplicate synthesis on QStash retry
+- `sessionId NOT NULL` on SignalProfile — enforced at DB level
+- `StudentPrivacySettings` has `shareSummary Boolean @default(true)` — added in session
+
+**3 Prisma migrations applied to Supabase:**
+1. `0_init` — baseline of existing schema
+2. `add-signal-profile-session-id-unique` — sessionId + @@unique
+3. `signal-profile-not-null-add-share-summary` — sessionId NOT NULL, shareSummary field
+
+**Migration workflow (Supabase can't run shadow DB):**
+```bash
+cd packages/db
+pnpm db:migrate-new <name>    # generates SQL via prisma migrate diff
+pnpm db:migrate-deploy         # applies with prisma migrate deploy
+# Never use: prisma migrate dev / prisma migrate reset
+```
+
+---
+
+## Deployment
+
+### Web (Vercel)
+- Root Directory blank in Vercel UI; `vercel.json` at repo root is source of truth
+- Prisma uses WASM engine + custom webpack loader (`apps/web/prisma-wasm-loader.js`) that
+  inlines the 2.2MB WASM as base64 — bypasses Next.js 14's broken @webassemblyjs parser
+- `packages/db/src/index.ts` uses pg Pool with `DIRECT_URL` (not pgbouncer) for driver adapter
+- SSL: `rejectUnauthorized: false` (Supabase CA not in Node trust store); set `DB_SSL_CA`
+  env var (base64-encoded PEM from Supabase dashboard) to enable full chain verification
+- Student layout auto-creates student record if Clerk webhook missed it (prevents redirect loop)
+
+### AI Service (Railway)
+- Root Directory in Railway: `apps/ai-service`
+- Watch Paths: `apps/ai-service/**`
+- Port: 8000
+- All routes protected by `X-Service-Key` header (checked against `AI_SERVICE_SECRET_KEY`)
+- Health check: GET /health → `{"status": "ok", "service": "compass-ai"}`
+
+### Required Vercel Env Vars
+DATABASE_URL, DIRECT_URL, NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY,
+CLERK_WEBHOOK_SECRET, UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN, QSTASH_TOKEN,
+QSTASH_CURRENT_SIGNING_KEY, QSTASH_NEXT_SIGNING_KEY, AI_SERVICE_URL (no trailing slash),
+AI_SERVICE_SECRET_KEY, NEXT_PUBLIC_APP_URL
+
+### Required Railway Env Vars
+ANTHROPIC_API_KEY, VOYAGE_API_KEY, DATABASE_URL (direct, port 5432), AI_SERVICE_SECRET_KEY,
+APP_URL (Vercel domain, for CORS)
+
+---
+
+## What Was Fixed in This Session
+
+### Security
+- SSL rejectUnauthorized false→true (then reverted with env-var escape hatch for Supabase CA)
+- Security headers: X-Frame-Options, CSP, X-Content-Type-Options, Referrer-Policy, etc.
+- CORS wildcard → settings.app_url in Python AI service
+- Rate limiting on 6 endpoints:
+  - POST /api/sessions: 10/hr
+  - POST /api/sessions/[id]/submit: 5/hr
+  - GET /api/map/personalized: 20/min
+  - POST /api/reflections: 30/hr
+  - POST /api/activities: 30/hr
+  - GET /api/counselor/students/[id]/meeting-prep: 10/hr
+- Embedding array validated (1024-dim floats, all finite) before raw SQL
+- Input validation on reflections, onboarding, notifications routes
+
+### Bug Fixes
+- BUG-1: EMBED_PROFILE QStash job type unhandled → implemented with Voyage AI + Redis cache
+- BUG-2: pgvector raw SQL ran with unvalidated AI output → validated first
+- BUG-4: completedCount counted started sessions → fixed to count completedAt NOT NULL
+- BUG-5: weekKey used Math.ceil(date/7) → replaced with ISO 8601 getISOWeekKey() (UTC-based)
+- Synthesis idempotency: signalProfile.create → upsert in both submit route + QStash handler
+- Duplicate reflection create race condition (creatingRef Set guard)
+- SessionWizard step count hardcoded "5" → dynamic STEP_LABELS.length
+- PulseCheckStep didn't check response.ok before advancing
+- TemplateManager delete/toggle didn't check response.ok
+
+### API Error Handling (all 33 routes)
+- AuthError class with typed 401/403 status in lib/auth.ts
+- apiError() helper — returns 401 for unauth, 403 for forbidden, 500 for server errors
+- Previously all errors returned 400
+
+### Privacy
+- shareSignals toggle → fans out to all 4 DB fields atomically
+- shareSummary → new DB field, persists immediately on toggle change
+- Privacy settings fetched from DB on entering step 5 (not initialized to defaults)
+- Privacy reset also clears shareSummary
+- Counselor summary + meeting-prep routes respect shareSummary (compressedSummary filtered)
+
+### Maintainability
+- COOLDOWN_DAYS: 4 files → single lib/constants.ts
+- getISOWeekKey: inline in qstash → lib/utils.ts (also fixed UTC timezone bug)
+- withShareSignals: lib/privacy-utils.ts
+- parsePrompts called 3×/render → 1×
+- synthesize.ts: type-safe content blocks, JSON parse error handling, code fence stripping
+
+---
+
+## Tests (32 passing, 0 failing)
+
+Vitest setup in apps/web. Run: `pnpm test` / `pnpm test:coverage`
+
+| File | Tests | What |
+|------|-------|------|
+| `__tests__/lib/utils.test.ts` | 7 | getISOWeekKey (caught real timezone bug) |
+| `__tests__/lib/auth.test.ts` | 8 | AuthError, apiError status codes + no-leak |
+| `__tests__/lib/constants.test.ts` | 2 | COOLDOWN_DAYS value |
+| `__tests__/api/privacy.test.ts` | 10 | withShareSignals, GET/PUT fan-out |
+| `__tests__/api/sessions.test.ts` | 5 | cooldown, rate limit, template selection |
+
+---
+
+## Key Files
+- `apps/web/lib/auth.ts` — AuthError + apiError + requireStudent/Counselor/Admin
+- `apps/web/lib/redis.ts` — Redis client + rateLimiters + CACHE_KEYS/TTL
+- `apps/web/lib/constants.ts` — COOLDOWN_DAYS = 21
+- `apps/web/lib/utils.ts` — getISOWeekKey() (UTC ISO 8601)
+- `apps/web/lib/privacy-utils.ts` — withShareSignals()
+- `apps/web/lib/synthesize.ts` — AI synthesis (Claude)
+- `apps/web/lib/ai-service.ts` — HTTP client for Railway AI service
+- `apps/web/app/api/webhooks/qstash/route.ts` — background job handler
+- `apps/web/app/api/webhooks/clerk/route.ts` — user sync webhook
+- `packages/db/src/index.ts` — pg Pool + WASM Prisma client
+- `packages/db/prisma/schema.prisma` — DB schema
+- `apps/ai-service/app/main.py` — FastAPI entry point
+- `apps/ai-service/app/config.py` — pydantic-settings (reads env vars)
+- `CONTRIBUTING.md` — migration workflow documentation
+
+---
+
+## What's Still Open
+
+### Needs your action
+1. **Vercel redeployment failure** — unknown error, need build logs
+2. **Set APP_URL in Railway** — CORS fix only works with correct Vercel domain set
+3. **Enable ESLint builds** — `ignoreDuringBuilds: true` in next.config.mjs (fix lint errors first)
+4. **Clerk webhook** — verify correct URL in Clerk dashboard + CLERK_WEBHOOK_SECRET matches
+
+### Needs product decision
+5. **Mobile app** (`apps/mobile`) — completely untouched, unknown state
+6. **maxDuration config** — long-running routes (QStash webhook) need Vercel function timeout config
+
+### Engineering (can be done anytime)
+7. **More tests** — 32 tests cover core logic; API routes and components need more coverage
+8. **DB_SSL_CA** — optional full Supabase cert chain verification (download from Supabase dashboard)
+9. **Remove --force from turbo build** — speeds up Vercel builds once stable

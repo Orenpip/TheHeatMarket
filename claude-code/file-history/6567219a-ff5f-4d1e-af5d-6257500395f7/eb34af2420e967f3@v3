@@ -1,0 +1,124 @@
+import { getToken } from "./auth";
+
+const API_BASE = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3000";
+
+async function apiFetch<T>(
+  path: string,
+  options: RequestInit = {}
+): Promise<T> {
+  const token = await getToken();
+
+  const response = await fetch(`${API_BASE}${path}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options.headers,
+    },
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`API error ${response.status}: ${text}`);
+  }
+
+  return response.json() as Promise<T>;
+}
+
+export const api = {
+  // Sessions
+  getSessions: () => apiFetch<unknown[]>("/api/sessions"),
+  createSession: (monthKey?: string) =>
+    apiFetch<{ id: string }>("/api/sessions", {
+      method: "POST",
+      body: JSON.stringify({ monthKey }),
+    }),
+  getSession: (id: string) => apiFetch<unknown>(`/api/sessions/${id}`),
+  submitSession: (id: string) =>
+    apiFetch<{ success: boolean }>(`/api/sessions/${id}/submit`, {
+      method: "POST",
+    }),
+  updateSession: (id: string, data: Record<string, unknown>) =>
+    apiFetch<{ success: boolean }>(`/api/sessions/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    }),
+  getReflectionPrompts: (sessionId: string) =>
+    apiFetch<{ prompts: unknown[] }>("/api/sessions/prompts", {
+      method: "POST",
+      body: JSON.stringify({ sessionId }),
+    }),
+
+  // Activities
+  createActivity: (data: Record<string, unknown>) =>
+    apiFetch<unknown>("/api/activities", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+  updateActivity: (id: string, data: Record<string, unknown>) =>
+    apiFetch<{ success: boolean }>(`/api/activities/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+  deleteActivity: (id: string) =>
+    apiFetch<{ success: boolean }>(`/api/activities/${id}`, {
+      method: "DELETE",
+    }),
+
+  // Reflections
+  createReflection: (data: Record<string, unknown>) =>
+    apiFetch<unknown>("/api/reflections", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+  saveReflection: (data: Record<string, unknown>) =>
+    apiFetch<unknown>("/api/reflections", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+  updateReflection: (id: string, data: Record<string, unknown>) =>
+    apiFetch<{ success: boolean }>(`/api/reflections/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    }),
+
+  // Student
+  getProfile: () => apiFetch<unknown>("/api/students/profile"),
+  getSignalProfile: () => apiFetch<unknown>("/api/students/signal-profile"),
+  completeOnboarding: (data: Record<string, unknown>) =>
+    apiFetch<{ success: boolean }>("/api/students/onboarding", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+  saveOnboarding: (data: Record<string, unknown>) =>
+    apiFetch<{ success: boolean }>("/api/students/onboarding", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+
+  // Map
+  getPersonalizedMap: () => apiFetch<unknown>("/api/map/personalized"),
+  searchMap: (q: string) => apiFetch<unknown[]>(`/api/map/search?q=${encodeURIComponent(q)}`),
+
+  // Notifications
+  getNotifications: (page = 1) =>
+    apiFetch<unknown>(`/api/notifications?page=${page}`),
+  markRead: (id: string) =>
+    apiFetch<{ success: boolean }>(`/api/notifications/${id}/read`, {
+      method: "PUT",
+    }),
+  getNotificationPrefs: () => apiFetch<unknown>("/api/notifications/preferences"),
+  updateNotificationPrefs: (data: Record<string, unknown>) =>
+    apiFetch<unknown>("/api/notifications/preferences", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+
+  // Privacy
+  getPrivacySettings: () => apiFetch<unknown>("/api/privacy"),
+  updatePrivacySettings: (data: Record<string, unknown>) =>
+    apiFetch<unknown>("/api/privacy", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+};

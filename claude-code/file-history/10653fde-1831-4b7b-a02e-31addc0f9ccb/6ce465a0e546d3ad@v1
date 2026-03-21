@@ -1,0 +1,288 @@
+import { NextResponse } from "next/server";
+import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
+import { prisma } from "@compass/db";
+import { aiService } from "@/lib/ai-service";
+import { redis, CACHE_KEYS } from "@/lib/redis";
+import { Client } from "@upstash/qstash";
+
+const qstash = new Client({ token: process.env.QSTASH_TOKEN! });
+
+interface QStashPayload {
+  type: "WEEKLY_NUDGE_SWEEP" | "OPPORTUNITY_SWEEP" | "POST_SESSION_SYNTHESIS";
+  data: Record<string, unknown>;
+  triggeredAt: string;
+}
+
+async function handler(req: Request) {
+  const body = (await req.json()) as QStashPayload;
+
+  switch (body.type) {
+    case "POST_SESSION_SYNTHESIS": {
+      const { studentId, sessionId } = body.data as {
+        studentId: string;
+        sessionId: string;
+      };
+      await handlePostSessionSynthesis(studentId, sessionId);
+      break;
+    }
+
+    case "WEEKLY_NUDGE_SWEEP": {
+      await handleWeeklyNudgeSweep();
+      break;
+    }
+
+    case "OPPORTUNITY_SWEEP": {
+      await handleOpportunitySweep();
+      break;
+    }
+
+    default:
+      return NextResponse.json(
+        { error: "Unknown job type" },
+        { status: 400 }
+      );
+  }
+
+  return NextResponse.json({ success: true });
+}
+
+async function handlePostSessionSynthesis(
+  studentId: string,
+  sessionId: string
+) {
+  // Fetch all relevant data
+  const [activities, reflections, previousProfile] = await Promise.all([
+    prisma.activity.findMany({
+      where: { studentId },
+      orderBy: { createdAt: "asc" },
+    }),
+    prisma.reflection.findMany({
+      where: { studentId },
+      orderBy: { createdAt: "asc" },
+    }),
+    prisma.signalProfile.findFirst({
+      where: { studentId },
+      orderBy: { createdAt: "desc" },
+    }),
+  ]);
+
+  const synthesis = await aiService.synthesizeProfile({
+    studentId,
+    sessionId,
+    activities,
+    reflections,
+    previousProfile,
+  });
+
+  // Save new signal profile
+  await prisma.signalProfile.create({
+    data: {
+      studentId,
+      interestClusters: synthesis.interestClusters as object[],
+      characterSignals: synthesis.characterSignals as object[],
+      trajectoryShifts: synthesis.trajectoryShifts as object[],
+      gapDetection: synthesis.gapDetection as object,
+      breadthScore: synthesis.breadthScore,
+      compressedSummary: synthesis.compressedSummary,
+      lastSynthesizedAt: new Date(),
+    },
+  });
+
+  // Invalidate caches
+  await Promise.all([
+    redis.del(CACHE_KEYS.signalProfile(studentId)),
+    redis.del(CACHE_KEYS.personalizedMap(studentId)),
+  ]);
+
+  // Enqueue embedding update if AI service is available
+  try {
+    const aiServiceUrl = process.env.AI_SERVICE_URL;
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+    if (aiServiceUrl) {
+      await qstash.publishJSON({
+        url: `${appUrl}/api/webhooks/qstash`,
+        body: {
+          type: "EMBED_PROFILE",
+          data: { studentId, summary: synthesis.compressedSummary },
+          triggeredAt: new Date().toISOString(),
+        },
+        delay: 5,
+      });
+    }
+  } catch {
+    // Non-critical: embedding is for personalized map, not core feature
+  }
+}
+
+async function handleWeeklyNudgeSweep() {
+  const now = new Date();
+  const cutoff90Days = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+  const cutoff48Hours = new Date(now.getTime() - 48 * 60 * 60 * 1000);
+  const cutoff72Hours = new Date(now.getTime() - 72 * 60 * 60 * 1000);
+
+  // Get all students with notification preferences enabled
+  const students = await prisma.student.findMany({
+    where: { onboardingCompleted: true },
+    include: {
+      notificationPrefs: true,
+      sessions: {
+        orderBy: { createdAt: "desc" },
+        take: 1,
+        select: { completedAt: true, createdAt: true },
+      },
+      notifications: {
+        where: {
+          type: "REFLECTION_NUDGE",
+          createdAt: { gte: cutoff48Hours },
+        },
+        take: 1,
+      },
+      signalProfiles: {
+        orderBy: { createdAt: "desc" },
+        take: 1,
+        select: { compressedSummary: true },
+      },
+    },
+  });
+
+  const weekKey = `${now.getFullYear()}-W${Math.ceil(now.getDate() / 7)}`;
+
+  for (const student of students) {
+    const prefs = student.notificationPrefs;
+    if (!prefs?.reflectionNudges) continue;
+
+    // Check weekly cap
+    const weeklyCount = (await redis.get(
+      `notif-count:${student.id}:${weekKey}`
+    )) as number | null;
+    if ((weeklyCount ?? 0) >= (prefs.maxPerWeek ?? 3)) continue;
+
+    // Check 48hr cooldown
+    if (student.notifications.length > 0) continue;
+
+    // Check 72hr post-session cooldown
+    const lastSession = student.sessions[0];
+    if (lastSession?.completedAt) {
+      const sessionCompletedAt = new Date(lastSession.completedAt);
+      if (sessionCompletedAt > cutoff72Hours) continue;
+
+      // Only nudge if it's been more than 35 days (approaching monthly)
+      const daysSinceSession = Math.floor(
+        (now.getTime() - sessionCompletedAt.getTime()) / (1000 * 60 * 60 * 24)
+      );
+      if (daysSinceSession < 25) continue;
+    }
+
+    // Check quiet hours
+    const hour = now.getHours();
+    const quietStart = parseInt(prefs.quietHoursStart?.split(":")[0] ?? "21");
+    const quietEnd = parseInt(prefs.quietHoursEnd?.split(":")[0] ?? "8");
+    const inQuietHours =
+      quietStart > quietEnd
+        ? hour >= quietStart || hour < quietEnd
+        : hour >= quietStart && hour < quietEnd;
+    if (inQuietHours) continue;
+
+    // Generate personalized notification
+    try {
+      const content = await aiService.generateNotification({
+        studentId: student.id,
+        triggerType: "REFLECTION_NUDGE",
+        compressedSummary:
+          student.signalProfiles[0]?.compressedSummary ?? undefined,
+      });
+
+      await prisma.notification.create({
+        data: {
+          studentId: student.id,
+          type: "REFLECTION_NUDGE",
+          title: content.title,
+          body: content.body,
+        },
+      });
+
+      // Increment weekly count
+      await redis.incr(`notif-count:${student.id}:${weekKey}`);
+      await redis.expire(
+        `notif-count:${student.id}:${weekKey}`,
+        60 * 60 * 24 * 7
+      );
+    } catch {
+      // Log and continue
+      console.error(`Failed to generate nudge for student ${student.id}`);
+    }
+  }
+}
+
+async function handleOpportunitySweep() {
+  // Find upcoming opportunities (programs with deadlines within 3 weeks)
+  const threeWeeksOut = new Date();
+  threeWeeksOut.setDate(threeWeeksOut.getDate() + 21);
+
+  // Get all students with signal profiles
+  const students = await prisma.student.findMany({
+    where: { onboardingCompleted: true },
+    include: {
+      signalProfiles: {
+        orderBy: { createdAt: "desc" },
+        take: 1,
+        select: { compressedSummary: true, interestClusters: true },
+      },
+      notificationPrefs: true,
+    },
+    take: 100,
+  });
+
+  // For each student with a profile, generate an opportunity notification
+  for (const student of students) {
+    const prefs = student.notificationPrefs;
+    if (!prefs?.opportunityAlerts) continue;
+
+    const profile = student.signalProfiles[0];
+    if (!profile?.compressedSummary) continue;
+
+    // Check weekly cap
+    const now = new Date();
+    const weekKey = `${now.getFullYear()}-W${Math.ceil(now.getDate() / 7)}`;
+    const weeklyCount = (await redis.get(
+      `notif-count:${student.id}:${weekKey}`
+    )) as number | null;
+    if ((weeklyCount ?? 0) >= (prefs.maxPerWeek ?? 3)) continue;
+
+    // Check for recent opportunity notification (7 days cooldown)
+    const recentOpportunity = await prisma.notification.findFirst({
+      where: {
+        studentId: student.id,
+        type: "OPPORTUNITY",
+        createdAt: {
+          gte: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000),
+        },
+      },
+    });
+    if (recentOpportunity) continue;
+
+    try {
+      const content = await aiService.generateNotification({
+        studentId: student.id,
+        triggerType: "OPPORTUNITY",
+        compressedSummary: profile.compressedSummary,
+      });
+
+      await prisma.notification.create({
+        data: {
+          studentId: student.id,
+          type: "OPPORTUNITY",
+          title: content.title,
+          body: content.body,
+        },
+      });
+
+      await redis.incr(`notif-count:${student.id}:${weekKey}`);
+      await redis.expire(`notif-count:${student.id}:${weekKey}`, 60 * 60 * 24 * 7);
+    } catch {
+      console.error(`Failed opportunity sweep for student ${student.id}`);
+    }
+  }
+}
+
+export const POST = verifySignatureAppRouter(handler);

@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(python3:*)",
+      "Bash(npx prisma:*)",
+      "Bash(pnpm install:*)",
+      "WebFetch(domain:pris.ly)",
+      "WebFetch(domain:www.prisma.io)",
+      "WebSearch",
+      "Bash(git add:*)",
+      "Bash(find:*)",
+      "Bash(head:*)",
+      "Bash(npx tsc:*)",
+      "Bash(pnpm:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:context7.com)",
+      "Bash(git -C /Users/yahelraviv status)"
+    ]
+  }
+}

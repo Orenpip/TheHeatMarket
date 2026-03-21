@@ -1,0 +1,21 @@
+Done:                                                                   
+  - Supabase: project created, pgvector enabled, connection strings saved 
+  - Clerk: app created, API keys saved, session token configured with role
+   claim
+  - Upstash: Redis database created, credentials saved                    
+  - Vercel: project deployed, all 11 env vars set, Clerk webhook
+  configured
+
+  Left (from your directions):
+  1. Run Prisma migration — npx prisma migrate dev --name init from
+  /Users/yahelraviv/compass/packages/db with a local .env file containing
+  your Supabase URLs. This creates the database tables.
+  2. Fix Vercel build error — the vercel.json references the qstash route
+  but Vercel can't find it during build. Needs investigation.
+  3. Sign up — once deployed successfully, sign up on the live URL to
+  trigger the Clerk webhook and create your Student record
+  4. Set your role — in Clerk dashboard, set your user's public metadata
+  to { "role": "COUNSELOR" }
+
+  The Prisma migration is the most critical — without it there are no
+  tables in your database and nothing will work. Want to start there?

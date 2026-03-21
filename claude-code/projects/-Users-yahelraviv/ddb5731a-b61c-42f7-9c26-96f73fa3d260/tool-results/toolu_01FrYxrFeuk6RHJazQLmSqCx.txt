@@ -1,0 +1,454 @@
+==> Fetching downloads for: gh
+==> Downloading https://raw.githubusercontent.com/Homebrew/homebrew-core/51b894d36dd0d53289b815570bb82d94334cfbd0/Formula/g/go.rb
+Already downloaded: /Users/yahelraviv/Library/Caches/Homebrew/downloads/18491a07f72e5265831e48bd00145e4e6d8ed1493e8d95a472a4eadfddae335a--go.rb
+==> Installing gh dependency: go
+[34m==>[0m [1mPatching[0m
+[34m==>[0m [1mApplying 28fbdf7acb4146b5bc3d88128e407d1344691839.patch[0m
+[34m==>[0m [1m./make.bash[0m
+🍺  /opt/homebrew/Cellar/go/1.26.0: 14,925 files, 228.4MB, built in 1 minute 10 seconds
+[34m==>[0m [1mmake bin/gh manpages[0m
+🍺  /opt/homebrew/Cellar/gh/2.87.3: 223 files, 36.6MB, built in 1 minute 8 seconds
+==> Running `brew cleanup gh`...
+Disable this behaviour by setting `HOMEBREW_NO_INSTALL_CLEANUP=1`.
+Hide these hints with `HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+==> `brew cleanup` has not been run in the last 30 days, running now...
+Disable this behaviour by setting `HOMEBREW_NO_INSTALL_CLEANUP=1`.
+Hide these hints with `HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/aom_bottle_manifest--3.12.1... (28.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/aom--3.12.1... (4MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/aribb24_bottle_manifest--1.0.4... (13.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/aribb24--1.0.4... (72.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/brotli_bottle_manifest--1.1.0-2... (9.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/brotli--1.1.0... (751.8KB)
+Removing: /opt/homebrew/Cellar/ca-certificates/2025-07-15... (4 files, 231.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/ca-certificates_bottle_manifest--2025-07-15... (2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/ca-certificates--2025-07-15... (129.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/cairo_bottle_manifest--1.18.4... (30KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/cairo--1.18.4... (762.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/cjson_bottle_manifest--1.7.18... (11.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/cjson--1.7.18... (58.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/dav1d_bottle_manifest--1.5.1... (8.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/dav1d--1.5.1... (362.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/ffmpeg_bottle_manifest--7.1.1_3... (115.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/ffmpeg--7.1.1_3... (21.2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/flac_bottle_manifest--1.5.0... (11KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/flac--1.5.0... (557KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/fontconfig_bottle_manifest--2.16.0... (13.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/fontconfig--2.16.0... (387.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/freetype_bottle_manifest--2.13.3... (12KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/freetype--2.13.3... (960.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/frei0r_bottle_manifest--2.3.3... (9.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/frei0r--2.3.3... (652KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/fribidi_bottle_manifest--1.0.16... (8.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/fribidi--1.0.16... (98.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/gettext_bottle_manifest--0.25.1... (15.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/gettext--0.25.1... (9.5MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/giflib_bottle_manifest--5.2.2... (9.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/giflib--5.2.2... (152.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/git_bottle_manifest--2.50.1... (21.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/git--2.50.1... (21.2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/glib_bottle_manifest--2.84.3... (22KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/glib--2.84.3... (9.0MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/gmp_bottle_manifest--6.3.0... (11.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/gmp--6.3.0... (1MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/gnutls_bottle_manifest--3.8.10... (22.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/gnutls--3.8.10... (3.2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/go--gobootstrap--1.24.13.tar.gz... (76.4MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/go--patch--2e05f7e16f2320685547a7ebb240163a8b7f1c7bf9d2f6dc4872ff8b27707a35.patch... (5.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/graphite2_bottle_manifest--1.3.14... (13.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/graphite2--1.3.14... (91.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/harfbuzz_bottle_manifest--11.2.1... (33.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/harfbuzz--11.2.1... (2.8MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/highway_bottle_manifest--1.2.0... (10.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/highway--1.2.0... (751.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/icu4c@77_bottle_manifest--77.1... (11.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/icu4c@77--77.1... (31.1MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/imath_bottle_manifest--3.1.12... (10.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/imath--3.1.12... (191.0KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/jpeg-turbo_bottle_manifest--3.1.1... (9.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/jpeg-turbo--3.1.1... (1.2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/jpeg-xl_bottle_manifest--0.11.1_1... (29.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/jpeg-xl--0.11.1_1... (13.9MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/lame_bottle_manifest--3.100... (15KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/lame--3.100... (799.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/leptonica_bottle_manifest--1.85.0... (18.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/leptonica--1.85.0... (2.7MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libarchive_bottle_manifest--3.8.1... (13.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libarchive--3.8.1... (1.6MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libass_bottle_manifest--0.17.4... (34.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libass--0.17.4... (235KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libb2_bottle_manifest--0.98.1... (14.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libb2--0.98.1... (31KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libbluray_bottle_manifest--1.3.4... (17.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libbluray--1.3.4... (365.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libdeflate_bottle_manifest--1.24... (9.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libdeflate--1.24... (110.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libevent_bottle_manifest--2.1.12_1... (15.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libevent--2.1.12_1... (718.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libidn2_bottle_manifest--2.3.8... (11.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libidn2--2.3.8... (320.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libmicrohttpd_bottle_manifest--1.0.2... (22KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libmicrohttpd--1.0.2... (480.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libnghttp2_bottle_manifest--1.66.0... (8.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libnghttp2--1.66.0... (235.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libogg_bottle_manifest--1.3.6... (8.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libogg--1.3.6... (234.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libpng_bottle_manifest--1.6.50... (9.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libpng--1.6.50... (459.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/librist_bottle_manifest--0.2.11... (23KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/librist--0.2.11... (214.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libsamplerate_bottle_manifest--0.2.2-1... (8.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libsamplerate--0.2.2... (2.7MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libsndfile_bottle_manifest--1.2.2_1... (15.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libsndfile--1.2.2_1... (617.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libsodium_bottle_manifest--1.0.20... (9.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libsodium--1.0.20... (316.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libsoxr_bottle_manifest--0.1.3-1... (14.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libsoxr--0.1.3... (91.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libssh_bottle_manifest--0.11.2... (10.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libssh--0.11.2... (539KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libtasn1_bottle_manifest--4.20.0... (9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libtasn1--4.20.0... (168.0KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libtiff_bottle_manifest--4.7.0-1... (13.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libtiff--4.7.0... (1.9MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libunibreak_bottle_manifest--6.1... (9.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libunibreak--6.1... (64.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libunistring_bottle_manifest--1.3... (8.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libunistring--1.3... (1.8MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libvidstab_bottle_manifest--1.1.1... (11.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libvidstab--1.1.1... (47KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libvmaf_bottle_manifest--3.0.0-1... (10.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libvmaf--3.0.0... (1.1MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libvorbis_bottle_manifest--1.3.7-1... (13KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libvorbis--1.3.7... (590.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libvpx_bottle_manifest--1.15.2... (8.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libvpx--1.15.2... (1.9MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libx11_bottle_manifest--1.8.12... (16KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libx11--1.8.12... (2.3MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxau_bottle_manifest--1.0.12... (9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxau--1.0.12... (33.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxcb_bottle_manifest--1.17.0-1... (16.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxcb--1.17.0... (1MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxdmcp_bottle_manifest--1.1.5... (10.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxdmcp--1.1.5... (36.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxext_bottle_manifest--1.3.6... (15KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxext--1.3.6... (108.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxrender_bottle_manifest--0.9.12... (12.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/libxrender--0.9.12... (54.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/little-cms2_bottle_manifest--2.17... (13.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/little-cms2--2.17... (433.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/lz4_bottle_manifest--1.10.0-1... (11.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/lz4--1.10.0... (275.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/lzo_bottle_manifest--2.10... (15.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/lzo--2.10... (148.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/mbedtls_bottle_manifest--3.6.4... (15.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/mbedtls--3.6.4... (3.6MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/mpg123_bottle_manifest--1.33.0... (9.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/mpg123--1.33.0... (650.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/nettle_bottle_manifest--3.10.2... (10.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/nettle--3.10.2... (994.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/opencore-amr_bottle_manifest--0.1.6... (12.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/opencore-amr--0.1.6... (303.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/openexr_bottle_manifest--3.3.4... (12KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/openexr--3.3.4... (1.2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/openjpeg_bottle_manifest--2.5.3... (14.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/openjpeg--2.5.3... (2.3MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/openssl@3_bottle_manifest--3.5.1... (12.1KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/openssl@3--3.5.1... (10.7MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/opus_bottle_manifest--1.5.2... (9.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/opus--1.5.2... (483.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/p11-kit_bottle_manifest--0.25.5-2... (11.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/p11-kit--0.25.5... (1MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/pango_bottle_manifest--1.56.4... (35.1KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/pango--1.56.4... (855.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/pcre2_bottle_manifest--10.45... (10.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/pcre2--10.45... (2.3MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/pixman_bottle_manifest--0.46.2... (8.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/pixman--0.46.2... (193KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/python@3.14--flit-core--3.12.0.tar.gz... (53.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/python@3.14--patch--9f2eae1d08720b06ac3d9ef1999c09388b9db39dfb52687fc261ff820bff20c3.diff... (1.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/python@3.14--pip--25.3.tar.gz... (1.8MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/python@3.14--wheel--0.45.1.tar.gz... (107.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/rav1e_bottle_manifest--0.8.1... (8.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/rav1e--0.8.1... (13.2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/readline--patch--21f0a03106dbe697337cd25c70eb0edbaa2bdb6d595b45f83285cdd35bac84de... (1.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/readline--patch--72dee13601ce38f6746eb15239999a7c56f8e1ff5eb1ec8153a1f213e4acdb29... (2.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/readline--patch--e27364396ba9f6debf7cbaaf1a669e2b2854241ae07f7eca74ca8a8ba0c97472... (1.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/rubberband_bottle_manifest--4.0.0... (21.1KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/rubberband--4.0.0... (644.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/sdl2_bottle_manifest--2.32.8... (21.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/sdl2--2.32.8... (1.8MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/snappy_bottle_manifest--1.2.2... (8.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/snappy--1.2.2... (47KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/speex_bottle_manifest--1.2.1... (13.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/speex--1.2.1... (550.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/srt_bottle_manifest--1.5.4... (11KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/srt--1.5.4... (1.8MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/svt-av1_bottle_manifest--3.0.2... (8.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/svt-av1--3.0.2... (1.4MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/tesseract_bottle_manifest--5.5.1... (48.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/tesseract--5.5.1... (13.3MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/theora_bottle_manifest--1.1.1-4... (15.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/theora--1.1.1... (698.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/unbound_bottle_manifest--1.23.1... (16.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/unbound--1.23.1... (3MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/webp_bottle_manifest--1.5.0... (16.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/webp--1.5.0... (906.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/x264_bottle_manifest--r3108... (9.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/x264--r3108... (2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/x265_bottle_manifest--4.1-1... (8.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/x265--4.1... (3.9MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/xorgproto_bottle_manifest--2024.1... (18.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/xorgproto--2024.1... (716.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/xvid_bottle_manifest--1.3.7... (13.1KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/xvid--1.3.7... (455.9KB)
+Removing: /opt/homebrew/Cellar/xz/5.8.1... (96 files, 2.6MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/xz_bottle_manifest--5.8.1... (11.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/xz--5.8.1... (749.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/zeromq_bottle_manifest--4.3.5_1-1... (9.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/zeromq--4.3.5_1... (1.7MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/zimg_bottle_manifest--3.0.5... (11.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/zimg--3.0.5... (346.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/zstd_bottle_manifest--1.5.7... (12.9KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/zstd--1.5.7... (789.0KB)
+==> Autoremoving 3 unneeded formulae:
+autoconf
+libyaml
+m4
+Uninstalling /opt/homebrew/Cellar/libyaml/0.2.5... (11 files, 362.3KB)
+Uninstalling /opt/homebrew/Cellar/autoconf/2.72... (72 files, 3.8MB)
+Uninstalling /opt/homebrew/Cellar/m4/1.4.20... (14 files, 801.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/go_mod_cache... (22,513 files, 343.2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/rust--cargo--0.93.0.tar.gz... (4.3MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/portable-ruby-3.4.8.arm64_big_sur.bottle.tar.gz... (12.2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/llvm--21.1.8.tar.xz... (159.0MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/rust--1.92.0.tar.gz... (640.4MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/ruby--4.0.0.tar.gz... (24.0MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/rust--cargo-bootstrap--1.91.0.tar.xz... (8.5MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/go_cache... (10,857 files, 1.3GB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/pip_cache... (8 files, 2.0MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/cocoapods--1.16.2.tar.gz... (29.7MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/rust--rustc-bootstrap--1.91.0.tar.xz... (63.9MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/rust--rust-std-bootstrap--1.91.0.tar.xz... (27.2MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/llvm--patch--f6dafd762737eb79761ab7ef814a9fc802ec4bb8d20f46691f07178053b0eb36.diff... (4.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/portable-ruby-3.4.4.arm64_big_sur.bottle.tar.gz... (12.0MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/cmake.rb... (3.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/cocoapods.rb... (1.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/expat.rb... (2.8KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/libgit2.rb... (2.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/llvm.rb... (34.6KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/ninja.rb... (2.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/openssl@3.rb... (7.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/pcre2.rb... (2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/python@3.14.rb... (23.4KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/readline.rb... (4.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/ruby.rb... (10.2KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/rust.rb... (9.7KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/sqlite.rb... (3.3KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/swig.rb... (2.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/xz.rb... (2.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/api-source/Homebrew/homebrew-core/73dc431e139b16fb5f557513fedb36f5ac72aa19/Formula/z3.rb... (2.5KB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/bootsnap/287d6b13bd97dfce385fd07e3348320940a44056e50552b059ee64db214471b8... (567 files, 5.0MB)
+Removing: /Users/yahelraviv/Library/Caches/Homebrew/bootsnap/684c26d8211c6bacd91f8187e94767537f4d3bb555c2f7d7d582cc7ad2221890... (651 files, 5.7MB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/z3... (10 files, 3.3MB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/swig... (8 files, 653.2KB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/cmake... (17 files, 5.2MB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/python@3.14... (16 files, 5.8MB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/expat... (6 files, 227.8KB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/glib... (64B)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/readline... (6 files, 379.8KB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/llvm... (5 files, 31.2MB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/sqlite... (6 files, 84.3KB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/xz... (7 files, 1.4MB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/ninja... (3 files, 123.6KB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/fontconfig... (71.8KB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/openssl@3... (7 files, 8.4MB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/ca-certificates... (64B)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/pcre2... (7 files, 420.4KB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/libgit2... (14 files, 3.3MB)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/unbound... (64B)
+Removing: /Users/yahelraviv/Library/Logs/Homebrew/gnutls... (64B)
+Pruned 0 symbolic links and 59 directories from /opt/homebrew
+==> Caveats
+zsh completions have been installed to:
+  /opt/homebrew/share/zsh/site-functions
+==> Auto-updating Homebrew...
+Adjust how often this is run with `$HOMEBREW_AUTO_UPDATE_SECS` or disable with
+`$HOMEBREW_NO_AUTO_UPDATE=1`. Hide these hints with `$HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+==> Auto-updated Homebrew!
+Updated 2 taps (homebrew/core and homebrew/cask).
+==> New Formulae
+actions-up: Tool to update GitHub Actions to latest versions with SHA pinning
+agent-browser: Browser automation CLI for AI agents
+any2fasta: Convert various sequence formats to FASTA
+aoe: Terminal session manager for AI coding agents
+apache-serf: High-performance asynchronous HTTP client library
+arcadedb: Multi-Model DBMS: Graph, Document, Key/Value, Search, Time Series, Vector
+asc: Fast, lightweight CLI for App Store Connect
+async-profiler: Sampling CPU & HEAP profiler for Java using AsyncGetCallTrace + perf_events
+azure-dev: Developer CLI that provides commands for working with Azure resources
+azurite: Lightweight server clone of Azure Storage that simulates it locally
+bagel: CLI to audit posture and evaluate compromise blast radius
+bazel@8: Google's own build tool
+beads_viewer: Terminal-based UI for the Beads issue tracker
+bitwuzla: SMT solver for bit-vectors, floating-points, arrays and uninterpreted functions
+cargo-features-manager: TUI like cli tool to manage the features of your rust-project dependencies
+claude-agent-acp: Use Claude Code from any ACP client such as Zed!
+clock-rs: Modern, digital clock that effortlessly runs in your terminal
+codanna: Code intelligence system with semantic search
+codex-acp: Use Codex from ACP-compatible clients such as Zed!
+cozyhr: Cozy wrapper around Helm and Flux CD for local development
+cronboard: Terminal-based dashboard for managing cron jobs locally and on servers
+cwalk: Cross-platform path library for C/C++
+datadog-static-analyzer: Static analysis tool for code quality and security
+dbcsr: Distributed Block Compressed Sparse Row matrix library
+difi: Pixel-perfect terminal diff viewer
+dovi_convert: Dolby Vision Profile 7 to 8.1 MKV converter
+durdraw: Versatile ASCII and ANSI Art text editor for drawing in the terminal
+ekphos: Terminal-based markdown research tool inspired by Obsidian
+fence: Lightweight sandbox for commands with network and filesystem restrictions
+ffmpeg-full: Play, record, convert, and stream many audio and video codecs
+fracturedjson: JSON formatter that produces highly readable but fairly compact output
+fzf-tab: Replace zsh completion selection menu with fzf
+git-flow-next: Modern implementation of the Git-flow branching model
+gnuastro: Astronomical data manipulation and analysis utilities and libraries
+go-air: Live reload for Go apps
+go@1.25: Open source programming language to build simple/reliable/efficient software
+gogcli: Google Suite CLI
+grafanactl: CLI to interact with Grafana
+happy-coder: CLI for operating AI coding agents from mobile devices
+hdrhistogram_c: C port of the HdrHistogram
+hindent: Haskell pretty printer
+ic-wasm: CLI tool for performing Wasm transformations specific to ICP canisters
+icp-cli: Development tool for building and deploying canisters on ICP
+imagemagick-full: Tools and libraries to manipulate images in many formats
+ironclaw: Security-first personal AI assistant with WASM sandbox channels
+jqfmt: Opinionated formatter for jq
+kaf: Modern CLI for Apache Kafka
+kubefwd: Bulk port forwarding Kubernetes services for local development
+letta-code: Memory-first coding agent
+libigloo: Generic C framework used and developed by the Icecast project
+libks: Foundational support for signalwire C products
+libnpupnp: C++ base UPnP library, derived from Portable UPnP, a.k.a libupnp
+libthai: Thai language support library
+libupnpp: C++ wrapper for libnpupnp
+likec4: Architecture modeling tool with live diagrams from code
+linux-headers@6.8: Header files of the Linux kernel
+litra: Control Logitech Litra lights from the command-line
+livereload: Local web server in Python
+llhttp: Port of http_parser to llparse
+llmfit: Find what models run on your hardware
+ls-hpack: HTTP/2 HPACK header compression library
+mac-cleanup-go: TUI macOS cleaner that scans caches/logs and lets you select what to delete
+magics: ECMWF's meteorological plotting software
+micasa: TUI for tracking home projects, maintenance schedules, appliances and quotes
+minizign: Minisign reimplemented in Zig
+mipsel-linux-gnu-binutils: GNU Binutils for mipsel-linux-gnu cross development
+mlx-c: C API for MLX
+nativefiledialog-extended: Native file dialog library with C and C++ bindings
+nomad-pack: Templating and packaging tool used with HashiCorp Nomad
+nullclaw: Tiny autonomous AI assistant infrastructure written in Zig
+nuls: NuShell-inspired ls with colorful table output
+odiff: Very fast SIMD-first image comparison library (with nodejs API)
+openskills: Universal skills loader for AI coding agents
+pcapmirror: Tool for capturing network traffic on remote host using TZSP or ERSPAN
+pgroll: Postgres zero-downtime migrations made easy
+pi-coding-agent: AI agent toolkit
+picoclaw: Ultra-efficient personal AI assistant in Go
+picoruby: Smallest Ruby implementation for microcontrollers
+playwright-cli: CLI for Playwright: record/generate code, inspect selectors, take screenshots
+pocket-tts: Text-to-speech application designed to run efficiently on CPUs
+pyperformance: Python benchmark suite
+radicle: Sovereign code forge built on Git
+ralph-orchestrator: Multi-agent orchestration framework for autonomous AI task completion
+repeater: Flashcard program that uses spaced repetition
+rig-r: R Installation Manager
+rtk: CLI proxy to minimize LLM token consumption
+run-kit: Universal multi-language runner and smart REPL
+rustledger: Fast, pure Rust implementation of Beancount double-entry accounting
+rustypaste: Minimal file upload/pastebin service
+rv-r: Declarative R package manager
+sandvault: Run AI agents isolated in a sandboxed macOS user account
+shadcn: CLI for adding components to your project
+sheenbidi: Fast and stable implementation of the Unicode Bidirectional Algorithm
+shiki: Beautiful yet powerful syntax highlighter
+signalwire-client-c: SignalWire C Client SDK
+skillshare: Sync skills across AI CLI tools
+sss-cli: Shamir secret share command-line interface
+static-web-apps-cli: SWA CLI serves as a local development tool for Azure Static Web Apps
+structurizr: Software architecture models as code
+tftp-now: Single-binary TFTP server and client that you can use right now
+tock: Powerful time tracking tool for the command-line
+tpix: Simple terminal image viewer using the Kitty graphics protocol
+transifex-cli: Transifex command-line client
+tree-sitter-go: Go grammar for tree-sitter
+tree-sitter-python: Python grammar for tree-sitter
+tree-sitter-ruby: Ruby grammar for tree-sitter
+try-rs: Temporary workspace manager for fast experimentation in the terminal
+tuckr: Super powered replacement for GNU Stow
+umoci: Reference OCI implementation for creating, modifying and inspecting images
+vampire: High-performance theorem prover
+vtsls: LSP wrapper for typescript extension of vscode
+whodb-cli: Database management CLI with TUI interface, MCP server support, AI, and more
+whosthere: LAN discovery tool with a modern TUI written in Go
+wik: View Wikipedia pages from your terminal
+worktrunk: CLI for Git worktree management, designed for parallel AI agent workflows
+xcsift: Swift tool to parse xcodebuild output for coding agents
+yap: On-device audio transcription using Speech.framework
+zeptoclaw: Lightweight personal AI gateway with layered safety controls
+zeroclaw: Rust-first autonomous agent runtime
+zxing-cpp: Multi-format barcode image processing library written in C++
+
+You have 62 outdated formulae installed.
+
+Warning: You are using macOS 13.
+We (and Apple) do not provide support for this old version.
+You may have better luck with MacPorts which supports older versions of macOS:
+  https://www.macports.org
+
+This is a Tier 3 configuration:
+  https://docs.brew.sh/Support-Tiers#tier-3
+You can report Tier 3 unrelated issues to Homebrew/* repositories!
+Read the above document before opening any issues or PRs.
+
+✔︎ API Source gh.rb
+✔︎ API Source go.rb
+✔︎ Patch 28fbdf7acb4146b5bc3d88128e407d1344691839.patch?full_index=1
+✔︎ Formula gh (2.87.3)
+✔︎ Formula go (1.26.0)
+✔︎ Resource go--gobootstrap
+Warning: A newer Command Line Tools release is available.
+Update them from Software Update in System Settings.
+
+If that doesn't show you any updates, run:
+  sudo rm -rf /Library/Developer/CommandLineTools
+  sudo xcode-select --install
+
+Alternatively, manually download them from:
+  https://developer.apple.com/download/all/.
+You should download the Command Line Tools for Xcode 15.2.
+
+
+
+This is a Tier 2 configuration:
+  https://docs.brew.sh/Support-Tiers#tier-2
+You can report Tier 2 unrelated issues to Homebrew/* repositories!
+Read the above document before opening any issues or PRs.
+
+Warning: A newer Command Line Tools release is available.
+Update them from Software Update in System Settings.
+
+If that doesn't show you any updates, run:
+  sudo rm -rf /Library/Developer/CommandLineTools
+  sudo xcode-select --install
+
+Alternatively, manually download them from:
+  https://developer.apple.com/download/all/.
+You should download the Command Line Tools for Xcode 15.2.
+
+
+
+This is a Tier 2 configuration:
+  https://docs.brew.sh/Support-Tiers#tier-2
+You can report Tier 2 unrelated issues to Homebrew/* repositories!
+Read the above document before opening any issues or PRs.

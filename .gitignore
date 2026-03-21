@@ -1,0 +1,17 @@
+claude-code/cache/
+claude-code/history.jsonl
+claude-code/sessions/
+claude-code/shell-snapshots/
+claude-code/debug/
+claude-code/statsig/
+claude-code/stats-cache.json
+claude-code/mcp-needs-auth-cache.json
+claude-code/file-history/
+claude-code/telemetry/
+claude-code/image-cache/
+claude-code/paste-cache/
+claude-code/todos/
+claude-code/backups/
+claude-code/downloads/
+claude-code/tasks/
+claude-code/homunculus/
