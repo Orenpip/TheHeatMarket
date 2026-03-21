@@ -588,97 +588,59 @@ function ListHeatForm({ county, onClose }) {
 
 // ── BuyerCard ─────────────────────────────────────────────────────
 function BuyerCard({ buyer }) {
-  const [open, setOpen] = useState(false);
   const meta  = BUYER_META[buyer.type] ?? BUYER_META.school;
-  const feas  = buyer.feasibility;
-  const fc    = feas >= 65 ? '#15803d' : feas >= 35 ? '#ca8a04' : '#b91c1c';
-  const fl    = feas >= 65 ? 'HIGH' : feas >= 35 ? 'MEDIUM' : 'LOW';
+  const distLabel = buyer.distKm < 1
+    ? `${Math.round(buyer.distKm*1000)}m away`
+    : `${buyer.distKm.toFixed(1)} km away`;
+  const isClose = buyer.distKm < 2;
 
   return (
     <div className="buyer-card rounded-xl mb-3 overflow-hidden" style={{border:'1px solid #e2d9cc',background:'white'}}>
-      <button className="w-full text-left p-4" onClick={() => setOpen(o=>!o)}>
+      <div className="p-4">
         {/* Header row */}
-        <div className="flex items-start gap-2.5 mb-3">
+        <div className="flex items-start gap-2.5 mb-2">
           <span className="text-xl mt-0.5 flex-shrink-0">{meta.emoji}</span>
           <div className="flex-1 min-w-0">
             <p className="font-bold text-sm truncate leading-tight">{buyer.name}</p>
             <p className="text-xs mt-0.5" style={{color:'#6b6b6b'}}>
               {meta.label} · {buyer.city}, {buyer.state}
             </p>
-            <p className="text-xs" style={{color:'#9a9a9a'}}>{buyer.distKm.toFixed(1)} km away</p>
           </div>
           <div className="flex-shrink-0 text-right">
-            <p className="text-xs font-bold" style={{color:fc}}>{fl}</p>
-            <p className="text-xs" style={{color:'#9a9a9a'}}>feasibility</p>
+            <p className="text-xs font-bold" style={{color: isClose ? '#15803d' : '#9a9a9a'}}>{distLabel}</p>
           </div>
         </div>
 
-        {/* Metrics row */}
-        <div className="grid grid-cols-3 gap-2">
-          {[
-            [fmtUSD(buyer.annualSavings), 'savings/yr'],
-            [`${buyer.co2Saved}t`,        'CO₂/yr'],
-            [`${buyer.payback}yr`,        'payback'],
-          ].map(([v,l]) => (
-            <div key={l} className="text-center rounded-lg py-1.5" style={{background:'#f5f0e8'}}>
-              <p className="text-xs font-bold">{v}</p>
-              <p className="text-xs" style={{color:'#9a9a9a'}}>{l}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Feasibility bar */}
-        <div className="mt-2.5 h-1.5 rounded-full overflow-hidden" style={{background:'#e2d9cc'}}>
-          <div className="h-full rounded-full bar-fill" style={{width:`${feas}%`,background:fc}} />
-        </div>
-
-        {/* Heat pump badge */}
-        <div className="mt-2 flex items-center gap-2">
-          <span className="text-xs px-2 py-0.5 rounded-full font-bold"
-            style={{
-              background: buyer.needsPump ? '#fff1ed' : '#d1fae5',
-              color:      buyer.needsPump ? '#c2410c' : '#15803d',
-            }}>
-            {buyer.needsPump ? '⚡ Heat pump required' : '✅ Direct use'}
-          </span>
-          <span className="text-xs" style={{color:'#9a9a9a'}}>{buyer.required_temp_c}°C needed</span>
-        </div>
-      </button>
-
-      {/* Expanded details */}
-      {open && (
-        <div className="px-4 pb-4 text-xs" style={{borderTop:'1px solid #f0e8dc'}}>
-          <div className="grid grid-cols-2 gap-3 mt-3">
-            <div>
-              <p className="font-bold uppercase tracking-wider mb-1.5" style={{color:'#b0a898',fontSize:10}}>Heat Transfer</p>
-              <p className="mb-1">Deliverable: <strong>{fmtMWh(buyer.deliverableMwh)}/yr</strong></p>
-              <p className="mb-1">Pipe distance: <strong>{(buyer.distKm*1000).toFixed(0)} m</strong></p>
-              <p>Pump COP: <strong>{buyer.needsPump ? '3.5' : 'N/A'}</strong></p>
-            </div>
-            <div>
-              <p className="font-bold uppercase tracking-wider mb-1.5" style={{color:'#b0a898',fontSize:10}}>Economics</p>
-              <p className="mb-1">Gas cost: <strong>${buyer.gasCostMwh}/MWh</strong></p>
-              <p className="mb-1">DC heat cost: <strong>${buyer.dcHeatCostMwh}/MWh</strong></p>
-              <p>Infrastructure: <strong>{fmtUSD(buyer.infraCost)}</strong></p>
-            </div>
-          </div>
-          {buyer.type === 'school' && buyer.est_sqft && (
-            <p className="mt-2" style={{color:'#9a9a9a'}}>
-              ~{(buyer.est_sqft/1000).toFixed(0)}K sqft · {buyer.students} students · {buyer.level}
-            </p>
+        {/* Connection feasibility */}
+        <div className="flex items-center gap-2">
+          {isClose ? (
+            <span className="text-xs px-2 py-0.5 rounded-full font-bold"
+              style={{background:'#d1fae5',color:'#15803d'}}>
+              Direct connection feasible
+            </span>
+          ) : buyer.distKm < 10 ? (
+            <span className="text-xs px-2 py-0.5 rounded-full font-bold"
+              style={{background:'#fef9c3',color:'#a16207'}}>
+              Co-development opportunity
+            </span>
+          ) : (
+            <span className="text-xs px-2 py-0.5 rounded-full font-bold"
+              style={{background:'#f5f0e8',color:'#9a9a9a'}}>
+              Future potential
+            </span>
           )}
-          {buyer.type === 'greenhouse' && buyer.sqft && (
-            <p className="mt-2" style={{color:'#9a9a9a'}}>~{(buyer.sqft/1000).toFixed(0)}K sqft · year-round demand</p>
+          {buyer.enrollment > 0 && (
+            <span className="text-xs" style={{color:'#9a9a9a'}}>{buyer.enrollment.toLocaleString()} students</span>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
 
 // ── Marketplace Panel (Side B) ────────────────────────────────────
 function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
-  const [sortBy, setSortBy] = useState('feasibility');
+  const [sortBy, setSortBy] = useState('distance');
 
   const sorted = useMemo(() => {
     if (!buyers?.length) return [];
@@ -690,17 +652,16 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
     return b.sort((a,z) => z.feasibility - a.feasibility);
   }, [buyers, sortBy]);
 
-  const summary = useMemo(() => {
+  // Simple, meaningful community stats — only count feasible connections (<2km)
+  const impact = useMemo(() => {
     if (!buyers?.length) return null;
-    const totalSavings  = buyers.reduce((s,b)=>s+b.annualSavings, 0);
-    const totalCo2      = buyers.reduce((s,b)=>s+b.co2Saved, 0);
-    const totalMwh      = buyers.reduce((s,b)=>s+b.deliverableMwh, 0);
-    const avgPayback    = buyers.reduce((s,b)=>s+b.payback, 0)/buyers.length;
-    return { totalSavings, totalCo2, totalMwh, avgPayback, homesEquiv: Math.round(totalMwh/10.5) };
-  }, [buyers]);
-
-  const totalHeatMwh = Math.round(dcConfig.capacityMw * 8760 * 0.80);
-  const capturedPct  = summary ? Math.min(100, Math.round(summary.totalMwh/totalHeatMwh*100)) : 0;
+    const nearby = buyers.filter(b => b.distKm < 2);
+    const reachable = buyers.filter(b => b.distKm < 10);
+    const totalHeat = dcConfig.capacityMw * 8760 * 0.80; // MWh/yr
+    // Each school uses ~90 MWh/yr heating (avg 600 students × 150sqft × 30kBtu/sqft / 3412)
+    const schoolsHeatable = Math.min(nearby.length, Math.floor(totalHeat / 90));
+    return { nearby: nearby.length, reachable: reachable.length, schoolsHeatable, totalHeat };
+  }, [buyers, dcConfig]);
 
   // By-type counts
   const byType = useMemo(() => {
@@ -769,31 +730,31 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
         </p>
       </div>
 
-      {/* Impact summary */}
-      {summary && (
+      {/* Community impact — simple, meaningful numbers */}
+      {impact && impact.reachable > 0 && (
         <div className="rounded-xl p-4 mb-3" style={{background:'#fff1ed',border:'1px solid #fed7aa'}}>
           <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{color:'#d4380d'}}>
             Community Impact
           </p>
-          <div className="grid grid-cols-2 gap-2 mb-3">
-            {[
-              [fmtUSD(summary.totalSavings), 'annual savings'],
-              [`${summary.totalCo2}t`,        'CO₂ eliminated'],
-              [`${summary.homesEquiv.toLocaleString()}`, 'homes equiv.'],
-              [`${summary.avgPayback.toFixed(1)}yr`,     'avg payback'],
-            ].map(([v,l])=>(
-              <div key={l} className="text-center rounded-lg py-2" style={{background:'white'}}>
-                <p className="font-bold text-sm" style={{color:'#d4380d'}}>{v}</p>
-                <p className="text-xs" style={{color:'#6b6b6b'}}>{l}</p>
+          <div className="space-y-2">
+            {impact.nearby > 0 && (
+              <div className="rounded-lg p-3" style={{background:'white'}}>
+                <p className="font-bold text-lg" style={{color:'#15803d'}}>{impact.nearby} facilities</p>
+                <p className="text-xs" style={{color:'#6b6b6b'}}>within 2 km — direct heat connection feasible</p>
               </div>
-            ))}
-          </div>
-          {/* Heat capture bar */}
-          <div className="text-xs mb-1.5" style={{color:'#92400e'}}>
-            Heat captured vs. dumped: <strong>{capturedPct}%</strong>
-          </div>
-          <div className="h-2.5 rounded-full overflow-hidden" style={{background:'#fde68a'}}>
-            <div className="h-full rounded-full bar-fill" style={{width:`${capturedPct}%`,background:'#d4380d'}} />
+            )}
+            {impact.nearby === 0 && (
+              <div className="rounded-lg p-3" style={{background:'white'}}>
+                <p className="font-bold text-lg" style={{color:'#a16207'}}>{impact.reachable} facilities</p>
+                <p className="text-xs" style={{color:'#6b6b6b'}}>within 10 km — co-development opportunities</p>
+              </div>
+            )}
+            <div className="rounded-lg p-3" style={{background:'white'}}>
+              <p className="font-bold text-lg" style={{color:'#d4380d'}}>{fmtMWh(impact.totalHeat)}/yr</p>
+              <p className="text-xs" style={{color:'#6b6b6b'}}>
+                waste heat produced — enough to heat {impact.schoolsHeatable > 0 ? `~${impact.schoolsHeatable.toLocaleString()} schools` : 'nearby facilities'}
+              </p>
+            </div>
           </div>
         </div>
       )}
@@ -815,7 +776,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
 
       {/* Sort pills */}
       <div className="flex gap-1.5 mb-3 overflow-x-auto pb-1 flex-shrink-0" style={{scrollbarWidth:'none'}}>
-        {[['feasibility','Best Match'],['distance','Nearest'],['savings','Most Savings'],['co2','Most CO₂'],['payback','Fastest ROI']].map(([v,l])=>(
+        {[['distance','Nearest'],['feasibility','Best Match']].map(([v,l])=>(
           <button key={v} onClick={()=>setSortBy(v)}
             className="flex-shrink-0 pill-btn text-xs px-2.5 py-1 rounded-full border"
             style={{
