@@ -632,6 +632,195 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
   );
 }
 
+// ── ComparePanel (A/B siting comparison) ─────────────────────────
+function ComparePanel({ countyA, scoresA, countyB, scoresB, onClearB }) {
+  const METRICS = [
+    { key:'grid',      label:'Grid Carbon',  icon:'⚡' },
+    { key:'water',     label:'Water Stress', icon:'💧' },
+    { key:'climate',   label:'Climate',      icon:'🌡' },
+    { key:'renewable', label:'Renewables',   icon:'🌬' },
+    { key:'heat',      label:'Heat Demand',  icon:'🔥' },
+  ];
+  const winnerTotal = scoresA.total >= scoresB.total ? 'A' : 'B';
+  const diff = Math.abs(scoresA.total - scoresB.total);
+  const winnerCounty = winnerTotal === 'A' ? countyA : countyB;
+  const loserCounty  = winnerTotal === 'A' ? countyB : countyA;
+
+  return (
+    <div className="slide-up h-full flex flex-col">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4 pb-4" style={{borderBottom:'1px solid #e2d9cc'}}>
+        <div>
+          <p className="text-xs uppercase tracking-widest mb-0.5" style={{color:'#9a9a9a'}}>A/B Comparison</p>
+          <h2 className="serif text-lg font-bold">Site Face-Off</h2>
+        </div>
+        <button onClick={onClearB}
+          className="text-xs px-3 py-1.5 rounded-lg hover:opacity-70 transition-opacity font-bold"
+          style={{background:'#e2d9cc',color:'#6b6b6b'}}>Clear B</button>
+      </div>
+
+      {/* Big scores side by side */}
+      <div className="grid grid-cols-2 gap-2 mb-5">
+        {[
+          {id:'A',county:countyA,scores:scoresA,color:'#1a5cff',bg:'#e8eeff'},
+          {id:'B',county:countyB,scores:scoresB,color:'#d4380d',bg:'#fff1ed'},
+        ].map(({id,county,scores,color,bg})=>{
+          const t = getThreshold(scores.total);
+          return (
+            <div key={id} className="rounded-xl p-3 text-center relative" style={{background:bg}}>
+              {winnerTotal===id && (
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-xs px-2 py-0.5 rounded-full font-bold whitespace-nowrap"
+                  style={{background:color,color:'white'}}>Winner</div>
+              )}
+              <p className="text-xs font-bold uppercase tracking-widest mb-1 mt-1" style={{color}}>{id==='A'?'🔵':'🟠'} Site {id}</p>
+              <p className="serif font-bold" style={{fontSize:40,lineHeight:1,color}}>{Math.round(scores.total)}</p>
+              <p className="text-xs font-bold mt-1" style={{color:t.color}}>{t.label}</p>
+              <p className="text-xs mt-0.5 truncate" style={{color:'#6b6b6b'}}>{county?.county}, {county?.state}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Per-metric comparison bars */}
+      <div className="flex-1 overflow-y-auto space-y-3">
+        {METRICS.map(m=>{
+          const vA = Math.round(scoresA[m.key]);
+          const vB = Math.round(scoresB[m.key]);
+          const winner = vA > vB ? 'A' : vA < vB ? 'B' : null;
+          return (
+            <div key={m.key} className="rounded-xl p-3" style={{background:'white',border:'1px solid #e2d9cc'}}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider" style={{color:'#9a9a9a'}}>{m.icon} {m.label}</span>
+                {winner && (
+                  <span className="text-xs font-bold" style={{color:winner==='A'?'#1a5cff':'#d4380d'}}>
+                    {winner==='A'?'🔵':'🟠'} +{Math.abs(vA-vB)} pts
+                  </span>
+                )}
+              </div>
+              {[['A',vA,'#1a5cff'],[' B',vB,'#d4380d']].map(([lbl,v,clr])=>(
+                <div key={lbl} className="flex items-center gap-2 mb-1.5">
+                  <span className="text-xs font-bold w-5 text-right" style={{color:clr}}>{v}</span>
+                  <div className="flex-1 h-2 rounded-full overflow-hidden" style={{background:'#e2d9cc'}}>
+                    <div className="h-full rounded-full bar-fill" style={{width:`${v}%`,background:clr}} />
+                  </div>
+                  <span className="text-xs font-bold w-4" style={{color:clr}}>{lbl}</span>
+                </div>
+              ))}
+            </div>
+          );
+        })}
+
+        {/* Verdict */}
+        <div className="rounded-xl p-3 mt-1" style={{background:'white',border:'1px solid #e2d9cc'}}>
+          <p className="text-xs font-bold uppercase tracking-wider mb-1.5" style={{color:'#9a9a9a'}}>Verdict</p>
+          <p className="text-xs leading-relaxed" style={{color:'#1a1a1a'}}>
+            {diff < 3
+              ? `📊 Near tie — ${winnerCounty?.county} and ${loserCounty?.county} score within ${diff.toFixed(1)} points.`
+              : diff < 10
+              ? `${winnerTotal==='A'?'🔵':'🟠'} ${winnerCounty?.county} edges out ${loserCounty?.county} by ${diff.toFixed(1)} points.`
+              : `⚡ ${winnerCounty?.county} is the significantly stronger siting choice (+${diff.toFixed(1)} pts).`}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── SearchBar (Nominatim geocoding) ───────────────────────────────
+function SearchBar({ onResult, mapRef }) {
+  const [query,   setQuery]   = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [open,    setOpen]    = useState(false);
+  const debounceRef = useRef(null);
+  const inputRef    = useRef(null);
+
+  const search = useCallback(async (q) => {
+    if (!q || q.length < 3) { setResults([]); setOpen(false); return; }
+    setLoading(true);
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&countrycodes=us&limit=6&addressdetails=1`;
+      const res = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+      const data = await res.json();
+      const filtered = data.filter(r => r.lat && r.lon && parseFloat(r.lat) > 18 && parseFloat(r.lat) < 72);
+      setResults(filtered);
+      setOpen(filtered.length > 0);
+    } catch(e) {
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    const q = e.target.value;
+    setQuery(q);
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => search(q), 350);
+  };
+
+  const handleSelect = (r) => {
+    const lat = parseFloat(r.lat);
+    const lng = parseFloat(r.lon);
+    setQuery(r.display_name.split(',').slice(0,2).join(','));
+    setResults([]);
+    setOpen(false);
+    onResult(lat, lng);
+    mapRef.current?.flyTo({ center: [lng, lat], zoom: 10, duration: 1000, essential: true });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') { setOpen(false); inputRef.current?.blur(); }
+    if (e.key === 'Enter' && results.length > 0) handleSelect(results[0]);
+  };
+
+  return (
+    <div style={{ position: 'relative', width: 280 }}>
+      <div className="flex items-center gap-2 rounded-xl px-3 py-2"
+        style={{ background: 'rgba(255,255,255,.10)', border: '1px solid rgba(255,255,255,.12)' }}>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" strokeWidth="2.5" strokeLinecap="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input ref={inputRef} type="text" value={query} onChange={handleChange} onKeyDown={handleKeyDown}
+          onFocus={() => results.length > 0 && setOpen(true)}
+          placeholder="Search city, address, county…"
+          style={{
+            background: 'transparent', border: 'none', outline: 'none',
+            color: '#f5f0e8', fontSize: 12, width: '100%',
+            fontFamily: 'Space Mono, monospace',
+          }}
+        />
+        {loading && <div className="spinner" style={{ width: 12, height: 12, flexShrink: 0 }} />}
+        {query && !loading && (
+          <button onClick={() => { setQuery(''); setResults([]); setOpen(false); }}
+            style={{ color: '#9a9a9a', background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, lineHeight: 1 }}>×</button>
+        )}
+      </div>
+      {open && results.length > 0 && (
+        <div style={{
+          position: 'absolute', top: '110%', left: 0, right: 0, zIndex: 100,
+          background: 'white', borderRadius: 10, boxShadow: '0 8px 32px rgba(0,0,0,.18)',
+          border: '1px solid #e2d9cc', overflow: 'hidden',
+        }}>
+          {results.map((r, i) => {
+            const parts = r.display_name.split(',');
+            const main  = parts.slice(0, 2).join(',').trim();
+            const sub   = parts.slice(2, 4).join(',').trim();
+            return (
+              <button key={i} onClick={() => handleSelect(r)}
+                className="w-full text-left px-3 py-2.5 hover:bg-gray-50 transition-colors"
+                style={{ borderBottom: i < results.length-1 ? '1px solid #f0e8dc' : 'none', display: 'block' }}>
+                <p className="text-xs font-bold truncate">{main}</p>
+                {sub && <p className="text-xs truncate" style={{ color: '#9a9a9a' }}>{sub}</p>}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── Empty state ───────────────────────────────────────────────────
 function EmptyState({ onDemo }) {
   return (
@@ -706,7 +895,7 @@ function ErrorScreen({ message }) {
 // ══════════════════════════════════════════════════════════════════
 //  Map component
 // ══════════════════════════════════════════════════════════════════
-function HeatMap({ data, selected, activeView, buyers, radiusKm, onSelect, mapRef: externalRef }) {
+function HeatMap({ data, selected, selectedB, pickingB, activeView, buyers, radiusKm, onSelect, mapRef: externalRef }) {
   const containerRef  = useRef(null);
   const mapRef        = useRef(null);
   const popupRef      = useRef(null);
@@ -822,6 +1011,15 @@ function HeatMap({ data, selected, activeView, buyers, radiusKm, onSelect, mapRe
         }});
       map.addLayer({id:'selected-pin', type:'circle', source:'selected',
         paint:{
+          'circle-radius':11,'circle-color':'#1a5cff',
+          'circle-stroke-width':3,'circle-stroke-color':'white',
+          'circle-opacity':0.95,
+        }});
+
+      // ── Site B pin ──────────────────────────────────────────
+      map.addSource('selected-b', {type:'geojson',data:{type:'FeatureCollection',features:[]}});
+      map.addLayer({id:'selected-b-pin', type:'circle', source:'selected-b',
+        paint:{
           'circle-radius':11,'circle-color':'#d4380d',
           'circle-stroke-width':3,'circle-stroke-color':'white',
           'circle-opacity':0.95,
@@ -848,16 +1046,32 @@ function HeatMap({ data, selected, activeView, buyers, radiusKm, onSelect, mapRe
     return () => { map.remove(); mapRef.current=null; loadedRef.current=false; };
   }, [data]);
 
-  // Update selected pin
+  // Update selected pin (A)
   useEffect(() => {
     const map=mapRef.current;
     if (!map||!loadedRef.current) return;
-    const src=map.getSource('selected');
-    if (!src) return;
-    src.setData(selected
+    const gj = selected
       ? {type:'FeatureCollection',features:[{type:'Feature',geometry:{type:'Point',coordinates:[selected.lng,selected.lat]}}]}
-      : {type:'FeatureCollection',features:[]});
+      : {type:'FeatureCollection',features:[]};
+    map.getSource('selected')?.setData(gj);
   }, [selected]);
+
+  // Update site B pin
+  useEffect(() => {
+    const map=mapRef.current;
+    if (!map||!loadedRef.current) return;
+    const gj = selectedB
+      ? {type:'FeatureCollection',features:[{type:'Feature',geometry:{type:'Point',coordinates:[selectedB.lng,selectedB.lat]}}]}
+      : {type:'FeatureCollection',features:[]};
+    map.getSource('selected-b')?.setData(gj);
+  }, [selectedB]);
+
+  // Change cursor when picking site B
+  useEffect(() => {
+    const map=mapRef.current;
+    if (!map) return;
+    map.getCanvas().style.cursor = pickingB ? 'crosshair' : '';
+  }, [pickingB]);
 
   // Update radius ring + buyer overlays
   useEffect(() => {
@@ -903,34 +1117,104 @@ function App() {
   const [scores,      setScores]      = useState(null);
   const [buyers,      setBuyers]      = useState(null);
   const [dcConfig,    setDcConfig]    = useState({capacityMw:20, coolingType:'air', radiusKm:5});
+  // Compare mode
+  const [pickingB,    setPickingB]    = useState(false);   // user is clicking map to set site B
+  const [selectedB,   setSelectedB]   = useState(null);
+  const [countyB,     setCountyB]     = useState(null);
+  const [scoresB,     setScoresB]     = useState(null);
   const mapRef = useRef(null);
 
-  // Recompute everything when location or DC config changes
+  // Recompute site A when location or DC config changes
   useEffect(() => {
     if (!selected || !data) return;
     const c = nearestCounty(selected.lat, selected.lng, data.counties);
     setCounty(c);
-
     const nearby = data.buyers
       .map(b => {
         const d = haversineKm(selected.lat, selected.lng, b.lat, b.lng);
         return d <= dcConfig.radiusKm ? calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d) : null;
       })
       .filter(Boolean);
-
     setBuyers(nearby);
     setScores(computeScores(c, nearby));
   }, [selected, dcConfig, data]);
 
+  // Recompute site B
+  useEffect(() => {
+    if (!selectedB || !data) return;
+    const c = nearestCounty(selectedB.lat, selectedB.lng, data.counties);
+    setCountyB(c);
+    const nearby = data.buyers
+      .map(b => {
+        const d = haversineKm(selectedB.lat, selectedB.lng, b.lat, b.lng);
+        return d <= dcConfig.radiusKm ? calcEconomics(b, dcConfig.capacityMw, dcConfig.coolingType, d) : null;
+      })
+      .filter(Boolean);
+    setScoresB(computeScores(c, nearby));
+  }, [selectedB, dcConfig, data]);
+
+  // Restore from URL hash on initial data load
+  useEffect(() => {
+    if (!data) return;
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const parts = hash.split(',');
+    if (parts.length < 2) return;
+    const lat = parseFloat(parts[0]);
+    const lng = parseFloat(parts[1]);
+    if (isNaN(lat) || isNaN(lng)) return;
+    setSelected({ lat, lng });
+    // fly after map is ready (slight delay)
+    setTimeout(() => {
+      mapRef.current?.flyTo({ center: [lng, lat], zoom: 10, duration: 800, essential: true });
+    }, 600);
+  }, [data]);
+
   const handleSelect = useCallback((lat,lng) => {
+    if (pickingB) {
+      setSelectedB({lat,lng});
+      setPickingB(false);
+      return;
+    }
     setSelected({lat,lng});
+    setSelectedB(null);
+    setCountyB(null);
+    setScoresB(null);
     setActiveView('siteA');
-  },[]);
+    history.replaceState(null, '', '#' + lat.toFixed(5) + ',' + lng.toFixed(5));
+  },[pickingB]);
 
   const handleDemo = useCallback((lat,lng,zoom) => {
     handleSelect(lat,lng);
     mapRef.current?.flyTo({center:[lng,lat],zoom,duration:1200,essential:true});
   },[handleSelect]);
+
+  const handleClearLocation = useCallback(() => {
+    setSelected(null);
+    setSelectedB(null);
+    setCounty(null);
+    setCountyB(null);
+    setScores(null);
+    setScoresB(null);
+    setBuyers(null);
+    setPickingB(false);
+    setActiveView('siteA');
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }, []);
+
+  // Keyboard shortcuts (after handleClearLocation is defined)
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.key === 'Escape') { if (selected) handleClearLocation(); }
+      if (e.key === 'Tab' && selected) {
+        e.preventDefault();
+        setActiveView(v => v === 'siteA' ? 'siteB' : 'siteA');
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [selected, handleClearLocation]);
 
   if (loading) return <LoadingScreen />;
   if (error)   return <ErrorScreen message={error} />;
@@ -951,29 +1235,77 @@ function App() {
             style={{background:'#d4380d',color:'white'}}>BETA</span>
         </div>
 
-        {/* View tabs — only when a location is selected */}
-        {selected && (
+        {/* Search bar — center */}
+        <SearchBar onResult={handleSelect} mapRef={mapRef} />
+
+        {/* View tabs + Compare — only when location A is selected */}
+        {selected && !selectedB && !pickingB && (
           <div className="flex items-center gap-1 rounded-full px-1 py-1" style={{background:'rgba(255,255,255,.08)'}}>
-            {[['siteA','🔵 Siting Score'],['siteB','🟠 Heat Market']].map(([v,l])=>(
+            {[['siteA','🔵 Score'],['siteB','🟠 Market']].map(([v,l])=>(
               <button key={v} onClick={()=>setActiveView(v)}
-                className="pill-btn text-xs px-4 py-1.5 rounded-full font-bold tracking-wide"
+                className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
                 style={{
                   background: activeView===v ? '#f5f0e8' : 'transparent',
                   color:      activeView===v ? '#1a1a1a' : '#9a9a9a',
                 }}>{l}</button>
             ))}
+            <button onClick={()=>setPickingB(true)}
+              className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
+              style={{background:'transparent',color:'#9a9a9a'}}>⚖ A/B</button>
           </div>
         )}
 
-        {/* Meta info */}
-        <div className="flex items-center gap-4 flex-shrink-0" style={{color:'#6b6b6b',fontSize:11}}>
+        {/* Picking site B notification */}
+        {pickingB && (
+          <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold animate-pulse"
+            style={{background:'#d4380d',color:'white'}}>
+            🟠 Click map to pin Site B
+            <button onClick={()=>setPickingB(false)} style={{opacity:.7}}>✕</button>
+          </div>
+        )}
+
+        {/* Compare tab — when both sites are set */}
+        {selected && selectedB && (
+          <div className="flex items-center gap-1 rounded-full px-1 py-1" style={{background:'rgba(255,255,255,.08)'}}>
+            <button onClick={()=>{ setSelectedB(null); setCountyB(null); setScoresB(null); }}
+              className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
+              style={{background:'transparent',color:'#9a9a9a'}}>🔵 A only</button>
+            <button className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
+              style={{background:'#f5f0e8',color:'#1a1a1a'}}>⚖ Compare</button>
+          </div>
+        )}
+
+        {/* Right side actions */}
+        <div className="flex items-center gap-2 flex-shrink-0">
           {scores && selected && (
-            <span>
-              Score: <strong style={{color:'#f5f0e8'}}>{Math.round(scores.total)}</strong>/100
-              &nbsp;·&nbsp; {county?.county}, {county?.state}
+            <span className="hidden lg:block text-xs" style={{color:'#6b6b6b'}}>
+              <strong style={{color:'#f5f0e8'}}>{Math.round(scores.total)}</strong>/100
+              &nbsp;·&nbsp;{county?.county}, {county?.state}
             </span>
           )}
-          <span>{data.buyers.length.toLocaleString()} buyers indexed</span>
+          {selected && (
+            <button
+              onClick={() => {
+                const url = window.location.href;
+                navigator.clipboard?.writeText(url).then(() => {
+                  /* quick flash feedback */
+                  const el = document.getElementById('share-btn');
+                  if (el) { el.textContent='✓ Copied'; setTimeout(()=>{ el.textContent='Share'; }, 1500); }
+                });
+              }}
+              id="share-btn"
+              className="text-xs px-3 py-1.5 rounded-lg font-bold transition-opacity hover:opacity-80"
+              style={{background:'rgba(255,255,255,.12)',color:'#f5f0e8',border:'1px solid rgba(255,255,255,.1)'}}>
+              Share
+            </button>
+          )}
+          {selected && (
+            <button onClick={handleClearLocation}
+              className="text-xs px-2 py-1.5 rounded-lg hover:opacity-70 transition-opacity"
+              style={{color:'#9a9a9a'}}
+              title="Clear selection">✕</button>
+          )}
+          <span className="hidden md:block text-xs" style={{color:'#4a4a4a'}}>{data.buyers.length.toLocaleString()} buyers</span>
         </div>
       </header>
 
@@ -989,6 +1321,12 @@ function App() {
         }}>
           {!selected ? (
             <EmptyState onDemo={handleDemo} />
+          ) : selectedB && scoresB ? (
+            <ComparePanel
+              countyA={county} scoresA={scores}
+              countyB={countyB} scoresB={scoresB}
+              onClearB={()=>{ setSelectedB(null); setCountyB(null); setScoresB(null); }}
+            />
           ) : activeView==='siteA' ? (
             <ScoreCard county={county} scores={scores} onViewMarket={()=>setActiveView('siteB')} />
           ) : (
@@ -1003,7 +1341,8 @@ function App() {
         {/* Map */}
         <div style={{flex:1,position:'relative'}}>
           <HeatMap
-            data={data} selected={selected}
+            data={data} selected={selected} selectedB={selectedB}
+            pickingB={pickingB}
             activeView={activeView} buyers={buyers}
             radiusKm={dcConfig.radiusKm}
             onSelect={handleSelect} mapRef={mapRef}
@@ -1050,8 +1389,15 @@ function App() {
               background:'rgba(26,26,26,.8)', borderRadius:8,
               padding:'6px 10px', fontSize:10, color:'#f5f0e8',
               fontFamily:'Space Mono,monospace', letterSpacing:'.03em',
+              textAlign:'right', lineHeight:1.6,
             }}>
-              {selected.lat.toFixed(4)}°N · {Math.abs(selected.lng).toFixed(4)}°W
+              <span style={{color:'#93c5fd'}}>A</span> {selected.lat.toFixed(4)}°N · {Math.abs(selected.lng).toFixed(4)}°W
+              {selectedB && <>
+                <br/>
+                <span style={{color:'#fdba74'}}>B</span> {selectedB.lat.toFixed(4)}°N · {Math.abs(selectedB.lng).toFixed(4)}°W
+              </>}
+              <br/>
+              <span style={{opacity:.4,fontSize:9}}>ESC clear · TAB toggle</span>
             </div>
           )}
 

@@ -116,17 +116,17 @@ def process_egrid(input_path, output_path):
 
     headers = [str(c or '').strip().upper() for c in rows[header_row]]
 
-    def col(name):
-        candidates = [name, name+'A', name+'RTA', name[:-1]]  # eGRID appends year suffix
-        for h in headers:
-            for c in candidates:
-                if h.startswith(c):
+    def col(*names):
+        for name in names:
+            for h in headers:
+                if h == name or h.startswith(name):
                     return headers.index(h)
         return None
 
     idx_code = col('SUBRGN')
     idx_name = col('SRNAME')
-    idx_co2  = col('SRLCO2RT')  # or SRLCO2RTA
+    # eGRID 2023 uses SRCO2RTA (subregion CO2 output rate, lb/MWh)
+    idx_co2  = col('SRCO2RTA', 'SRLCO2RTA', 'SRLCO2RT', 'SRCO2RT')
 
     if idx_co2 is None:
         # Try other common names

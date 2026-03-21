@@ -1,1 +1,357 @@
-{"subregions":[{"code":"AZNM","name":"WECC Southwest","co2_lbs_per_mwh":703.7,"centroid":{"lat":34.5,"lng":-112.0},"states":["AZ","NM","NV"]},{"code":"CAMX","name":"WECC California","co2_lbs_per_mwh":436.7,"centroid":{"lat":36.8,"lng":-119.5},"states":["CA"]},{"code":"ERCT","name":"ERCOT Texas","co2_lbs_per_mwh":738.0,"centroid":{"lat":31.5,"lng":-99.0},"states":["TX"]},{"code":"FRCC","name":"Florida","co2_lbs_per_mwh":840.9,"centroid":{"lat":28.0,"lng":-82.0},"states":["FL"]},{"code":"MROE","name":"MRO East (Wisconsin)","co2_lbs_per_mwh":1402.0,"centroid":{"lat":44.0,"lng":-89.0},"states":["WI"]},{"code":"MROW","name":"MRO West","co2_lbs_per_mwh":906.5,"centroid":{"lat":44.5,"lng":-96.0},"states":["MN","ND","SD","NE","IA"]},{"code":"NEWE","name":"New England","co2_lbs_per_mwh":489.8,"centroid":{"lat":43.5,"lng":-71.5},"states":["ME","NH","VT","MA","RI","CT"]},{"code":"NWPP","name":"WECC Northwest","co2_lbs_per_mwh":499.5,"centroid":{"lat":46.0,"lng":-117.0},"states":["WA","OR","ID","MT"]},{"code":"NYCW","name":"NYC / Westchester","co2_lbs_per_mwh":627.0,"centroid":{"lat":40.7,"lng":-74.0},"states":["NY"]},{"code":"NYUP","name":"NY Upstate","co2_lbs_per_mwh":249.0,"centroid":{"lat":43.0,"lng":-76.0},"states":["NY"]},{"code":"RFCE","name":"RFC East","co2_lbs_per_mwh":644.5,"centroid":{"lat":39.5,"lng":-76.0},"states":["NJ","PA","MD","DE","DC"]},{"code":"RFCM","name":"RFC Michigan","co2_lbs_per_mwh":1016.4,"centroid":{"lat":43.5,"lng":-84.5},"states":["MI"]},{"code":"RFCW","name":"RFC West","co2_lbs_per_mwh":1027.0,"centroid":{"lat":40.1,"lng":-82.5},"states":["OH","IN","KY","WV"]},{"code":"RMPA","name":"WECC Rockies","co2_lbs_per_mwh":1187.3,"centroid":{"lat":39.5,"lng":-105.0},"states":["CO","WY"]},{"code":"SPNO","name":"SPP North","co2_lbs_per_mwh":894.5,"centroid":{"lat":39.0,"lng":-97.5},"states":["KS","MO"]},{"code":"SPSO","name":"SPP South","co2_lbs_per_mwh":891.1,"centroid":{"lat":35.5,"lng":-97.0},"states":["OK","AR"]},{"code":"SRMV","name":"SERC Mississippi Valley","co2_lbs_per_mwh":739.4,"centroid":{"lat":32.5,"lng":-91.5},"states":["LA","MS"]},{"code":"SRMW","name":"SERC Midwest","co2_lbs_per_mwh":1238.3,"centroid":{"lat":38.5,"lng":-90.0},"states":["IL"]},{"code":"SRSO","name":"SERC South","co2_lbs_per_mwh":840.9,"centroid":{"lat":32.5,"lng":-86.5},"states":["AL","GA","FL"]},{"code":"SRTV","name":"SERC Tennessee Valley","co2_lbs_per_mwh":821.4,"centroid":{"lat":35.5,"lng":-86.5},"states":["TN"]},{"code":"SRVC","name":"SERC Virginia/Carolina","co2_lbs_per_mwh":641.6,"centroid":{"lat":35.5,"lng":-79.5},"states":["VA","NC","SC"]}]}
+{
+  "subregions": [
+    {
+      "code": "AKGD",
+      "name": "ASCC Alaska Grid",
+      "co2_lbs_per_mwh": 899.6,
+      "centroid": {
+        "lat": 61.2,
+        "lng": -149.9
+      },
+      "states": [
+        "AK"
+      ]
+    },
+    {
+      "code": "AKMS",
+      "name": "ASCC Miscellaneous",
+      "co2_lbs_per_mwh": 520.5,
+      "centroid": {
+        "lat": 64.8,
+        "lng": -147.7
+      },
+      "states": [
+        "AK"
+      ]
+    },
+    {
+      "code": "AZNM",
+      "name": "WECC Southwest",
+      "co2_lbs_per_mwh": 703.7,
+      "centroid": {
+        "lat": 34.5,
+        "lng": -112.0
+      },
+      "states": [
+        "AZ",
+        "NM",
+        "NV"
+      ]
+    },
+    {
+      "code": "CAMX",
+      "name": "WECC California",
+      "co2_lbs_per_mwh": 428.5,
+      "centroid": {
+        "lat": 36.8,
+        "lng": -119.5
+      },
+      "states": [
+        "CA"
+      ]
+    },
+    {
+      "code": "ERCT",
+      "name": "ERCOT All",
+      "co2_lbs_per_mwh": 733.9,
+      "centroid": {
+        "lat": 31.5,
+        "lng": -99.0
+      },
+      "states": [
+        "TX"
+      ]
+    },
+    {
+      "code": "FRCC",
+      "name": "FRCC All",
+      "co2_lbs_per_mwh": 782.3,
+      "centroid": {
+        "lat": 28.0,
+        "lng": -82.0
+      },
+      "states": [
+        "FL"
+      ]
+    },
+    {
+      "code": "HIMS",
+      "name": "HICC Miscellaneous",
+      "co2_lbs_per_mwh": 1123.4,
+      "centroid": {
+        "lat": 20.5,
+        "lng": -156.3
+      },
+      "states": [
+        "HI"
+      ]
+    },
+    {
+      "code": "HIOA",
+      "name": "HICC Oahu",
+      "co2_lbs_per_mwh": 1489.5,
+      "centroid": {
+        "lat": 21.3,
+        "lng": -157.8
+      },
+      "states": [
+        "HI"
+      ]
+    },
+    {
+      "code": "MROE",
+      "name": "MRO East",
+      "co2_lbs_per_mwh": 1397.3,
+      "centroid": {
+        "lat": 44.0,
+        "lng": -89.0
+      },
+      "states": [
+        "WI"
+      ]
+    },
+    {
+      "code": "MROW",
+      "name": "MRO West",
+      "co2_lbs_per_mwh": 920.1,
+      "centroid": {
+        "lat": 44.5,
+        "lng": -96.0
+      },
+      "states": [
+        "MN",
+        "ND",
+        "SD",
+        "NE",
+        "IA"
+      ]
+    },
+    {
+      "code": "NEWE",
+      "name": "NPCC New England",
+      "co2_lbs_per_mwh": 539.3,
+      "centroid": {
+        "lat": 43.5,
+        "lng": -71.5
+      },
+      "states": [
+        "ME",
+        "NH",
+        "VT",
+        "MA",
+        "RI",
+        "CT"
+      ]
+    },
+    {
+      "code": "NWPP",
+      "name": "WECC Northwest",
+      "co2_lbs_per_mwh": 631.7,
+      "centroid": {
+        "lat": 46.0,
+        "lng": -117.0
+      },
+      "states": [
+        "WA",
+        "OR",
+        "ID",
+        "MT"
+      ]
+    },
+    {
+      "code": "NYCW",
+      "name": "NPCC NYC/Westchester",
+      "co2_lbs_per_mwh": 864.5,
+      "centroid": {
+        "lat": 40.7,
+        "lng": -74.0
+      },
+      "states": [
+        "NY"
+      ]
+    },
+    {
+      "code": "NYLI",
+      "name": "NPCC Long Island",
+      "co2_lbs_per_mwh": 1180.7,
+      "centroid": {
+        "lat": 40.8,
+        "lng": -73.2
+      },
+      "states": [
+        "NY"
+      ]
+    },
+    {
+      "code": "NYUP",
+      "name": "NPCC Upstate NY",
+      "co2_lbs_per_mwh": 242.1,
+      "centroid": {
+        "lat": 43.0,
+        "lng": -76.0
+      },
+      "states": [
+        "NY"
+      ]
+    },
+    {
+      "code": "PRMS",
+      "name": "Puerto Rico Miscellaneous",
+      "co2_lbs_per_mwh": 1543.1,
+      "centroid": {
+        "lat": 18.2,
+        "lng": -66.5
+      },
+      "states": [
+        "PR"
+      ]
+    },
+    {
+      "code": "RFCE",
+      "name": "RFC East",
+      "co2_lbs_per_mwh": 596.9,
+      "centroid": {
+        "lat": 39.5,
+        "lng": -76.0
+      },
+      "states": [
+        "NJ",
+        "PA",
+        "MD",
+        "DE",
+        "DC"
+      ]
+    },
+    {
+      "code": "RFCM",
+      "name": "RFC Michigan",
+      "co2_lbs_per_mwh": 970.6,
+      "centroid": {
+        "lat": 43.5,
+        "lng": -84.5
+      },
+      "states": [
+        "MI"
+      ]
+    },
+    {
+      "code": "RFCW",
+      "name": "RFC West",
+      "co2_lbs_per_mwh": 911.4,
+      "centroid": {
+        "lat": 40.1,
+        "lng": -82.5
+      },
+      "states": [
+        "OH",
+        "IN",
+        "KY",
+        "WV"
+      ]
+    },
+    {
+      "code": "RMPA",
+      "name": "WECC Rockies",
+      "co2_lbs_per_mwh": 1036.6,
+      "centroid": {
+        "lat": 39.5,
+        "lng": -105.0
+      },
+      "states": [
+        "CO",
+        "WY"
+      ]
+    },
+    {
+      "code": "SPNO",
+      "name": "SPP North",
+      "co2_lbs_per_mwh": 862.0,
+      "centroid": {
+        "lat": 39.0,
+        "lng": -97.5
+      },
+      "states": [
+        "KS",
+        "MO"
+      ]
+    },
+    {
+      "code": "SPSO",
+      "name": "SPP South",
+      "co2_lbs_per_mwh": 872.0,
+      "centroid": {
+        "lat": 35.5,
+        "lng": -97.0
+      },
+      "states": [
+        "OK",
+        "AR"
+      ]
+    },
+    {
+      "code": "SRMV",
+      "name": "SERC Mississippi Valley",
+      "co2_lbs_per_mwh": 739.7,
+      "centroid": {
+        "lat": 32.5,
+        "lng": -91.5
+      },
+      "states": [
+        "LA",
+        "MS"
+      ]
+    },
+    {
+      "code": "SRMW",
+      "name": "SERC Midwest",
+      "co2_lbs_per_mwh": 1239.8,
+      "centroid": {
+        "lat": 38.5,
+        "lng": -90.0
+      },
+      "states": [
+        "IL"
+      ]
+    },
+    {
+      "code": "SRSO",
+      "name": "SERC South",
+      "co2_lbs_per_mwh": 842.3,
+      "centroid": {
+        "lat": 32.5,
+        "lng": -86.5
+      },
+      "states": [
+        "AL",
+        "GA",
+        "FL partial"
+      ]
+    },
+    {
+      "code": "SRTV",
+      "name": "SERC Tennessee Valley",
+      "co2_lbs_per_mwh": 898.1,
+      "centroid": {
+        "lat": 35.5,
+        "lng": -86.5
+      },
+      "states": [
+        "TN"
+      ]
+    },
+    {
+      "code": "SRVC",
+      "name": "SERC Virginia/Carolina",
+      "co2_lbs_per_mwh": 593.4,
+      "centroid": {
+        "lat": 35.5,
+        "lng": -79.5
+      },
+      "states": [
+        "VA",
+        "NC",
+        "SC"
+      ]
+    }
+  ]
+}
