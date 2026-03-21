@@ -1,0 +1,504 @@
+{
+  "data_centers": [
+    {
+      "id": "dc001",
+      "name": "Ashburn Data Center 1",
+      "lat": 39.068975,
+      "lng": -77.483355,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 68,
+      "operator": "QTS Realty"
+    },
+    {
+      "id": "dc002",
+      "name": "Ashburn Cloud Campus 2",
+      "lat": 39.025274,
+      "lng": -77.540374,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 46,
+      "operator": "Equinix"
+    },
+    {
+      "id": "dc003",
+      "name": "Ashburn Data Center 3",
+      "lat": 39.042087,
+      "lng": -77.420196,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 86,
+      "operator": "Evoque"
+    },
+    {
+      "id": "dc004",
+      "name": "Ashburn Data Center 4",
+      "lat": 39.060563,
+      "lng": -77.427433,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 33,
+      "operator": "Zayo"
+    },
+    {
+      "id": "dc005",
+      "name": "Ashburn Compute Center 5",
+      "lat": 39.011773,
+      "lng": -77.422803,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 33,
+      "operator": "Cologix"
+    },
+    {
+      "id": "dc006",
+      "name": "Ashburn Cloud Campus 6",
+      "lat": 39.0609,
+      "lng": -77.555592,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 86,
+      "operator": "Flexential"
+    },
+    {
+      "id": "dc007",
+      "name": "Ashburn Colocation Facility 7",
+      "lat": 39.070344,
+      "lng": -77.45907,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 25,
+      "operator": "Centersquare"
+    },
+    {
+      "id": "dc008",
+      "name": "Ashburn Compute Center 8",
+      "lat": 39.091036,
+      "lng": -77.537641,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 81,
+      "operator": "Vantage Data Centers"
+    },
+    {
+      "id": "dc009",
+      "name": "Ashburn Colocation Facility 9",
+      "lat": 39.000274,
+      "lng": -77.534327,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 34,
+      "operator": "RagingWire"
+    },
+    {
+      "id": "dc010",
+      "name": "Ashburn Data Hub 10",
+      "lat": 39.014914,
+      "lng": -77.418017,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 85,
+      "operator": "CyrusOne"
+    },
+    {
+      "id": "dc011",
+      "name": "Ashburn Cloud Campus 11",
+      "lat": 39.090478,
+      "lng": -77.528867,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 78,
+      "operator": "H5 Data Centers"
+    },
+    {
+      "id": "dc012",
+      "name": "Ashburn Cloud Campus 12",
+      "lat": 39.046428,
+      "lng": -77.419962,
+      "city": "Ashburn",
+      "state": "VA",
+      "est_capacity_mw": 42,
+      "operator": "Digital Realty"
+    },
+    {
+      "id": "dc013",
+      "name": "Dallas Data Hub 1",
+      "lat": 32.872043,
+      "lng": -97.00303,
+      "city": "Dallas",
+      "state": "TX",
+      "est_capacity_mw": 69,
+      "operator": "QTS Realty"
+    },
+    {
+      "id": "dc014",
+      "name": "Dallas Compute Center 2",
+      "lat": 32.970249,
+      "lng": -97.067088,
+      "city": "Dallas",
+      "state": "TX",
+      "est_capacity_mw": 16,
+      "operator": "Switch"
+    },
+    {
+      "id": "dc015",
+      "name": "Dallas Cloud Campus 3",
+      "lat": 32.865732,
+      "lng": -97.068358,
+      "city": "Dallas",
+      "state": "TX",
+      "est_capacity_mw": 49,
+      "operator": "CyrusOne"
+    },
+    {
+      "id": "dc016",
+      "name": "Dallas Colocation Facility 4",
+      "lat": 32.962993,
+      "lng": -96.854861,
+      "city": "Dallas",
+      "state": "TX",
+      "est_capacity_mw": 66,
+      "operator": "Aligned Energy"
+    },
+    {
+      "id": "dc017",
+      "name": "Dallas Compute Center 5",
+      "lat": 32.854367,
+      "lng": -96.915715,
+      "city": "Dallas",
+      "state": "TX",
+      "est_capacity_mw": 76,
+      "operator": "Stack Infrastructure"
+    },
+    {
+      "id": "dc018",
+      "name": "Dallas Data Hub 6",
+      "lat": 32.822611,
+      "lng": -97.008851,
+      "city": "Dallas",
+      "state": "TX",
+      "est_capacity_mw": 22,
+      "operator": "CoreSite"
+    },
+    {
+      "id": "dc019",
+      "name": "Santa Clara Data Center 1",
+      "lat": 37.341603,
+      "lng": -121.959075,
+      "city": "Santa Clara",
+      "state": "CA",
+      "est_capacity_mw": 76,
+      "operator": "CoreSite"
+    },
+    {
+      "id": "dc020",
+      "name": "Santa Clara Colocation Facility 2",
+      "lat": 37.337975,
+      "lng": -121.93586,
+      "city": "Santa Clara",
+      "state": "CA",
+      "est_capacity_mw": 23,
+      "operator": "Switch"
+    },
+    {
+      "id": "dc021",
+      "name": "Santa Clara Data Hub 3",
+      "lat": 37.39204,
+      "lng": -121.911294,
+      "city": "Santa Clara",
+      "state": "CA",
+      "est_capacity_mw": 72,
+      "operator": "NTT Global Data Centers"
+    },
+    {
+      "id": "dc022",
+      "name": "Santa Clara Data Center 4",
+      "lat": 37.306334,
+      "lng": -121.965497,
+      "city": "Santa Clara",
+      "state": "CA",
+      "est_capacity_mw": 21,
+      "operator": "Zayo"
+    },
+    {
+      "id": "dc023",
+      "name": "Santa Clara Data Center 5",
+      "lat": 37.372377,
+      "lng": -121.922398,
+      "city": "Santa Clara",
+      "state": "CA",
+      "est_capacity_mw": 63,
+      "operator": "Zayo"
+    },
+    {
+      "id": "dc024",
+      "name": "Chicago Colocation Facility 1",
+      "lat": 41.937648,
+      "lng": -88.023648,
+      "city": "Chicago",
+      "state": "IL",
+      "est_capacity_mw": 37,
+      "operator": "DataBank"
+    },
+    {
+      "id": "dc025",
+      "name": "Chicago Data Center 2",
+      "lat": 41.86915,
+      "lng": -88.035259,
+      "city": "Chicago",
+      "state": "IL",
+      "est_capacity_mw": 34,
+      "operator": "Switch"
+    },
+    {
+      "id": "dc026",
+      "name": "Chicago Data Center 3",
+      "lat": 41.978412,
+      "lng": -88.022583,
+      "city": "Chicago",
+      "state": "IL",
+      "est_capacity_mw": 10,
+      "operator": "CoreSite"
+    },
+    {
+      "id": "dc027",
+      "name": "Chicago Colocation Facility 4",
+      "lat": 41.969769,
+      "lng": -88.070374,
+      "city": "Chicago",
+      "state": "IL",
+      "est_capacity_mw": 20,
+      "operator": "CyrusOne"
+    },
+    {
+      "id": "dc028",
+      "name": "Phoenix Data Center 1",
+      "lat": 33.464127,
+      "lng": -111.999268,
+      "city": "Phoenix",
+      "state": "AZ",
+      "est_capacity_mw": 32,
+      "operator": "Digital Realty"
+    },
+    {
+      "id": "dc029",
+      "name": "Phoenix Data Hub 2",
+      "lat": 33.444541,
+      "lng": -112.092995,
+      "city": "Phoenix",
+      "state": "AZ",
+      "est_capacity_mw": 40,
+      "operator": "DataBank"
+    },
+    {
+      "id": "dc030",
+      "name": "Phoenix Colocation Facility 3",
+      "lat": 33.491819,
+      "lng": -112.140378,
+      "city": "Phoenix",
+      "state": "AZ",
+      "est_capacity_mw": 43,
+      "operator": "CyrusOne"
+    },
+    {
+      "id": "dc031",
+      "name": "Phoenix Data Hub 4",
+      "lat": 33.489414,
+      "lng": -111.935612,
+      "city": "Phoenix",
+      "state": "AZ",
+      "est_capacity_mw": 46,
+      "operator": "Equinix"
+    },
+    {
+      "id": "dc032",
+      "name": "Atlanta Data Hub 1",
+      "lat": 33.780688,
+      "lng": -84.31075,
+      "city": "Atlanta",
+      "state": "GA",
+      "est_capacity_mw": 55,
+      "operator": "Equinix"
+    },
+    {
+      "id": "dc033",
+      "name": "Atlanta Data Center 2",
+      "lat": 33.858357,
+      "lng": -84.588951,
+      "city": "Atlanta",
+      "state": "GA",
+      "est_capacity_mw": 60,
+      "operator": "H5 Data Centers"
+    },
+    {
+      "id": "dc034",
+      "name": "Atlanta Cloud Campus 3",
+      "lat": 33.812467,
+      "lng": -84.496379,
+      "city": "Atlanta",
+      "state": "GA",
+      "est_capacity_mw": 49,
+      "operator": "Vantage Data Centers"
+    },
+    {
+      "id": "dc035",
+      "name": "Quincy Data Center 1",
+      "lat": 47.695187,
+      "lng": -121.841472,
+      "city": "Quincy",
+      "state": "WA",
+      "est_capacity_mw": 88,
+      "operator": "Vantage Data Centers"
+    },
+    {
+      "id": "dc036",
+      "name": "Quincy Data Hub 2",
+      "lat": 47.66045,
+      "lng": -121.299878,
+      "city": "Quincy",
+      "state": "WA",
+      "est_capacity_mw": 76,
+      "operator": "NTT Global Data Centers"
+    },
+    {
+      "id": "dc037",
+      "name": "Quincy Cloud Campus 3",
+      "lat": 47.258462,
+      "lng": -121.447276,
+      "city": "Quincy",
+      "state": "WA",
+      "est_capacity_mw": 30,
+      "operator": "Vantage Data Centers"
+    },
+    {
+      "id": "dc038",
+      "name": "Quincy Data Center 4",
+      "lat": 47.69793,
+      "lng": -122.211084,
+      "city": "Quincy",
+      "state": "WA",
+      "est_capacity_mw": 67,
+      "operator": "Centersquare"
+    },
+    {
+      "id": "dc039",
+      "name": "Secaucus Colocation Facility 1",
+      "lat": 40.774778,
+      "lng": -74.021264,
+      "city": "Secaucus",
+      "state": "NJ",
+      "est_capacity_mw": 72,
+      "operator": "CoreSite"
+    },
+    {
+      "id": "dc040",
+      "name": "Secaucus Data Hub 2",
+      "lat": 40.72809,
+      "lng": -74.143371,
+      "city": "Secaucus",
+      "state": "NJ",
+      "est_capacity_mw": 61,
+      "operator": "Stack Infrastructure"
+    },
+    {
+      "id": "dc041",
+      "name": "Secaucus Compute Center 3",
+      "lat": 40.750858,
+      "lng": -74.039184,
+      "city": "Secaucus",
+      "state": "NJ",
+      "est_capacity_mw": 22,
+      "operator": "Aligned Energy"
+    },
+    {
+      "id": "dc042",
+      "name": "Secaucus Data Hub 4",
+      "lat": 40.791409,
+      "lng": -74.156284,
+      "city": "Secaucus",
+      "state": "NJ",
+      "est_capacity_mw": 60,
+      "operator": "Vantage Data Centers"
+    },
+    {
+      "id": "dc043",
+      "name": "Denver Data Hub 1",
+      "lat": 39.775715,
+      "lng": -104.906975,
+      "city": "Denver",
+      "state": "CO",
+      "est_capacity_mw": 50,
+      "operator": "RagingWire"
+    },
+    {
+      "id": "dc044",
+      "name": "Denver Compute Center 2",
+      "lat": 39.777215,
+      "lng": -104.967576,
+      "city": "Denver",
+      "state": "CO",
+      "est_capacity_mw": 47,
+      "operator": "Zayo"
+    },
+    {
+      "id": "dc045",
+      "name": "Portland Colocation Facility 1",
+      "lat": 45.548193,
+      "lng": -122.600651,
+      "city": "Portland",
+      "state": "OR",
+      "est_capacity_mw": 13,
+      "operator": "Centersquare"
+    },
+    {
+      "id": "dc046",
+      "name": "Portland Data Center 2",
+      "lat": 45.541941,
+      "lng": -122.67244,
+      "city": "Portland",
+      "state": "OR",
+      "est_capacity_mw": 42,
+      "operator": "CoreSite"
+    },
+    {
+      "id": "dc047",
+      "name": "Minneapolis Data Center 1",
+      "lat": 44.958683,
+      "lng": -93.322287,
+      "city": "Minneapolis",
+      "state": "MN",
+      "est_capacity_mw": 13,
+      "operator": "Aligned Energy"
+    },
+    {
+      "id": "dc048",
+      "name": "Minneapolis Colocation Facility 2",
+      "lat": 44.980308,
+      "lng": -93.248277,
+      "city": "Minneapolis",
+      "state": "MN",
+      "est_capacity_mw": 38,
+      "operator": "Aligned Energy"
+    },
+    {
+      "id": "dc049",
+      "name": "Boston Colocation Facility 1",
+      "lat": 42.398565,
+      "lng": -71.137387,
+      "city": "Boston",
+      "state": "MA",
+      "est_capacity_mw": 30,
+      "operator": "Evoque"
+    },
+    {
+      "id": "dc050",
+      "name": "Boston Compute Center 2",
+      "lat": 42.397452,
+      "lng": -71.145574,
+      "city": "Boston",
+      "state": "MA",
+      "est_capacity_mw": 43,
+      "operator": "Switch"
+    }
+  ]
+}

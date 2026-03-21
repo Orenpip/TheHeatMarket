@@ -1,0 +1,1243 @@
+{
+  "counties": {
+    "06037": {
+      "pop": 10014009,
+      "housing_units": 3501458,
+      "density_per_sqmi": 2344,
+      "lat": 34.05,
+      "lng": -118.24
+    },
+    "17031": {
+      "pop": 5275541,
+      "housing_units": 2173344,
+      "density_per_sqmi": 5672,
+      "lat": 41.84,
+      "lng": -87.82
+    },
+    "48201": {
+      "pop": 4731145,
+      "housing_units": 1764497,
+      "density_per_sqmi": 2843,
+      "lat": 29.85,
+      "lng": -95.4
+    },
+    "04013": {
+      "pop": 4485414,
+      "housing_units": 1871576,
+      "density_per_sqmi": 475,
+      "lat": 33.35,
+      "lng": -112.49
+    },
+    "06073": {
+      "pop": 3338330,
+      "housing_units": 1176544,
+      "density_per_sqmi": 811,
+      "lat": 32.72,
+      "lng": -116.73
+    },
+    "48113": {
+      "pop": 2613539,
+      "housing_units": 1030406,
+      "density_per_sqmi": 3719,
+      "lat": 32.77,
+      "lng": -96.79
+    },
+    "53033": {
+      "pop": 2269675,
+      "housing_units": 919922,
+      "density_per_sqmi": 986,
+      "lat": 47.49,
+      "lng": -121.83
+    },
+    "12086": {
+      "pop": 2716940,
+      "housing_units": 1050220,
+      "density_per_sqmi": 1413,
+      "lat": 25.55,
+      "lng": -80.63
+    },
+    "48439": {
+      "pop": 2110640,
+      "housing_units": 817823,
+      "density_per_sqmi": 2279,
+      "lat": 32.77,
+      "lng": -97.29
+    },
+    "06065": {
+      "pop": 2457590,
+      "housing_units": 837305,
+      "density_per_sqmi": 312,
+      "lat": 33.74,
+      "lng": -115.99
+    },
+    "06085": {
+      "pop": 1927852,
+      "housing_units": 672225,
+      "density_per_sqmi": 1747,
+      "lat": 37.23,
+      "lng": -121.69
+    },
+    "48029": {
+      "pop": 2009324,
+      "housing_units": 762613,
+      "density_per_sqmi": 1454,
+      "lat": 29.45,
+      "lng": -98.52
+    },
+    "12011": {
+      "pop": 1952778,
+      "housing_units": 759320,
+      "density_per_sqmi": 1649,
+      "lat": 26.15,
+      "lng": -80.44
+    },
+    "32003": {
+      "pop": 2266715,
+      "housing_units": 922047,
+      "density_per_sqmi": 568,
+      "lat": 36.21,
+      "lng": -115.01
+    },
+    "06001": {
+      "pop": 1682353,
+      "housing_units": 637070,
+      "density_per_sqmi": 2123,
+      "lat": 37.65,
+      "lng": -121.92
+    },
+    "06067": {
+      "pop": 1585055,
+      "housing_units": 604684,
+      "density_per_sqmi": 1618,
+      "lat": 38.45,
+      "lng": -121.34
+    },
+    "25017": {
+      "pop": 1632002,
+      "housing_units": 610229,
+      "density_per_sqmi": 1907,
+      "lat": 42.48,
+      "lng": -71.39
+    },
+    "26163": {
+      "pop": 1749343,
+      "housing_units": 715120,
+      "density_per_sqmi": 3373,
+      "lat": 42.28,
+      "lng": -83.26
+    },
+    "27053": {
+      "pop": 1281565,
+      "housing_units": 545433,
+      "density_per_sqmi": 1989,
+      "lat": 44.97,
+      "lng": -93.39
+    },
+    "41051": {
+      "pop": 815428,
+      "housing_units": 352091,
+      "density_per_sqmi": 1801,
+      "lat": 45.55,
+      "lng": -122.43
+    },
+    "08031": {
+      "pop": 715878,
+      "housing_units": 317872,
+      "density_per_sqmi": 4493,
+      "lat": 39.76,
+      "lng": -104.88
+    },
+    "48453": {
+      "pop": 1290188,
+      "housing_units": 531344,
+      "density_per_sqmi": 804,
+      "lat": 30.22,
+      "lng": -97.77
+    },
+    "51107": {
+      "pop": 420959,
+      "housing_units": 152219,
+      "density_per_sqmi": 1036,
+      "lat": 39.08,
+      "lng": -77.64
+    },
+    "51059": {
+      "pop": 1150309,
+      "housing_units": 418454,
+      "density_per_sqmi": 3085,
+      "lat": 38.84,
+      "lng": -77.27
+    },
+    "24031": {
+      "pop": 1062061,
+      "housing_units": 393248,
+      "density_per_sqmi": 2074,
+      "lat": 39.14,
+      "lng": -77.21
+    },
+    "24033": {
+      "pop": 967201,
+      "housing_units": 335519,
+      "density_per_sqmi": 1799,
+      "lat": 38.83,
+      "lng": -76.84
+    },
+    "24510": {
+      "pop": 585708,
+      "housing_units": 253978,
+      "density_per_sqmi": 7671,
+      "lat": 39.29,
+      "lng": -76.61
+    },
+    "42101": {
+      "pop": 1576251,
+      "housing_units": 673896,
+      "density_per_sqmi": 11683,
+      "lat": 40.0,
+      "lng": -75.13
+    },
+    "42003": {
+      "pop": 1218452,
+      "housing_units": 533867,
+      "density_per_sqmi": 1648,
+      "lat": 40.47,
+      "lng": -79.99
+    },
+    "39049": {
+      "pop": 1323807,
+      "housing_units": 568714,
+      "density_per_sqmi": 3023,
+      "lat": 39.96,
+      "lng": -82.99
+    },
+    "39061": {
+      "pop": 826518,
+      "housing_units": 360714,
+      "density_per_sqmi": 2131,
+      "lat": 39.22,
+      "lng": -84.55
+    },
+    "39035": {
+      "pop": 1264817,
+      "housing_units": 550948,
+      "density_per_sqmi": 2877,
+      "lat": 41.44,
+      "lng": -81.68
+    },
+    "39153": {
+      "pop": 541228,
+      "housing_units": 235841,
+      "density_per_sqmi": 1459,
+      "lat": 41.12,
+      "lng": -81.52
+    },
+    "39095": {
+      "pop": 436490,
+      "housing_units": 190210,
+      "density_per_sqmi": 935,
+      "lat": 41.59,
+      "lng": -83.67
+    },
+    "39169": {
+      "pop": 139909,
+      "housing_units": 60234,
+      "density_per_sqmi": 230,
+      "lat": 40.82,
+      "lng": -81.89
+    },
+    "18097": {
+      "pop": 964582,
+      "housing_units": 406612,
+      "density_per_sqmi": 2243,
+      "lat": 39.77,
+      "lng": -86.14
+    },
+    "18003": {
+      "pop": 385810,
+      "housing_units": 164521,
+      "density_per_sqmi": 1015,
+      "lat": 41.08,
+      "lng": -85.07
+    },
+    "29510": {
+      "pop": 308626,
+      "housing_units": 151124,
+      "density_per_sqmi": 5210,
+      "lat": 38.64,
+      "lng": -90.24
+    },
+    "29095": {
+      "pop": 714034,
+      "housing_units": 294103,
+      "density_per_sqmi": 1455,
+      "lat": 39.0,
+      "lng": -94.35
+    },
+    "55079": {
+      "pop": 945726,
+      "housing_units": 394321,
+      "density_per_sqmi": 3881,
+      "lat": 43.03,
+      "lng": -87.97
+    },
+    "55025": {
+      "pop": 561504,
+      "housing_units": 231413,
+      "density_per_sqmi": 425,
+      "lat": 43.07,
+      "lng": -89.41
+    },
+    "55133": {
+      "pop": 404198,
+      "housing_units": 163321,
+      "density_per_sqmi": 875,
+      "lat": 43.01,
+      "lng": -88.3
+    },
+    "01073": {
+      "pop": 674721,
+      "housing_units": 283415,
+      "density_per_sqmi": 793,
+      "lat": 33.55,
+      "lng": -86.89
+    },
+    "47157": {
+      "pop": 929744,
+      "housing_units": 380209,
+      "density_per_sqmi": 1371,
+      "lat": 35.18,
+      "lng": -89.9
+    },
+    "47037": {
+      "pop": 715884,
+      "housing_units": 311022,
+      "density_per_sqmi": 1282,
+      "lat": 36.17,
+      "lng": -86.79
+    },
+    "47093": {
+      "pop": 478971,
+      "housing_units": 204321,
+      "density_per_sqmi": 878,
+      "lat": 35.99,
+      "lng": -83.93
+    },
+    "37119": {
+      "pop": 1110356,
+      "housing_units": 450211,
+      "density_per_sqmi": 1055,
+      "lat": 35.25,
+      "lng": -80.84
+    },
+    "37183": {
+      "pop": 1129410,
+      "housing_units": 462104,
+      "density_per_sqmi": 1255,
+      "lat": 35.79,
+      "lng": -78.64
+    },
+    "37063": {
+      "pop": 324734,
+      "housing_units": 138012,
+      "density_per_sqmi": 902,
+      "lat": 35.99,
+      "lng": -78.9
+    },
+    "37081": {
+      "pop": 541299,
+      "housing_units": 222414,
+      "density_per_sqmi": 729,
+      "lat": 36.07,
+      "lng": -79.79
+    },
+    "45079": {
+      "pop": 415759,
+      "housing_units": 175621,
+      "density_per_sqmi": 512,
+      "lat": 34.03,
+      "lng": -80.9
+    },
+    "45019": {
+      "pop": 411406,
+      "housing_units": 177321,
+      "density_per_sqmi": 278,
+      "lat": 32.8,
+      "lng": -80.02
+    },
+    "13121": {
+      "pop": 1066710,
+      "housing_units": 458201,
+      "density_per_sqmi": 1959,
+      "lat": 33.79,
+      "lng": -84.47
+    },
+    "13089": {
+      "pop": 764382,
+      "housing_units": 308012,
+      "density_per_sqmi": 2847,
+      "lat": 33.77,
+      "lng": -84.22
+    },
+    "13135": {
+      "pop": 957062,
+      "housing_units": 369043,
+      "density_per_sqmi": 2037,
+      "lat": 33.97,
+      "lng": -84.0
+    },
+    "12095": {
+      "pop": 1429908,
+      "housing_units": 568921,
+      "density_per_sqmi": 1321,
+      "lat": 28.51,
+      "lng": -81.37
+    },
+    "12057": {
+      "pop": 1459762,
+      "housing_units": 601204,
+      "density_per_sqmi": 1362,
+      "lat": 27.97,
+      "lng": -82.37
+    },
+    "12099": {
+      "pop": 1496770,
+      "housing_units": 638412,
+      "density_per_sqmi": 727,
+      "lat": 26.65,
+      "lng": -80.45
+    },
+    "12031": {
+      "pop": 995318,
+      "housing_units": 419204,
+      "density_per_sqmi": 1109,
+      "lat": 30.33,
+      "lng": -81.66
+    },
+    "12103": {
+      "pop": 974996,
+      "housing_units": 453021,
+      "density_per_sqmi": 3476,
+      "lat": 27.9,
+      "lng": -82.74
+    },
+    "12073": {
+      "pop": 294071,
+      "housing_units": 123412,
+      "density_per_sqmi": 383,
+      "lat": 30.46,
+      "lng": -84.28
+    },
+    "22033": {
+      "pop": 456781,
+      "housing_units": 184321,
+      "density_per_sqmi": 512,
+      "lat": 30.53,
+      "lng": -91.1
+    },
+    "22051": {
+      "pop": 432552,
+      "housing_units": 178214,
+      "density_per_sqmi": 1897,
+      "lat": 29.83,
+      "lng": -90.17
+    },
+    "22071": {
+      "pop": 383997,
+      "housing_units": 190321,
+      "density_per_sqmi": 2082,
+      "lat": 29.95,
+      "lng": -90.07
+    },
+    "28049": {
+      "pop": 229926,
+      "housing_units": 94321,
+      "density_per_sqmi": 280,
+      "lat": 32.27,
+      "lng": -90.44
+    },
+    "28089": {
+      "pop": 107046,
+      "housing_units": 42321,
+      "density_per_sqmi": 183,
+      "lat": 32.63,
+      "lng": -90.02
+    },
+    "05119": {
+      "pop": 399125,
+      "housing_units": 167321,
+      "density_per_sqmi": 532,
+      "lat": 34.77,
+      "lng": -92.31
+    },
+    "40109": {
+      "pop": 796292,
+      "housing_units": 334021,
+      "density_per_sqmi": 1168,
+      "lat": 35.55,
+      "lng": -97.4
+    },
+    "40143": {
+      "pop": 669279,
+      "housing_units": 280412,
+      "density_per_sqmi": 948,
+      "lat": 36.12,
+      "lng": -95.93
+    },
+    "20173": {
+      "pop": 523824,
+      "housing_units": 215321,
+      "density_per_sqmi": 600,
+      "lat": 37.69,
+      "lng": -97.44
+    },
+    "20091": {
+      "pop": 609863,
+      "housing_units": 237412,
+      "density_per_sqmi": 1384,
+      "lat": 38.88,
+      "lng": -94.83
+    },
+    "31055": {
+      "pop": 576858,
+      "housing_units": 234321,
+      "density_per_sqmi": 1459,
+      "lat": 41.3,
+      "lng": -96.15
+    },
+    "31109": {
+      "pop": 319090,
+      "housing_units": 129321,
+      "density_per_sqmi": 327,
+      "lat": 40.79,
+      "lng": -96.69
+    },
+    "46099": {
+      "pop": 197214,
+      "housing_units": 83012,
+      "density_per_sqmi": 190,
+      "lat": 43.67,
+      "lng": -96.73
+    },
+    "46103": {
+      "pop": 113775,
+      "housing_units": 51012,
+      "density_per_sqmi": 25,
+      "lat": 44.08,
+      "lng": -103.23
+    },
+    "27109": {
+      "pop": 158293,
+      "housing_units": 67412,
+      "density_per_sqmi": 235,
+      "lat": 44.02,
+      "lng": -92.46
+    },
+    "27145": {
+      "pop": 161448,
+      "housing_units": 67412,
+      "density_per_sqmi": 65,
+      "lat": 45.54,
+      "lng": -94.65
+    },
+    "55009": {
+      "pop": 264542,
+      "housing_units": 108321,
+      "density_per_sqmi": 452,
+      "lat": 44.47,
+      "lng": -88.03
+    },
+    "55087": {
+      "pop": 187885,
+      "housing_units": 77412,
+      "density_per_sqmi": 368,
+      "lat": 44.41,
+      "lng": -88.46
+    },
+    "26077": {
+      "pop": 265066,
+      "housing_units": 110321,
+      "density_per_sqmi": 423,
+      "lat": 42.24,
+      "lng": -85.53
+    },
+    "26081": {
+      "pop": 643140,
+      "housing_units": 264021,
+      "density_per_sqmi": 1062,
+      "lat": 43.03,
+      "lng": -85.55
+    },
+    "26065": {
+      "pop": 292406,
+      "housing_units": 120321,
+      "density_per_sqmi": 484,
+      "lat": 42.6,
+      "lng": -84.41
+    },
+    "26161": {
+      "pop": 372258,
+      "housing_units": 153021,
+      "density_per_sqmi": 540,
+      "lat": 42.25,
+      "lng": -83.93
+    },
+    "26049": {
+      "pop": 405813,
+      "housing_units": 168321,
+      "density_per_sqmi": 747,
+      "lat": 43.01,
+      "lng": -83.71
+    },
+    "26099": {
+      "pop": 881217,
+      "housing_units": 354021,
+      "density_per_sqmi": 1769,
+      "lat": 42.67,
+      "lng": -82.92
+    },
+    "26125": {
+      "pop": 1274395,
+      "housing_units": 508321,
+      "density_per_sqmi": 1477,
+      "lat": 42.66,
+      "lng": -83.38
+    },
+    "34025": {
+      "pop": 643615,
+      "housing_units": 250321,
+      "density_per_sqmi": 1318,
+      "lat": 40.29,
+      "lng": -74.16
+    },
+    "34003": {
+      "pop": 955732,
+      "housing_units": 340321,
+      "density_per_sqmi": 3918,
+      "lat": 40.96,
+      "lng": -74.07
+    },
+    "34013": {
+      "pop": 863728,
+      "housing_units": 320321,
+      "density_per_sqmi": 6286,
+      "lat": 40.79,
+      "lng": -74.25
+    },
+    "34017": {
+      "pop": 724854,
+      "housing_units": 257321,
+      "density_per_sqmi": 13440,
+      "lat": 40.73,
+      "lng": -74.07
+    },
+    "34023": {
+      "pop": 863162,
+      "housing_units": 307021,
+      "density_per_sqmi": 2692,
+      "lat": 40.44,
+      "lng": -74.41
+    },
+    "36059": {
+      "pop": 1395774,
+      "housing_units": 501321,
+      "density_per_sqmi": 4622,
+      "lat": 40.73,
+      "lng": -73.59
+    },
+    "36103": {
+      "pop": 1525920,
+      "housing_units": 551321,
+      "density_per_sqmi": 1696,
+      "lat": 40.88,
+      "lng": -72.83
+    },
+    "36119": {
+      "pop": 1004457,
+      "housing_units": 362321,
+      "density_per_sqmi": 2165,
+      "lat": 41.13,
+      "lng": -73.77
+    },
+    "36055": {
+      "pop": 744248,
+      "housing_units": 311321,
+      "density_per_sqmi": 1768,
+      "lat": 43.17,
+      "lng": -77.6
+    },
+    "36067": {
+      "pop": 476516,
+      "housing_units": 201321,
+      "density_per_sqmi": 751,
+      "lat": 43.0,
+      "lng": -76.2
+    },
+    "36029": {
+      "pop": 918702,
+      "housing_units": 394321,
+      "density_per_sqmi": 1406,
+      "lat": 42.76,
+      "lng": -78.85
+    },
+    "36001": {
+      "pop": 314848,
+      "housing_units": 138321,
+      "density_per_sqmi": 806,
+      "lat": 42.6,
+      "lng": -73.97
+    },
+    "09001": {
+      "pop": 973383,
+      "housing_units": 364321,
+      "density_per_sqmi": 1452,
+      "lat": 41.27,
+      "lng": -73.38
+    },
+    "09003": {
+      "pop": 898977,
+      "housing_units": 361321,
+      "density_per_sqmi": 1148,
+      "lat": 41.8,
+      "lng": -72.73
+    },
+    "09009": {
+      "pop": 864835,
+      "housing_units": 349321,
+      "density_per_sqmi": 1400,
+      "lat": 41.35,
+      "lng": -72.9
+    },
+    "44007": {
+      "pop": 663001,
+      "housing_units": 266321,
+      "density_per_sqmi": 1518,
+      "lat": 41.82,
+      "lng": -71.51
+    },
+    "25015": {
+      "pop": 161355,
+      "housing_units": 66321,
+      "density_per_sqmi": 321,
+      "lat": 42.34,
+      "lng": -72.67
+    },
+    "25027": {
+      "pop": 838318,
+      "housing_units": 326321,
+      "density_per_sqmi": 849,
+      "lat": 42.35,
+      "lng": -71.97
+    },
+    "25009": {
+      "pop": 789034,
+      "housing_units": 305321,
+      "density_per_sqmi": 1248,
+      "lat": 42.65,
+      "lng": -70.97
+    },
+    "25021": {
+      "pop": 706775,
+      "housing_units": 273021,
+      "density_per_sqmi": 1724,
+      "lat": 42.17,
+      "lng": -71.19
+    },
+    "25005": {
+      "pop": 565217,
+      "housing_units": 224021,
+      "density_per_sqmi": 1337,
+      "lat": 41.79,
+      "lng": -71.09
+    },
+    "33015": {
+      "pop": 307086,
+      "housing_units": 128321,
+      "density_per_sqmi": 480,
+      "lat": 43.0,
+      "lng": -71.14
+    },
+    "23005": {
+      "pop": 296214,
+      "housing_units": 128321,
+      "density_per_sqmi": 322,
+      "lat": 43.82,
+      "lng": -70.37
+    },
+    "50007": {
+      "pop": 168323,
+      "housing_units": 73321,
+      "density_per_sqmi": 400,
+      "lat": 44.47,
+      "lng": -73.09
+    },
+    "35001": {
+      "pop": 679121,
+      "housing_units": 277321,
+      "density_per_sqmi": 661,
+      "lat": 35.06,
+      "lng": -106.67
+    },
+    "35013": {
+      "pop": 218195,
+      "housing_units": 88321,
+      "density_per_sqmi": 98,
+      "lat": 32.35,
+      "lng": -106.83
+    },
+    "48141": {
+      "pop": 865657,
+      "housing_units": 306321,
+      "density_per_sqmi": 821,
+      "lat": 31.77,
+      "lng": -106.42
+    },
+    "48303": {
+      "pop": 314193,
+      "housing_units": 126321,
+      "density_per_sqmi": 165,
+      "lat": 33.61,
+      "lng": -101.82
+    },
+    "48479": {
+      "pop": 266772,
+      "housing_units": 97321,
+      "density_per_sqmi": 90,
+      "lat": 27.76,
+      "lng": -99.47
+    },
+    "48215": {
+      "pop": 870781,
+      "housing_units": 264321,
+      "density_per_sqmi": 670,
+      "lat": 26.4,
+      "lng": -98.18
+    },
+    "48355": {
+      "pop": 346534,
+      "housing_units": 141321,
+      "density_per_sqmi": 399,
+      "lat": 27.73,
+      "lng": -97.55
+    },
+    "48245": {
+      "pop": 252273,
+      "housing_units": 105321,
+      "density_per_sqmi": 373,
+      "lat": 30.08,
+      "lng": -94.2
+    },
+    "48167": {
+      "pop": 342139,
+      "housing_units": 149321,
+      "density_per_sqmi": 676,
+      "lat": 29.3,
+      "lng": -94.79
+    },
+    "48157": {
+      "pop": 811688,
+      "housing_units": 290321,
+      "density_per_sqmi": 979,
+      "lat": 29.53,
+      "lng": -95.77
+    },
+    "48085": {
+      "pop": 1005146,
+      "housing_units": 370321,
+      "density_per_sqmi": 2132,
+      "lat": 33.19,
+      "lng": -96.57
+    },
+    "48121": {
+      "pop": 906422,
+      "housing_units": 341321,
+      "density_per_sqmi": 920,
+      "lat": 33.21,
+      "lng": -97.13
+    },
+    "48491": {
+      "pop": 609017,
+      "housing_units": 223321,
+      "density_per_sqmi": 609,
+      "lat": 30.65,
+      "lng": -97.6
+    },
+    "48209": {
+      "pop": 263959,
+      "housing_units": 102321,
+      "density_per_sqmi": 252,
+      "lat": 29.98,
+      "lng": -98.05
+    },
+    "48423": {
+      "pop": 234769,
+      "housing_units": 97321,
+      "density_per_sqmi": 175,
+      "lat": 32.37,
+      "lng": -95.27
+    },
+    "48309": {
+      "pop": 264004,
+      "housing_units": 106321,
+      "density_per_sqmi": 155,
+      "lat": 31.55,
+      "lng": -97.17
+    },
+    "48027": {
+      "pop": 362924,
+      "housing_units": 138321,
+      "density_per_sqmi": 268,
+      "lat": 31.04,
+      "lng": -97.47
+    },
+    "48061": {
+      "pop": 423163,
+      "housing_units": 151321,
+      "density_per_sqmi": 588,
+      "lat": 26.16,
+      "lng": -97.57
+    },
+    "04019": {
+      "pop": 1066454,
+      "housing_units": 419321,
+      "density_per_sqmi": 97,
+      "lat": 32.0,
+      "lng": -111.01
+    },
+    "04021": {
+      "pop": 446902,
+      "housing_units": 175321,
+      "density_per_sqmi": 83,
+      "lat": 32.91,
+      "lng": -111.36
+    },
+    "04025": {
+      "pop": 245883,
+      "housing_units": 112321,
+      "density_per_sqmi": 15,
+      "lat": 34.6,
+      "lng": -112.47
+    },
+    "04015": {
+      "pop": 213267,
+      "housing_units": 97321,
+      "density_per_sqmi": 6,
+      "lat": 35.72,
+      "lng": -113.75
+    },
+    "04027": {
+      "pop": 213787,
+      "housing_units": 88321,
+      "density_per_sqmi": 40,
+      "lat": 32.77,
+      "lng": -113.92
+    },
+    "04005": {
+      "pop": 145101,
+      "housing_units": 68321,
+      "density_per_sqmi": 4,
+      "lat": 36.23,
+      "lng": -111.75
+    },
+    "04001": {
+      "pop": 72125,
+      "housing_units": 27321,
+      "density_per_sqmi": 3,
+      "lat": 35.4,
+      "lng": -109.49
+    },
+    "04017": {
+      "pop": 109926,
+      "housing_units": 43321,
+      "density_per_sqmi": 5,
+      "lat": 35.79,
+      "lng": -110.32
+    },
+    "32031": {
+      "pop": 469587,
+      "housing_units": 193321,
+      "density_per_sqmi": 125,
+      "lat": 40.6,
+      "lng": -119.8
+    },
+    "32510": {
+      "pop": 58639,
+      "housing_units": 27321,
+      "density_per_sqmi": 878,
+      "lat": 39.15,
+      "lng": -119.75
+    },
+    "16001": {
+      "pop": 486492,
+      "housing_units": 188321,
+      "density_per_sqmi": 309,
+      "lat": 43.45,
+      "lng": -116.24
+    },
+    "16027": {
+      "pop": 231799,
+      "housing_units": 88321,
+      "density_per_sqmi": 127,
+      "lat": 43.63,
+      "lng": -116.68
+    },
+    "16019": {
+      "pop": 119429,
+      "housing_units": 46321,
+      "density_per_sqmi": 65,
+      "lat": 43.38,
+      "lng": -112.02
+    },
+    "16055": {
+      "pop": 171362,
+      "housing_units": 72321,
+      "density_per_sqmi": 115,
+      "lat": 47.66,
+      "lng": -116.73
+    },
+    "30111": {
+      "pop": 159798,
+      "housing_units": 68321,
+      "density_per_sqmi": 48,
+      "lat": 45.78,
+      "lng": -108.5
+    },
+    "30013": {
+      "pop": 83012,
+      "housing_units": 36321,
+      "density_per_sqmi": 42,
+      "lat": 47.45,
+      "lng": -111.22
+    },
+    "30063": {
+      "pop": 119600,
+      "housing_units": 52321,
+      "density_per_sqmi": 65,
+      "lat": 46.92,
+      "lng": -114.07
+    },
+    "30093": {
+      "pop": 34915,
+      "housing_units": 15321,
+      "density_per_sqmi": 36,
+      "lat": 45.9,
+      "lng": -112.66
+    },
+    "30031": {
+      "pop": 118960,
+      "housing_units": 50321,
+      "density_per_sqmi": 42,
+      "lat": 45.68,
+      "lng": -111.16
+    },
+    "56025": {
+      "pop": 75450,
+      "housing_units": 31321,
+      "density_per_sqmi": 10,
+      "lat": 42.96,
+      "lng": -106.79
+    },
+    "56021": {
+      "pop": 99500,
+      "housing_units": 41321,
+      "density_per_sqmi": 22,
+      "lat": 41.31,
+      "lng": -105.59
+    },
+    "56005": {
+      "pop": 46341,
+      "housing_units": 18321,
+      "density_per_sqmi": 6,
+      "lat": 44.25,
+      "lng": -105.55
+    },
+    "49035": {
+      "pop": 1160437,
+      "housing_units": 413321,
+      "density_per_sqmi": 1386,
+      "lat": 40.67,
+      "lng": -111.92
+    },
+    "49049": {
+      "pop": 636235,
+      "housing_units": 229321,
+      "density_per_sqmi": 429,
+      "lat": 40.12,
+      "lng": -111.66
+    },
+    "49057": {
+      "pop": 256828,
+      "housing_units": 97321,
+      "density_per_sqmi": 428,
+      "lat": 41.26,
+      "lng": -111.97
+    },
+    "49011": {
+      "pop": 363392,
+      "housing_units": 128321,
+      "density_per_sqmi": 851,
+      "lat": 41.02,
+      "lng": -112.08
+    },
+    "49053": {
+      "pop": 180279,
+      "housing_units": 71321,
+      "density_per_sqmi": 80,
+      "lat": 37.33,
+      "lng": -113.53
+    },
+    "49005": {
+      "pop": 128289,
+      "housing_units": 47321,
+      "density_per_sqmi": 92,
+      "lat": 41.73,
+      "lng": -111.75
+    },
+    "08041": {
+      "pop": 720403,
+      "housing_units": 289321,
+      "density_per_sqmi": 244,
+      "lat": 38.83,
+      "lng": -104.52
+    },
+    "08069": {
+      "pop": 359066,
+      "housing_units": 144321,
+      "density_per_sqmi": 163,
+      "lat": 40.66,
+      "lng": -105.46
+    },
+    "08123": {
+      "pop": 322571,
+      "housing_units": 127321,
+      "density_per_sqmi": 59,
+      "lat": 40.56,
+      "lng": -104.4
+    },
+    "08005": {
+      "pop": 656590,
+      "housing_units": 264321,
+      "density_per_sqmi": 2313,
+      "lat": 39.65,
+      "lng": -104.34
+    },
+    "08059": {
+      "pop": 582881,
+      "housing_units": 233321,
+      "density_per_sqmi": 844,
+      "lat": 39.59,
+      "lng": -105.19
+    },
+    "08001": {
+      "pop": 519672,
+      "housing_units": 203321,
+      "density_per_sqmi": 1507,
+      "lat": 39.87,
+      "lng": -104.34
+    },
+    "08013": {
+      "pop": 330758,
+      "housing_units": 138321,
+      "density_per_sqmi": 437,
+      "lat": 40.09,
+      "lng": -105.36
+    },
+    "08101": {
+      "pop": 168424,
+      "housing_units": 70321,
+      "density_per_sqmi": 145,
+      "lat": 38.18,
+      "lng": -104.51
+    },
+    "53063": {
+      "pop": 522798,
+      "housing_units": 215321,
+      "density_per_sqmi": 282,
+      "lat": 47.62,
+      "lng": -117.42
+    },
+    "53053": {
+      "pop": 921173,
+      "housing_units": 359321,
+      "density_per_sqmi": 464,
+      "lat": 47.06,
+      "lng": -122.16
+    },
+    "53061": {
+      "pop": 827957,
+      "housing_units": 320321,
+      "density_per_sqmi": 376,
+      "lat": 47.98,
+      "lng": -121.74
+    },
+    "53011": {
+      "pop": 503320,
+      "housing_units": 194321,
+      "density_per_sqmi": 548,
+      "lat": 45.79,
+      "lng": -122.49
+    },
+    "53067": {
+      "pop": 290536,
+      "housing_units": 119321,
+      "density_per_sqmi": 282,
+      "lat": 47.05,
+      "lng": -122.86
+    },
+    "53073": {
+      "pop": 229247,
+      "housing_units": 95321,
+      "density_per_sqmi": 93,
+      "lat": 48.83,
+      "lng": -121.82
+    },
+    "53077": {
+      "pop": 250873,
+      "housing_units": 101321,
+      "density_per_sqmi": 63,
+      "lat": 46.47,
+      "lng": -120.51
+    },
+    "41039": {
+      "pop": 382971,
+      "housing_units": 160321,
+      "density_per_sqmi": 86,
+      "lat": 43.94,
+      "lng": -122.62
+    },
+    "41047": {
+      "pop": 345920,
+      "housing_units": 140321,
+      "density_per_sqmi": 180,
+      "lat": 44.9,
+      "lng": -122.57
+    },
+    "41067": {
+      "pop": 616074,
+      "housing_units": 243321,
+      "density_per_sqmi": 545,
+      "lat": 45.56,
+      "lng": -123.08
+    },
+    "41005": {
+      "pop": 428204,
+      "housing_units": 173321,
+      "density_per_sqmi": 148,
+      "lat": 45.19,
+      "lng": -122.22
+    },
+    "41029": {
+      "pop": 220944,
+      "housing_units": 95321,
+      "density_per_sqmi": 78,
+      "lat": 42.42,
+      "lng": -122.74
+    },
+    "41017": {
+      "pop": 198253,
+      "housing_units": 88321,
+      "density_per_sqmi": 40,
+      "lat": 43.91,
+      "lng": -121.22
+    }
+  }
+}

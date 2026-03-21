@@ -1,0 +1,889 @@
+{
+  "counties": {
+    "06037": {
+      "bws_raw": 4.08,
+      "label": "Extremely High",
+      "county": "Los Angeles, CA"
+    },
+    "17031": {
+      "bws_raw": 0.86,
+      "label": "Low",
+      "county": "Cook, IL"
+    },
+    "48201": {
+      "bws_raw": 1.91,
+      "label": "Low-Medium",
+      "county": "Harris, TX"
+    },
+    "04013": {
+      "bws_raw": 4.89,
+      "label": "Extremely High",
+      "county": "Maricopa, AZ"
+    },
+    "06073": {
+      "bws_raw": 3.08,
+      "label": "High",
+      "county": "San Diego, CA"
+    },
+    "48113": {
+      "bws_raw": 2.52,
+      "label": "Medium-High",
+      "county": "Dallas, TX"
+    },
+    "53033": {
+      "bws_raw": 1.87,
+      "label": "Low-Medium",
+      "county": "King, WA"
+    },
+    "12086": {
+      "bws_raw": 1.54,
+      "label": "Low-Medium",
+      "county": "Miami-Dade, FL"
+    },
+    "48439": {
+      "bws_raw": 1.35,
+      "label": "Low-Medium",
+      "county": "Tarrant, TX"
+    },
+    "06065": {
+      "bws_raw": 3.06,
+      "label": "High",
+      "county": "Riverside, CA"
+    },
+    "06085": {
+      "bws_raw": 3.17,
+      "label": "High",
+      "county": "Santa Clara, CA"
+    },
+    "48029": {
+      "bws_raw": 2.51,
+      "label": "Medium-High",
+      "county": "Bexar, TX"
+    },
+    "12011": {
+      "bws_raw": 2.4,
+      "label": "Medium-High",
+      "county": "Broward, FL"
+    },
+    "32003": {
+      "bws_raw": 4.71,
+      "label": "Extremely High",
+      "county": "Clark, NV"
+    },
+    "06001": {
+      "bws_raw": 1.69,
+      "label": "Low-Medium",
+      "county": "Alameda, CA"
+    },
+    "06067": {
+      "bws_raw": 1.6,
+      "label": "Low-Medium",
+      "county": "Sacramento, CA"
+    },
+    "25017": {
+      "bws_raw": 0.41,
+      "label": "Low",
+      "county": "Middlesex, MA"
+    },
+    "26163": {
+      "bws_raw": 0.58,
+      "label": "Low",
+      "county": "Wayne, MI"
+    },
+    "27053": {
+      "bws_raw": 1.55,
+      "label": "Low-Medium",
+      "county": "Hennepin, MN"
+    },
+    "41051": {
+      "bws_raw": 3.39,
+      "label": "High",
+      "county": "Multnomah, OR"
+    },
+    "08031": {
+      "bws_raw": 3.97,
+      "label": "High",
+      "county": "Denver, CO"
+    },
+    "48453": {
+      "bws_raw": 1.64,
+      "label": "Low-Medium",
+      "county": "Travis, TX"
+    },
+    "51107": {
+      "bws_raw": 0.97,
+      "label": "Low",
+      "county": "Loudoun, VA"
+    },
+    "51059": {
+      "bws_raw": 0.89,
+      "label": "Low",
+      "county": "Fairfax, VA"
+    },
+    "24031": {
+      "bws_raw": 1.33,
+      "label": "Low-Medium",
+      "county": "Montgomery, MD"
+    },
+    "24033": {
+      "bws_raw": 0.42,
+      "label": "Low",
+      "county": "Prince George's, MD"
+    },
+    "24510": {
+      "bws_raw": 1.26,
+      "label": "Low-Medium",
+      "county": "Baltimore City, MD"
+    },
+    "42101": {
+      "bws_raw": 0.3,
+      "label": "Low",
+      "county": "Philadelphia, PA"
+    },
+    "42003": {
+      "bws_raw": 1.3,
+      "label": "Low-Medium",
+      "county": "Allegheny, PA"
+    },
+    "39049": {
+      "bws_raw": 1.47,
+      "label": "Low-Medium",
+      "county": "Franklin, OH"
+    },
+    "39061": {
+      "bws_raw": 1.24,
+      "label": "Low-Medium",
+      "county": "Hamilton, OH"
+    },
+    "39035": {
+      "bws_raw": 0.55,
+      "label": "Low",
+      "county": "Cuyahoga, OH"
+    },
+    "39153": {
+      "bws_raw": 1.37,
+      "label": "Low-Medium",
+      "county": "Summit, OH"
+    },
+    "39095": {
+      "bws_raw": 0.9,
+      "label": "Low",
+      "county": "Lucas, OH"
+    },
+    "39169": {
+      "bws_raw": 0.71,
+      "label": "Low",
+      "county": "Wayne, OH"
+    },
+    "18097": {
+      "bws_raw": 0.63,
+      "label": "Low",
+      "county": "Marion, IN"
+    },
+    "18003": {
+      "bws_raw": 0.82,
+      "label": "Low",
+      "county": "Allen, IN"
+    },
+    "29510": {
+      "bws_raw": 0.93,
+      "label": "Low",
+      "county": "St. Louis City, MO"
+    },
+    "29095": {
+      "bws_raw": 1.26,
+      "label": "Low-Medium",
+      "county": "Jackson, MO"
+    },
+    "55079": {
+      "bws_raw": 1.18,
+      "label": "Low-Medium",
+      "county": "Milwaukee, WI"
+    },
+    "55025": {
+      "bws_raw": 1.15,
+      "label": "Low-Medium",
+      "county": "Dane, WI"
+    },
+    "55133": {
+      "bws_raw": 1.19,
+      "label": "Low-Medium",
+      "county": "Waukesha, WI"
+    },
+    "01073": {
+      "bws_raw": 1.24,
+      "label": "Low-Medium",
+      "county": "Jefferson, AL"
+    },
+    "47157": {
+      "bws_raw": 1.14,
+      "label": "Low-Medium",
+      "county": "Shelby, TN"
+    },
+    "47037": {
+      "bws_raw": 2.35,
+      "label": "Medium-High",
+      "county": "Davidson, TN"
+    },
+    "47093": {
+      "bws_raw": 1.94,
+      "label": "Low-Medium",
+      "county": "Knox, TN"
+    },
+    "37119": {
+      "bws_raw": 1.03,
+      "label": "Low-Medium",
+      "county": "Mecklenburg, NC"
+    },
+    "37183": {
+      "bws_raw": 0.89,
+      "label": "Low",
+      "county": "Wake, NC"
+    },
+    "37063": {
+      "bws_raw": 0.81,
+      "label": "Low",
+      "county": "Durham, NC"
+    },
+    "37081": {
+      "bws_raw": 1.03,
+      "label": "Low-Medium",
+      "county": "Guilford, NC"
+    },
+    "45079": {
+      "bws_raw": 2.0,
+      "label": "Medium-High",
+      "county": "Richland, SC"
+    },
+    "45019": {
+      "bws_raw": 1.43,
+      "label": "Low-Medium",
+      "county": "Charleston, SC"
+    },
+    "13121": {
+      "bws_raw": 2.14,
+      "label": "Medium-High",
+      "county": "Fulton, GA"
+    },
+    "13089": {
+      "bws_raw": 0.98,
+      "label": "Low",
+      "county": "DeKalb, GA"
+    },
+    "13135": {
+      "bws_raw": 1.43,
+      "label": "Low-Medium",
+      "county": "Gwinnett, GA"
+    },
+    "12095": {
+      "bws_raw": 1.9,
+      "label": "Low-Medium",
+      "county": "Orange, FL"
+    },
+    "12057": {
+      "bws_raw": 2.03,
+      "label": "Medium-High",
+      "county": "Hillsborough, FL"
+    },
+    "12099": {
+      "bws_raw": 1.17,
+      "label": "Low-Medium",
+      "county": "Palm Beach, FL"
+    },
+    "12031": {
+      "bws_raw": 1.67,
+      "label": "Low-Medium",
+      "county": "Duval, FL"
+    },
+    "12103": {
+      "bws_raw": 1.5,
+      "label": "Low-Medium",
+      "county": "Pinellas, FL"
+    },
+    "12073": {
+      "bws_raw": 1.72,
+      "label": "Low-Medium",
+      "county": "Leon, FL"
+    },
+    "22033": {
+      "bws_raw": 2.37,
+      "label": "Medium-High",
+      "county": "East Baton Rouge, LA"
+    },
+    "22051": {
+      "bws_raw": 1.05,
+      "label": "Low-Medium",
+      "county": "Jefferson, LA"
+    },
+    "22071": {
+      "bws_raw": 2.44,
+      "label": "Medium-High",
+      "county": "Orleans, LA"
+    },
+    "28049": {
+      "bws_raw": 1.06,
+      "label": "Low-Medium",
+      "county": "Hinds, MS"
+    },
+    "28089": {
+      "bws_raw": 0.89,
+      "label": "Low",
+      "county": "Madison, MS"
+    },
+    "05119": {
+      "bws_raw": 1.9,
+      "label": "Low-Medium",
+      "county": "Pulaski, AR"
+    },
+    "40109": {
+      "bws_raw": 1.39,
+      "label": "Low-Medium",
+      "county": "Oklahoma, OK"
+    },
+    "40143": {
+      "bws_raw": 2.2,
+      "label": "Medium-High",
+      "county": "Tulsa, OK"
+    },
+    "20173": {
+      "bws_raw": 0.75,
+      "label": "Low",
+      "county": "Sedgwick, KS"
+    },
+    "20091": {
+      "bws_raw": 1.0,
+      "label": "Low-Medium",
+      "county": "Johnson, KS"
+    },
+    "31055": {
+      "bws_raw": 0.92,
+      "label": "Low",
+      "county": "Douglas, NE"
+    },
+    "31109": {
+      "bws_raw": 1.4,
+      "label": "Low-Medium",
+      "county": "Lancaster, NE"
+    },
+    "46099": {
+      "bws_raw": 1.5,
+      "label": "Low-Medium",
+      "county": "Minnehaha, SD"
+    },
+    "46103": {
+      "bws_raw": 3.06,
+      "label": "High",
+      "county": "Pennington, SD"
+    },
+    "27109": {
+      "bws_raw": 0.85,
+      "label": "Low",
+      "county": "Olmsted, MN"
+    },
+    "27145": {
+      "bws_raw": 1.05,
+      "label": "Low-Medium",
+      "county": "Stearns, MN"
+    },
+    "55009": {
+      "bws_raw": 0.69,
+      "label": "Low",
+      "county": "Brown, WI"
+    },
+    "55087": {
+      "bws_raw": 0.42,
+      "label": "Low",
+      "county": "Outagamie, WI"
+    },
+    "26077": {
+      "bws_raw": 0.94,
+      "label": "Low",
+      "county": "Kalamazoo, MI"
+    },
+    "26081": {
+      "bws_raw": 0.59,
+      "label": "Low",
+      "county": "Kent, MI"
+    },
+    "26065": {
+      "bws_raw": 0.79,
+      "label": "Low",
+      "county": "Ingham, MI"
+    },
+    "26161": {
+      "bws_raw": 1.5,
+      "label": "Low-Medium",
+      "county": "Washtenaw, MI"
+    },
+    "26049": {
+      "bws_raw": 1.27,
+      "label": "Low-Medium",
+      "county": "Genesee, MI"
+    },
+    "26099": {
+      "bws_raw": 1.06,
+      "label": "Low-Medium",
+      "county": "Macomb, MI"
+    },
+    "26125": {
+      "bws_raw": 1.47,
+      "label": "Low-Medium",
+      "county": "Oakland, MI"
+    },
+    "34025": {
+      "bws_raw": 1.4,
+      "label": "Low-Medium",
+      "county": "Monmouth, NJ"
+    },
+    "34003": {
+      "bws_raw": 0.94,
+      "label": "Low",
+      "county": "Bergen, NJ"
+    },
+    "34013": {
+      "bws_raw": 1.01,
+      "label": "Low-Medium",
+      "county": "Essex, NJ"
+    },
+    "34017": {
+      "bws_raw": 0.86,
+      "label": "Low",
+      "county": "Hudson, NJ"
+    },
+    "34023": {
+      "bws_raw": 0.77,
+      "label": "Low",
+      "county": "Middlesex, NJ"
+    },
+    "36059": {
+      "bws_raw": 1.13,
+      "label": "Low-Medium",
+      "county": "Nassau, NY"
+    },
+    "36103": {
+      "bws_raw": 0.97,
+      "label": "Low",
+      "county": "Suffolk, NY"
+    },
+    "36119": {
+      "bws_raw": 0.67,
+      "label": "Low",
+      "county": "Westchester, NY"
+    },
+    "36055": {
+      "bws_raw": 0.33,
+      "label": "Low",
+      "county": "Monroe, NY"
+    },
+    "36067": {
+      "bws_raw": 0.88,
+      "label": "Low",
+      "county": "Onondaga, NY"
+    },
+    "36029": {
+      "bws_raw": 0.87,
+      "label": "Low",
+      "county": "Erie, NY"
+    },
+    "36001": {
+      "bws_raw": 0.94,
+      "label": "Low",
+      "county": "Albany, NY"
+    },
+    "09001": {
+      "bws_raw": 1.13,
+      "label": "Low-Medium",
+      "county": "Fairfield, CT"
+    },
+    "09003": {
+      "bws_raw": 0.5,
+      "label": "Low",
+      "county": "Hartford, CT"
+    },
+    "09009": {
+      "bws_raw": 0.67,
+      "label": "Low",
+      "county": "New Haven, CT"
+    },
+    "44007": {
+      "bws_raw": 0.56,
+      "label": "Low",
+      "county": "Providence, RI"
+    },
+    "25015": {
+      "bws_raw": 1.3,
+      "label": "Low-Medium",
+      "county": "Hampshire, MA"
+    },
+    "25027": {
+      "bws_raw": 0.32,
+      "label": "Low",
+      "county": "Worcester, MA"
+    },
+    "25009": {
+      "bws_raw": 0.76,
+      "label": "Low",
+      "county": "Essex, MA"
+    },
+    "25021": {
+      "bws_raw": 0.88,
+      "label": "Low",
+      "county": "Norfolk, MA"
+    },
+    "25005": {
+      "bws_raw": 0.78,
+      "label": "Low",
+      "county": "Bristol, MA"
+    },
+    "33015": {
+      "bws_raw": 0.77,
+      "label": "Low",
+      "county": "Rockingham, NH"
+    },
+    "23005": {
+      "bws_raw": 1.0,
+      "label": "Low-Medium",
+      "county": "Cumberland, ME"
+    },
+    "50007": {
+      "bws_raw": 0.42,
+      "label": "Low",
+      "county": "Chittenden, VT"
+    },
+    "35001": {
+      "bws_raw": 3.23,
+      "label": "High",
+      "county": "Bernalillo, NM"
+    },
+    "35013": {
+      "bws_raw": 4.59,
+      "label": "Extremely High",
+      "county": "Dona Ana, NM"
+    },
+    "48141": {
+      "bws_raw": 4.4,
+      "label": "Extremely High",
+      "county": "El Paso, TX"
+    },
+    "48303": {
+      "bws_raw": 2.14,
+      "label": "Medium-High",
+      "county": "Lubbock, TX"
+    },
+    "48479": {
+      "bws_raw": 3.24,
+      "label": "High",
+      "county": "Webb, TX"
+    },
+    "48215": {
+      "bws_raw": 2.84,
+      "label": "Medium-High",
+      "county": "Hidalgo, TX"
+    },
+    "48355": {
+      "bws_raw": 2.0,
+      "label": "Medium-High",
+      "county": "Nueces, TX"
+    },
+    "48245": {
+      "bws_raw": 3.16,
+      "label": "High",
+      "county": "Jefferson, TX"
+    },
+    "48167": {
+      "bws_raw": 2.13,
+      "label": "Medium-High",
+      "county": "Galveston, TX"
+    },
+    "48157": {
+      "bws_raw": 1.97,
+      "label": "Low-Medium",
+      "county": "Fort Bend, TX"
+    },
+    "48085": {
+      "bws_raw": 3.24,
+      "label": "High",
+      "county": "Collin, TX"
+    },
+    "48121": {
+      "bws_raw": 1.57,
+      "label": "Low-Medium",
+      "county": "Denton, TX"
+    },
+    "48491": {
+      "bws_raw": 3.05,
+      "label": "High",
+      "county": "Williamson, TX"
+    },
+    "48209": {
+      "bws_raw": 3.17,
+      "label": "High",
+      "county": "Hays, TX"
+    },
+    "48423": {
+      "bws_raw": 2.89,
+      "label": "Medium-High",
+      "county": "Smith, TX"
+    },
+    "48309": {
+      "bws_raw": 2.29,
+      "label": "Medium-High",
+      "county": "McLennan, TX"
+    },
+    "48027": {
+      "bws_raw": 3.17,
+      "label": "High",
+      "county": "Bell, TX"
+    },
+    "48061": {
+      "bws_raw": 2.32,
+      "label": "Medium-High",
+      "county": "Cameron, TX"
+    },
+    "04019": {
+      "bws_raw": 3.04,
+      "label": "High",
+      "county": "Pima, AZ"
+    },
+    "04021": {
+      "bws_raw": 3.14,
+      "label": "High",
+      "county": "Pinal, AZ"
+    },
+    "04025": {
+      "bws_raw": 4.51,
+      "label": "Extremely High",
+      "county": "Yavapai, AZ"
+    },
+    "04015": {
+      "bws_raw": 4.54,
+      "label": "Extremely High",
+      "county": "Mohave, AZ"
+    },
+    "04027": {
+      "bws_raw": 3.22,
+      "label": "High",
+      "county": "Yuma, AZ"
+    },
+    "04005": {
+      "bws_raw": 3.53,
+      "label": "High",
+      "county": "Coconino, AZ"
+    },
+    "04001": {
+      "bws_raw": 4.16,
+      "label": "Extremely High",
+      "county": "Apache, AZ"
+    },
+    "04017": {
+      "bws_raw": 4.17,
+      "label": "Extremely High",
+      "county": "Navajo, AZ"
+    },
+    "32031": {
+      "bws_raw": 3.19,
+      "label": "High",
+      "county": "Washoe, NV"
+    },
+    "32510": {
+      "bws_raw": 4.5,
+      "label": "Extremely High",
+      "county": "Carson City, NV"
+    },
+    "16001": {
+      "bws_raw": 2.84,
+      "label": "Medium-High",
+      "county": "Ada, ID"
+    },
+    "16027": {
+      "bws_raw": 3.91,
+      "label": "High",
+      "county": "Canyon, ID"
+    },
+    "16019": {
+      "bws_raw": 3.62,
+      "label": "High",
+      "county": "Bonneville, ID"
+    },
+    "16055": {
+      "bws_raw": 2.9,
+      "label": "Medium-High",
+      "county": "Kootenai, ID"
+    },
+    "30111": {
+      "bws_raw": 2.13,
+      "label": "Medium-High",
+      "county": "Yellowstone, MT"
+    },
+    "30013": {
+      "bws_raw": 3.31,
+      "label": "High",
+      "county": "Cascade, MT"
+    },
+    "30063": {
+      "bws_raw": 2.23,
+      "label": "Medium-High",
+      "county": "Missoula, MT"
+    },
+    "30093": {
+      "bws_raw": 2.21,
+      "label": "Medium-High",
+      "county": "Silver Bow, MT"
+    },
+    "30031": {
+      "bws_raw": 3.23,
+      "label": "High",
+      "county": "Gallatin, MT"
+    },
+    "56025": {
+      "bws_raw": 3.19,
+      "label": "High",
+      "county": "Natrona, WY"
+    },
+    "56021": {
+      "bws_raw": 2.43,
+      "label": "Medium-High",
+      "county": "Laramie, WY"
+    },
+    "56005": {
+      "bws_raw": 2.86,
+      "label": "Medium-High",
+      "county": "Campbell, WY"
+    },
+    "49035": {
+      "bws_raw": 3.1,
+      "label": "High",
+      "county": "Salt Lake, UT"
+    },
+    "49049": {
+      "bws_raw": 2.39,
+      "label": "Medium-High",
+      "county": "Utah, UT"
+    },
+    "49057": {
+      "bws_raw": 3.55,
+      "label": "High",
+      "county": "Weber, UT"
+    },
+    "49011": {
+      "bws_raw": 4.05,
+      "label": "Extremely High",
+      "county": "Davis, UT"
+    },
+    "49053": {
+      "bws_raw": 3.82,
+      "label": "High",
+      "county": "Washington, UT"
+    },
+    "49005": {
+      "bws_raw": 4.08,
+      "label": "Extremely High",
+      "county": "Cache, UT"
+    },
+    "08041": {
+      "bws_raw": 3.99,
+      "label": "High",
+      "county": "El Paso, CO"
+    },
+    "08069": {
+      "bws_raw": 3.47,
+      "label": "High",
+      "county": "Larimer, CO"
+    },
+    "08123": {
+      "bws_raw": 2.0,
+      "label": "Medium-High",
+      "county": "Weld, CO"
+    },
+    "08005": {
+      "bws_raw": 2.37,
+      "label": "Medium-High",
+      "county": "Arapahoe, CO"
+    },
+    "08059": {
+      "bws_raw": 3.35,
+      "label": "High",
+      "county": "Jefferson, CO"
+    },
+    "08001": {
+      "bws_raw": 3.35,
+      "label": "High",
+      "county": "Adams, CO"
+    },
+    "08013": {
+      "bws_raw": 4.03,
+      "label": "Extremely High",
+      "county": "Boulder, CO"
+    },
+    "08101": {
+      "bws_raw": 3.94,
+      "label": "High",
+      "county": "Pueblo, CO"
+    },
+    "53063": {
+      "bws_raw": 2.82,
+      "label": "Medium-High",
+      "county": "Spokane, WA"
+    },
+    "53053": {
+      "bws_raw": 3.37,
+      "label": "High",
+      "county": "Pierce, WA"
+    },
+    "53061": {
+      "bws_raw": 3.16,
+      "label": "High",
+      "county": "Snohomish, WA"
+    },
+    "53011": {
+      "bws_raw": 2.53,
+      "label": "Medium-High",
+      "county": "Clark, WA"
+    },
+    "53067": {
+      "bws_raw": 1.67,
+      "label": "Low-Medium",
+      "county": "Thurston, WA"
+    },
+    "53073": {
+      "bws_raw": 3.4,
+      "label": "High",
+      "county": "Whatcom, WA"
+    },
+    "53077": {
+      "bws_raw": 3.14,
+      "label": "High",
+      "county": "Yakima, WA"
+    },
+    "41039": {
+      "bws_raw": 2.6,
+      "label": "Medium-High",
+      "county": "Lane, OR"
+    },
+    "41047": {
+      "bws_raw": 3.03,
+      "label": "High",
+      "county": "Marion, OR"
+    },
+    "41067": {
+      "bws_raw": 1.65,
+      "label": "Low-Medium",
+      "county": "Washington, OR"
+    },
+    "41005": {
+      "bws_raw": 2.44,
+      "label": "Medium-High",
+      "county": "Clackamas, OR"
+    },
+    "41029": {
+      "bws_raw": 2.5,
+      "label": "Medium-High",
+      "county": "Jackson, OR"
+    },
+    "41017": {
+      "bws_raw": 3.7,
+      "label": "High",
+      "county": "Deschutes, OR"
+    }
+  }
+}
