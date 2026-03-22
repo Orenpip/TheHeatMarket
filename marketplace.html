@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HeatGrid — Heat Marketplace</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -501,11 +502,12 @@ function App() {
         background:'#1a1a1a',color:'#f5f0e8',padding:'14px 24px',
         display:'flex',alignItems:'center',justifyContent:'space-between',gap:16,
       }}>
-        <div className="flex items-center gap-3">
-          <a href="index.html" className="serif font-bold text-xl tracking-tight hover:opacity-80 transition-opacity"
-            style={{color:'#f5f0e8',textDecoration:'none'}}>HeatGrid</a>
-          <span className="text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wider"
-            style={{background:'#d4380d',color:'white'}}>MARKETPLACE</span>
+        <div className="flex items-center gap-2.5">
+          <a href="index.html" className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            style={{color:'#f5f0e8',textDecoration:'none'}}>
+            <img src="favicon.svg" alt="" style={{width:24,height:24}} />
+            <span className="serif font-bold text-xl tracking-tight">HeatGrid</span>
+          </a>
         </div>
         <div className="text-xs" style={{color:'#6b6b6b'}}>
           {dcs?.length?.toLocaleString()} data centers indexed

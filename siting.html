@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HeatGrid — Data Center Sustainability Platform</title>
+  <title>HeatGrid — Data Center Siting</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
   <!-- MapLibre GL JS (free, no token required) -->
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
@@ -1078,7 +1079,7 @@ function EmptyState({ onDemo }) {
       </div>
 
       <div className="w-full space-y-2">
-        <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{color:'#9a9a9a'}}>Try a demo location</p>
+        <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{color:'#9a9a9a'}}>Quick Start</p>
         <button onClick={() => onDemo(39.04, -77.49, 9)}
           className="w-full py-3 rounded-xl text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
           style={{background:'#1a5cff',color:'white'}}>
@@ -1524,11 +1525,12 @@ function App() {
         padding:'0 20px', zIndex:10, gap:12,
       }}>
         {/* Brand */}
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <a href="index.html" className="serif font-bold text-xl tracking-tight hover:opacity-80 transition-opacity"
-            style={{color:'#f5f0e8',textDecoration:'none'}}>HeatGrid</a>
-          <span className="text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wider"
-            style={{background:'#1a5cff',color:'white'}}>SITING</span>
+        <div className="flex items-center gap-2.5 flex-shrink-0">
+          <a href="index.html" className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            style={{color:'#f5f0e8',textDecoration:'none'}}>
+            <img src="favicon.svg" alt="" style={{width:24,height:24}} />
+            <span className="serif font-bold text-xl tracking-tight">HeatGrid</span>
+          </a>
         </div>
 
         {/* Search bar — center */}
