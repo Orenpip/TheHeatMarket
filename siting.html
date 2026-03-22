@@ -403,9 +403,7 @@ function ScoreCard({ county, scores, onViewMarket, onListHeat }) {
   const total = Math.round(scores.total);
 
   return (
-    <div className="slide-up h-full flex flex-col" style={{overflow:'hidden'}}>
-      {/* Scrollable content */}
-      <div className="flex-1" style={{overflowY:'auto'}}>
+    <div className="slide-up">
       {/* Location */}
       <div className="mb-4 pb-4" style={{borderBottom:'1px solid #e2d9cc'}}>
         <p className="text-xs uppercase tracking-widest mb-1" style={{color:'#9a9a9a'}}>Selected Site</p>
@@ -456,9 +454,7 @@ function ScoreCard({ county, scores, onViewMarket, onListHeat }) {
           ✅ <strong>Clean local grid</strong> — low carbon footprint for operations.
         </div>
       )}
-      </div>{/* end scrollable content */}
-
-      <div className="flex gap-2 flex-shrink-0 pt-3">
+      <div className="flex gap-2 pt-3">
         <button onClick={onViewMarket}
           className="flex-1 py-3.5 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
           style={{background:'#d4380d',color:'white',letterSpacing:'.04em'}}>
@@ -743,7 +739,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
   }, [buyers]);
 
   return (
-    <div className="slide-up h-full flex flex-col">
+    <div className="slide-up">
       {/* Back */}
       <button onClick={onBack} className="flex items-center gap-1.5 text-xs mb-4 hover:opacity-60 transition-opacity" style={{color:'#6b6b6b'}}>
         ← Siting Score
@@ -831,7 +827,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
       )}
 
       {/* Buyer list header */}
-      <div className="flex items-center justify-between mb-2 flex-shrink-0">
+      <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <span className="serif font-bold text-sm">Buyers within {dcConfig.radiusKm} km</span>
           <span className="text-xs px-2 py-0.5 rounded-full font-bold" style={{background:'#d4380d',color:'white'}}>
@@ -846,7 +842,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
       </div>
 
       {/* Sort pills */}
-      <div className="flex gap-1.5 mb-3 overflow-x-auto pb-1 flex-shrink-0" style={{scrollbarWidth:'none'}}>
+      <div className="flex gap-1.5 mb-3 overflow-x-auto pb-1" style={{scrollbarWidth:'none'}}>
         {[['feasibility','Best Match'],['distance','Nearest'],['savings','Most Savings'],['co2','Most CO₂'],['payback','Fastest ROI']].map(([v,l])=>(
           <button key={v} onClick={()=>setSortBy(v)}
             className="flex-shrink-0 pill-btn text-xs px-2.5 py-1 rounded-full border"
@@ -859,7 +855,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
       </div>
 
       {/* Cards */}
-      <div className="flex-1 overflow-y-auto">
+      <div>
         {sorted.length === 0 ? (
           <div className="text-center py-10" style={{color:'#9a9a9a'}}>
             <p className="text-3xl mb-2">🔍</p>
@@ -1063,7 +1059,7 @@ function SearchBar({ onResult, mapRef }) {
 // ── Empty state ───────────────────────────────────────────────────
 function EmptyState({ onDemo }) {
   return (
-    <div className="slide-up flex flex-col items-center justify-center h-full py-8 px-2 text-center" style={{overflowY:'auto'}}>
+    <div className="slide-up flex flex-col items-center justify-center py-8 px-2 text-center" style={{minHeight:'100%'}}>
       <div className="mb-6">
         <p className="text-5xl mb-4">🌍</p>
         <h2 className="serif text-2xl font-bold mb-2">Analyze Any US Site</h2>
@@ -1398,7 +1394,7 @@ function App() {
   const [county,      setCounty]      = useState(null);
   const [scores,      setScores]      = useState(null);
   const [buyers,      setBuyers]      = useState(null);
-  const [dcConfig,    setDcConfig]    = useState({capacityMw:20, coolingType:'air', radiusKm:5});
+  const [dcConfig,    setDcConfig]    = useState({capacityMw:20, coolingType:'air', radiusKm:10});
   // Compare mode
   const [pickingB,    setPickingB]    = useState(false);   // user is clicking map to set site B
   const [showListHeat, setShowListHeat] = useState(false); // list heat modal
@@ -1614,10 +1610,9 @@ function App() {
 
         {/* Left panel */}
         <div style={{
-          width:380, flexShrink:0, overflow:'hidden',
+          width:380, flexShrink:0, overflowY:'auto',
           background:'#f5f0e8', padding:20,
           borderRight:'1px solid #e2d9cc',
-          display:'flex', flexDirection:'column',
         }}>
           {!selected ? (
             <EmptyState onDemo={handleDemo} />
