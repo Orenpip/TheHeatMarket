@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HeatGrid — Heat Marketplace</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -14,22 +14,29 @@
   <script>
     tailwind.config = {
       theme: { extend: {
-        fontFamily: { sans: ['Space Mono','monospace'], serif: ['Fraunces','serif'] },
+        fontFamily: { sans: ['Nunito','sans-serif'], serif: ['Fraunces','serif'] },
       }}
     }
   </script>
   <style>
-    :root { --bg: #f5f0e8; --surface: #fff; --text: #1a1a1a; --muted: #6b6b6b;
-            --border: #e2d9cc; --orange: #d4380d; --blue: #1a5cff; --green: #15803d; }
+    :root { --bg: #FDFCF8; --surface: #FEFEFA; --text: #2C2C24; --muted: #78786C;
+            --border: #DED8CF; --orange: #C18C5D; --blue: #5D7052; --green: #15803d; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Space Mono', monospace; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     .serif { font-family: 'Fraunces', serif; }
+    /* Grain texture */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9990; pointer-events: none;
+      opacity: 0.03; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 256px 256px;
+    }
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
     .fade-in { animation: fadeIn .3s ease-out both; }
     @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
     .dc-card { transition: box-shadow .15s, transform .15s; }
-    .dc-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
+    .dc-card:hover { box-shadow: 0 6px 24px rgba(93,112,82,0.1); transform: translateY(-2px); }
   </style>
 </head>
 <body>
@@ -109,7 +116,7 @@ function LocationSearch({ onResult }) {
   return (
     <div style={{ position:'relative', width:'100%', maxWidth:500 }}>
       <div className="flex items-center gap-3 rounded-xl px-4 py-3"
-        style={{ background:'white', border:'1px solid #e2d9cc' }}>
+        style={{ background:'white', border:'1px solid #DED8CF' }}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" strokeWidth="2.5" strokeLinecap="round">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
@@ -117,7 +124,7 @@ function LocationSearch({ onResult }) {
           onFocus={() => results.length > 0 && setOpen(true)}
           placeholder="Enter your location (city, address, zip)…"
           style={{ background:'transparent', border:'none', outline:'none', fontSize:13, width:'100%',
-                   fontFamily:'Space Mono, monospace', color:'#1a1a1a' }}
+                   fontFamily:'Nunito, sans-serif', color:'#2C2C24' }}
         />
         {query && <button onClick={()=>{setQuery('');setResults([]);setOpen(false);}}
           style={{color:'#9a9a9a',background:'none',border:'none',cursor:'pointer',fontSize:16}}>×</button>}
@@ -125,7 +132,7 @@ function LocationSearch({ onResult }) {
       {open && results.length > 0 && (
         <div style={{ position:'absolute',top:'110%',left:0,right:0,zIndex:100,
           background:'white',borderRadius:10,boxShadow:'0 8px 32px rgba(0,0,0,.15)',
-          border:'1px solid #e2d9cc',overflow:'hidden' }}>
+          border:'1px solid #DED8CF',overflow:'hidden' }}>
           {results.map((r,i) => {
             const parts = r.display_name.split(',');
             return (
@@ -199,24 +206,24 @@ function ExpressInterestForm({ dc, onClose, onSuccess }) {
     <div className="text-center py-4">
       <p className="text-3xl mb-3">&#10003;</p>
       <p className="serif font-bold text-lg mb-2">Interest Registered!</p>
-      <p className="text-xs" style={{color:'#6b6b6b'}}>
+      <p className="text-xs" style={{color:'#78786C'}}>
         We'll connect you with {dc.name || 'this data center'}. Check your email for next steps.
       </p>
       <button onClick={onClose} className="mt-4 px-5 py-2 rounded-lg text-xs font-bold"
-        style={{background:'#1a1a1a',color:'white'}}>Close</button>
+        style={{background:'#2C2C24',color:'white'}}>Close</button>
     </div>
   );
 
-  const fieldStyle = {background:'#f5f0e8',border:'1px solid #e2d9cc',borderRadius:8,padding:'8px 12px',
-    fontSize:12,fontFamily:'Space Mono,monospace',width:'100%',outline:'none'};
+  const fieldStyle = {background:'#FDFCF8',border:'1px solid #DED8CF',borderRadius:8,padding:'8px 12px',
+    fontSize:12,fontFamily:'Nunito, sans-serif',width:'100%',outline:'none'};
 
   return (
     <form onSubmit={handleSubmit}>
       <p className="serif font-bold text-lg mb-1">Express Interest</p>
-      <p className="text-xs mb-4" style={{color:'#6b6b6b'}}>
+      <p className="text-xs mb-4" style={{color:'#78786C'}}>
         in {dc.name || 'Data Center'} — {dc.city}, {dc.state}
       </p>
-      {error && <p className="text-xs mb-3 font-bold" style={{color:'#d4380d'}}>{error}</p>}
+      {error && <p className="text-xs mb-3 font-bold" style={{color:'#C18C5D'}}>{error}</p>}
       <div className="space-y-3">
         <div>
           <label className="text-xs font-bold block mb-1">Facility Type *</label>
@@ -256,8 +263,8 @@ function ExpressInterestForm({ dc, onClose, onSuccess }) {
         </div>
       </div>
       <button type="submit" disabled={submitting}
-        className="w-full mt-4 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
-        style={{background:'#d4380d',color:'white',opacity:submitting?0.6:1}}>
+        className="w-full mt-4 py-3 rounded-full text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+        style={{background:'#C18C5D',color:'white',opacity:submitting?0.6:1,boxShadow:'0 4px 20px -2px rgba(193,140,93,0.25)'}}>
         {submitting ? 'Submitting...' : 'Submit Interest'}
       </button>
     </form>
@@ -303,24 +310,24 @@ function BuyerRegistrationForm({ location, onClose }) {
     <div className="text-center py-4">
       <p className="text-3xl mb-3">&#10003;</p>
       <p className="serif font-bold text-lg mb-2">You're Registered!</p>
-      <p className="text-xs" style={{color:'#6b6b6b'}}>
+      <p className="text-xs" style={{color:'#78786C'}}>
         We'll match you with the best heat sources near you and reach out via email.
       </p>
       <button onClick={onClose} className="mt-4 px-5 py-2 rounded-lg text-xs font-bold"
-        style={{background:'#1a1a1a',color:'white'}}>Close</button>
+        style={{background:'#2C2C24',color:'white'}}>Close</button>
     </div>
   );
 
-  const fieldStyle = {background:'#f5f0e8',border:'1px solid #e2d9cc',borderRadius:8,padding:'8px 12px',
-    fontSize:12,fontFamily:'Space Mono,monospace',width:'100%',outline:'none'};
+  const fieldStyle = {background:'#FDFCF8',border:'1px solid #DED8CF',borderRadius:8,padding:'8px 12px',
+    fontSize:12,fontFamily:'Nunito, sans-serif',width:'100%',outline:'none'};
 
   return (
     <form onSubmit={handleSubmit}>
       <p className="serif font-bold text-lg mb-1">Register as Heat Buyer</p>
-      <p className="text-xs mb-4" style={{color:'#6b6b6b'}}>
+      <p className="text-xs mb-4" style={{color:'#78786C'}}>
         Tell us about your facility and we'll match you with nearby data centers.
       </p>
-      {error && <p className="text-xs mb-3 font-bold" style={{color:'#d4380d'}}>{error}</p>}
+      {error && <p className="text-xs mb-3 font-bold" style={{color:'#C18C5D'}}>{error}</p>}
       <div className="space-y-3">
         <div>
           <label className="text-xs font-bold block mb-1">Facility Type *</label>
@@ -360,8 +367,8 @@ function BuyerRegistrationForm({ location, onClose }) {
         </div>
       </div>
       <button type="submit" disabled={submitting}
-        className="w-full mt-4 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
-        style={{background:'#d4380d',color:'white',opacity:submitting?0.6:1}}>
+        className="w-full mt-4 py-3 rounded-full text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+        style={{background:'#C18C5D',color:'white',opacity:submitting?0.6:1,boxShadow:'0 4px 20px -2px rgba(193,140,93,0.25)'}}>
         {submitting ? 'Submitting...' : 'Register'}
       </button>
     </form>
@@ -378,7 +385,7 @@ function DCCard({ dc, distKm, onExpressInterest }) {
   const savingsPerMwh = gasCostMwh - heatPrice;
 
   return (
-    <div className="dc-card rounded-xl overflow-hidden" style={{background:'white',border:'1px solid #e2d9cc'}}>
+    <div className="dc-card rounded-2xl overflow-hidden" style={{background:'white',border:'1px solid #DED8CF'}}>
       <button className="w-full text-left p-5" onClick={()=>setExpanded(e=>!e)}>
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex-1 min-w-0">
@@ -388,13 +395,13 @@ function DCCard({ dc, distKm, onExpressInterest }) {
                 <span className="text-xs px-2 py-0.5 rounded-full font-bold" style={{background:'#dcfce7',color:'#15803d',fontSize:9}}>LISTED</span>
               )}
             </div>
-            <p className="text-xs mt-0.5" style={{color:'#6b6b6b'}}>
+            <p className="text-xs mt-0.5" style={{color:'#78786C'}}>
               {dc.company ? `${dc.company} · ` : ''}{dc.city}, {dc.state}
             </p>
           </div>
           {distKm !== null && (
             <div className="text-right flex-shrink-0">
-              <p className="text-sm font-bold" style={{color:'#d4380d'}}>{distKm < 1 ? `${Math.round(distKm*1000)}m` : `${distKm.toFixed(1)}km`}</p>
+              <p className="text-sm font-bold" style={{color:'#C18C5D'}}>{distKm < 1 ? `${Math.round(distKm*1000)}m` : `${distKm.toFixed(1)}km`}</p>
               <p className="text-xs" style={{color:'#9a9a9a'}}>away</p>
             </div>
           )}
@@ -406,7 +413,7 @@ function DCCard({ dc, distKm, onExpressInterest }) {
             [`${outputTemp}°C`, 'output temp'],
             [`$${heatPrice}/MWh`, 'heat price'],
           ].map(([v,l]) => (
-            <div key={l} className="text-center rounded-lg py-2" style={{background:'#f5f0e8'}}>
+            <div key={l} className="text-center rounded-lg py-2" style={{background:'#FDFCF8'}}>
               <p className="text-xs font-bold">{v}</p>
               <p style={{fontSize:10,color:'#9a9a9a'}}>{l}</p>
             </div>
@@ -451,8 +458,8 @@ function DCCard({ dc, distKm, onExpressInterest }) {
             </div>
           )}
           <button onClick={()=>onExpressInterest(dc)}
-            className="w-full mt-3 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
-            style={{background:'#d4380d',color:'white'}}>
+            className="w-full mt-3 py-3 rounded-full text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+            style={{background:'#C18C5D',color:'white',boxShadow:'0 4px 20px -2px rgba(193,140,93,0.25)'}}>
             Express Interest
           </button>
         </div>
@@ -489,27 +496,27 @@ function App() {
   }, [nearby, sortBy]);
 
   if (loading) return (
-    <div className="h-screen flex flex-col items-center justify-center gap-4" style={{background:'#f5f0e8'}}>
+    <div className="h-screen flex flex-col items-center justify-center gap-4" style={{background:'#FDFCF8'}}>
       <h1 className="serif text-3xl font-bold">HeatGrid Marketplace</h1>
-      <p className="text-sm" style={{color:'#6b6b6b'}}>Loading data centers...</p>
+      <p className="text-sm" style={{color:'#78786C'}}>Loading data centers...</p>
     </div>
   );
 
   return (
-    <div style={{minHeight:'100vh',background:'#f5f0e8'}}>
+    <div style={{minHeight:'100vh',background:'#FDFCF8'}}>
       {/* Header */}
       <header style={{
-        background:'#1a1a1a',color:'#f5f0e8',padding:'14px 24px',
+        background:'#2C2C24',color:'#FDFCF8',padding:'14px 24px',
         display:'flex',alignItems:'center',justifyContent:'space-between',gap:16,
       }}>
         <div className="flex items-center gap-2.5">
           <a href="index.html" className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-            style={{color:'#f5f0e8',textDecoration:'none'}}>
+            style={{color:'#FDFCF8',textDecoration:'none'}}>
             <img src="favicon.svg" alt="" style={{width:24,height:24}} />
             <span className="serif font-bold text-xl tracking-tight">HeatGrid</span>
           </a>
         </div>
-        <div className="text-xs" style={{color:'#6b6b6b'}}>
+        <div className="text-xs" style={{color:'#78786C'}}>
           {dcs?.length?.toLocaleString()} data centers indexed
         </div>
       </header>
@@ -519,7 +526,7 @@ function App() {
         <h1 className="serif font-bold mb-2" style={{fontSize:32}}>
           Is there a data center near you?
         </h1>
-        <p className="text-sm mb-6" style={{color:'#6b6b6b',maxWidth:480,margin:'0 auto'}}>
+        <p className="text-sm mb-6" style={{color:'#78786C',maxWidth:480,margin:'0 auto'}}>
           Data centers produce enormous amounts of waste heat. If one is close enough,
           your school, pool, or greenhouse could heat for free.
         </p>
@@ -535,7 +542,7 @@ function App() {
               <span className="text-xs font-bold" style={{color:'#9a9a9a'}}>Within</span>
               <select value={radius} onChange={e=>setRadius(+e.target.value)}
                 className="text-xs font-bold rounded-lg px-3 py-1.5"
-                style={{background:'white',border:'1px solid #e2d9cc',outline:'none'}}>
+                style={{background:'white',border:'1px solid #DED8CF',outline:'none'}}>
                 {[10,25,50,100,200].map(r=><option key={r} value={r}>{r} km</option>)}
               </select>
               <span className="text-xs font-bold" style={{color:'#9a9a9a'}}>of {location.label}</span>
@@ -546,9 +553,9 @@ function App() {
                 <button key={v} onClick={()=>setSortBy(v)}
                   className="text-xs px-3 py-1.5 rounded-full font-bold border transition-colors"
                   style={{
-                    background: sortBy===v ? '#1a1a1a' : 'white',
-                    color:      sortBy===v ? 'white'   : '#6b6b6b',
-                    border:     `1px solid ${sortBy===v ? '#1a1a1a' : '#e2d9cc'}`,
+                    background: sortBy===v ? '#2C2C24' : 'white',
+                    color:      sortBy===v ? 'white'   : '#78786C',
+                    border:     `1px solid ${sortBy===v ? '#2C2C24' : '#DED8CF'}`,
                   }}>{l}</button>
               ))}
             </div>
@@ -556,7 +563,7 @@ function App() {
 
           {/* Count badge */}
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-xs px-3 py-1 rounded-full font-bold" style={{background:'#d4380d',color:'white'}}>
+            <span className="text-xs px-3 py-1 rounded-full font-bold" style={{background:'#C18C5D',color:'white'}}>
               {sorted.length} found
             </span>
             {sorted.length > 0 && (
@@ -581,15 +588,15 @@ function App() {
 
           {/* CTA for registration */}
           {sorted.length > 0 && (
-            <div className="mt-8 rounded-xl p-6 text-center" style={{background:'white',border:'1px solid #e2d9cc'}}>
+            <div className="mt-8 rounded-xl p-6 text-center" style={{background:'white',border:'1px solid #DED8CF'}}>
               <h3 className="serif font-bold text-lg mb-2">Interested in connecting?</h3>
-              <p className="text-xs mb-4" style={{color:'#6b6b6b'}}>
+              <p className="text-xs mb-4" style={{color:'#78786C'}}>
                 Register your facility and we'll help you explore whether a nearby
                 data center could provide your heating — for a fraction of what you pay today.
               </p>
               <button onClick={()=>setShowRegister(true)}
-                className="px-6 py-3 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
-                style={{background:'#d4380d',color:'white'}}>
+                className="px-8 py-3 rounded-full text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+                style={{background:'#C18C5D',color:'white',boxShadow:'0 4px 20px -2px rgba(193,140,93,0.25)'}}>
                 Register as Heat Buyer
               </button>
             </div>
@@ -606,17 +613,17 @@ function App() {
               ['🌱','Greenhouses','Year-round heat demand at 30-50°C — a perfect match for DC waste heat, no gas needed.'],
               ['🏊','Pools & Aquatics','Pools need 26-30°C water. DC waste heat delivers this directly, cutting $15-25K/yr.'],
             ].map(([emoji,title,desc])=>(
-              <div key={title} className="rounded-xl p-5" style={{background:'white',border:'1px solid #e2d9cc'}}>
+              <div key={title} className="rounded-xl p-5" style={{background:'white',border:'1px solid #DED8CF'}}>
                 <p className="text-2xl mb-2">{emoji}</p>
                 <p className="font-bold text-sm mb-1">{title}</p>
-                <p className="text-xs" style={{color:'#6b6b6b',lineHeight:1.6}}>{desc}</p>
+                <p className="text-xs" style={{color:'#78786C',lineHeight:1.6}}>{desc}</p>
               </div>
             ))}
           </div>
 
-          <div className="rounded-xl p-5 mt-4" style={{background:'white',border:'1px solid #e2d9cc'}}>
+          <div className="rounded-xl p-5 mt-4" style={{background:'white',border:'1px solid #DED8CF'}}>
             <p className="font-bold text-xs uppercase tracking-wider mb-3" style={{color:'#9a9a9a'}}>How it works</p>
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs" style={{color:'#6b6b6b'}}>
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs" style={{color:'#78786C'}}>
               {[
                 ['1.','Enter your location','Search by city, address, or ZIP code'],
                 ['2.','See what\'s nearby','Data centers ranked by distance — closest first'],
@@ -624,8 +631,8 @@ function App() {
                 ['4.','Get connected','We match you with the DC operator to explore the opportunity'],
               ].map(([n,t,d])=>(
                 <div key={n}>
-                  <p className="font-bold text-lg mb-1" style={{color:'#d4380d'}}>{n}</p>
-                  <p className="font-bold text-sm mb-0.5" style={{color:'#1a1a1a'}}>{t}</p>
+                  <p className="font-bold text-lg mb-1" style={{color:'#C18C5D'}}>{n}</p>
+                  <p className="font-bold text-sm mb-0.5" style={{color:'#2C2C24'}}>{t}</p>
                   <p style={{lineHeight:1.5}}>{d}</p>
                 </div>
               ))}

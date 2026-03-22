@@ -11,7 +11,7 @@
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -28,25 +28,33 @@
 
   <style>
     :root {
-      --bg:         #f5f0e8;
-      --surface:    #ffffff;
-      --text:       #1a1a1a;
-      --muted:      #6b6b6b;
+      --bg:         #FDFCF8;
+      --surface:    #FEFEFA;
+      --text:       #2C2C24;
+      --muted:      #78786C;
       --faint:      #9a9a9a;
-      --border:     #e2d9cc;
-      --blue:       #1a5cff;
-      --blue-dim:   #e8eeff;
-      --orange:     #d4380d;
-      --orange-dim: #fff1ed;
+      --border:     #DED8CF;
+      --blue:       #5D7052;
+      --blue-dim:   #E8EDE5;
+      --orange:     #C18C5D;
+      --orange-dim: #FDF4ED;
       --green:      #15803d;
       --amber:      #a16207;
-      --red:        #b91c1c;
+      --red:        #A85448;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body, #root { height: 100%; overflow: hidden; }
-    body { font-family: 'Space Mono', monospace; background: var(--bg); color: var(--text); }
+    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); }
 
     .serif { font-family: 'Fraunces', serif; }
+
+    /* Grain texture */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9990; pointer-events: none;
+      opacity: 0.03; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 256px 256px;
+    }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 5px; }
@@ -80,7 +88,7 @@
 
     /* Buyer cards */
     .buyer-card { transition: box-shadow .15s ease, transform .15s ease; cursor: pointer; }
-    .buyer-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.09); transform: translateY(-1px); }
+    .buyer-card:hover { box-shadow: 0 4px 20px rgba(93,112,82,0.12); transform: translateY(-2px); }
 
     /* Spinner */
     .spinner {
@@ -92,11 +100,11 @@
 
     /* MapLibre popup override */
     .maplibregl-popup-content {
-      font-family: 'Space Mono', monospace; font-size: 11px;
-      padding: 7px 11px; border-radius: 7px;
-      background: #1a1a1a; color: #f5f0e8; box-shadow: 0 3px 12px rgba(0,0,0,.3);
+      font-family: 'Nunito', sans-serif; font-size: 11px;
+      padding: 7px 11px; border-radius: 10px;
+      background: #2C2C24; color: #FDFCF8; box-shadow: 0 4px 20px rgba(93,112,82,0.2);
     }
-    .maplibregl-popup-tip { border-top-color: #1a1a1a !important; }
+    .maplibregl-popup-tip { border-top-color: #2C2C24 !important; }
     .maplibregl-ctrl-group { border-radius: 10px !important; overflow: hidden; }
 
     /* Comparison toggle */
@@ -106,8 +114,8 @@
   <script>
     tailwind.config = {
       theme: { extend: {
-        fontFamily: { sans: ['Space Mono','monospace'], serif: ['Fraunces','serif'] },
-        colors: { 'hg-bg':'#f5f0e8','hg-border':'#e2d9cc','hg-blue':'#1a5cff','hg-orange':'#d4380d' }
+        fontFamily: { sans: ['Nunito','sans-serif'], serif: ['Fraunces','serif'] },
+        colors: { 'hg-bg':'#FDFCF8','hg-border':'#DED8CF','hg-blue':'#5D7052','hg-orange':'#C18C5D' }
       }}
     }
   </script>
@@ -389,7 +397,7 @@ function ScoreBar({ label, value, sublabel, color }) {
         <span className="text-xs font-bold tracking-wider uppercase" style={{color:'#9a9a9a'}}>{label}</span>
         <span className="text-sm font-bold" style={{color}}>{Math.round(value)}</span>
       </div>
-      <div className="h-2 rounded-full overflow-hidden" style={{background:'#e2d9cc'}}>
+      <div className="h-2 rounded-full overflow-hidden" style={{background:'#DED8CF'}}>
         <div className="h-full rounded-full bar-fill" style={{width:`${Math.round(value)}%`,background:color}} />
       </div>
       {sublabel && <p className="text-xs mt-0.5" style={{color:'#b0a898'}}>{sublabel}</p>}
@@ -406,10 +414,10 @@ function ScoreCard({ county, scores, onViewMarket, onListHeat }) {
   return (
     <div className="slide-up">
       {/* Location */}
-      <div className="mb-4 pb-4" style={{borderBottom:'1px solid #e2d9cc'}}>
+      <div className="mb-4 pb-4" style={{borderBottom:'1px solid #DED8CF'}}>
         <p className="text-xs uppercase tracking-widest mb-1" style={{color:'#9a9a9a'}}>Selected Site</p>
         <h2 className="serif text-xl font-bold">{county?.county ?? 'Unknown'}</h2>
-        <p className="text-xs mt-0.5" style={{color:'#6b6b6b'}}>
+        <p className="text-xs mt-0.5" style={{color:'#78786C'}}>
           {county?.state ?? ''}{county?.egrid ? ` · ${county.egrid} grid` : ''}
         </p>
       </div>
@@ -457,13 +465,13 @@ function ScoreCard({ county, scores, onViewMarket, onListHeat }) {
       )}
       <div className="flex gap-2 pt-3">
         <button onClick={onViewMarket}
-          className="flex-1 py-3.5 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
-          style={{background:'#d4380d',color:'white',letterSpacing:'.04em'}}>
+          className="flex-1 py-3.5 rounded-full text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+          style={{background:'#C18C5D',color:'white',letterSpacing:'.04em',boxShadow:'0 4px 20px -2px rgba(193,140,93,0.25)'}}>
           View Heat Buyers →
         </button>
         <button onClick={onListHeat}
-          className="py-3.5 px-4 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
-          style={{background:'#1a5cff',color:'white',letterSpacing:'.04em'}}
+          className="py-3.5 px-4 rounded-full text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
+          style={{background:'#5D7052',color:'white',letterSpacing:'.04em',boxShadow:'0 4px 20px -2px rgba(93,112,82,0.25)'}}
           title="List your waste heat on the marketplace">
           List Heat
         </button>
@@ -531,21 +539,21 @@ function ListHeatForm({ county, onClose }) {
     <div className="text-center py-4">
       <p className="text-3xl mb-3">&#10003;</p>
       <p className="serif font-bold text-lg mb-2">Listing Created!</p>
-      <p className="text-xs" style={{color:'#6b6b6b'}}>
+      <p className="text-xs" style={{color:'#78786C'}}>
         Your waste heat is now listed on the HeatGrid marketplace. Buyers near you will see it.
       </p>
       <button onClick={onClose} className="mt-4 px-5 py-2 rounded-lg text-xs font-bold"
-        style={{background:'#1a1a1a',color:'white'}}>Close</button>
+        style={{background:'#2C2C24',color:'white'}}>Close</button>
     </div>
   );
 
-  const fieldStyle = {background:'#f5f0e8',border:'1px solid #e2d9cc',borderRadius:8,padding:'8px 12px',
+  const fieldStyle = {background:'#FDFCF8',border:'1px solid #DED8CF',borderRadius:8,padding:'8px 12px',
     fontSize:12,fontFamily:'Space Mono,monospace',width:'100%',outline:'none'};
 
   return (
     <form onSubmit={handleSubmit}>
       <p className="serif font-bold text-lg mb-1">List Your Waste Heat</p>
-      <p className="text-xs mb-4" style={{color:'#6b6b6b'}}>
+      <p className="text-xs mb-4" style={{color:'#78786C'}}>
         Make your DC's waste heat available to nearby buyers on the marketplace.
       </p>
       {error && <p className="text-xs mb-3 font-bold" style={{color:'#d4380d'}}>{error}</p>}
@@ -612,7 +620,7 @@ function ListHeatForm({ county, onClose }) {
       </div>
       <button type="submit" disabled={submitting}
         className="w-full mt-4 py-3 rounded-xl text-xs font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
-        style={{background:'#1a5cff',color:'white',opacity:submitting?0.6:1}}>
+        style={{background:'#5D7052',color:'white',opacity:submitting?0.6:1,borderRadius:99,boxShadow:'0 4px 20px -2px rgba(93,112,82,0.25)'}}>
         {submitting ? 'Submitting...' : 'Create Listing'}
       </button>
     </form>
@@ -628,14 +636,14 @@ function BuyerCard({ buyer }) {
   const fl    = feas >= 65 ? 'HIGH' : feas >= 35 ? 'MEDIUM' : 'LOW';
 
   return (
-    <div className="buyer-card rounded-xl mb-3 overflow-hidden" style={{border:'1px solid #e2d9cc',background:'white'}}>
+    <div className="buyer-card rounded-xl mb-3 overflow-hidden" style={{border:'1px solid #DED8CF',background:'white'}}>
       <button className="w-full text-left p-4" onClick={() => setOpen(o=>!o)}>
         {/* Header row */}
         <div className="flex items-start gap-2.5 mb-3">
           <span className="text-xl mt-0.5 flex-shrink-0">{meta.emoji}</span>
           <div className="flex-1 min-w-0">
             <p className="font-bold text-sm truncate leading-tight">{buyer.name}</p>
-            <p className="text-xs mt-0.5" style={{color:'#6b6b6b'}}>
+            <p className="text-xs mt-0.5" style={{color:'#78786C'}}>
               {meta.label} · {buyer.city}, {buyer.state}
             </p>
             <p className="text-xs" style={{color:'#9a9a9a'}}>{buyer.distKm.toFixed(1)} km away</p>
@@ -653,7 +661,7 @@ function BuyerCard({ buyer }) {
             [`${buyer.co2Saved}t`,        'CO₂/yr'],
             [`${buyer.payback}yr`,        'payback'],
           ].map(([v,l]) => (
-            <div key={l} className="text-center rounded-lg py-1.5" style={{background:'#f5f0e8'}}>
+            <div key={l} className="text-center rounded-lg py-1.5" style={{background:'#FDFCF8'}}>
               <p className="text-xs font-bold">{v}</p>
               <p className="text-xs" style={{color:'#9a9a9a'}}>{l}</p>
             </div>
@@ -661,7 +669,7 @@ function BuyerCard({ buyer }) {
         </div>
 
         {/* Feasibility bar */}
-        <div className="mt-2.5 h-1.5 rounded-full overflow-hidden" style={{background:'#e2d9cc'}}>
+        <div className="mt-2.5 h-1.5 rounded-full overflow-hidden" style={{background:'#DED8CF'}}>
           <div className="h-full rounded-full bar-fill" style={{width:`${feas}%`,background:fc}} />
         </div>
 
@@ -742,12 +750,12 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
   return (
     <div className="slide-up">
       {/* Back */}
-      <button onClick={onBack} className="flex items-center gap-1.5 text-xs mb-4 hover:opacity-60 transition-opacity" style={{color:'#6b6b6b'}}>
+      <button onClick={onBack} className="flex items-center gap-1.5 text-xs mb-4 hover:opacity-60 transition-opacity" style={{color:'#78786C'}}>
         ← Siting Score
       </button>
 
       {/* DC Config */}
-      <div className="rounded-xl p-4 mb-3" style={{background:'white',border:'1px solid #e2d9cc'}}>
+      <div className="rounded-xl p-4 mb-3" style={{background:'white',border:'1px solid #DED8CF'}}>
         <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{color:'#d4380d'}}>
           ⚡ Data Center Configuration
         </p>
@@ -755,7 +763,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
         {/* Capacity */}
         <div className="mb-3">
           <div className="flex justify-between text-xs mb-1">
-            <span style={{color:'#6b6b6b'}}>Capacity</span>
+            <span style={{color:'#78786C'}}>Capacity</span>
             <span className="font-bold">{dcConfig.capacityMw} MW</span>
           </div>
           <input type="range" min="1" max="200" value={dcConfig.capacityMw}
@@ -767,15 +775,15 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
 
         {/* Cooling */}
         <div className="mb-3">
-          <p className="text-xs mb-1.5" style={{color:'#6b6b6b'}}>Cooling Architecture</p>
+          <p className="text-xs mb-1.5" style={{color:'#78786C'}}>Cooling Architecture</p>
           <div className="flex gap-2">
             {[['air','Air-cooled (45°C)'],['liquid','Liquid-cooled (55°C)']].map(([v,l])=>(
               <button key={v} onClick={()=>onDcChange({...dcConfig,coolingType:v})}
                 className="flex-1 pill-btn text-xs py-2 px-2 rounded-lg font-bold border"
                 style={{
                   background: dcConfig.coolingType===v ? '#d4380d' : 'white',
-                  color:      dcConfig.coolingType===v ? 'white'   : '#6b6b6b',
-                  border:     `1px solid ${dcConfig.coolingType===v ? '#d4380d' : '#e2d9cc'}`,
+                  color:      dcConfig.coolingType===v ? 'white'   : '#78786C',
+                  border:     `1px solid ${dcConfig.coolingType===v ? '#d4380d' : '#DED8CF'}`,
                 }}>{l}</button>
             ))}
           </div>
@@ -784,7 +792,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
         {/* Radius */}
         <div>
           <div className="flex justify-between text-xs mb-1">
-            <span style={{color:'#6b6b6b'}}>Discovery Radius</span>
+            <span style={{color:'#78786C'}}>Discovery Radius</span>
             <span className="font-bold">{dcConfig.radiusKm} km</span>
           </div>
           <input type="range" min="1" max="25" value={dcConfig.radiusKm}
@@ -809,17 +817,17 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
             {impact.nearby > 0 ? (
               <div className="rounded-lg p-3" style={{background:'white'}}>
                 <p className="font-bold text-lg" style={{color:'#15803d'}}>{impact.nearby} facilities</p>
-                <p className="text-xs" style={{color:'#6b6b6b'}}>within 2 km — direct heat connection feasible</p>
+                <p className="text-xs" style={{color:'#78786C'}}>within 2 km — direct heat connection feasible</p>
               </div>
             ) : (
               <div className="rounded-lg p-3" style={{background:'white'}}>
                 <p className="font-bold text-lg" style={{color:'#a16207'}}>{impact.reachable} facilities</p>
-                <p className="text-xs" style={{color:'#6b6b6b'}}>within 10 km — co-development opportunities</p>
+                <p className="text-xs" style={{color:'#78786C'}}>within 10 km — co-development opportunities</p>
               </div>
             )}
             <div className="rounded-lg p-3" style={{background:'white'}}>
               <p className="font-bold text-lg" style={{color:'#d4380d'}}>{fmtMWh(impact.totalHeat)}/yr</p>
-              <p className="text-xs" style={{color:'#6b6b6b'}}>
+              <p className="text-xs" style={{color:'#78786C'}}>
                 waste heat produced — enough to heat {impact.schoolsHeatable > 0 ? `~${impact.schoolsHeatable.toLocaleString()} schools` : 'nearby facilities'}
               </p>
             </div>
@@ -835,7 +843,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
             {sorted.length}
           </span>
         </div>
-        <div className="flex gap-1.5 text-xs" style={{color:'#6b6b6b'}}>
+        <div className="flex gap-1.5 text-xs" style={{color:'#78786C'}}>
           {byType.school > 0 && <span>🏫{byType.school}</span>}
           {byType.greenhouse > 0 && <span>🌱{byType.greenhouse}</span>}
           {byType.pool > 0 && <span>🏊{byType.pool}</span>}
@@ -848,9 +856,9 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
           <button key={v} onClick={()=>setSortBy(v)}
             className="flex-shrink-0 pill-btn text-xs px-2.5 py-1 rounded-full border"
             style={{
-              background: sortBy===v ? '#1a1a1a' : 'white',
-              color:      sortBy===v ? 'white'   : '#6b6b6b',
-              border:     `1px solid ${sortBy===v ? '#1a1a1a' : '#e2d9cc'}`,
+              background: sortBy===v ? '#2C2C24' : 'white',
+              color:      sortBy===v ? 'white'   : '#78786C',
+              border:     `1px solid ${sortBy===v ? '#2C2C24' : '#DED8CF'}`,
             }}>{l}</button>
         ))}
       </div>
@@ -885,14 +893,14 @@ function ComparePanel({ countyA, scoresA, countyB, scoresB, onClearB }) {
   return (
     <div className="slide-up h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4 pb-4" style={{borderBottom:'1px solid #e2d9cc'}}>
+      <div className="flex items-center justify-between mb-4 pb-4" style={{borderBottom:'1px solid #DED8CF'}}>
         <div>
           <p className="text-xs uppercase tracking-widest mb-0.5" style={{color:'#9a9a9a'}}>A/B Comparison</p>
           <h2 className="serif text-lg font-bold">Site Face-Off</h2>
         </div>
         <button onClick={onClearB}
           className="text-xs px-3 py-1.5 rounded-lg hover:opacity-70 transition-opacity font-bold"
-          style={{background:'#e2d9cc',color:'#6b6b6b'}}>Clear B</button>
+          style={{background:'#DED8CF',color:'#78786C'}}>Clear B</button>
       </div>
 
       {/* Big scores side by side */}
@@ -911,7 +919,7 @@ function ComparePanel({ countyA, scoresA, countyB, scoresB, onClearB }) {
               <p className="text-xs font-bold uppercase tracking-widest mb-1 mt-1" style={{color}}>{id==='A'?'🔵':'🟠'} Site {id}</p>
               <p className="serif font-bold" style={{fontSize:40,lineHeight:1,color}}>{Math.round(scores.total)}</p>
               <p className="text-xs font-bold mt-1" style={{color:t.color}}>{t.label}</p>
-              <p className="text-xs mt-0.5 truncate" style={{color:'#6b6b6b'}}>{county?.county}, {county?.state}</p>
+              <p className="text-xs mt-0.5 truncate" style={{color:'#78786C'}}>{county?.county}, {county?.state}</p>
             </div>
           );
         })}
@@ -924,7 +932,7 @@ function ComparePanel({ countyA, scoresA, countyB, scoresB, onClearB }) {
           const vB = Math.round(scoresB[m.key]);
           const winner = vA > vB ? 'A' : vA < vB ? 'B' : null;
           return (
-            <div key={m.key} className="rounded-xl p-3" style={{background:'white',border:'1px solid #e2d9cc'}}>
+            <div key={m.key} className="rounded-xl p-3" style={{background:'white',border:'1px solid #DED8CF'}}>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-bold uppercase tracking-wider" style={{color:'#9a9a9a'}}>{m.icon} {m.label}</span>
                 {winner && (
@@ -936,7 +944,7 @@ function ComparePanel({ countyA, scoresA, countyB, scoresB, onClearB }) {
               {[['A',vA,'#1a5cff'],[' B',vB,'#d4380d']].map(([lbl,v,clr])=>(
                 <div key={lbl} className="flex items-center gap-2 mb-1.5">
                   <span className="text-xs font-bold w-5 text-right" style={{color:clr}}>{v}</span>
-                  <div className="flex-1 h-2 rounded-full overflow-hidden" style={{background:'#e2d9cc'}}>
+                  <div className="flex-1 h-2 rounded-full overflow-hidden" style={{background:'#DED8CF'}}>
                     <div className="h-full rounded-full bar-fill" style={{width:`${v}%`,background:clr}} />
                   </div>
                   <span className="text-xs font-bold w-4" style={{color:clr}}>{lbl}</span>
@@ -947,9 +955,9 @@ function ComparePanel({ countyA, scoresA, countyB, scoresB, onClearB }) {
         })}
 
         {/* Verdict */}
-        <div className="rounded-xl p-3 mt-1" style={{background:'white',border:'1px solid #e2d9cc'}}>
+        <div className="rounded-xl p-3 mt-1" style={{background:'white',border:'1px solid #DED8CF'}}>
           <p className="text-xs font-bold uppercase tracking-wider mb-1.5" style={{color:'#9a9a9a'}}>Verdict</p>
-          <p className="text-xs leading-relaxed" style={{color:'#1a1a1a'}}>
+          <p className="text-xs leading-relaxed" style={{color:'#2C2C24'}}>
             {diff < 3
               ? `📊 Near tie — ${winnerCounty?.county} and ${loserCounty?.county} score within ${diff.toFixed(1)} points.`
               : diff < 10
@@ -1022,8 +1030,8 @@ function SearchBar({ onResult, mapRef }) {
           placeholder="Search city, address, county…"
           style={{
             background: 'transparent', border: 'none', outline: 'none',
-            color: '#f5f0e8', fontSize: 12, width: '100%',
-            fontFamily: 'Space Mono, monospace',
+            color: '#FDFCF8', fontSize: 12, width: '100%',
+            fontFamily: 'Nunito, sans-serif',
           }}
         />
         {loading && <div className="spinner" style={{ width: 12, height: 12, flexShrink: 0 }} />}
@@ -1036,7 +1044,7 @@ function SearchBar({ onResult, mapRef }) {
         <div style={{
           position: 'absolute', top: '110%', left: 0, right: 0, zIndex: 100,
           background: 'white', borderRadius: 10, boxShadow: '0 8px 32px rgba(0,0,0,.18)',
-          border: '1px solid #e2d9cc', overflow: 'hidden',
+          border: '1px solid #DED8CF', overflow: 'hidden',
         }}>
           {results.map((r, i) => {
             const parts = r.display_name.split(',');
@@ -1064,14 +1072,14 @@ function EmptyState({ onDemo }) {
       <div className="mb-6">
         <p className="text-5xl mb-4">🌍</p>
         <h2 className="serif text-2xl font-bold mb-2">Analyze Any US Site</h2>
-        <p className="text-sm leading-relaxed" style={{color:'#6b6b6b'}}>
+        <p className="text-sm leading-relaxed" style={{color:'#78786C'}}>
           Click the map to score any location for sustainable data center siting and discover nearby waste heat buyers.
         </p>
       </div>
 
-      <div className="w-full rounded-xl p-4 mb-5 text-left" style={{background:'white',border:'1px solid #e2d9cc'}}>
+      <div className="w-full rounded-xl p-4 mb-5 text-left" style={{background:'white',border:'1px solid #DED8CF'}}>
         <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{color:'#9a9a9a'}}>How It Works</p>
-        <div className="space-y-2.5 text-xs" style={{color:'#6b6b6b',lineHeight:1.6}}>
+        <div className="space-y-2.5 text-xs" style={{color:'#78786C',lineHeight:1.6}}>
           <p><strong style={{color:'#1a5cff'}}>Side A — Siting Score:</strong> 5-factor sustainability score based on grid carbon, water stress, climate, renewables, and local heat demand.</p>
           <p><strong style={{color:'#d4380d'}}>Side B — Heat Market:</strong> Discover schools, greenhouses, and pools that can buy the DC's waste heat, with full ROI analysis.</p>
           <p><strong>The Interlock:</strong> More heat buyers nearby → higher heat demand score → better overall siting score.</p>
@@ -1081,18 +1089,18 @@ function EmptyState({ onDemo }) {
       <div className="w-full space-y-2">
         <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{color:'#9a9a9a'}}>Quick Start</p>
         <button onClick={() => onDemo(39.04, -77.49, 9)}
-          className="w-full py-3 rounded-xl text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
-          style={{background:'#1a5cff',color:'white'}}>
+          className="w-full py-3 rounded-full text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
+          style={{background:'#5D7052',color:'white',boxShadow:'0 4px 20px -2px rgba(93,112,82,0.2)'}}>
           📍 Ashburn, VA — Data center capital of the world
         </button>
         <button onClick={() => onDemo(47.61, -122.33, 9)}
-          className="w-full py-3 rounded-xl text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
-          style={{background:'white',border:'1px solid #e2d9cc',color:'#1a1a1a'}}>
+          className="w-full py-3 rounded-full text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
+          style={{background:'#FEFEFA',border:'1px solid #DED8CF',color:'#2C2C24'}}>
           📍 Seattle, WA — Clean grid, cold climate
         </button>
         <button onClick={() => onDemo(41.85, -87.65, 9)}
-          className="w-full py-3 rounded-xl text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
-          style={{background:'white',border:'1px solid #e2d9cc',color:'#1a1a1a'}}>
+          className="w-full py-3 rounded-full text-sm font-bold hover:opacity-90 active:scale-[.98] transition-all text-left px-4"
+          style={{background:'#FEFEFA',border:'1px solid #DED8CF',color:'#2C2C24'}}>
           📍 Chicago, IL — Dense buyer market, dirty grid
         </button>
       </div>
@@ -1103,17 +1111,17 @@ function EmptyState({ onDemo }) {
 // ── Loading / Error ───────────────────────────────────────────────
 function LoadingScreen() {
   return (
-    <div className="h-screen flex flex-col items-center justify-center gap-5" style={{background:'#f5f0e8'}}>
+    <div className="h-screen flex flex-col items-center justify-center gap-5" style={{background:'#FDFCF8'}}>
       <h1 className="serif text-4xl font-bold">HeatGrid</h1>
       <div className="spinner" />
-      <p className="text-sm" style={{color:'#6b6b6b'}}>Loading datasets…</p>
+      <p className="text-sm" style={{color:'#78786C'}}>Loading datasets…</p>
     </div>
   );
 }
 
 function ErrorScreen({ message }) {
   return (
-    <div className="h-screen flex flex-col items-center justify-center gap-4 p-8 text-center" style={{background:'#f5f0e8'}}>
+    <div className="h-screen flex flex-col items-center justify-center gap-4 p-8 text-center" style={{background:'#FDFCF8'}}>
       <h1 className="serif text-4xl font-bold">HeatGrid</h1>
       <div className="rounded-xl p-5 max-w-md" style={{background:'#fee2e2',border:'1px solid #fca5a5'}}>
         <p className="font-bold mb-2" style={{color:'#991b1b'}}>Could not load data files</p>
@@ -1220,8 +1228,8 @@ function HeatMap({ data, selected, selectedB, pickingB, activeView, buyers, radi
         id:'dc-layer', type:'circle', source:'dcs',
         paint:{
           'circle-radius':['interpolate',['linear'],['zoom'], 3,4, 8,9],
-          'circle-color':'#1a1a1a',
-          'circle-stroke-width':2,'circle-stroke-color':'#f5f0e8',
+          'circle-color':'#2C2C24',
+          'circle-stroke-width':2,'circle-stroke-color':'#FDFCF8',
           'circle-opacity':0.85,
         },
       });
@@ -1516,18 +1524,18 @@ function App() {
   if (error)   return <ErrorScreen message={error} />;
 
   return (
-    <div style={{height:'100vh',display:'flex',flexDirection:'column',background:'#f5f0e8'}}>
+    <div style={{height:'100vh',display:'flex',flexDirection:'column',background:'#FDFCF8'}}>
 
       {/* ── Header ─────────────────────────────────────────── */}
       <header style={{
-        height:52, flexShrink:0, background:'#1a1a1a', color:'#f5f0e8',
+        height:52, flexShrink:0, background:'#2C2C24', color:'#FDFCF8',
         display:'flex', alignItems:'center', justifyContent:'space-between',
         padding:'0 20px', zIndex:10, gap:12,
       }}>
         {/* Brand */}
         <div className="flex items-center gap-2.5 flex-shrink-0">
           <a href="index.html" className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-            style={{color:'#f5f0e8',textDecoration:'none'}}>
+            style={{color:'#FDFCF8',textDecoration:'none'}}>
             <img src="favicon.svg" alt="" style={{width:24,height:24}} />
             <span className="serif font-bold text-xl tracking-tight">HeatGrid</span>
           </a>
@@ -1543,8 +1551,8 @@ function App() {
               <button key={v} onClick={()=>setActiveView(v)}
                 className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
                 style={{
-                  background: activeView===v ? '#f5f0e8' : 'transparent',
-                  color:      activeView===v ? '#1a1a1a' : '#9a9a9a',
+                  background: activeView===v ? '#FDFCF8' : 'transparent',
+                  color:      activeView===v ? '#2C2C24' : '#9a9a9a',
                 }}>{l}</button>
             ))}
             <button onClick={()=>setPickingB(true)}
@@ -1569,15 +1577,15 @@ function App() {
               className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
               style={{background:'transparent',color:'#9a9a9a'}}>🔵 A only</button>
             <button className="pill-btn text-xs px-3 py-1.5 rounded-full font-bold tracking-wide"
-              style={{background:'#f5f0e8',color:'#1a1a1a'}}>⚖ Compare</button>
+              style={{background:'#FDFCF8',color:'#2C2C24'}}>⚖ Compare</button>
           </div>
         )}
 
         {/* Right side actions */}
         <div className="flex items-center gap-2 flex-shrink-0">
           {scores && selected && (
-            <span className="hidden lg:block text-xs" style={{color:'#6b6b6b'}}>
-              <strong style={{color:'#f5f0e8'}}>{Math.round(scores.total)}</strong>/100
+            <span className="hidden lg:block text-xs" style={{color:'#78786C'}}>
+              <strong style={{color:'#FDFCF8'}}>{Math.round(scores.total)}</strong>/100
               &nbsp;·&nbsp;{county?.county}, {county?.state}
             </span>
           )}
@@ -1593,7 +1601,7 @@ function App() {
               }}
               id="share-btn"
               className="text-xs px-3 py-1.5 rounded-lg font-bold transition-opacity hover:opacity-80"
-              style={{background:'rgba(255,255,255,.12)',color:'#f5f0e8',border:'1px solid rgba(255,255,255,.1)'}}>
+              style={{background:'rgba(255,255,255,.12)',color:'#FDFCF8',border:'1px solid rgba(255,255,255,.1)'}}>
               Share
             </button>
           )}
@@ -1613,8 +1621,8 @@ function App() {
         {/* Left panel — absolute positioning guarantees scroll works */}
         <div style={{
           position:'absolute', top:0, left:0, bottom:0, width:380,
-          overflowY:'scroll', background:'#f5f0e8', padding:20,
-          borderRight:'1px solid #e2d9cc',
+          overflowY:'scroll', background:'#FDFCF8', padding:20,
+          borderRight:'1px solid #DED8CF',
         }}>
           {!selected ? (
             <EmptyState onDemo={handleDemo} />
@@ -1650,7 +1658,7 @@ function App() {
             position:'absolute', bottom:32, left:12,
             background:'rgba(255,255,255,.93)', borderRadius:12,
             padding:'10px 14px', fontSize:11, backdropFilter:'blur(8px)',
-            border:'1px solid #e2d9cc', boxShadow:'0 2px 12px rgba(0,0,0,.06)',
+            border:'1px solid #DED8CF', boxShadow:'0 2px 12px rgba(0,0,0,.06)',
           }}>
             <p className="font-bold uppercase tracking-wider mb-2" style={{color:'#9a9a9a',fontSize:9}}>
               Siting Score
@@ -1658,20 +1666,20 @@ function App() {
             {[...THRESHOLDS].reverse().map(t=>(
               <div key={t.label} className="flex items-center gap-2 mb-1">
                 <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{background:t.color}} />
-                <span style={{color:'#6b6b6b'}}>{t.label} ({t.min}+)</span>
+                <span style={{color:'#78786C'}}>{t.label} ({t.min}+)</span>
               </div>
             ))}
-            <div className="flex items-center gap-2 mt-2 pt-2" style={{borderTop:'1px solid #e2d9cc'}}>
-              <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{background:'#1a1a1a'}} />
-              <span style={{color:'#6b6b6b'}}>Existing data center</span>
+            <div className="flex items-center gap-2 mt-2 pt-2" style={{borderTop:'1px solid #DED8CF'}}>
+              <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{background:'#2C2C24'}} />
+              <span style={{color:'#78786C'}}>Existing data center</span>
             </div>
             {activeView==='siteB' && buyers?.length > 0 && (
               <>
-                <div className="mt-2 pt-2" style={{borderTop:'1px solid #e2d9cc'}}>
+                <div className="mt-2 pt-2" style={{borderTop:'1px solid #DED8CF'}}>
                   {Object.entries(BUYER_META).map(([k,m])=>(
                     <div key={k} className="flex items-center gap-2 mb-1">
                       <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{background:m.color}} />
-                      <span style={{color:'#6b6b6b'}}>{m.emoji} {m.label}</span>
+                      <span style={{color:'#78786C'}}>{m.emoji} {m.label}</span>
                     </div>
                   ))}
                 </div>
@@ -1684,7 +1692,7 @@ function App() {
             <div style={{
               position:'absolute', bottom:32, right:12,
               background:'rgba(26,26,26,.8)', borderRadius:8,
-              padding:'6px 10px', fontSize:10, color:'#f5f0e8',
+              padding:'6px 10px', fontSize:10, color:'#FDFCF8',
               fontFamily:'Space Mono,monospace', letterSpacing:'.03em',
               textAlign:'right', lineHeight:1.6,
             }}>
@@ -1729,7 +1737,7 @@ class ErrorBoundary extends React.Component {
     if (this.state.error) {
       return React.createElement('div', {
         style: { height:'100vh', display:'flex', flexDirection:'column', alignItems:'center',
-          justifyContent:'center', gap:16, padding:32, background:'#f5f0e8', textAlign:'center' }
+          justifyContent:'center', gap:16, padding:32, background:'#FDFCF8', textAlign:'center' }
       },
         React.createElement('h1', { className:'serif', style:{fontSize:32,fontWeight:'bold'} }, 'HeatGrid'),
         React.createElement('div', { style:{ background:'#fee2e2', border:'1px solid #fca5a5',
@@ -1738,7 +1746,7 @@ class ErrorBoundary extends React.Component {
           React.createElement('p', { style:{fontSize:12,color:'#dc2626',marginBottom:12} }, String(this.state.error?.message || this.state.error)),
           React.createElement('button', {
             onClick: () => { window.location.reload(); },
-            style: { background:'#1a1a1a', color:'white', border:'none', borderRadius:8,
+            style: { background:'#2C2C24', color:'white', border:'none', borderRadius:8,
               padding:'8px 20px', fontSize:12, fontWeight:'bold', cursor:'pointer' }
           }, 'Retry')
         )

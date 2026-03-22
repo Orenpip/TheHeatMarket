@@ -5,67 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HeatGrid — Data Center Sustainability Platform</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
-        fontFamily: { sans: ['Space Mono','monospace'], serif: ['Fraunces','serif'] },
+        fontFamily: { sans: ['Nunito','sans-serif'], serif: ['Fraunces','serif'] },
       }}
     }
   </script>
   <style>
-    :root { --bg: #f5f0e8; --text: #1a1a1a; --blue: #1a5cff; --orange: #d4380d; --border: #e2d9cc; }
+    :root { --bg: #FDFCF8; --text: #2C2C24; --primary: #5D7052; --secondary: #C18C5D; --border: #DED8CF; --muted: #78786C; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Space Mono', monospace; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     .serif { font-family: 'Fraunces', serif; }
 
-    .path-card {
-      background: white; border-radius: 20px; padding: 48px 36px;
-      border: 1px solid var(--border); cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease;
-      text-align: center; flex: 1; max-width: 420px;
+    /* Grain texture */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9990; pointer-events: none;
+      opacity: 0.035; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 256px 256px;
     }
-    .path-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.1); }
-    .path-card:active { transform: translateY(-1px); }
+
+    .path-card {
+      background: #FEFEFA; border-radius: 2rem; padding: 48px 36px;
+      border: 1px solid rgba(222,216,207,0.5); cursor: pointer;
+      transition: transform .3s ease, box-shadow .3s ease;
+      text-align: center; flex: 1; max-width: 420px;
+      box-shadow: 0 4px 20px -2px rgba(93,112,82,0.12);
+    }
+    .path-card:first-child { border-radius: 4rem 2rem 2rem 3rem; }
+    .path-card:last-child  { border-radius: 2rem 4rem 3rem 2rem; }
+    .path-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(93,112,82,0.2); }
+    .path-card:active { transform: translateY(-2px); }
 
     .stat-pill {
-      display: inline-block; padding: 6px 16px; border-radius: 99px;
-      font-size: 11px; font-weight: bold; letter-spacing: .04em;
-      border: 1px solid var(--border); background: white;
+      display: inline-block; padding: 8px 18px; border-radius: 99px;
+      font-size: 12px; font-weight: 600; letter-spacing: .02em;
+      border: 1px solid rgba(222,216,207,0.5); background: #FEFEFA; color: #78786C;
     }
 
     @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-    .fade-up { animation: fadeUp .6s ease-out both; }
+    .fade-up   { animation: fadeUp .6s ease-out both; }
     .fade-up-1 { animation-delay: .1s; }
     .fade-up-2 { animation-delay: .2s; }
     .fade-up-3 { animation-delay: .35s; }
+
+    .blob { position: absolute; filter: blur(80px); opacity: 0.12; pointer-events: none; }
   </style>
 </head>
 <body>
-  <div style="min-height:100vh; display:flex; flex-direction:column;">
+  <div style="min-height:100vh; display:flex; flex-direction:column; position:relative; overflow:hidden;">
+
+    <!-- Ambient blobs -->
+    <div class="blob" style="width:500px; height:500px; background:#5D7052; top:-120px; right:-100px; border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;"></div>
+    <div class="blob" style="width:400px; height:400px; background:#C18C5D; bottom:-100px; left:-80px; border-radius:30% 70% 70% 30% / 30% 30% 70% 70%;"></div>
 
     <!-- Header -->
-    <header style="padding:20px 32px; display:flex; align-items:center; justify-content:space-between;">
+    <header style="padding:20px 32px; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1;">
       <div style="display:flex; align-items:center; gap:12px;">
-        <img src="favicon.svg" alt="" style="width:28px; height:28px;" />
+        <div style="width:36px; height:36px; background:#5D7052; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+          <img src="favicon.svg" alt="" style="width:22px; height:22px;" />
+        </div>
         <span class="serif" style="font-size:28px; font-weight:700; letter-spacing:-.02em;">HeatGrid</span>
       </div>
-      <div style="font-size:11px; color:#9a9a9a;">
-        Data Center Sustainability + Waste Heat Marketplace
+      <div style="font-size:13px; color:#78786C; font-weight:600;">
+        Waste Heat Marketplace
       </div>
     </header>
 
     <!-- Main content -->
-    <main style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px 32px; gap:48px;">
+    <main style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px 32px; gap:48px; position:relative; z-index:1;">
 
       <!-- Headline -->
       <div class="fade-up" style="text-align:center; max-width:700px;">
-        <h1 class="serif" style="font-size:42px; font-weight:700; line-height:1.15; margin-bottom:16px;">
+        <h1 class="serif" style="font-size:48px; font-weight:700; line-height:1.15; margin-bottom:20px;">
           Data centers power our future.<br/>
-          <span style="color:var(--orange);">Their waste heat can warm our communities.</span>
+          <span style="color:#C18C5D;">Their waste heat can warm our communities.</span>
         </h1>
-        <p style="font-size:13px; color:#6b6b6b; line-height:1.7; max-width:520px; margin:0 auto;">
+        <p style="font-size:15px; color:#78786C; line-height:1.8; max-width:520px; margin:0 auto;">
           US data centers release 165 million MWh of heat every year — enough to warm
           every school in America. HeatGrid turns data centers from isolated industrial
           sites into community infrastructure.
@@ -81,13 +100,15 @@
           <h2 class="serif" style="font-size:22px; font-weight:700; margin-bottom:10px;">
             I'm building a data center
           </h2>
-          <p style="font-size:12px; color:#6b6b6b; line-height:1.7; margin-bottom:24px;">
+          <p style="font-size:14px; color:#78786C; line-height:1.7; margin-bottom:24px;">
             Site your facility where it can give back. Find locations with clean energy,
-            low water stress, and nearby schools and communities that can
+            low water stress, and nearby communities that can
             benefit from your waste heat.
           </p>
-          <div style="display:inline-block; padding:12px 28px; border-radius:12px; font-size:13px; font-weight:700;
-                      background:var(--blue); color:white; letter-spacing:.03em;">
+          <div style="display:inline-block; padding:14px 32px; border-radius:99px; font-size:14px; font-weight:700;
+                      background:#5D7052; color:#F3F4F1; letter-spacing:.03em;
+                      box-shadow:0 4px 20px -2px rgba(93,112,82,0.25);
+                      transition:transform .2s, box-shadow .2s;">
             Explore Siting Tool
           </div>
         </div>
@@ -98,13 +119,15 @@
           <h2 class="serif" style="font-size:22px; font-weight:700; margin-bottom:10px;">
             I run a school, pool, or greenhouse
           </h2>
-          <p style="font-size:12px; color:#6b6b6b; line-height:1.7; margin-bottom:24px;">
+          <p style="font-size:14px; color:#78786C; line-height:1.7; margin-bottom:24px;">
             There may be a data center near you producing free heat.
             Connect with nearby facilities to cut your heating costs
             and carbon footprint — no new gas needed.
           </p>
-          <div style="display:inline-block; padding:12px 28px; border-radius:12px; font-size:13px; font-weight:700;
-                      background:var(--orange); color:white; letter-spacing:.03em;">
+          <div style="display:inline-block; padding:14px 32px; border-radius:99px; font-size:14px; font-weight:700;
+                      background:#C18C5D; color:white; letter-spacing:.03em;
+                      box-shadow:0 4px 20px -2px rgba(193,140,93,0.25);
+                      transition:transform .2s, box-shadow .2s;">
             Find Nearby Heat Sources
           </div>
         </div>
@@ -112,7 +135,7 @@
     </main>
 
     <!-- Stats footer -->
-    <footer class="fade-up-3" style="padding:24px 32px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+    <footer class="fade-up-3" style="padding:24px 32px; display:flex; justify-content:center; gap:14px; flex-wrap:wrap; position:relative; z-index:1;">
       <span class="stat-pill">183 TWh wasted annually</span>
       <span class="stat-pill">3,143 US counties scored</span>
       <span class="stat-pill">131,021 schools mapped</span>
@@ -121,7 +144,7 @@
     </footer>
 
     <!-- Bottom attribution -->
-    <div style="text-align:center; padding:12px; font-size:10px; color:#b0a898;">
+    <div style="text-align:center; padding:12px; font-size:11px; color:#78786C; opacity:0.6; position:relative; z-index:1;">
       Data: EPA eGRID 2023 · WRI Aqueduct 4.0 · NOAA Climate Normals · NCES Schools · DOE/PNNL IM3 Atlas
     </div>
   </div>
