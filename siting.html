@@ -1429,7 +1429,7 @@ function App() {
     if (parts.length < 2) return;
     const lat = parseFloat(parts[0]);
     const lng = parseFloat(parts[1]);
-    if (isNaN(lat) || isNaN(lng)) return;
+    if (isNaN(lat) || isNaN(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
     setSelected({ lat, lng });
     // fly after map is ready (slight delay)
     setTimeout(() => {
@@ -1589,7 +1589,7 @@ function App() {
         }}>
           {!selected ? (
             <EmptyState onDemo={handleDemo} />
-          ) : selectedB && scoresB ? (
+          ) : selectedB && scoresB && scores ? (
             <ComparePanel
               countyA={county} scoresA={scores}
               countyB={countyB} scoresB={scoresB}
