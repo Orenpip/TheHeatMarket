@@ -367,6 +367,15 @@ function nearestCounty(lat, lng, counties) {
   return best;
 }
 
+// Build FIPS→county lookup for O(1) access from map clicks
+function buildFipsLookup(counties) {
+  const map = {};
+  for (const c of counties) {
+    map[String(c.fips).padStart(5, '0')] = c;
+  }
+  return map;
+}
+
 // ══════════════════════════════════════════════════════════════════
 //  Sub-components
 // ══════════════════════════════════════════════════════════════════
@@ -394,7 +403,9 @@ function ScoreCard({ county, scores, onViewMarket, onListHeat }) {
   const total = Math.round(scores.total);
 
   return (
-    <div className="slide-up h-full flex flex-col">
+    <div className="slide-up h-full flex flex-col" style={{overflow:'hidden'}}>
+      {/* Scrollable content */}
+      <div className="flex-1" style={{overflowY:'auto'}}>
       {/* Location */}
       <div className="mb-4 pb-4" style={{borderBottom:'1px solid #e2d9cc'}}>
         <p className="text-xs uppercase tracking-widest mb-1" style={{color:'#9a9a9a'}}>Selected Site</p>
@@ -418,7 +429,7 @@ function ScoreCard({ county, scores, onViewMarket, onListHeat }) {
       </div>
 
       {/* Component bars (4 components, v2) */}
-      <div className="mb-4 flex-1">
+      <div className="mb-4">
         <ScoreBar label="Clean Energy" value={scores.clean_energy} color="#1a5cff"
           sublabel={county?.co2_lbs_per_mwh ? `${Math.round(county.co2_lbs_per_mwh)} lb CO₂/MWh · ${county.egrid??''} grid region` : null} />
         <ScoreBar label="Water Stress" value={scores.water}     color="#0891b2"
@@ -445,8 +456,9 @@ function ScoreCard({ county, scores, onViewMarket, onListHeat }) {
           ✅ <strong>Clean local grid</strong> — low carbon footprint for operations.
         </div>
       )}
+      </div>{/* end scrollable content */}
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-shrink-0 pt-3">
         <button onClick={onViewMarket}
           className="flex-1 py-3.5 rounded-xl text-sm font-bold tracking-wide hover:opacity-90 active:scale-[.98] transition-all"
           style={{background:'#d4380d',color:'white',letterSpacing:'.04em'}}>
@@ -1051,7 +1063,7 @@ function SearchBar({ onResult, mapRef }) {
 // ── Empty state ───────────────────────────────────────────────────
 function EmptyState({ onDemo }) {
   return (
-    <div className="slide-up flex flex-col items-center justify-center h-full py-8 px-2 text-center">
+    <div className="slide-up flex flex-col items-center justify-center h-full py-8 px-2 text-center" style={{overflowY:'auto'}}>
       <div className="mb-6">
         <p className="text-5xl mb-4">🌍</p>
         <h2 className="serif text-2xl font-bold mb-2">Analyze Any US Site</h2>
@@ -1169,16 +1181,16 @@ function HeatMap({ data, selected, selectedB, pickingB, activeView, buyers, radi
               17,'#dc2626', 25,'#ef4444', 35,'#f97316', 45,'#eab308',
               55,'#22c55e', 65,'#16a34a', 73,'#15803d'],
             'rgba(200,200,200,0.1)'],
-          'fill-opacity':0.55,
+          'fill-opacity':0.45,
         },
       });
 
-      // Border lines for county boundaries
+      // Border lines for county boundaries — visible at all zoom levels
       map.addLayer({
         id:'county-borders', type:'line', source:'counties',
         paint:{
-          'line-color':'rgba(255,255,255,0.3)',
-          'line-width':['interpolate',['linear'],['zoom'], 3,0, 6,0.5, 10,1],
+          'line-color':'rgba(80,80,80,0.35)',
+          'line-width':['interpolate',['linear'],['zoom'], 3,0.3, 6,0.8, 10,1.2],
         },
       });
 
@@ -1276,9 +1288,18 @@ function HeatMap({ data, selected, selectedB, pickingB, activeView, buyers, radi
         popupRef.current.remove();
       });
 
-      // Click to select — use ref so handler always calls latest onSelect
+      // Click to select — query county polygon for accurate FIPS matching
       map.on('click', e=>{
-        onSelectRef.current(e.lngLat.lat, e.lngLat.lng);
+        let fips = null;
+        const features = map.queryRenderedFeatures(e.point, { layers: ['county-fill'] });
+        if (features.length > 0) {
+          const f0 = features[0];
+          // MapLibre may store id as number (01001→1001) or string
+          fips = f0.id != null ? String(f0.id).padStart(5, '0')
+               : f0.properties?.GEO_ID ? f0.properties.GEO_ID.slice(-5)
+               : null;
+        }
+        onSelectRef.current(e.lngLat.lat, e.lngLat.lng, fips);
       });
     });
 
@@ -1385,11 +1406,20 @@ function App() {
   const [countyB,     setCountyB]     = useState(null);
   const [scoresB,     setScoresB]     = useState(null);
   const mapRef = useRef(null);
+  const fipsLookupRef = useRef({});
+
+  // Build FIPS lookup when counties data loads
+  useEffect(() => {
+    if (data?.counties) fipsLookupRef.current = buildFipsLookup(data.counties);
+  }, [data?.counties]);
 
   // Recompute site A when location or DC config changes
   useEffect(() => {
     if (!selected || !data) return;
-    const c = nearestCounty(selected.lat, selected.lng, data.counties);
+    // Use FIPS from map click for accurate polygon matching; fall back to nearest centroid
+    const c = (selected.fips && fipsLookupRef.current[selected.fips])
+      ? fipsLookupRef.current[selected.fips]
+      : nearestCounty(selected.lat, selected.lng, data.counties);
     setCounty(c);
     // Bounding-box pre-filter: skip haversine for buyers clearly outside radius
     const bb = boundingBox(selected.lat, selected.lng, dcConfig.radiusKm);
@@ -1407,7 +1437,9 @@ function App() {
   // Recompute site B
   useEffect(() => {
     if (!selectedB || !data) return;
-    const c = nearestCounty(selectedB.lat, selectedB.lng, data.counties);
+    const c = (selectedB.fips && fipsLookupRef.current[selectedB.fips])
+      ? fipsLookupRef.current[selectedB.fips]
+      : nearestCounty(selectedB.lat, selectedB.lng, data.counties);
     setCountyB(c);
     const bb = boundingBox(selectedB.lat, selectedB.lng, dcConfig.radiusKm);
     const nearby = [];
@@ -1437,13 +1469,13 @@ function App() {
     }, 600);
   }, [data]);
 
-  const handleSelect = useCallback((lat,lng) => {
+  const handleSelect = useCallback((lat,lng,fips) => {
     if (pickingB) {
-      setSelectedB({lat,lng});
+      setSelectedB({lat,lng,fips});
       setPickingB(false);
       return;
     }
-    setSelected({lat,lng});
+    setSelected({lat,lng,fips});
     setSelectedB(null);
     setCountyB(null);
     setScoresB(null);
@@ -1582,7 +1614,7 @@ function App() {
 
         {/* Left panel */}
         <div style={{
-          width:380, flexShrink:0, overflowY:'auto',
+          width:380, flexShrink:0, overflow:'hidden',
           background:'#f5f0e8', padding:20,
           borderRight:'1px solid #e2d9cc',
           display:'flex', flexDirection:'column',
