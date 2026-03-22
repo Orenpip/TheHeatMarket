@@ -1606,12 +1606,12 @@ function App() {
       </header>
 
       {/* ── Body ───────────────────────────────────────────── */}
-      <div style={{flex:1,display:'flex',overflow:'hidden'}}>
+      <div style={{flex:1,display:'flex',overflow:'hidden',position:'relative'}}>
 
-        {/* Left panel */}
+        {/* Left panel — absolute positioning guarantees scroll works */}
         <div style={{
-          width:380, flexShrink:0, height:'100%', overflowY:'auto',
-          background:'#f5f0e8', padding:20,
+          position:'absolute', top:0, left:0, bottom:0, width:380,
+          overflowY:'scroll', background:'#f5f0e8', padding:20,
           borderRight:'1px solid #e2d9cc',
         }}>
           {!selected ? (
@@ -1634,7 +1634,7 @@ function App() {
         </div>
 
         {/* Map */}
-        <div style={{flex:1,position:'relative'}}>
+        <div style={{flex:1,position:'relative',marginLeft:380}}>
           <HeatMap
             data={data} selected={selected} selectedB={selectedB}
             pickingB={pickingB}
