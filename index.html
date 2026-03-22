@@ -34,7 +34,9 @@
       transition: transform .3s ease, box-shadow .3s ease;
       text-align: center; flex: 1; max-width: 420px;
       box-shadow: 0 4px 20px -2px rgba(93,112,82,0.12);
+      display: flex; flex-direction: column; align-items: center;
     }
+    .path-card p { flex: 1; }
     .path-card:first-child { border-radius: 4rem 2rem 2rem 3rem; }
     .path-card:last-child  { border-radius: 2rem 4rem 3rem 2rem; }
     .path-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(93,112,82,0.2); }
@@ -134,9 +136,8 @@
             I'm building a data center
           </h2>
           <p style="font-size:14px; color:#78786C; line-height:1.7; margin-bottom:24px;">
-            Site your facility where it can give back. Find locations with clean energy,
-            low water stress, and nearby communities that can
-            benefit from your waste heat.
+            Find locations with clean energy, low water stress,
+            and nearby communities that can benefit from your waste heat.
           </p>
           <div style="display:inline-block; padding:14px 32px; border-radius:99px; font-size:14px; font-weight:700;
                       background:#5D7052; color:#F3F4F1; letter-spacing:.03em;
@@ -150,12 +151,11 @@
         <div class="path-card" onclick="window.location.href='marketplace.html'">
           <div style="font-size:48px; margin-bottom:20px;">🏫</div>
           <h2 class="serif" style="font-size:22px; font-weight:700; margin-bottom:10px;">
-            I run a school, pool, or greenhouse
+            I need affordable heating
           </h2>
           <p style="font-size:14px; color:#78786C; line-height:1.7; margin-bottom:24px;">
-            There may be a data center near you producing free heat.
-            Connect with nearby facilities to cut your heating costs
-            and carbon footprint — no new gas needed.
+            A data center near you may produce free heat.
+            Cut your heating costs and carbon footprint — no new gas needed.
           </p>
           <div style="display:inline-block; padding:14px 32px; border-radius:99px; font-size:14px; font-weight:700;
                       background:#C18C5D; color:white; letter-spacing:.03em;
