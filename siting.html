@@ -664,7 +664,7 @@ function BuyerCard({ buyer }) {
           </div>
           {buyer.type === 'school' && buyer.est_sqft && (
             <p className="mt-2" style={{color:'#9a9a9a'}}>
-              ~{(buyer.est_sqft/1000).toFixed(0)}K sqft · {buyer.students} students · {buyer.level}
+              ~{(buyer.est_sqft/1000).toFixed(0)}K sqft · {buyer.enrollment > 0 ? `${buyer.enrollment.toLocaleString()} students` : ''}
             </p>
           )}
           {buyer.type === 'greenhouse' && buyer.sqft && (
@@ -762,7 +762,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
         </div>
 
         <p className="text-xs mt-2 text-right" style={{color:'#9a9a9a'}}>
-          Heat available: <strong style={{color:'#d4380d'}}>{fmtMWh(totalHeatMwh)}/yr</strong>
+          Heat available: <strong style={{color:'#d4380d'}}>{fmtMWh(dcConfig.capacityMw * 8760 * 0.80)}/yr</strong>
         </p>
       </div>
 
@@ -830,7 +830,7 @@ function MarketplacePanel({ location, buyers, dcConfig, onDcChange, onBack }) {
             <p className="text-sm font-bold mb-1">No buyers found within {dcConfig.radiusKm} km</p>
             <p className="text-xs">Try increasing the discovery radius</p>
           </div>
-        ) : sorted.map(b=><BuyerCard key={b.id} buyer={b} />)}
+        ) : sorted.map((b,i)=><BuyerCard key={b.name + '-' + i} buyer={b} />)}
       </div>
     </div>
   );
